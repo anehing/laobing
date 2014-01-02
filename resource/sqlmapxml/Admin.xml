@@ -28,8 +28,8 @@
       <isNotNull prepend="," property="email">EMAIL = #email#</isNotNull>
     </dynamic>where id = #id#
   </update>
-  <select id="findById" parameterClass="java.lang.Long" resultMap="adminResult">select * from admin where id = #id#</select>
-  <select id="findNameById" parameterClass="java.lang.Long" resultMap="adminResult">select * from admin where username = #username#</select>
+  <select id="findById" parameterClass="java.lang.Integer" resultMap="adminResult">select * from admin where id = #id#</select>
+  <select id="findNameById" parameterClass="java.lang.Integer" resultMap="adminResult">select * from admin where username = #username#</select>
   <select id="loginByUsernameAndPassword" parameterClass="java.util.Map" resultMap="adminResult">select * from admin
 	    <dynamic prepend="where">
 		      <isNotNull prepend=" and " property="username">USERNAME = #username#</isNotNull>

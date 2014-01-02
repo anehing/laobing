@@ -15,7 +15,7 @@
 		<img id="z0" style="cursor: pointer" align="middle" src="${ctx}/images/nxx8.png" width="80" height="22" />
 	</div>
 
-	<s:form action="queryAdmin" method="post" id="form1" onsubmit="return toSubmit();" >
+	<s:form action="queryAdmin" method="post" id="form1" >
 	    <div id="r0" align="center" >
              <table class="dataTable" width="97%" border="0" align="center" cellpadding="0" cellspacing="1"  bgcolor="#93b5d1">
 	             <tr>
@@ -38,7 +38,7 @@
 	            </tr>
              </table>
         </div>
-	</s:form>
+	
 		<div align="center">
 			<div class="data0">
 				<div class="data1">
@@ -61,8 +61,8 @@
 								       <c:if test="${t.status eq 0}">可用 </c:if>							 
 								    </td>
 									<td class="dataTd" align="center">
-									   <c:if test="${t.usertype eq 1}">普通用户 </c:if>
-								       <c:if test="${t.usertype eq 0}">管理员	</c:if>							 
+									   <c:if test="${t.usertype eq 0}">普通用户 </c:if>
+								       <c:if test="${t.usertype eq 1}">管理员	</c:if>							 
 								    </td>
 									<td class="dataTd" align="center">${t.username}</td>
 									<td class="dataTd" align="center">
@@ -97,6 +97,7 @@
 	            </tr>
              </table>
 		</div>
+    </s:form>		
 </body>
 <script type="text/javascript">
 function toSubmit(){

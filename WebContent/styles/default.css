@@ -235,7 +235,6 @@ line-height:15px;
 
 .bodyTable{
 
-	background:url(../images/tb0.gif) #bcd2e0 repeat-x;
 	margin:10px auto;
 	width: 98%;
 	background:#FFF; 
@@ -257,7 +256,6 @@ line-height:15px;
 
 .topTd{
 
-	background: url(../images/thead_a.png);
 	line-height:22px; 
 	height:22px;
 	border-width:1px;
@@ -268,7 +266,6 @@ line-height:15px;
 
 .topTd:hover{ 
 	
-	background: url(../images/thead_b.gif);
 	
 }
 
@@ -336,7 +333,6 @@ line-height:15px;
 }
 
 .data0 {
-background:#BCD2E0 url(../images/tb0.gif) repeat-x scroll 0 0;
 border:1px solid #7DA0BB;
 margin:10px auto;
 width:98%;

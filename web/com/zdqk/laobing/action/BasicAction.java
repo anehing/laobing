@@ -3,7 +3,6 @@ package com.zdqk.laobing.action;
 
 
 import java.io.IOException;
-import java.util.Date;
 
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpServletResponse;
@@ -11,15 +10,12 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.struts2.ServletActionContext;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.interceptor.annotations.After;
 import com.opensymphony.xwork2.interceptor.annotations.Before;
-import com.zdqk.laobing.po.User;
+import com.zdqk.laobing.po.Admin;
 import com.zdqk.laobing.po.UserLog;
-import com.zdqk.laobing.service.UsersService;
-import com.zdqk.laobing.tools.DateConverter;
 
 /**
  * 
@@ -41,12 +37,10 @@ public class BasicAction extends ActionSupport {
 	
 	protected HttpServletResponse response =null;
 	
-	@Autowired
-	protected UsersService usersService;
 	
 	protected UserLog log=null;
 	
-	protected User basicUser=null;
+	protected Admin basicAdmin=null;
 	
 
 	private void loadSession(){
@@ -68,9 +62,9 @@ public class BasicAction extends ActionSupport {
 		System.out.println("验证权限已经开启");
 		
 		loadSession();
-		if(session.getAttribute("user")!=null){
-			basicUser =(User)session.getAttribute("user");
-			System.out.println("检测到用户"+basicUser.getUserName()+"登录成功");
+		if(session.getAttribute("admin")!=null){
+			basicAdmin =(Admin)session.getAttribute("admin");
+			System.out.println("检测到用户"+basicAdmin.getUsername()+"登录成功");
 		}
 		else	
 		{
@@ -91,30 +85,30 @@ public class BasicAction extends ActionSupport {
 
 		System.out.println("用户操作日志开启");
 		
-		if(log!=null){
-			if(basicUser == null){
-				try {
-					ServletActionContext.getResponse().sendRedirect("/laobing/login.html");
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-			log.setOperadate(new Date());
-			log.setOptdate(new Date());
-			log.setIsWorking(1L);
-			log.setIp(getIpAddr(request));
-			try {
-				if(usersService.addUserLog(log)){
-					System.out.println("记录成功");
-				}else{
-					System.out.println("记录失败");
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			System.out.println("time"+DateConverter.toDateString(new Date())+"["+basicUser.getUserName()+"]");
-			
-		}	
+//		if(log!=null){
+//			if(basicUser == null){
+//				try {
+//					ServletActionContext.getResponse().sendRedirect("/laobing/login.html");
+//				} catch (IOException e) {
+//					e.printStackTrace();
+//				}
+//			}
+//			log.setOperadate(new Date());
+//			log.setOptdate(new Date());
+//			log.setIsWorking(1L);
+//			log.setIp(getIpAddr(request));
+//			try {
+//				if(usersService.addUserLog(log)){
+//					System.out.println("记录成功");
+//				}else{
+//					System.out.println("记录失败");
+//				}
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//			}
+//			System.out.println("time"+DateConverter.toDateString(new Date())+"["+basicUser.getUserName()+"]");
+//			
+//		}	
 	}
 	/** 获取真实IP（通过代理服务器访问）	
 	 * 

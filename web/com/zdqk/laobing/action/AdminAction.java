@@ -29,7 +29,7 @@ import com.zdqk.laobing.po.Admin;
 @InterceptorRefs(value = { @InterceptorRef("annotationInterceptor"),
 		@InterceptorRef("simpleStack") })
 @Results({ @Result(name = "adminList", location = "/adminList.jsp"),
-	       @Result(name = "updateAdmin", location = "/updateUserPass.jsp"),
+	       @Result(name = "updateAdmin", location = "/updateAdmin.jsp"),
 	       @Result(name = "queryAdmin", type = "chain", location = "queryAdmin"),
 		})
 
@@ -63,8 +63,14 @@ public class AdminAction extends BasePaginationAction {
 		if(admin!=null){
 			if(admin.getUsername()!=null&& !admin.getUsername().trim().equals("")){
 				map.put("username",admin.getUsername());
+				}
+			if(admin.getStatus()!=3){
+				map.put("status", admin.getStatus());
+				}
+			if(admin.getUsertype()!=3){
+				map.put("usertype", admin.getUsertype());
+				}
 			}
-		}
 		List<Admin> list = publicQuery(map, a, adminDAO); 
 		return "adminList";
 	}
@@ -84,15 +90,13 @@ public class AdminAction extends BasePaginationAction {
 		} catch (Exception e) {
 			System.out.print("数据异常");
 		} 
-		
-		Admin admin = new Admin();
-		admin = (Admin) adminDAO.findObjectById(id, admin);
-		request.setAttribute("admin", admin);
+		Admin a=new Admin();
+		this.admin = (Admin) adminDAO.findObjectById(id, a);
 		
 		if (totype == 1) return "updateAdmin";
 		if (totype == 2) {
 			boolean flag;
-		    flag=adminDAO.delete(id);
+		    flag=adminDAO.delete(this.admin);
 		    if(flag)  this.addActionMessage("删除成功");
 		    else this.addActionError("删除失败");
 		    return "queryAdmin";
@@ -101,5 +105,18 @@ public class AdminAction extends BasePaginationAction {
 		return null;
 
 	}
-	
+	/**
+	 * @author ane
+	 *  更新后台账户
+	 */
+	@Action("updateAdmin")
+	public String updateAdmin() {
+		if(this.admin!=null){
+			boolean  flag=adminDAO.update(this.admin);
+		    if(flag)  this.addActionMessage("更新成功");
+			else this.addActionError("更新失败");
+		}
+		
+		return "updateAdmin";
+	}
 }

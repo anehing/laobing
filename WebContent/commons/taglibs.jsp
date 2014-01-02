@@ -36,7 +36,7 @@
 
 
 <script src="${ctx}/scripts/jquery-1.3.2.js" ></script>
-<script src="${ctx}/scripts/jquery-ui-1.7.1.custom.min.js" charset="GBK"></script>
+<script src="${ctx}/scripts/jquery-ui-1.7.1.custom.min.js" ></script>
 <script src="${ctx}/scripts/thickbox-compressed.js" ></script>
 <script src="${ctx}/scripts/jquery.json.js" ></script>
 <script src="${ctx}/scripts/jquery.form.js" ></script>
@@ -45,7 +45,7 @@
 <script src="${ctx}/scripts/tools2.js" ></script>
 <!--<script src="${ctx}/scripts/company.js" ></script>-->
 <script src="${ctx}/scripts/utilCode.js" ></script>
-<script src="${ctx}/scripts/ValidateTools.js" charset="GBK"></script>
+<script src="${ctx}/scripts/ValidateTools.js" ></script>
 <script src="${ctx}/scripts/jquery.tablesorter.js" ></script>
 <!--<script src="${ctx}/My97DatePicker/WdatePicker.js" ></script>-->
 <noscript> <iframe   src="*.htm"> </iframe> </noscript>

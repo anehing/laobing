@@ -23,18 +23,7 @@ ul { list-style:none;}
 .active a {color:#fff;}
 .blankgray {background:#bbb; height:2px; width:100%; margin:0; padding:0; clear:both; font-size:2px;}
 </style>
-<script type="text/javascript" language="javascript" src="js/jquery-1.3.2.min.js"></script>
 <script type="text/javascript">
-var oplist = new Array('about', 'user', 'news', 'mars', 'jielong', 'box', 'school', 'config', 'other');
-$(document).ready(function() {
-	$('#nav').find("a").click(function() {
-		var id = $(this).attr('id');
-		$.each(oplist, function(i, n) {
-			$('#'+n).attr('class', 'inactive');
-		});
-		$(this).parents("li").attr('class', 'active');
-	});
-});
 </script>
 </head>
 
