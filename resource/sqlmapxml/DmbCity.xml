@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="com.zdqk.ewm.po.DmbCity">
+  <typeAlias alias="dmbCity" type="com.zdqk.ewm.po.DmbCity"/>
+  <resultMap id="dmbCityResult" class="dmbCity">
+    <result property="id" column="ID"/>
+    <result property="parentId" column="PARENTID"/>
+    <result property="name" column="MC"/>
+    <result property="property" column="SSX"/>
+    <result property="type" column="TYPE"/>
+    <result property="note" column="BZ"/>
+  </resultMap>
+  <insert id="insert" parameterClass="dmbCity">insert into DMB_CITY( ID,PARENTID,MC,SSX,TYPE,BZ ) values ( #id#,#parentId#,#name#,#property#,#type#,#note# )</insert>
+  <delete id="delete" parameterClass="dmbCity">delete from DMB_CITY where ID = #id#</delete>
+  <update id="update" parameterClass="dmbCity">update DMB_CITY 
+    <dynamic prepend="set">
+      <isNotNull prepend="," property="parentId">PARENTID = #parentId#</isNotNull>
+      <isNotNull prepend="," property="name">MC = #name#</isNotNull>
+      <isNotNull prepend="," property="property">SSX = #property#</isNotNull>
+      <isNotNull prepend="," property="type">TYPE = #type#</isNotNull>
+      <isNotNull prepend="," property="note">BZ = #note#</isNotNull>
+    </dynamic>where ID = #id#
+  </update>
+  <select id="findById" parameterClass="java.lang.Long" resultMap="dmbCityResult">select * from DMB_CITY where ID = #id#</select>
+  <select id="findNameById" parameterClass="java.lang.Long" resultMap="dmbCityResult">select * from DMB_CITY where ID = #id#</select>
+  <select id="selectAll" parameterClass="java.util.Map" resultMap="dmbCityResult">select ID,PARENTID,MC,SSX,TYPE,BZ from DMB_CITY
+    <dynamic prepend="where">
+      <isNotNull prepend=" and " property="parentId">PARENTID = #parentId#</isNotNull>
+      <isNotNull prepend=" and " property="name">MC = #name#</isNotNull>
+      <isNotNull prepend=" and " property="property">SSX = #property#</isNotNull>
+      <isNotNull prepend=" and " property="type">TYPE = #type#</isNotNull>
+      <isNotNull prepend=" and " property="note">BZ = #note#</isNotNull>
+    </dynamic>
+  </select>
+  <select id="selectPage" parameterClass="java.util.Map" resultMap="dmbCityResult">select ID,PARENTID,MC,SSX,TYPE,BZ from DMB_CITY
+    <dynamic prepend="where">
+      <isNotNull prepend=" and " property="parentId">PARENTID = #parentId#</isNotNull>
+      <isNotNull prepend=" and " property="name">MC = #name#</isNotNull>
+      <isNotNull prepend=" and " property="property">SSX = #property#</isNotNull>
+      <isNotNull prepend=" and " property="type">TYPE = #type#</isNotNull>
+      <isNotNull prepend=" and " property="note">BZ = #note#</isNotNull>
+    </dynamic>order by id desc limit #startIndex#,#endIndex#
+  </select>
+  <select id="selectCount" parameterClass="java.util.Map" resultClass="java.lang.Long">select count(ID) from DMB_CITY 
+    <dynamic prepend="where">
+      <isNotNull prepend=" and " property="parentId">PARENTID = #parentId#</isNotNull>
+      <isNotNull prepend=" and " property="name">MC = #name#</isNotNull>
+      <isNotNull prepend=" and " property="property">SSX = #property#</isNotNull>
+      <isNotNull prepend=" and " property="type">TYPE = #type#</isNotNull>
+      <isNotNull prepend=" and " property="note">BZ = #note#</isNotNull>
+    </dynamic>
+  </select>
+</sqlMap>

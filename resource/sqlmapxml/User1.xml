@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="com.zdqk.ewm.po.User">
+  <typeAlias alias="user" type="com.zdqk.ewm.po.User"/>
+  <resultMap id="userResult" class="user">
+    <result property="id" column="ID"/>
+    <result property="userName" column="USERNAME"/>
+    <result property="parentId" column="PARENTID"/>
+    <result property="name" column="NAME"/>
+    <result property="pass" column="PASS"/>
+    <result property="mobile" column="MOBILE"/>
+    <result property="tel" column="TEL"/>
+    <result property="userType" column="USERTYPE"/>
+    <result property="sum" column="SUM"/>
+    <result property="unitPrice" column="UNITPRICE"/>
+    <result property="email" column="EMAIL"/>
+    <result property="inputTime" column="INPUTTIME"/>
+    <result property="company" column="COMPANY"/>
+    <result property="address" column="ADDRESS"/>
+    <result property="postcode" column="POSTCODE"/>
+    <result property="qq" column="QQ"/>
+    <result property="emailCheckCode" column="EMAILCHECKCODE"/>
+    <result property="checkStatus" column="CHECKSTATUS"/>
+    <result property="checkTime" column="CHECKTIME"/>
+    <result property="active" column="ACTIVE"/>
+    <result property="note" column="NOTE"/>
+    <result property="msgType" column="MSGTYPE"/>
+    <result property="smsUserName" column="SMSUSERNAME"/>
+    <result property="smsPassword" column="SMSPASSWORD"/>
+    <result property="mobileLoginPass" column="MOBILELOGINPASS"/>
+    <result property="amount" column="AMOUNT"/>    
+    <result property="isRefused" column="ISREFUSED"/>
+    <result property="refusedSum" column="REFUSEDSUM"/>
+    <result property="refusedPassMobile" column="REFUSEDPASSMOBILE"/>
+    <result property="refusedIndex" column="REFUSEDINDEX"/>    
+  </resultMap>
+  <insert id="insert" parameterClass="user">insert into USER( ID,USERNAME,PARENTID,NAME,PASS,MOBILE,TEL,USERTYPE,SUM,UNITPRICE,EMAIL,INPUTTIME,COMPANY,ADDRESS,POSTCODE,QQ,EMAILCHECKCODE,CHECKSTATUS,CHECKTIME,ACTIVE,NOTE,MSGTYPE,SMSUSERNAME,SMSPASSWORD,MOBILELOGINPASS,AMOUNT,ISREFUSED,REFUSEDSUM,REFUSEDPASSMOBILE,REFUSEDINDEX ) values ( #id#,#userName#,#parentId#,#name#,#pass#,#mobile#,#tel#,#userType#,#sum#,#unitPrice#,#email#,#inputTime#,#company#,#address#,#postcode#,#qq#,#emailCheckCode#,#checkStatus#,#checkTime#,#active#,#note#,#msgType#,#smsUserName#,#smsPassword#,#mobileLoginPass#,#amount#,#isRefused#,#refusedSum#,#refusedPassMobile#,#refusedIndex# )</insert>
+  <delete id="delete" parameterClass="user">delete from USER where id = #id#</delete>
+  <update id="update" parameterClass="user">update USER 
+    <dynamic prepend="set">
+      <isNotNull prepend="," property="userName">USERNAME = #userName#</isNotNull>
+      <isNotNull prepend="," property="parentId">PARENTID = #parentId#</isNotNull>
+      <isNotNull prepend="," property="name">NAME = #name#</isNotNull>
+      <isNotNull prepend="," property="pass">PASS = #pass#</isNotNull>
+      <isNotNull prepend="," property="mobile">MOBILE = #mobile#</isNotNull>
+      <isNotNull prepend="," property="tel">TEL = #tel#</isNotNull>
+      <isNotNull prepend="," property="userType">USERTYPE = #userType#</isNotNull>
+      <isNotNull prepend="," property="sum">SUM = #sum#</isNotNull>
+      <isNotNull prepend="," property="unitPrice">UNITPRICE = #unitPrice#</isNotNull>
+      <isNotNull prepend="," property="email">EMAIL = #email#</isNotNull>
+      <isNotNull prepend="," property="inputTime">INPUTTIME = #inputTime#</isNotNull>
+      <isNotNull prepend="," property="company">COMPANY = #company#</isNotNull>
+      <isNotNull prepend="," property="address">ADDRESS = #address#</isNotNull>
+      <isNotNull prepend="," property="postcode">POSTCODE = #postcode#</isNotNull>
+      <isNotNull prepend="," property="qq">QQ = #qq#</isNotNull>
+      <isNotNull prepend="," property="emailCheckCode">EMAILCHECKCODE = #emailCheckCode#</isNotNull>
+      <isNotNull prepend="," property="checkStatus">CHECKSTATUS = #checkStatus#</isNotNull>
+      <isNotNull prepend="," property="checkTime">CHECKTIME = #checkTime#</isNotNull>
+      <isNotNull prepend="," property="active">ACTIVE = #active#</isNotNull>
+      <isNotNull prepend="," property="note">NOTE = #note#</isNotNull>
+      <isNotNull prepend="," property="msgType">MSGTYPE = #msgType#</isNotNull>
+      <isNotNull prepend="," property="smsUserName">SMSUSERNAME = #smsUserName#</isNotNull>
+      <isNotNull prepend="," property="smsPassword">SMSPASSWORD = #smsPassword#</isNotNull>
+      <isNotNull prepend="," property="mobileLoginPass">MOBILELOGINPASS = #mobileLoginPass#</isNotNull>
+      <isNotNull prepend="," property="amount">AMOUNT = #amount#</isNotNull>   
+      <isNotNull prepend="," property="isRefused">ISREFUSED = #isRefused#</isNotNull>
+      <isNotNull prepend="," property="refusedSum">REFUSEDSUM = #refusedSum#</isNotNull>
+      <isNotNull prepend="," property="refusedPassMobile">REFUSEDPASSMOBILE = #refusedPassMobile#</isNotNull>
+      <isNotNull prepend="," property="refusedIndex">REFUSEDINDEX = #refusedIndex#</isNotNull>         
+    </dynamic>where id = #id#
+  </update>
+  <select id="findById" parameterClass="java.lang.Long" resultMap="userResult">select * from USER where id = #id#</select>
+  <select id="findNameById" parameterClass="java.lang.Long" resultMap="userResult">select * from USER where id = #id#</select>
+  <select id="loginByUsernameAndPass" parameterClass="java.util.Map" resultMap="userResult">select ID,USERNAME,PARENTID,NAME,PASS,MOBILE,TEL,USERTYPE,SUM,UNITPRICE,EMAIL,INPUTTIME,COMPANY,ADDRESS,POSTCODE,QQ,EMAILCHECKCODE,CHECKSTATUS,CHECKTIME,ACTIVE,NOTE,MSGTYPE,SMSUSERNAME,SMSPASSWORD,MOBILELOGINPASS,AMOUNT,ISREFUSED,REFUSEDSUM,REFUSEDPASSMOBILE,REFUSEDINDEX from USER
+	    <dynamic prepend="where">
+		      <isNotNull prepend=" and " property="userName">USERNAME = #userName#</isNotNull>
+		      <isNotNull prepend=" and " property="pass">PASS = #pass#</isNotNull>
+	    </dynamic>
+  </select>
+  <select id="loginByMobileAndPass" parameterClass="java.util.Map" resultMap="userResult">select ID,USERNAME,PARENTID,NAME,PASS,MOBILE,TEL,USERTYPE,SUM,UNITPRICE,EMAIL,INPUTTIME,COMPANY,ADDRESS,POSTCODE,QQ,EMAILCHECKCODE,CHECKSTATUS,CHECKTIME,ACTIVE,NOTE,MSGTYPE,SMSUSERNAME,SMSPASSWORD,MOBILELOGINPASS,AMOUNT,ISREFUSED,REFUSEDSUM,REFUSEDPASSMOBILE,REFUSEDINDEX from USER
+	    <dynamic prepend="where">
+		      <isNotNull prepend=" and " property="mobile">MOBILE = #mobile#</isNotNull>
+		      <isNotNull prepend=" and " property="pass">PASS = #pass#</isNotNull>
+	    </dynamic>
+  </select>
+  <select id="loginByEmailAndPass" parameterClass="java.util.Map" resultMap="userResult">select ID,USERNAME,PARENTID,NAME,PASS,MOBILE,TEL,USERTYPE,SUM,UNITPRICE,EMAIL,INPUTTIME,COMPANY,ADDRESS,POSTCODE,QQ,EMAILCHECKCODE,CHECKSTATUS,CHECKTIME,ACTIVE,NOTE,MSGTYPE,SMSUSERNAME,SMSPASSWORD,MOBILELOGINPASS,AMOUNT,ISREFUSED,REFUSEDSUM,REFUSEDPASSMOBILE,REFUSEDINDEX from USER
+	    <dynamic prepend="where">
+  		      <isNotNull prepend=" and " property="email">EMAIL = #email#</isNotNull>
+		      <isNotNull prepend=" and " property="pass">PASS = #pass#</isNotNull>
+	    </dynamic>
+  </select>
+  <select id="selectAll" parameterClass="java.util.Map" resultMap="userResult">select ID,USERNAME,PARENTID,NAME,PASS,MOBILE,TEL,USERTYPE,SUM,UNITPRICE,EMAIL,INPUTTIME,COMPANY,ADDRESS,POSTCODE,QQ,EMAILCHECKCODE,CHECKSTATUS,CHECKTIME,ACTIVE,NOTE,MSGTYPE,SMSUSERNAME,SMSPASSWORD,MOBILELOGINPASS,AMOUNT,ISREFUSED,REFUSEDSUM,REFUSEDPASSMOBILE,REFUSEDINDEX from USER
+    <dynamic prepend="where">
+      <isNotNull prepend=" and " property="userName">USERNAME = #userName#</isNotNull>
+      <isNotNull prepend=" and " property="parentId">PARENTID = #parentId#</isNotNull>
+      <isNotNull prepend=" and " property="name">NAME = #name#</isNotNull>
+      <isNotNull prepend=" and " property="pass">PASS = #pass#</isNotNull>
+      <isNotNull prepend=" and " property="mobile">MOBILE = #mobile#</isNotNull>
+      <isNotNull prepend=" and " property="tel">TEL = #tel#</isNotNull>
+      <isNotNull prepend=" and " property="userType">USERTYPE = #userType#</isNotNull>
+      <isNotNull prepend=" and " property="sum">SUM = #sum#</isNotNull>
+      <isNotNull prepend=" and " property="unitPrice">UNITPRICE = #unitPrice#</isNotNull>
+      <isNotNull prepend=" and " property="email">EMAIL = #email#</isNotNull>
+      <isNotNull prepend=" and " property="inputTime">INPUTTIME = #inputTime#</isNotNull>
+      <isNotNull prepend=" and " property="company">COMPANY = #company#</isNotNull>
+      <isNotNull prepend=" and " property="address">ADDRESS = #address#</isNotNull>
+      <isNotNull prepend=" and " property="postcode">POSTCODE = #postcode#</isNotNull>
+      <isNotNull prepend=" and " property="qq">QQ = #qq#</isNotNull>
+      <isNotNull prepend=" and " property="emailCheckCode">EMAILCHECKCODE = #emailCheckCode#</isNotNull>
+      <isNotNull prepend=" and " property="checkStatus">CHECKSTATUS = #checkStatus#</isNotNull>
+      <isNotNull prepend=" and " property="checkTime">CHECKTIME = #checkTime#</isNotNull>
+      <isNotNull prepend=" and " property="active">ACTIVE = #active#</isNotNull>
+      <isNotNull prepend=" and " property="note">NOTE = #note#</isNotNull>
+      <isNotNull prepend=" and " property="msgType">MSGTYPE = #msgType#</isNotNull>
+      <isNotNull prepend=" and " property="smsUserName">SMSUSERNAME = #smsUserName#</isNotNull>
+      <isNotNull prepend=" and " property="smsPassword">SMSPASSWORD = #smsPassword#</isNotNull>   
+      <isNotNull prepend=" and " property="mobileLoginPass">MOBILELOGINPASS = #mobileLoginPass#</isNotNull>
+      <isNotNull prepend=" and " property="amount">AMOUNT = #amount#</isNotNull>  
+      <isNotNull prepend=" and " property="isRefused">ISREFUSED = #isRefused#</isNotNull>
+      <isNotNull prepend=" and " property="refusedSum">REFUSEDSUM = #refusedSum#</isNotNull>
+      <isNotNull prepend=" and " property="refusedPassMobile">REFUSEDPASSMOBILE = #refusedPassMobile#</isNotNull>
+      <isNotNull prepend=" and " property="refusedIndex">REFUSEDINDEX = #refusedIndex#</isNotNull>             
+    </dynamic>
+  </select>
+  <select id="selectPage" parameterClass="java.util.Map" resultMap="userResult">select ID,USERNAME,PARENTID,NAME,PASS,MOBILE,TEL,USERTYPE,SUM,UNITPRICE,EMAIL,INPUTTIME,COMPANY,ADDRESS,POSTCODE,QQ,EMAILCHECKCODE,CHECKSTATUS,CHECKTIME,ACTIVE,NOTE,MSGTYPE,SMSUSERNAME,SMSPASSWORD,MOBILELOGINPASS,AMOUNT,ISREFUSED,REFUSEDSUM,REFUSEDPASSMOBILE,REFUSEDINDEX from USER
+    <dynamic prepend="where">
+      <isNotNull prepend=" and " property="userName">USERNAME like '%$userName$%'</isNotNull>
+      <isNotNull prepend=" and " property="parentId">PARENTID = #parentId#</isNotNull>
+      <isNotNull prepend=" and " property="name">NAME like '%$name$%'</isNotNull>
+      <isNotNull prepend=" and " property="pass">PASS = #pass#</isNotNull>
+      <isNotNull prepend=" and " property="mobile">MOBILE like '%$mobile$%'</isNotNull>
+      <isNotNull prepend=" and " property="tel">TEL like '%$tel$%'</isNotNull>
+      <isNotNull prepend=" and " property="userType">USERTYPE = #userType#</isNotNull>
+      <isNotNull prepend=" and " property="sum">SUM = #sum#</isNotNull>
+      <isNotNull prepend=" and " property="unitPrice">UNITPRICE = #unitPrice#</isNotNull>
+      <isNotNull prepend=" and " property="email">EMAIL = #email#</isNotNull>
+      <isNotNull prepend=" and " property="inputTime">INPUTTIME = #inputTime#</isNotNull>
+      <isNotNull prepend=" and " property="company">COMPANY like '%$company$%'</isNotNull>
+      <isNotNull prepend=" and " property="address">ADDRESS = #address#</isNotNull>
+      <isNotNull prepend=" and " property="postcode">POSTCODE = #postcode#</isNotNull>
+      <isNotNull prepend=" and " property="qq">QQ like '%$qq$%'</isNotNull>
+      <isNotNull prepend=" and " property="emailCheckCode">EMAILCHECKCODE = #emailCheckCode#</isNotNull>
+      <isNotNull prepend=" and " property="checkStatus">CHECKSTATUS = #checkStatus#</isNotNull>
+      <isNotNull prepend=" and " property="checkTime">CHECKTIME = #checkTime#</isNotNull>
+      <isNotNull prepend=" and " property="active">ACTIVE = #active#</isNotNull>
+      <isNotNull prepend=" and " property="note">NOTE = #note#</isNotNull>
+      <isNotNull prepend=" and " property="msgType">MSGTYPE = #msgType#</isNotNull>
+      <isNotNull prepend=" and " property="smsUserName">SMSUSERNAME = #smsUserName#</isNotNull>
+      <isNotNull prepend=" and " property="smsPassword">SMSPASSWORD = #smsPassword#</isNotNull>   
+      <isNotNull prepend=" and " property="mobileLoginPass">MOBILELOGINPASS = #mobileLoginPass#</isNotNull>
+      <isNotNull prepend=" and " property="amount">AMOUNT = #amount#</isNotNull>  
+      <isNotNull prepend=" and " property="isRefused">ISREFUSED = #isRefused#</isNotNull>
+      <isNotNull prepend=" and " property="refusedSum">REFUSEDSUM = #refusedSum#</isNotNull>
+      <isNotNull prepend=" and " property="refusedPassMobile">REFUSEDPASSMOBILE = #refusedPassMobile#</isNotNull>
+      <isNotNull prepend=" and " property="refusedIndex">REFUSEDINDEX = #refusedIndex#</isNotNull>                
+    </dynamic>order by id desc limit #startIndex#,#endIndex#
+  </select>
+  <select id="selectCount" parameterClass="java.util.Map" resultClass="java.lang.Long">select count(id) from USER 
+    <dynamic prepend="where">
+      <isNotNull prepend=" and " property="userName">USERNAME like '%$userName$%'</isNotNull>
+      <isNotNull prepend=" and " property="parentId">PARENTID = #parentId#</isNotNull>
+      <isNotNull prepend=" and " property="name">NAME like '%$name$%'</isNotNull>
+      <isNotNull prepend=" and " property="pass">PASS = #pass#</isNotNull>
+      <isNotNull prepend=" and " property="mobile">MOBILE like '%$mobile$%'</isNotNull>
+      <isNotNull prepend=" and " property="tel">TEL like '%$tel$%'</isNotNull>
+      <isNotNull prepend=" and " property="userType">USERTYPE = #userType#</isNotNull>
+      <isNotNull prepend=" and " property="sum">SUM = #sum#</isNotNull>
+      <isNotNull prepend=" and " property="unitPrice">UNITPRICE = #unitPrice#</isNotNull>
+      <isNotNull prepend=" and " property="email">EMAIL = #email#</isNotNull>
+      <isNotNull prepend=" and " property="inputTime">INPUTTIME = #inputTime#</isNotNull>
+      <isNotNull prepend=" and " property="company">COMPANY like '%$company$%'</isNotNull>
+      <isNotNull prepend=" and " property="address">ADDRESS = #address#</isNotNull>
+      <isNotNull prepend=" and " property="postcode">POSTCODE = #postcode#</isNotNull>
+      <isNotNull prepend=" and " property="qq">QQ like '%$qq$%'</isNotNull>
+      <isNotNull prepend=" and " property="emailCheckCode">EMAILCHECKCODE = #emailCheckCode#</isNotNull>
+      <isNotNull prepend=" and " property="checkStatus">CHECKSTATUS = #checkStatus#</isNotNull>
+      <isNotNull prepend=" and " property="checkTime">CHECKTIME = #checkTime#</isNotNull>
+      <isNotNull prepend=" and " property="active">ACTIVE = #active#</isNotNull>
+      <isNotNull prepend=" and " property="note">NOTE = #note#</isNotNull>
+      <isNotNull prepend=" and " property="msgType">MSGTYPE = #msgType#</isNotNull>
+      <isNotNull prepend=" and " property="smsUserName">SMSUSERNAME = #smsUserName#</isNotNull>
+      <isNotNull prepend=" and " property="smsPassword">SMSPASSWORD = #smsPassword#</isNotNull>
+      <isNotNull prepend=" and " property="mobileLoginPass">MOBILELOGINPASS = #mobileLoginPass#</isNotNull>
+      <isNotNull prepend=" and " property="amount">AMOUNT = #amount#</isNotNull>   
+      <isNotNull prepend=" and " property="isRefused">ISREFUSED = #isRefused#</isNotNull>
+      <isNotNull prepend=" and " property="refusedSum">REFUSEDSUM = #refusedSum#</isNotNull>
+      <isNotNull prepend=" and " property="refusedPassMobile">REFUSEDPASSMOBILE = #refusedPassMobile#</isNotNull>
+      <isNotNull prepend=" and " property="refusedIndex">REFUSEDINDEX = #refusedIndex#</isNotNull>            
+    </dynamic>order by id desc
+  </select>
+</sqlMap>

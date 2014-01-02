@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="com.zdqk.ewm.po.User">
+  <typeAlias alias="user" type="com.zdqk.ewm.po.User"/>
+  <resultMap id="userResult" class="user">
+    <result property="id" column="ID"/>
+    <result property="userName" column="USERNAME"/>
+    <result property="parentId" column="PARENTID"/>
+    <result property="parentName" column="PARENTNAME"/>
+    <result property="name" column="NAME"/>
+    <result property="pass" column="PASS"/>
+    <result property="photoUrl" column="PHOTOURL"/>
+    <result property="sex" column="SEX"/>
+    <result property="age" column="AGE"/>
+    <result property="userType" column="USERTYPE"/>
+    <result property="mobile" column="MOBILE"/>
+    <result property="mobileChecked" column="MOBILECHECKED"/>
+    <result property="email" column="EMAIL"/>
+    <result property="emailChecked" column="EMAILCHECKED"/>
+    <result property="regDate" column="REGDATE"/>
+    <result property="regDateTime" column="REGDATETIME"/>
+    <result property="province" column="PROVINCE"/>
+    <result property="city" column="CITY"/>
+    <result property="country" column="COUNTRY"/>
+    <result property="address" column="ADDRESS"/>
+    <result property="checkStatus" column="CHECKSTATUS"/>
+    <result property="status" column="STATUS"/>
+    <result property="note" column="NOTE"/>
+    <result property="nickName" column="NICKNAME"/>
+     <result property="sinaToken" column="SINATOKEN"/>
+     <result property="birthday" column="BIRTHDAY"/>
+  </resultMap>
+  <insert id="insert" parameterClass="user">insert into USERS( ID,USERNAME,PARENTID,PARENTNAME,NAME,PASS,PHOTOURL,SEX,AGE,USERTYPE,MOBILE,MOBILECHECKED,EMAIL,EMAILCHECKED,REGDATE,REGDATETIME,PROVINCE,CITY,COUNTRY,ADDRESS,CHECKSTATUS,STATUS,NOTE,NICKNAME,SINATOKEN,birthday ) values ( #id#,#userName#,#parentId#,#parentName#,#name#,#pass#,#photoUrl#,#sex#,#age#,#userType#,#mobile#,#mobileChecked#,#email#,#emailChecked#,#regDate#,#regDateTime#,#province#,#city#,#country#,#address#,#checkStatus#,#status#,#note#,#nickName#,#sinaToken#,#birthday#)</insert>
+  <delete id="delete" parameterClass="user">delete from USERS where id = #id#</delete>
+  <update id="update" parameterClass="user">update USERS 
+    <dynamic prepend="set">
+      <isNotNull prepend="," property="userName">USERNAME = #userName#</isNotNull>
+      <isNotNull prepend="," property="parentId">PARENTID = #parentId#</isNotNull>
+      <isNotNull prepend="," property="parentName">PARENTNAME = #parentName#</isNotNull>
+      <isNotNull prepend="," property="name">NAME = #name#</isNotNull>
+      <isNotNull prepend="," property="pass">PASS = #pass#</isNotNull>
+      <isNotNull prepend="," property="photoUrl">PHOTOURL = #photoUrl#</isNotNull>
+      <isNotNull prepend="," property="sex">SEX = #sex#</isNotNull>
+      <isNotNull prepend="," property="age">AGE = #age#</isNotNull>
+      <isNotNull prepend="," property="userType">USERTYPE = #userType#</isNotNull>
+      <isNotNull prepend="," property="mobile">MOBILE = #mobile#</isNotNull>
+      <isNotNull prepend="," property="mobileChecked">MOBILECHECKED = #mobileChecked#</isNotNull>
+      <isNotNull prepend="," property="email">EMAIL = #email#</isNotNull>
+      <isNotNull prepend="," property="emailChecked">EMAILCHECKED = #emailChecked#</isNotNull>
+      <isNotNull prepend="," property="regDate">REGDATE = #regDate#</isNotNull>
+      <isNotNull prepend="," property="regDateTime">REGDATETIME = #regDateTime#</isNotNull>
+      <isNotNull prepend="," property="province">PROVINCE = #province#</isNotNull>
+      <isNotNull prepend="," property="city">CITY = #city#</isNotNull>
+      <isNotNull prepend="," property="country">COUNTRY = #country#</isNotNull>
+      <isNotNull prepend="," property="address">ADDRESS = #address#</isNotNull>
+      <isNotNull prepend="," property="checkStatus">CHECKSTATUS = #checkStatus#</isNotNull>
+      <isNotNull prepend="," property="status">STATUS = #status#</isNotNull>
+      <isNotNull prepend="," property="note">NOTE = #note#</isNotNull>
+      <isNotNull prepend="," property="nickName">NICKNAME = #nickName#</isNotNull>
+      <isNotNull prepend="," property="sinaToken">SINATOKEN = #sinaToken#</isNotNull>
+      <isNotNull prepend="," property="birthday">BIRTHDAY = #birthday#</isNotNull>
+    </dynamic>where id = #id#
+  </update>
+   <select id="findByusername" parameterClass="java.util.Map" resultMap="userResult">select * from USERS where userName = #userName#</select>
+  <select id="findById" parameterClass="java.lang.Long" resultMap="userResult">select * from USERS where id = #id#</select>
+  <select id="findNameById" parameterClass="java.lang.Long" resultMap="userResult">select * from USERS where id = #id#</select>
+  <select id="loginByUsernameAndPass" parameterClass="java.util.Map" resultMap="userResult">select ID,USERNAME,PARENTID,PARENTNAME,NAME,PASS,PHOTOURL,SEX,AGE,USERTYPE,MOBILE,MOBILECHECKED,EMAIL,EMAILCHECKED,REGDATE,REGDATETIME,PROVINCE,CITY,COUNTRY,ADDRESS,CHECKSTATUS,STATUS,NOTE,NICKNAME,SINATOKEN,BIRTHDAY from USERS
+	    <dynamic prepend="where">
+		      <isNotNull prepend=" and " property="userName">USERNAME = #userName#</isNotNull>
+		      <isNotNull prepend=" and " property="pass">PASS = #pass#</isNotNull>
+	    </dynamic>
+  </select>
+  <select id="loginByMobileAndPass" parameterClass="java.util.Map" resultMap="userResult">select ID,USERNAME,PARENTID,PARENTNAME,NAME,PASS,PHOTOURL,SEX,AGE,USERTYPE,MOBILE,MOBILECHECKED,EMAIL,EMAILCHECKED,REGDATE,REGDATETIME,PROVINCE,CITY,COUNTRY,ADDRESS,CHECKSTATUS,STATUS,NOTE,NICKNAME,SINATOKEN,BIRTHDAY from USERS
+	    <dynamic prepend="where">
+		      <isNotNull prepend=" and " property="mobile">MOBILE = #mobile#</isNotNull>
+		      <isNotNull prepend=" and " property="pass">PASS = #pass#</isNotNull>
+	    </dynamic>
+  </select>
+  <select id="loginByEmailAndPass" parameterClass="java.util.Map" resultMap="userResult">select ID,USERNAME,PARENTID,PARENTNAME,NAME,PASS,PHOTOURL,SEX,AGE,USERTYPE,MOBILE,MOBILECHECKED,EMAIL,EMAILCHECKED,REGDATE,REGDATETIME,PROVINCE,CITY,COUNTRY,ADDRESS,CHECKSTATUS,STATUS,NOTE,NICKNAME,SINATOKEN,BIRTHDAY from USERS
+	    <dynamic prepend="where">
+  		      <isNotNull prepend=" and " property="email">EMAIL = #email#</isNotNull>
+		      <isNotNull prepend=" and " property="pass">PASS = #pass#</isNotNull>
+	    </dynamic>
+  </select>
+  <select id="selectAll" parameterClass="java.util.Map" resultMap="userResult">select ID,USERNAME,PARENTID,PARENTNAME,NAME,PASS,PHOTOURL,SEX,AGE,USERTYPE,MOBILE,MOBILECHECKED,EMAIL,EMAILCHECKED,REGDATE,REGDATETIME,PROVINCE,CITY,COUNTRY,ADDRESS,CHECKSTATUS,STATUS,NOTE,NICKNAME,SINATOKEN,BIRTHDAY from USERS
+    <dynamic prepend="where">
+      <isNotNull prepend=" and " property="userName">USERNAME like '%$userName$%'</isNotNull>
+      <isNotNull prepend=" and " property="parentId">PARENTID = #parentId#</isNotNull>
+      <isNotNull prepend=" and " property="parentName">PARENTNAME = #parentName#</isNotNull>
+      <isNotNull prepend=" and " property="name">NAME = #name#</isNotNull>
+      <isNotNull prepend=" and " property="pass">PASS = #pass#</isNotNull>
+      <isNotNull prepend=" and " property="photoUrl">PHOTOURL = #photoUrl#</isNotNull>
+      <isNotNull prepend=" and " property="sex">SEX = #sex#</isNotNull>
+      <isNotNull prepend=" and " property="age">AGE = #age#</isNotNull>
+      <isNotNull prepend=" and " property="userType">USERTYPE = #userType#</isNotNull>
+      <isNotNull prepend=" and " property="mobile">MOBILE = #mobile#</isNotNull>
+      <isNotNull prepend=" and " property="mobileChecked">MOBILECHECKED = #mobileChecked#</isNotNull>
+      <isNotNull prepend=" and " property="email">EMAIL = #email#</isNotNull>
+      <isNotNull prepend=" and " property="emailChecked">EMAILCHECKED = #emailChecked#</isNotNull>
+      <isNotNull prepend=" and " property="regDate">REGDATE = #regDate#</isNotNull>
+      <isNotNull prepend=" and " property="regDateTime">REGDATETIME = #regDateTime#</isNotNull>
+      <isNotNull prepend=" and " property="province">PROVINCE = #province#</isNotNull>
+      <isNotNull prepend=" and " property="city">CITY = #city#</isNotNull>
+      <isNotNull prepend=" and " property="country">COUNTRY = #country#</isNotNull>
+      <isNotNull prepend=" and " property="address">ADDRESS = #address#</isNotNull>
+      <isNotNull prepend=" and " property="checkStatus">CHECKSTATUS = #checkStatus#</isNotNull>
+      <isNotNull prepend=" and " property="status">STATUS = #status#</isNotNull>
+      <isNotNull prepend=" and " property="note">NOTE = #note#</isNotNull>
+         <isNotNull prepend=" and " property="nickName">NICKNAME = #nickName#</isNotNull>
+      <isNotNull prepend=" and " property="sinaToken">SINATOKEN = #sinaToken#</isNotNull>
+   <isNotNull prepend=" and " property="birthday">BIRTHDAY = #birthday#</isNotNull>
+    </dynamic>
+  </select>
+  <select id="selectPage" parameterClass="java.util.Map" resultMap="userResult">select ID,USERNAME,PARENTID,PARENTNAME,NAME,PASS,PHOTOURL,SEX,AGE,USERTYPE,MOBILE,MOBILECHECKED,EMAIL,EMAILCHECKED,REGDATE,REGDATETIME,PROVINCE,CITY,COUNTRY,ADDRESS,CHECKSTATUS,STATUS,NOTE,NICKNAME,SINATOKEN,BIRTHDAY from USERS
+    <dynamic prepend="where">
+      <isNotNull prepend=" and " property="userName">USERNAME like '%$userName$%'</isNotNull>
+      <isNotNull prepend=" and " property="parentId">PARENTID = #parentId#</isNotNull>
+      <isNotNull prepend=" and " property="parentName">PARENTNAME = #parentName#</isNotNull>
+      <isNotNull prepend=" and " property="name">NAME = #name#</isNotNull>
+      <isNotNull prepend=" and " property="pass">PASS = #pass#</isNotNull>
+      <isNotNull prepend=" and " property="photoUrl">PHOTOURL = #photoUrl#</isNotNull>
+      <isNotNull prepend=" and " property="sex">SEX = #sex#</isNotNull>
+      <isNotNull prepend=" and " property="age">AGE = #age#</isNotNull>
+      <isNotNull prepend=" and " property="userType">USERTYPE = #userType#</isNotNull>
+      <isNotNull prepend=" and " property="mobile">MOBILE = #mobile#</isNotNull>
+      <isNotNull prepend=" and " property="mobileChecked">MOBILECHECKED = #mobileChecked#</isNotNull>
+      <isNotNull prepend=" and " property="email">EMAIL = #email#</isNotNull>
+      <isNotNull prepend=" and " property="emailChecked">EMAILCHECKED = #emailChecked#</isNotNull>
+      <isNotNull prepend=" and " property="regDate">REGDATE = #regDate#</isNotNull>
+      <isNotNull prepend=" and " property="regDateTime">REGDATETIME = #regDateTime#</isNotNull>
+      <isNotNull prepend=" and " property="province">PROVINCE = #province#</isNotNull>
+      <isNotNull prepend=" and " property="city">CITY = #city#</isNotNull>
+      <isNotNull prepend=" and " property="country">COUNTRY = #country#</isNotNull>
+      <isNotNull prepend=" and " property="address">ADDRESS = #address#</isNotNull>
+      <isNotNull prepend=" and " property="checkStatus">CHECKSTATUS = #checkStatus#</isNotNull>
+      <isNotNull prepend=" and " property="status">STATUS = #status#</isNotNull>
+      <isNotNull prepend=" and " property="note">NOTE = #note#</isNotNull>
+      <isNotNull prepend=" and " property="nickName">NICKNAME = #nickName#</isNotNull>
+         <isNotNull prepend=" and " property="sinaToken">SINATOKEN = #sinaToken#</isNotNull>
+           <isNotNull prepend=" and " property="birthday">BIRTHDAY = #birthday#</isNotNull>
+    </dynamic>order by id desc limit #startIndex#,#endIndex#
+  </select>
+  <select id="selectCount" parameterClass="java.util.Map" resultClass="java.lang.Long">select count(id) from USERS 
+    <dynamic prepend="where">
+      <isNotNull prepend=" and " property="userName">USERNAME like '%$userName$%'</isNotNull>
+      <isNotNull prepend=" and " property="parentId">PARENTID = #parentId#</isNotNull>
+      <isNotNull prepend=" and " property="parentName">PARENTNAME = #parentName#</isNotNull>
+      <isNotNull prepend=" and " property="name">NAME = #name#</isNotNull>
+      <isNotNull prepend=" and " property="pass">PASS = #pass#</isNotNull>
+      <isNotNull prepend=" and " property="photoUrl">PHOTOURL = #photoUrl#</isNotNull>
+      <isNotNull prepend=" and " property="sex">SEX = #sex#</isNotNull>
+      <isNotNull prepend=" and " property="age">AGE = #age#</isNotNull>
+      <isNotNull prepend=" and " property="userType">USERTYPE = #userType#</isNotNull>
+      <isNotNull prepend=" and " property="mobile">MOBILE = #mobile#</isNotNull>
+      <isNotNull prepend=" and " property="mobileChecked">MOBILECHECKED = #mobileChecked#</isNotNull>
+      <isNotNull prepend=" and " property="email">EMAIL = #email#</isNotNull>
+      <isNotNull prepend=" and " property="emailChecked">EMAILCHECKED = #emailChecked#</isNotNull>
+      <isNotNull prepend=" and " property="regDate">REGDATE = #regDate#</isNotNull>
+      <isNotNull prepend=" and " property="regDateTime">REGDATETIME = #regDateTime#</isNotNull>
+      <isNotNull prepend=" and " property="province">PROVINCE = #province#</isNotNull>
+      <isNotNull prepend=" and " property="city">CITY = #city#</isNotNull>
+      <isNotNull prepend=" and " property="country">COUNTRY = #country#</isNotNull>
+      <isNotNull prepend=" and " property="address">ADDRESS = #address#</isNotNull>
+      <isNotNull prepend=" and " property="checkStatus">CHECKSTATUS = #checkStatus#</isNotNull>
+      <isNotNull prepend=" and " property="status">STATUS = #status#</isNotNull>
+      <isNotNull prepend=" and " property="note">NOTE = #note#</isNotNull>
+      <isNotNull prepend=" and " property="nickName">NICKNAME = #nickName#</isNotNull>
+      <isNotNull prepend=" and " property="sinaToken">SINATOKEN = #sinaToken#</isNotNull>
+        <isNotNull prepend=" and " property="birthday">BIRTHDAY = #birthday#</isNotNull>
+    </dynamic>
+  </select>
+</sqlMap>
