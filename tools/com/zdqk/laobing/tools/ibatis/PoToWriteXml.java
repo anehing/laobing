@@ -310,7 +310,7 @@ public class PoToWriteXml {
         Element count = rootElement.addElement("select");
         count.addAttribute("id", "selectCount");
         count.addAttribute("parameterClass", "java.util.Map");
-        count.addAttribute("resultClass", "java.lang.Integer");
+        count.addAttribute("resultClass", "java.lang.Long");
         String strcount = countStr(declaredFields);
         count.addText("select  count("+strcount+") from "+table.toUpperCase()+" ");
         //dynamic 鑺傜偣
