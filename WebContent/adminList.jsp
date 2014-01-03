@@ -20,11 +20,12 @@
              <table class="dataTable" width="97%" border="0" align="center" cellpadding="0" cellspacing="1"  bgcolor="#93b5d1">
 	             <tr>
 		            <td width="10%" align="center" bgcolor="#F3F8FE" class="dataTdText">用户名称</td>
-		            <td width="25%" align="left" bgcolor="#FFFFFF"> <s:textfield id="username" name="admin.username" ></s:textfield></td>
+		            <td width="30%" align="left" bgcolor="#FFFFFF"> <s:textfield id="username" name="admin.username" ></s:textfield></td>
 		            <td width="10%" align="center" bgcolor="#F3F8FE" class="dataTdText">用户类型</td>
 		            <td width="30%" align="left" class="dataTdText" bgcolor="#FFFFFF" >
-		            <s:select list="#{0:'普通用户',1:'管理员'}" listKey="key" listValue="value" name ="admin.usertype" id="usertype"  headerValue="请选择" headerKey="3" ></s:select>
-		            <td rowspan="3" align="center" valign="middle" bgcolor="#FFFFFF">
+		               <s:select list="#{0:'普通用户',1:'管理员'}" listKey="key" listValue="value" name ="admin.usertype" id="usertype"  headerValue="请选择" headerKey="3" ></s:select>
+		            </td>
+                    <td rowspan="3" align="center" valign="middle" bgcolor="#FFFFFF">
 			            <input	type="submit" class="inputBtn"   value="提交" style="cursor: pointer"  />
 		                <input	type="button" class="inputBtn"   value="清空" onClick="clearForm('form1')" style="cursor: pointer" />
 		            </td>
