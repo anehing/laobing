@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="com.zdqk.laobing.po.Url">
+  <typeAlias alias="url" type="com.zdqk.laobing.po.Url"/>
+  <resultMap id="urlResult" class="url">
+    <result property="id" column="ID"/>
+    <result property="urlid" column="URLID"/>
+    <result property="adminid" column="ADMINID"/>
+  </resultMap>
+  <insert id="insert" parameterClass="url">insert into URL( ID,URLID,ADMINID ) values ( #id#,#urlid#,#adminid# )</insert>
+  <delete id="delete" parameterClass="url">delete from URL where id = #id#</delete>
+  <update id="update" parameterClass="url">update URL 
+    <dynamic prepend="set">
+      <isNotNull prepend="," property="urlid">URLID = #urlid#</isNotNull>
+      <isNotNull prepend="," property="adminid">ADMINID = #adminid#</isNotNull>
+    </dynamic>where id = #id#
+  </update>
+  <select id="findById" parameterClass="java.lang.Integer" resultMap="urlResult">select * from URL where id = #id#</select>
+  <select id="findNameById" parameterClass="java.lang.Integer" resultMap="urlResult">select * from URL where id = #id#</select>
+  <select id="selectAll" parameterClass="java.util.Map" resultMap="urlResult">select ID,URLID,ADMINID from URL
+    <dynamic prepend="where">
+      <isNotNull prepend=" and " property="urlid">URLID = #urlid#</isNotNull>
+      <isNotNull prepend=" and " property="adminid">ADMINID = #adminid#</isNotNull>
+    </dynamic>
+  </select>
+  <select id="selectPage" parameterClass="java.util.Map" resultMap="urlResult">select ID,URLID,ADMINID from URL
+    <dynamic prepend="where">
+      <isNotNull prepend=" and " property="urlid">URLID = #urlid#</isNotNull>
+      <isNotNull prepend=" and " property="adminid">ADMINID = #adminid#</isNotNull>
+    </dynamic>order by id desc limit #startIndex#,#endIndex#
+  </select>
+  <select id="selectCount" parameterClass="java.util.Map" resultClass="java.lang.Long">select count(id) from URL 
+    <dynamic prepend="where">
+      <isNotNull prepend=" and " property="urlid">URLID = #urlid#</isNotNull>
+      <isNotNull prepend=" and " property="adminid">ADMINID = #adminid#</isNotNull>
+    </dynamic>
+  </select>
+</sqlMap>

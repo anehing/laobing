@@ -15,7 +15,6 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.interceptor.annotations.After;
 import com.opensymphony.xwork2.interceptor.annotations.Before;
 import com.zdqk.laobing.po.Admin;
-import com.zdqk.laobing.po.UserLog;
 
 /**
  * 
@@ -38,7 +37,6 @@ public class BasicAction extends ActionSupport {
 	protected HttpServletResponse response =null;
 	
 	
-	protected UserLog log=null;
 	
 	protected Admin basicAdmin=null;
 	

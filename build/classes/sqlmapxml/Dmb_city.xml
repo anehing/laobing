@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="com.zdqk.laobing.po.Dmb_city">
+  <typeAlias alias="dmb_city" type="com.zdqk.laobing.po.Dmb_city"/>
+  <resultMap id="dmb_cityResult" class="dmb_city">
+    <result property="id" column="ID"/>
+    <result property="parentid" column="PARENTID"/>
+    <result property="ssx" column="SSX"/>
+    <result property="type" column="TYPE"/>
+    <result property="status" column="STATUS"/>
+    <result property="parentname" column="PARENTNAME"/>
+    <result property="mc" column="MC"/>
+    <result property="bz" column="BZ"/>
+  </resultMap>
+  <insert id="insert" parameterClass="dmb_city">insert into PRE_PRICE( ID,PARENTID,SSX,TYPE,STATUS,PARENTNAME,MC,BZ ) values ( #id#,#parentid#,#ssx#,#type#,#status#,#parentname#,#mc#,#bz# )</insert>
+  <delete id="delete" parameterClass="dmb_city">delete from PRE_PRICE where id = #id#</delete>
+  <update id="update" parameterClass="dmb_city">update PRE_PRICE 
+    <dynamic prepend="set">
+      <isNotNull prepend="," property="parentid">PARENTID = #parentid#</isNotNull>
+      <isNotNull prepend="," property="ssx">SSX = #ssx#</isNotNull>
+      <isNotNull prepend="," property="type">TYPE = #type#</isNotNull>
+      <isNotNull prepend="," property="status">STATUS = #status#</isNotNull>
+      <isNotNull prepend="," property="parentname">PARENTNAME = #parentname#</isNotNull>
+      <isNotNull prepend="," property="mc">MC = #mc#</isNotNull>
+      <isNotNull prepend="," property="bz">BZ = #bz#</isNotNull>
+    </dynamic>where id = #id#
+  </update>
+  <select id="findById" parameterClass="java.lang.Integer" resultMap="dmb_cityResult">select * from PRE_PRICE where id = #id#</select>
+  <select id="findNameById" parameterClass="java.lang.Integer" resultMap="dmb_cityResult">select * from PRE_PRICE where id = #id#</select>
+  <select id="selectAll" parameterClass="java.util.Map" resultMap="dmb_cityResult">select ID,PARENTID,SSX,TYPE,STATUS,PARENTNAME,MC,BZ from PRE_PRICE
+    <dynamic prepend="where">
+      <isNotNull prepend=" and " property="parentid">PARENTID = #parentid#</isNotNull>
+      <isNotNull prepend=" and " property="ssx">SSX = #ssx#</isNotNull>
+      <isNotNull prepend=" and " property="type">TYPE = #type#</isNotNull>
+      <isNotNull prepend=" and " property="status">STATUS = #status#</isNotNull>
+      <isNotNull prepend=" and " property="parentname">PARENTNAME = #parentname#</isNotNull>
+      <isNotNull prepend=" and " property="mc">MC = #mc#</isNotNull>
+      <isNotNull prepend=" and " property="bz">BZ = #bz#</isNotNull>
+    </dynamic>
+  </select>
+  <select id="selectPage" parameterClass="java.util.Map" resultMap="dmb_cityResult">select ID,PARENTID,SSX,TYPE,STATUS,PARENTNAME,MC,BZ from PRE_PRICE
+    <dynamic prepend="where">
+      <isNotNull prepend=" and " property="parentid">PARENTID = #parentid#</isNotNull>
+      <isNotNull prepend=" and " property="ssx">SSX = #ssx#</isNotNull>
+      <isNotNull prepend=" and " property="type">TYPE = #type#</isNotNull>
+      <isNotNull prepend=" and " property="status">STATUS = #status#</isNotNull>
+      <isNotNull prepend=" and " property="parentname">PARENTNAME = #parentname#</isNotNull>
+      <isNotNull prepend=" and " property="mc">MC = #mc#</isNotNull>
+      <isNotNull prepend=" and " property="bz">BZ = #bz#</isNotNull>
+    </dynamic>order by id desc limit #startIndex#,#endIndex#
+  </select>
+  <select id="selectCount" parameterClass="java.util.Map" resultClass="java.lang.Long">select count(id) from PRE_PRICE 
+    <dynamic prepend="where">
+      <isNotNull prepend=" and " property="parentid">PARENTID = #parentid#</isNotNull>
+      <isNotNull prepend=" and " property="ssx">SSX = #ssx#</isNotNull>
+      <isNotNull prepend=" and " property="type">TYPE = #type#</isNotNull>
+      <isNotNull prepend=" and " property="status">STATUS = #status#</isNotNull>
+      <isNotNull prepend=" and " property="parentname">PARENTNAME = #parentname#</isNotNull>
+      <isNotNull prepend=" and " property="mc">MC = #mc#</isNotNull>
+      <isNotNull prepend=" and " property="bz">BZ = #bz#</isNotNull>
+    </dynamic>
+  </select>
+</sqlMap>

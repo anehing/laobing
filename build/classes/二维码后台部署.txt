@@ -1,0 +1,9 @@
+1。修改Ewm\resource\initconfig.properties 文件
+host=http://192.168.1.10/Ewm/    修改iP和端口号
+2。修改Ewm\resource\jdbc.properties 文件
+修改数据库连接信息
+
+3。修改Ewm\resource\struts.xml 文件
+ <constant name="struts.multipart.saveDir" value="F:/temp/" />	修改value值 所在路径
+
+4。复制已存在到musics 、videos、photos 文件夹 到WebContent下

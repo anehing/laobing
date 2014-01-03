@@ -3,17 +3,22 @@ package com.zdqk.laobing.tools.ibatis;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.zdqk.laobing.po.Collections;
-import com.zdqk.laobing.po.Comments;
-import com.zdqk.laobing.po.DmbCity;
-import com.zdqk.laobing.po.Exhibits;
-import com.zdqk.laobing.po.Groups;
-import com.zdqk.laobing.po.Museums;
-import com.zdqk.laobing.po.Musics;
-import com.zdqk.laobing.po.Photos;
+import com.zdqk.laobing.po.App_comment;
+import com.zdqk.laobing.po.Coupon;
+import com.zdqk.laobing.po.Customer_judge_driver;
+import com.zdqk.laobing.po.Customer_order;
+import com.zdqk.laobing.po.Dmb_city;
+import com.zdqk.laobing.po.Driver;
+import com.zdqk.laobing.po.Permission;
+import com.zdqk.laobing.po.Pre_price;
+import com.zdqk.laobing.po.Price;
+import com.zdqk.laobing.po.Tranrecord;
+import com.zdqk.laobing.po.Twitter;
+import com.zdqk.laobing.po.Url;
 import com.zdqk.laobing.po.User;
-import com.zdqk.laobing.po.UserLog;
-import com.zdqk.laobing.po.Videos;
+import com.zdqk.laobing.po.Version;
+
+
 
 
 
@@ -25,29 +30,34 @@ public class PoMap {
 	public static Map<String,Object>  putObject()
 	{
 		Map<String,Object> hashmap=new HashMap<String,Object>();
-		DmbCity DmbCity=new DmbCity();
-		hashmap.put("DmbCity",DmbCity);
-		UserLog UserLog=new UserLog();
-		hashmap.put("UserLog",UserLog);		
-		User User=new User();
-		hashmap.put("User",User);	
-		
-		Collections Collections =new Collections();
-		hashmap.put("Collections",Collections);		
-		Comments Comments =new Comments();
-		hashmap.put("Comments",Comments);			
-		Exhibits Exhibits =new Exhibits();
-		hashmap.put("Exhibits",Exhibits);			
-		Museums Museums=new Museums();
-		hashmap.put("Museums",Museums);	
-		Musics Musics=new Musics();
-		hashmap.put("Musics",Musics);	
-		Photos Photos =new Photos();
-		hashmap.put("Photos",Photos);		
-		Groups Groups =new Groups();
-		hashmap.put("Groups",Groups);			
-		Videos Videos =new Videos();
-		hashmap.put("Videos",Videos);			
+		Dmb_city Dmb_city=new Dmb_city();
+		hashmap.put("Dmb_city",Dmb_city);
+        App_comment App_comment =new App_comment();
+        hashmap.put("App_comment", App_comment);
+        Coupon Coupon =new Coupon();
+        hashmap.put("Coupon", Coupon);
+        Customer_judge_driver Customer_judge_driver =new Customer_judge_driver();
+        hashmap.put("Customer_judge_driver", Customer_judge_driver);
+        Customer_order Customer_order = new Customer_order();
+        hashmap.put("Customer_order", Customer_order);
+        Driver Driver = new Driver();
+        hashmap.put("Driver", Driver);
+        Permission Permission =new Permission();
+        hashmap.put("Permission", Permission);
+        Pre_price Pre_price =new Pre_price();
+        hashmap.put("Pre_price", Pre_price);
+        Price Price =new Price();
+        hashmap.put("Price", Price);
+        Tranrecord Tranrecord =new Tranrecord();
+        hashmap.put("Tranrecord", Tranrecord);
+        Twitter Twitter =new Twitter();
+        hashmap.put("Twitter", Twitter);
+        Url Url=new Url();
+        hashmap.put("Url", Url);
+        User User =new User();
+        hashmap.put("User", User);
+        Version Version =new Version();
+        hashmap.put("Version", Version);
 		return hashmap; 
 	}
 }

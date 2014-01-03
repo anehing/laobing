@@ -2,12 +2,10 @@
     <wb-module deploy-name="laobing">
         <wb-resource deploy-path="/" source-path="/WebContent"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/resource"/>
-        <wb-resource deploy-path="/WEB-INF/classes" source-path="/doc"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/dao"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/web"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/service"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/tools"/>
-        <wb-resource deploy-path="/WEB-INF/classes" source-path="/test"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/webservice"/>
         <property name="java-output-path" value="build/classes"/>
         <property name="context-root" value="laobing"/>

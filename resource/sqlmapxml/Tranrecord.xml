@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="com.zdqk.laobing.po.Tranrecord">
+  <typeAlias alias="tranrecord" type="com.zdqk.laobing.po.Tranrecord"/>
+  <resultMap id="tranrecordResult" class="tranrecord">
+    <result property="id" column="ID"/>
+    <result property="driverid" column="DRIVERID"/>
+    <result property="orderid" column="ORDERID"/>
+    <result property="type" column="TYPE"/>
+    <result property="trans_datetime" column="TRANS_DATETIME"/>
+    <result property="account" column="ACCOUNT"/>
+    <result property="note" column="NOTE"/>
+  </resultMap>
+  <insert id="insert" parameterClass="tranrecord">insert into TRANRECORD( ID,DRIVERID,ORDERID,TYPE,TRANS_DATETIME,ACCOUNT,NOTE ) values ( #id#,#driverid#,#orderid#,#type#,#trans_datetime#,#account#,#note# )</insert>
+  <delete id="delete" parameterClass="tranrecord">delete from TRANRECORD where id = #id#</delete>
+  <update id="update" parameterClass="tranrecord">update TRANRECORD 
+    <dynamic prepend="set">
+      <isNotNull prepend="," property="driverid">DRIVERID = #driverid#</isNotNull>
+      <isNotNull prepend="," property="orderid">ORDERID = #orderid#</isNotNull>
+      <isNotNull prepend="," property="type">TYPE = #type#</isNotNull>
+      <isNotNull prepend="," property="trans_datetime">TRANS_DATETIME = #trans_datetime#</isNotNull>
+      <isNotNull prepend="," property="account">ACCOUNT = #account#</isNotNull>
+      <isNotNull prepend="," property="note">NOTE = #note#</isNotNull>
+    </dynamic>where id = #id#
+  </update>
+  <select id="findById" parameterClass="java.lang.Integer" resultMap="tranrecordResult">select * from TRANRECORD where id = #id#</select>
+  <select id="findNameById" parameterClass="java.lang.Integer" resultMap="tranrecordResult">select * from TRANRECORD where id = #id#</select>
+  <select id="selectAll" parameterClass="java.util.Map" resultMap="tranrecordResult">select ID,DRIVERID,ORDERID,TYPE,TRANS_DATETIME,ACCOUNT,NOTE from TRANRECORD
+    <dynamic prepend="where">
+      <isNotNull prepend=" and " property="driverid">DRIVERID = #driverid#</isNotNull>
+      <isNotNull prepend=" and " property="orderid">ORDERID = #orderid#</isNotNull>
+      <isNotNull prepend=" and " property="type">TYPE = #type#</isNotNull>
+      <isNotNull prepend=" and " property="trans_datetime">TRANS_DATETIME = #trans_datetime#</isNotNull>
+      <isNotNull prepend=" and " property="account">ACCOUNT = #account#</isNotNull>
+      <isNotNull prepend=" and " property="note">NOTE = #note#</isNotNull>
+    </dynamic>
+  </select>
+  <select id="selectPage" parameterClass="java.util.Map" resultMap="tranrecordResult">select ID,DRIVERID,ORDERID,TYPE,TRANS_DATETIME,ACCOUNT,NOTE from TRANRECORD
+    <dynamic prepend="where">
+      <isNotNull prepend=" and " property="driverid">DRIVERID = #driverid#</isNotNull>
+      <isNotNull prepend=" and " property="orderid">ORDERID = #orderid#</isNotNull>
+      <isNotNull prepend=" and " property="type">TYPE = #type#</isNotNull>
+      <isNotNull prepend=" and " property="trans_datetime">TRANS_DATETIME = #trans_datetime#</isNotNull>
+      <isNotNull prepend=" and " property="account">ACCOUNT = #account#</isNotNull>
+      <isNotNull prepend=" and " property="note">NOTE = #note#</isNotNull>
+    </dynamic>order by id desc limit #startIndex#,#endIndex#
+  </select>
+  <select id="selectCount" parameterClass="java.util.Map" resultClass="java.lang.Long">select count(id) from TRANRECORD 
+    <dynamic prepend="where">
+      <isNotNull prepend=" and " property="driverid">DRIVERID = #driverid#</isNotNull>
+      <isNotNull prepend=" and " property="orderid">ORDERID = #orderid#</isNotNull>
+      <isNotNull prepend=" and " property="type">TYPE = #type#</isNotNull>
+      <isNotNull prepend=" and " property="trans_datetime">TRANS_DATETIME = #trans_datetime#</isNotNull>
+      <isNotNull prepend=" and " property="account">ACCOUNT = #account#</isNotNull>
+      <isNotNull prepend=" and " property="note">NOTE = #note#</isNotNull>
+    </dynamic>
+  </select>
+</sqlMap>

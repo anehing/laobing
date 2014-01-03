@@ -182,7 +182,7 @@ public class PoToWriteXml {
         //涓婚敭鏌ヨ鑺傜偣
         Element queryAllById = rootElement.addElement("select");
         queryAllById.addAttribute("id", "findById");
-        queryAllById.addAttribute("parameterClass", "java.lang.Long");
+        queryAllById.addAttribute("parameterClass", "java.lang.Integer");
         queryAllById.addAttribute("resultMap", alias+"Result");
         for (Field field : declaredFields) {			
 			String fieldName = field.getName();
@@ -203,7 +203,7 @@ public class PoToWriteXml {
 		//涓婚敭鏌ヨ鑺傜偣锛屾煡璇㈢粨鏋滆繑鍥炵殑鍊煎彧鏈塏ame瀛楁锛屽叾浠栧瓧娈靛�閮戒负绌�
 		Element queryAllById = rootElement.addElement("select");
 		queryAllById.addAttribute("id", "findNameById");
-		queryAllById.addAttribute("parameterClass", "java.lang.Long");
+		queryAllById.addAttribute("parameterClass", "java.lang.Integer");
 		queryAllById.addAttribute("resultMap", alias+"Result");
 		for (Field field : declaredFields) {			
 			String fieldName = field.getName();
@@ -310,7 +310,7 @@ public class PoToWriteXml {
         Element count = rootElement.addElement("select");
         count.addAttribute("id", "selectCount");
         count.addAttribute("parameterClass", "java.util.Map");
-        count.addAttribute("resultClass", "java.lang.Long");
+        count.addAttribute("resultClass", "java.lang.Integer");
         String strcount = countStr(declaredFields);
         count.addText("select  count("+strcount+") from "+table.toUpperCase()+" ");
         //dynamic 鑺傜偣
@@ -362,8 +362,8 @@ public class PoToWriteXml {
         }  
 	}
 	public static void main(String[] args) {
-		 String rootstr="E://workspace//Ewm//dao//com//zdqk//ewm//po";		
-		 String rootdes="E://workspace//Ewm//resource//sqlmapxml//";	
+		 String rootstr="/Users/ane/workspace/laobing/dao/com/zdqk/laobing/po/";		
+		 String rootdes="/Users/ane//workspace/laobing/resource/sqlmapxml/";	
 		 Map<String ,String> pathMap=new HashMap<String ,String>();
 		 pathMap.put(rootstr,rootdes);
 		 for(String obj : pathMap.keySet()) {        
@@ -388,7 +388,7 @@ public class PoToWriteXml {
 	                if(strFileName.indexOf(".svn")<0){
 	                	 //System.out.println("-" + strFileName);
 	                	 //System.out.println(strFileName.lastIndexOf("\\"));
-	                	 String fileNameWithExtension=strFileName.substring(strFileName.lastIndexOf("\\")+1);
+	                	 String fileNameWithExtension=strFileName.substring(strFileName.lastIndexOf("/")+1);
 	                	 //System.out.println(fileNameWithExtension);
 	                	 if(fileNameWithExtension.lastIndexOf(".java")>0){
 	                		 String fileNameNoExtension=fileNameWithExtension.substring(0,fileNameWithExtension.lastIndexOf(".java"));
@@ -401,7 +401,7 @@ public class PoToWriteXml {
 		                	 if(o!=null){
 		                		 sqlMap(hashmap.get(fileNameNoExtension),folderPath);
 		                	 }else{
-		                		 System.out.println(fileNameNoExtension+"is NULL");
+		                		 System.out.println(fileNameNoExtension+" is NULL");
 		                	 }
 		                	
 	                	 }	                	 

@@ -99,24 +99,3 @@
 		</div>
     </s:form>		
 </body>
-<script type="text/javascript">
-function toSubmit(){
-	var username=document.getElementById("username").value;
-	var usertype=document.getElementById("usertype").value;
-	var status=document.getElementById("status").value;
-	
-	if(!checkNull(username)){
-	      showErrorMsg("请输入用户名称");
-	      return false;
-	 }
-	if(usertype==3){
-	      showErrorMsg("请选择用户类型");
-	      return false;
-	 }
-	if(status==3){
-	      showErrorMsg("请选择状态");
-	      return false;
-	 }
-	return ture;
-}
-</script>

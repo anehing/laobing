@@ -31,6 +31,7 @@ import com.zdqk.laobing.po.Admin;
 @Results({ @Result(name = "adminList", location = "/adminList.jsp"),
 	       @Result(name = "updateAdmin", location = "/updateAdmin.jsp"),
 	       @Result(name = "queryAdmin", type = "chain", location = "queryAdmin"),
+	       @Result(name = "addAdmin", location = "/addAdmin.jsp"),
 		})
 
 public class AdminAction extends BasePaginationAction {
@@ -115,6 +116,23 @@ public class AdminAction extends BasePaginationAction {
 			boolean  flag=adminDAO.update(this.admin);
 		    if(flag)  this.addActionMessage("更新成功");
 			else this.addActionError("更新失败");
+		}
+		
+		return "updateAdmin";
+	}
+	/**
+	 * @author ane
+	 *  添加后台账户
+	 */
+	@Action("addAdmin")
+	public String addAdmin() {
+		if(this.admin!=null){
+			boolean  flag=adminDAO.update(this.admin);
+		    if(flag)  this.addActionMessage("更新成功");
+			else this.addActionError("更新失败");
+		}else{
+			
+			return "addAdmin";
 		}
 		
 		return "updateAdmin";

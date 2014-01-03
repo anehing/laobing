@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="com.zdqk.laobing.po.Twitter">
+  <typeAlias alias="twitter" type="com.zdqk.laobing.po.Twitter"/>
+  <resultMap id="twitterResult" class="twitter">
+    <result property="id" column="ID"/>
+    <result property="title" column="TITLE"/>
+    <result property="content" column="CONTENT"/>
+    <result property="createtime" column="CREATETIME"/>
+    <result property="sendtype" column="SENDTYPE"/>
+    <result property="type" column="TYPE"/>
+    <result property="cityid" column="CITYID"/>
+  </resultMap>
+  <insert id="insert" parameterClass="twitter">insert into TWITTER( ID,TITLE,CONTENT,CREATETIME,SENDTYPE,TYPE,CITYID ) values ( #id#,#title#,#content#,#createtime#,#sendtype#,#type#,#cityid# )</insert>
+  <delete id="delete" parameterClass="twitter">delete from TWITTER where id = #id#</delete>
+  <update id="update" parameterClass="twitter">update TWITTER 
+    <dynamic prepend="set">
+      <isNotNull prepend="," property="title">TITLE = #title#</isNotNull>
+      <isNotNull prepend="," property="content">CONTENT = #content#</isNotNull>
+      <isNotNull prepend="," property="createtime">CREATETIME = #createtime#</isNotNull>
+      <isNotNull prepend="," property="sendtype">SENDTYPE = #sendtype#</isNotNull>
+      <isNotNull prepend="," property="type">TYPE = #type#</isNotNull>
+      <isNotNull prepend="," property="cityid">CITYID = #cityid#</isNotNull>
+    </dynamic>where id = #id#
+  </update>
+  <select id="findById" parameterClass="java.lang.Integer" resultMap="twitterResult">select * from TWITTER where id = #id#</select>
+  <select id="findNameById" parameterClass="java.lang.Integer" resultMap="twitterResult">select * from TWITTER where id = #id#</select>
+  <select id="selectAll" parameterClass="java.util.Map" resultMap="twitterResult">select ID,TITLE,CONTENT,CREATETIME,SENDTYPE,TYPE,CITYID from TWITTER
+    <dynamic prepend="where">
+      <isNotNull prepend=" and " property="title">TITLE = #title#</isNotNull>
+      <isNotNull prepend=" and " property="content">CONTENT = #content#</isNotNull>
+      <isNotNull prepend=" and " property="createtime">CREATETIME = #createtime#</isNotNull>
+      <isNotNull prepend=" and " property="sendtype">SENDTYPE = #sendtype#</isNotNull>
+      <isNotNull prepend=" and " property="type">TYPE = #type#</isNotNull>
+      <isNotNull prepend=" and " property="cityid">CITYID = #cityid#</isNotNull>
+    </dynamic>
+  </select>
+  <select id="selectPage" parameterClass="java.util.Map" resultMap="twitterResult">select ID,TITLE,CONTENT,CREATETIME,SENDTYPE,TYPE,CITYID from TWITTER
+    <dynamic prepend="where">
+      <isNotNull prepend=" and " property="title">TITLE = #title#</isNotNull>
+      <isNotNull prepend=" and " property="content">CONTENT = #content#</isNotNull>
+      <isNotNull prepend=" and " property="createtime">CREATETIME = #createtime#</isNotNull>
+      <isNotNull prepend=" and " property="sendtype">SENDTYPE = #sendtype#</isNotNull>
+      <isNotNull prepend=" and " property="type">TYPE = #type#</isNotNull>
+      <isNotNull prepend=" and " property="cityid">CITYID = #cityid#</isNotNull>
+    </dynamic>order by id desc limit #startIndex#,#endIndex#
+  </select>
+  <select id="selectCount" parameterClass="java.util.Map" resultClass="java.lang.Long">select count(id) from TWITTER 
+    <dynamic prepend="where">
+      <isNotNull prepend=" and " property="title">TITLE = #title#</isNotNull>
+      <isNotNull prepend=" and " property="content">CONTENT = #content#</isNotNull>
+      <isNotNull prepend=" and " property="createtime">CREATETIME = #createtime#</isNotNull>
+      <isNotNull prepend=" and " property="sendtype">SENDTYPE = #sendtype#</isNotNull>
+      <isNotNull prepend=" and " property="type">TYPE = #type#</isNotNull>
+      <isNotNull prepend=" and " property="cityid">CITYID = #cityid#</isNotNull>
+    </dynamic>
+  </select>
+</sqlMap>
