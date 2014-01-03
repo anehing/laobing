@@ -52,7 +52,7 @@ public class UserAction extends BasePaginationAction {
 	}
 	/**
 	 * @author ane
-	 *  查询后台账户
+	 *  查看手机端用户信息
 	 */
 	@Action("queryUser")
 	public String queryUser() {
