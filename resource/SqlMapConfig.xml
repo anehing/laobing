@@ -11,4 +11,17 @@
 
 	<sqlMap resource="sqlmapxml/Admin.xml" />
 	<sqlMap resource="sqlmapxml/User.xml" />
+	<sqlMap resource="sqlmapxml/App_comment.xml" />
+	<sqlMap resource="sqlmapxml/Coupon.xml" />
+	<sqlMap resource="sqlmapxml/Customer_judge_driver.xml" />
+	<sqlMap resource="sqlmapxml/Customer_order.xml" />
+	<sqlMap resource="sqlmapxml/Dmb_city.xml" />
+	<sqlMap resource="sqlmapxml/Driver.xml" />
+	<sqlMap resource="sqlmapxml/Permission.xml" />
+	<sqlMap resource="sqlmapxml/Pre_price.xml" />
+	<sqlMap resource="sqlmapxml/Price.xml" />
+	<sqlMap resource="sqlmapxml/Tranrecord.xml" />
+	<sqlMap resource="sqlmapxml/Twitter.xml" />
+	<sqlMap resource="sqlmapxml/Url.xml" />
+	<sqlMap resource="sqlmapxml/Version.xml" />
 </sqlMapConfig>
