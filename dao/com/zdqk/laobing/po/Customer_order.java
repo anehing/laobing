@@ -38,6 +38,8 @@ public class Customer_order implements Serializable{
     private Date create_time;
 	@TODO("note")
     private String note;
+	
+	
 	public int getId() {
 		return id;
 	}

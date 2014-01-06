@@ -73,7 +73,7 @@ html {
 				  <tr>
 						<td bgcolor="#edf2f8" colspan="8" align="center">
 						    <input	type="submit" class="inputBtn"   value="提交" style="cursor: pointer" />
-						    <input  adminList.jsptype="button" class="inputBtn" value="返回"
+						    <input  type="button" class="inputBtn" value="返回"
 						        	onclick="javaScript:history.go(-1)" style="cursor: pointer" />
 						</td>
 				  </tr>

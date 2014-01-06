@@ -29,7 +29,7 @@ import com.zdqk.laobing.po.Coupon;
 @InterceptorRefs(value = { @InterceptorRef("annotationInterceptor"),
 		@InterceptorRef("simpleStack") })
 @Results({ @Result(name = "couponList", location = "/couponList.jsp"),
-	       @Result(name = "updateUser", location = "/updateUser.jsp"),
+	       @Result(name = "addCoupon", location = "/addCoupon.jsp"),
 	       @Result(name = "queryUser", type = "chain", location = "queryUser"),
 	       @Result(name = "addUser", location = "/addUser.jsp"),
 		})
@@ -76,6 +76,21 @@ public class CouponAction extends BasePaginationAction {
 			}
 		List<Coupon> list = publicQuery(map, a, couponDAO); 
 		return "couponList";
+	}
+	/**
+	 * @author ane
+	 *  添加后台账户
+	 */
+	@Action("addCoupon")
+	public String addCoupon() {
+		if(this.coupon!=null){
+			boolean  flag=couponDAO.insert(this.coupon);
+		    if(flag)  this.addActionMessage("新增成功");
+			else this.addActionError("新增失败");
+		}
+			
+			return "addCoupon";
+		
 	}
 	
 }

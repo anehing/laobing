@@ -24,4 +24,5 @@
 	<sqlMap resource="sqlmapxml/Twitter.xml" />
 	<sqlMap resource="sqlmapxml/Url.xml" />
 	<sqlMap resource="sqlmapxml/Version.xml" />
+	<sqlMap resource="sqlmapxml/Driver_order.xml" />
 </sqlMapConfig>
