@@ -28,8 +28,8 @@ import com.zdqk.laobing.po.Twitter;
 @ParentPackage("lfx-default")
 @InterceptorRefs(value = { @InterceptorRef("annotationInterceptor"),
 		@InterceptorRef("simpleStack") })
-@Results({ @Result(name = "TwitterList", location = "/TwitterList.jsp"),
-	       @Result(name = "updateTwitter", location = "/TwitterList.jsp"),
+@Results({ @Result(name = "twitterList", location = "/twitterList.jsp"),
+	       @Result(name = "updateTwitter", location = "/twitterList.jsp"),
 	       @Result(name = "queryTwitter", type = "chain", location = "queryTwitter"),
 	       @Result(name = "addTwitter", location = "/addTwitter.jsp"),
 		})
