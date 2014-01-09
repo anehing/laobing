@@ -46,6 +46,10 @@ public class Driver implements Serializable{
 	private String drive_card;
 	@TODO("servicefee")		
     private float servicefee;
+	
+	
+	
+	
 	public int getId() {
 		return id;
 	}

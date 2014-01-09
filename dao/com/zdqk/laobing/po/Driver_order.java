@@ -138,6 +138,12 @@ public class Driver_order implements Serializable{
 	public void setSource(String source) {
 		this.source = source;
 	}
+	public int getJudge() {
+		return judge;
+	}
+	public void setJudge(int judge) {
+		this.judge = judge;
+	}
 
 	
 	

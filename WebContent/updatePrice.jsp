@@ -19,15 +19,17 @@
 				<tr>
 					<td width="15%" align="center" class="dataTd" >城市</td>
 					<td width="35%" align="left" class="dataTd" >
-					    <s:textfield id="cityid" name="price.cityid"/>
+					    <s:select list="dmb_citylist" listKey="mc" listValue="mc" name ="price.note" id="note"  headerValue="请选择" headerKey="0" ></s:select>
 					</td>    
 				    <td width="15%" align="center" class="dataTd" >时间段</td>
 					<td width="35%" align="left" class="dataTd" >
-					    <s:textfield name="price.time" id="time"/>
+					    <s:radio label="时间段" name ="price.time" id="time"
+					             list= "#{'07:00-21:59':'&nbsp;07:00-21:59','22:00-22:59':'&nbsp;22:00-22:59','23:00-23:59':'&nbsp;23:00-23:59','00:00-06:59':'&nbsp;00:00-06:59'}"  
+					             listKey="key" listValue="value" value="price.time" />
 					</td> 
 				</tr>
 				<tr>
-				    <td width="15%" align="center" class="dataTd" >价&nbsp;&nbsp;格</td>
+				    <td width="15%" align="center" class="dataTd" >价格（￥）</td>
 					<td width="35%" align="left" class="dataTd" >
 					    <s:textfield name="price.price" id="price"/>
 					</td>

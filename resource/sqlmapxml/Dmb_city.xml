@@ -13,9 +13,9 @@
     <result property="mc" column="MC"/>
     <result property="bz" column="BZ"/>
   </resultMap>
-  <insert id="insert" parameterClass="dmb_city">insert into PRE_PRICE( ID,PARENTID,SSX,TYPE,STATUS,PARENTNAME,MC,BZ ) values ( #id#,#parentid#,#ssx#,#type#,#status#,#parentname#,#mc#,#bz# )</insert>
-  <delete id="delete" parameterClass="dmb_city">delete from PRE_PRICE where id = #id#</delete>
-  <update id="update" parameterClass="dmb_city">update PRE_PRICE 
+  <insert id="insert" parameterClass="dmb_city">insert into Dmb_city( ID,PARENTID,SSX,TYPE,STATUS,PARENTNAME,MC,BZ ) values ( #id#,#parentid#,#ssx#,#type#,#status#,#parentname#,#mc#,#bz# )</insert>
+  <delete id="delete" parameterClass="dmb_city">delete from Dmb_city where id = #id#</delete>
+  <update id="update" parameterClass="dmb_city">update Dmb_city 
     <dynamic prepend="set">
       <isNotNull prepend="," property="parentid">PARENTID = #parentid#</isNotNull>
       <isNotNull prepend="," property="ssx">SSX = #ssx#</isNotNull>
@@ -26,9 +26,9 @@
       <isNotNull prepend="," property="bz">BZ = #bz#</isNotNull>
     </dynamic>where id = #id#
   </update>
-  <select id="findById" parameterClass="java.lang.Integer" resultMap="dmb_cityResult">select * from PRE_PRICE where id = #id#</select>
-  <select id="findNameById" parameterClass="java.lang.Integer" resultMap="dmb_cityResult">select * from PRE_PRICE where id = #id#</select>
-  <select id="selectAll" parameterClass="java.util.Map" resultMap="dmb_cityResult">select ID,PARENTID,SSX,TYPE,STATUS,PARENTNAME,MC,BZ from PRE_PRICE
+  <select id="findById" parameterClass="java.lang.Integer" resultMap="dmb_cityResult">select * from Dmb_city where id = #id#</select>
+  <select id="findNameById" parameterClass="java.lang.Integer" resultMap="dmb_cityResult">select * from Dmb_city where id = #id#</select>
+  <select id="selectAll" parameterClass="java.util.Map" resultMap="dmb_cityResult">select ID,PARENTID,SSX,TYPE,STATUS,PARENTNAME,MC,BZ from Dmb_city
     <dynamic prepend="where">
       <isNotNull prepend=" and " property="parentid">PARENTID = #parentid#</isNotNull>
       <isNotNull prepend=" and " property="ssx">SSX = #ssx#</isNotNull>
@@ -39,7 +39,7 @@
       <isNotNull prepend=" and " property="bz">BZ = #bz#</isNotNull>
     </dynamic>
   </select>
-  <select id="selectPage" parameterClass="java.util.Map" resultMap="dmb_cityResult">select ID,PARENTID,SSX,TYPE,STATUS,PARENTNAME,MC,BZ from PRE_PRICE
+  <select id="selectPage" parameterClass="java.util.Map" resultMap="dmb_cityResult">select ID,PARENTID,SSX,TYPE,STATUS,PARENTNAME,MC,BZ from Dmb_city
     <dynamic prepend="where">
       <isNotNull prepend=" and " property="parentid">PARENTID = #parentid#</isNotNull>
       <isNotNull prepend=" and " property="ssx">SSX = #ssx#</isNotNull>
@@ -50,7 +50,7 @@
       <isNotNull prepend=" and " property="bz">BZ = #bz#</isNotNull>
     </dynamic>order by id desc limit #startIndex#,#endIndex#
   </select>
-  <select id="selectCount" parameterClass="java.util.Map" resultClass="java.lang.Long">select count(id) from PRE_PRICE 
+  <select id="selectCount" parameterClass="java.util.Map" resultClass="java.lang.Long">select count(id) from Dmb_city 
     <dynamic prepend="where">
       <isNotNull prepend=" and " property="parentid">PARENTID = #parentid#</isNotNull>
       <isNotNull prepend=" and " property="ssx">SSX = #ssx#</isNotNull>

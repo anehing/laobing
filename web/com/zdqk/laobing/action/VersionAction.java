@@ -1,5 +1,6 @@
 package com.zdqk.laobing.action;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -30,7 +31,7 @@ import com.zdqk.laobing.po.Version;
 @InterceptorRefs(value = { @InterceptorRef("annotationInterceptor"),
 		@InterceptorRef("simpleStack") })
 @Results({ @Result(name = "versionList", location = "/versionList.jsp"),
-	       @Result(name = "updateVersion", location = "/versionList.jsp"),
+	       @Result(name = "updateVersion", location = "/updateVersion.jsp"),
 	       @Result(name = "queryVersion", type = "chain", location = "queryVersion"),
 	       @Result(name = "addVersion", location = "/addVersion.jsp"),
 		})
@@ -94,7 +95,7 @@ public class VersionAction extends BasePaginationAction {
 		Version a=new Version();
 		this.version = (Version) versionDAO.findObjectById(id, a);
 		
-		if (totype == 1) return "updatePrice";
+		if (totype == 1) return "updateVersion";
 		if (totype == 2) {
 			boolean flag;
 		    flag=versionDAO.delete(this.version);
@@ -113,6 +114,7 @@ public class VersionAction extends BasePaginationAction {
 	@Action("updateVersion")
 	public String updateVersion() {
 		if(this.version!=null){
+			this.version.setCreatetime(new Date());
 			boolean  flag=versionDAO.update(this.version);
 		    if(flag)  this.addActionMessage("更新成功");
 			else this.addActionError("更新失败");
@@ -127,6 +129,7 @@ public class VersionAction extends BasePaginationAction {
 	@Action("addVersion")
 	public String addVersion() {
 		if(this.version!=null){
+			this.version.setCreatetime(new Date());
 			boolean  flag=versionDAO.insert(this.version);
 		    if(flag)  this.addActionMessage("新增成功");
 			else this.addActionError("新增失败");

@@ -23,7 +23,8 @@ public class Price implements Serializable{
 	@TODO("price")		
     private float price;
 	@TODO("note")		
-    private String note;
+    private String note;//存放城市名称
+	
 	public int getId() {
 		return id;
 	}

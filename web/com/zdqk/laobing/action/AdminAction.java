@@ -29,7 +29,7 @@ import com.zdqk.laobing.po.Admin;
 @InterceptorRefs(value = { @InterceptorRef("annotationInterceptor"),
 		@InterceptorRef("simpleStack") })
 @Results({ @Result(name = "adminList", location = "/adminList.jsp"),
-	       @Result(name = "updateAdmin", location = "/adminList.jsp"),
+	       @Result(name = "updateAdmin", location = "/updateAdmin.jsp"),
 	       @Result(name = "queryAdmin", type = "chain", location = "queryAdmin"),
 	       @Result(name = "addAdmin", location = "/addAdmin.jsp"),
 		})
@@ -100,6 +100,7 @@ public class AdminAction extends BasePaginationAction {
 		    flag=adminDAO.delete(this.admin);
 		    if(flag)  this.addActionMessage("删除成功");
 		    else this.addActionError("删除失败");
+		    this.admin=null;
 		    return "queryAdmin";
 		}
 		

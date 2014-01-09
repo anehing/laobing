@@ -28,7 +28,7 @@
 		                <s:select list="#{0:'邀请码',1:'优惠卷'}" listKey="key" listValue="value" name ="coupon.is_invitation_code" id="is_invitation_code"  headerValue="请选择" headerKey="3" ></s:select>
 		            </td>
 		            <td rowspan="3" align="center" valign="middle" bgcolor="#FFFFFF">
-			            <input	type="submit" class="inputBtn"   value="提交" style="cursor: pointer"  />
+			            <input	type="submit" class="inputBtn"   value="查询" style="cursor: pointer"  />
 		                <input	type="button" class="inputBtn"   value="清空" onClick="clearForm('form1')" style="cursor: pointer" />
 		            </td>
 	            </tr>

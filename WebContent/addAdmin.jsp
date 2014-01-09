@@ -25,9 +25,6 @@ html {
 		<div class="data0">
 			<div class="data1">
 				<table class="dataTable" width="100%" border="0" cellspacing="0" cellpadding="0">
-					<tr>
-						<td height="26" colspan="4" align="left" class="topTd">&nbsp;</td>
-					</tr>
                     <tr>
 				    	<td width="15%" align="center" class="dataTd" >用户名称</td>
 					    <td width="35%" align="left" class="dataTd" >

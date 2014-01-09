@@ -26,7 +26,7 @@
 		             <td width="10%" align="center" bgcolor="#F3F8FE" class="dataTdText"></td>
 		            <td width="25%" align="left" bgcolor="#FFFFFF"></td>
 		            <td rowspan="3" align="center" valign="middle" bgcolor="#FFFFFF">
-			            <input	type="submit" class="inputBtn"   value="提交" style="cursor: pointer"  />
+			            <input	type="submit" class="inputBtn"   value="查询" style="cursor: pointer"  />
 		                <input	type="button" class="inputBtn"   value="清空" onClick="clearForm('form1')" style="cursor: pointer" />
 		            </td>
 	            </tr>
@@ -54,8 +54,8 @@
 								       <c:if test="${t.status eq 1}">已开通	</c:if>							 
 								    </td>
 								    <td class="dataTd" align="center">
-									  <a href="queryDmb_cityId.action?totype=1&id=${t.id}">修改</a> 
-									  <a href="queryDmb_cityId.action?totype=2&id=${t.id}">删除</a>
+									  <a href="queryDmb_citybyId.action?totype=1&id=${t.id}">修改</a> 
+									  <a href="queryDmb_citybyId.action?totype=2&id=${t.id}">删除</a>
 									</td>
 								</tr>
 							</s:iterator>

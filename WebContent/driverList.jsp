@@ -5,7 +5,7 @@
 	<div class="titleDiv">
 		<div class="titleDiv_a">
 			<img src="${ctx}/images/tb_1.png" align="absmiddle" /> 
-			<span>后台用户管理</span>
+			<span>司机管理</span>
 		</div>
 		<div class="titleDiv_b"></div>
 	</div>
@@ -20,12 +20,15 @@
              <table class="dataTable" width="97%" border="0" align="center" cellpadding="0" cellspacing="1"  bgcolor="#93b5d1">
 	             <tr>
 	                <td width="10%" align="center" bgcolor="#F3F8FE" class="dataTdText">工作状态</td>
+	                <td width="30%" align="left" bgcolor="#FFFFFF"> 
+		                <s:select list="#{0:'空闲',1:'繁忙',2:'结束工作'}" listKey="key" listValue="value" name ="driver.job_status" id="job_status"  headerValue="请选择" headerKey="3" ></s:select>
+		            </td>
 		            <td width="10%" align="center" bgcolor="#F3F8FE" class="dataTdText">城市</td>
 		            <td width="30%" align="left" bgcolor="#FFFFFF"> 
 		                <s:textfield id="cityid" name="driver.cityid" />
 		            </td>
-                    <td rowspan="3" align="center" valign="middle" bgcolor="#FFFFFF">
-			            <input	type="submit" class="inputBtn"   value="提交" style="cursor: pointer"  />
+                    <td rowspan="4" align="center" valign="middle" bgcolor="#FFFFFF">
+			            <input	type="submit" class="inputBtn"   value="查询" style="cursor: pointer"  />
 		                <input	type="button" class="inputBtn"   value="清空" onClick="clearForm('form1')" style="cursor: pointer" />
 		            </td>
 	            </tr>
@@ -59,18 +62,19 @@
 				<div class="data1">
 					<table class="dataTable" width="100%" border="0" cellspacing="0" cellpadding="0">
 						<tr>
-							<td class="topTd" align="center" width="8%">序号</td>
+							<td class="topTd" align="center" width="4%">序号</td>
+							<td class="topTd" align="center" width="8%">状态</td>
 							<td class="topTd" align="center" width="8%">姓名</td>
-							<td class="topTd" align="center" width="8%">年龄</td>
+							<td class="topTd" align="center" width="4%">年龄</td>
 							<td class="topTd" align="center" width="8%">籍贯</td>
 							<td class="topTd" align="center" width="8%">身份证好</td>
 							<td class="topTd" align="center" width="8%">手机号</td>
 							<td class="topTd" align="center" width="8%">驾照号</td>
 							<td class="topTd" align="center" width="8%">驾龄</td>
-							<td class="topTd" align="center" width="8%">星好评级</td>
-							<td class="topTd" align="center" width="8%">代驾次数</td>
+							<td class="topTd" align="center" width="4%">星好评级</td>
+							<td class="topTd" align="center" width="4%">代驾次数</td>
 							<td class="topTd" align="center" width="8%">所在城市</td>
-							<td class="topTd" align="center" width="8%">账户费用</td>
+							<td class="topTd" align="center" width="4%">账户费用</td>
 							<td class="topTd" align="center" width="8%">操作</td>
 						</tr>
 						<s:if test="page.data.size > 0">
@@ -79,7 +83,22 @@
 									<td class="dataTd" align="center">
 										${s.index+1+page.pageSize*(PageNo-1)}
 									</td>
-									<td class="dataTd" align="center">${t.username}</td>
+									<td class="dataTd" align="center">
+									   <c:if test="${t.job_status eq 2}">结束工作</c:if>
+								       <c:if test="${t.job_status eq 1}">繁忙</c:if>	
+								       <c:if test="${t.job_status eq 0}">空闲</c:if>							 
+								    </td>
+									<td class="dataTd" align="center">${t.name}</td>
+									<td class="dataTd" align="center">${t.age}</td>
+									<td class="dataTd" align="center">${t.city}</td>
+									<td class="dataTd" align="center">${t.ident_num}</td>
+									<td class="dataTd" align="center">${t.telphone}</td>
+									<td class="dataTd" align="center">${t.drive_card}</td>
+									<td class="dataTd" align="center">${t.year}</td>
+									<td class="dataTd" align="center">${t.stars}</td>
+									<td class="dataTd" align="center">${t.times}</td>
+									<td class="dataTd" align="center">${t.city}</td>
+									<td class="dataTd" align="center">${t.servicefee}</td>
 									<td class="dataTd" align="center">
 									  <a href="queryDriverbyId.action?totype=1&id=${t.id}">修改</a> 
 									  <a href="queryDriverbyId.action?totype=2&id=${t.id}">删除</a>

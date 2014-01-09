@@ -1,5 +1,6 @@
 package com.zdqk.laobing.action;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -14,7 +15,9 @@ import org.apache.struts2.convention.annotation.ParentPackage;
 import org.springframework.beans.factory.annotation.Autowired;
 
 
+import com.zdqk.laobing.dao.Dmb_cityDAO;
 import com.zdqk.laobing.dao.TwitterDAO;
+import com.zdqk.laobing.po.Dmb_city;
 import com.zdqk.laobing.po.Twitter;
 
 
@@ -43,13 +46,23 @@ public class TwitterAction extends BasePaginationAction {
 	
 	@Autowired
 	private TwitterDAO twitterDAO;
+	@Autowired
+	private Dmb_cityDAO dmb_cityDAO;
 	
 	private Twitter twitter;
+	
+	private List<Dmb_city> dmb_citylist;
 	
 	
 	
 	
 	 
+	public List<Dmb_city> getDmb_citylist() {
+		return dmb_citylist;
+	}
+	public void setDmb_citylist(List<Dmb_city> dmb_citylist) {
+		this.dmb_citylist = dmb_citylist;
+	}
 	public Twitter getTwitter() {
 		return twitter;
 	}
@@ -62,6 +75,7 @@ public class TwitterAction extends BasePaginationAction {
 	 */
 	@Action("queryTwitter")
 	public String queryTwitter() {
+		this.dmb_citylist=getcity();
 		Twitter a = new Twitter();
 		Map<String, Object> map = this.getPmapNew();
 		if(twitter!=null){
@@ -74,8 +88,8 @@ public class TwitterAction extends BasePaginationAction {
 			if(twitter.getCreatetime()!=null){
 				map.put("createtime", twitter.getCreatetime());
 				}
-			if(twitter.getCityid()!=0){
-				map.put("cityid", twitter.getCityid());
+			if(!twitter.getMc().equals("mc")){
+				map.put("mc", twitter.getMc());
 				}
 			}
 		List<Twitter> list = publicQuery(map, a, twitterDAO); 
@@ -100,7 +114,10 @@ public class TwitterAction extends BasePaginationAction {
 		Twitter a=new Twitter();
 		this.twitter = (Twitter) twitterDAO.findObjectById(id, a);
 		
-		if (totype == 1) return "updateTwitter";
+		if (totype == 1) {
+			this.dmb_citylist=getcity();
+			return "updateTwitter";
+		}
 		if (totype == 2) {
 			boolean flag;
 		    flag=twitterDAO.delete(this.twitter);
@@ -118,7 +135,9 @@ public class TwitterAction extends BasePaginationAction {
 	 */
 	@Action("updateTwitter")
 	public String updateTwitter() {
+		this.dmb_citylist=getcity();
 		if(this.twitter!=null){
+			this.twitter.setCreatetime(new Date());
 			boolean  flag=twitterDAO.update(this.twitter);
 		    if(flag)  this.addActionMessage("更新成功");
 			else this.addActionError("更新失败");
@@ -132,7 +151,9 @@ public class TwitterAction extends BasePaginationAction {
 	 */
 	@Action("addTwitter")
 	public String addTwitter() {
+		this.dmb_citylist=getcity();
 		if(this.twitter!=null){
+			this.twitter.setCreatetime(new Date());
 			boolean  flag=twitterDAO.insert(this.twitter);
 		    if(flag)  this.addActionMessage("新增成功");
 			else this.addActionError("新增失败");
@@ -140,5 +161,12 @@ public class TwitterAction extends BasePaginationAction {
 			
 			return "addTwitter";
 		
+	}
+	
+	private List<Dmb_city> getcity(){
+		Dmb_city a = new Dmb_city();
+		Map<String, Object> map = this.getPmapNew();
+		List<Dmb_city> list = publicQuery(map, a, dmb_cityDAO);
+		return list;
 	}
 }

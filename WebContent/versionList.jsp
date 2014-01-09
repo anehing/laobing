@@ -23,10 +23,10 @@
 		            <td width="30%" align="left" bgcolor="#FFFFFF"> <s:textfield id="version" name="version.version" ></s:textfield></td>
 		            <td width="10%" align="center" bgcolor="#F3F8FE" class="dataTdText">手机类型</td>
 		            <td width="30%" align="left" class="dataTdText" bgcolor="#FFFFFF" >
-		               <s:select list="#{0:'iphone（用户端）',1:'android（用户端）'，2:'android（司机端）'}" listKey="key" listValue="value" name ="version.version" id="version"  headerValue="请选择" headerKey="3" ></s:select>
+		               <s:select list="#{0:'iphone（用户端）',1:'android（用户端）',2:'android（司机端）'}" listKey="key" listValue="value" name ="version.type" id="type"  headerValue="请选择" headerKey="3" ></s:select>
 		            </td>
                     <td rowspan="3" align="center" valign="middle" bgcolor="#FFFFFF">
-			            <input	type="submit" class="inputBtn"   value="提交" style="cursor: pointer"  />
+			            <input	type="submit" class="inputBtn"   value="查询" style="cursor: pointer"  />
 		                <input	type="button" class="inputBtn"   value="清空" onClick="clearForm('form1')" style="cursor: pointer" />
 		            </td>
 	            </tr>
@@ -57,9 +57,9 @@
 										${s.index+1+page.pageSize*(PageNo-1)}
 									</td>
 									<td class="dataTd" align="center">
-									   <c:if test="${t.status eq 1}">android（用户端）</c:if>
-								       <c:if test="${t.status eq 0}">iphone（用户端）</c:if>	
-								       <c:if test="${t.status eq 3}">android（司机端）</c:if>							 
+									   <c:if test="${t.type eq 1}">android（用户端）</c:if>
+								       <c:if test="${t.type eq 0}">iphone（用户端）</c:if>	
+								       <c:if test="${t.type eq 3}">android（司机端）</c:if>							 
 								    </td>
 									<td class="dataTd" align="center">${t.version}</td>
 									<td class="dataTd" align="center">${t.createtime}</td>

@@ -29,6 +29,8 @@ public class Twitter implements Serializable{
     private int type;
 	@TODO("cityid")		
     private int cityid;
+	@TODO("mc")
+	private String mc;//城市名称
 	public int getId() {
 		return id;
 	}
@@ -70,6 +72,12 @@ public class Twitter implements Serializable{
 	}
 	public void setCityid(int cityid) {
 		this.cityid = cityid;
+	}
+	public String getMc() {
+		return mc;
+	}
+	public void setMc(String mc) {
+		this.mc = mc;
 	}
 	
 	

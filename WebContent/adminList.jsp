@@ -26,7 +26,7 @@
 		               <s:select list="#{0:'普通用户',1:'管理员'}" listKey="key" listValue="value" name ="admin.usertype" id="usertype"  headerValue="请选择" headerKey="3" ></s:select>
 		            </td>
                     <td rowspan="3" align="center" valign="middle" bgcolor="#FFFFFF">
-			            <input	type="submit" class="inputBtn"   value="提交" style="cursor: pointer"  />
+			            <input	type="submit" class="inputBtn"   value="查询" style="cursor: pointer"  />
 		                <input	type="button" class="inputBtn"   value="清空" onClick="clearForm('form1')" style="cursor: pointer" />
 		            </td>
 	            </tr>

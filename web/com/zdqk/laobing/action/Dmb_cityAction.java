@@ -29,7 +29,7 @@ import com.zdqk.laobing.po.Dmb_city;
 @InterceptorRefs(value = { @InterceptorRef("annotationInterceptor"),
 		@InterceptorRef("simpleStack") })
 @Results({ @Result(name = "dmb_cityList", location = "/dmb_cityList.jsp"),
-	       @Result(name = "updateDmb_city", location = "/dmb_cityList.jsp"),
+	       @Result(name = "updateDmb_city", location = "/updateDmb_city.jsp"),
 	       @Result(name = "queryDmb_city", type = "chain", location = "queryDmb_city"),
 	       @Result(name = "addDmb_city", location = "/addDmb_city.jsp"),
 		})
@@ -57,7 +57,7 @@ public class Dmb_cityAction extends BasePaginationAction {
 	 * @author ane
 	 *  查询城市信息
 	 */
-	@Action("querydmb_city")
+	@Action("queryDmb_city")
 	public String querydmb_city() {
 		Dmb_city a = new Dmb_city();
 		Map<String, Object> map = this.getPmapNew();
@@ -92,6 +92,7 @@ public class Dmb_cityAction extends BasePaginationAction {
 		    flag=dmb_cityDAO.delete(this.dmb_city);
 		    if(flag)  this.addActionMessage("删除成功");
 		    else this.addActionError("删除失败");
+		    this.dmb_city=null;
 		    return "queryDmb_city";
 		}
 		

@@ -25,9 +25,6 @@ html {
 		<div class="data0">
 			<div class="data1">
 				<table class="dataTable" width="100%" border="0" cellspacing="0" cellpadding="0">
-					<tr>
-						<td height="26" colspan="4" align="left" class="topTd">&nbsp;</td>
-					</tr>
                     <tr>
 				    	<td width="15%" align="center" class="dataTd" >标题</td>
 					    <td width="35%" align="left" class="dataTd" >
@@ -42,23 +39,24 @@ html {
 				        <td width="15%" align="center" class="dataTd" >推送类型</td>
 				     	<td width="35%" align="left" class="dataTd" >
 					        <s:radio label="推送类型" name ="twitter.sendtype" id="sendtype"
-					             list= "#{0:'所有用户都收到',1:'按城市用户推送'}"  
+					             list= "#{0:'&nbsp;所有用户都收到',1:'&nbsp;按城市用户推送'}"  
 					             listKey="key" listValue="value" value="twitter.sendtype" />
 					   </td>
 					   <td width="15%" align="center" class="dataTd" >客户端接受类型</td>
 					   <td width="35%" align="left" class="dataTd" >
 				           <s:radio label="客户端接受类型" name ="twitter.type" id="type"
-						         list= "#{0:'司机端接受',1:'用户端接受'}"
+						         list= "#{0:'&nbsp;司机端接受',1:'&nbsp;用户端接受'}"
                                  listKey="key" listValue="value" value="twitter.type" />
 					   </td>
 				   </tr>
 				   <tr>
 				        <td width="15%" align="center" class="dataTd" >城市</td>
 				     	<td width="35%" align="left" class="dataTd" >
-					       
-					   </td>
-					   <td width="35%" align="left" class="dataTd" >
-					   </td>
+					        <s:select list="dmb_citylist" listKey="mc" listValue="mc" name ="twitter.mc" id="mc"  headerValue="请选择" headerKey="0" ></s:select>
+					    </td>
+					    <td width="15%" align="center" class="dataTd" ></td>
+					    <td width="35%" align="left" class="dataTd" >
+					    </td>
 				   </tr>
 				   <tr>
 						<td bgcolor="#edf2f8" colspan="8" align="center">

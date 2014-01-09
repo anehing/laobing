@@ -25,9 +25,6 @@ html {
 		<div class="data0">
 			<div class="data1">
 				<table class="dataTable" width="100%" border="0" cellspacing="0" cellpadding="0">
-					<tr>
-						<td height="26" colspan="4" align="left" class="topTd">&nbsp;</td>
-					</tr>
                     <tr>
 				    	<td width="15%" align="center" class="dataTd" >版本号</td>
 					    <td width="35%" align="left" class="dataTd" >
@@ -36,7 +33,7 @@ html {
 				         <td width="15%" align="center" class="dataTd" >手机类型</td>
 				     	<td width="35%" align="left" class="dataTd" >
 					        <s:radio label="手机类型" name ="version.type" id="type"
-					             list= "#{0:'iphone（用户端）',1:'android（用户端）',2:'android（司机端）'}"  
+					             list= "#{0:'&nbsp;iphone（用户端）',1:'&nbsp;android（用户端）',2:'&nbsp;android（司机端）'}"  
 					             listKey="key" listValue="value" value="version.status" />
 					   </td>
 				   </tr>

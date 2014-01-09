@@ -5,7 +5,7 @@
 	<div class="titleDiv">
 		<div class="titleDiv_a">
 			<img src="${ctx}/images/tb_1.png" align="absmiddle" /> 
-			<span>价格管理</span>
+			<span>价格信息管理</span>
 		</div>
 		<div class="titleDiv_b"></div>
 	</div>
@@ -21,13 +21,13 @@
 	             <tr>
 		            <td width="10%" align="center" bgcolor="#F3F8FE" class="dataTdText">城市</td>
 		            <td width="30%" align="left" bgcolor="#FFFFFF"> 
-		                <s:textfield id="cityid" name="price.cityid" ></s:textfield>
+		                 <s:select list="dmb_citylist" listKey="mc" listValue="mc" name ="price.note" id="note"  headerValue="请选择" headerKey="0" ></s:select>
 		            </td>
 		            <td width="10%" align="center" bgcolor="#F3F8FE" class="dataTdText"></td>
 		            <td width="30%" align="left" class="dataTdText" bgcolor="#FFFFFF" >
 		            </td>
                     <td rowspan="3" align="center" valign="middle" bgcolor="#FFFFFF">
-			            <input	type="submit" class="inputBtn"   value="提交" style="cursor: pointer"  />
+			            <input	type="submit" class="inputBtn"   value="查询" style="cursor: pointer"  />
 		                <input	type="button" class="inputBtn"   value="清空" onClick="clearForm('form1')" style="cursor: pointer" />
 		            </td>
 	            </tr>
@@ -42,7 +42,7 @@
 							<td class="topTd" align="center" width="8%">序号</td>
 							<td class="topTd" align="center" width="8%">城市</td>
 							<td class="topTd" align="center" width="8%">时间段</td>
-							<td class="topTd" align="center" width="8%">价格</td>
+							<td class="topTd" align="center" width="8%">价格（￥）</td>
 							<td class="topTd" align="center" width="8%">操作</td>
 						</tr>
 						<s:if test="page.data.size > 0">
@@ -52,14 +52,12 @@
 										${s.index+1+page.pageSize*(PageNo-1)}
 									</td>
 									<td class="dataTd" align="center">
-									   <c:if test="${t.status eq 1}">不可用 </c:if>
-								       <c:if test="${t.status eq 0}">可用 </c:if>							 
+									  		${t.note}					 
 								    </td>
 									<td class="dataTd" align="center">
-									   <c:if test="${t.usertype eq 0}">普通用户 </c:if>
-								       <c:if test="${t.usertype eq 1}">管理员	</c:if>							 
+									   ${t.time}				 
 								    </td>
-									<td class="dataTd" align="center">${t.price}&nbsp;&nbsp;元</td>
+									<td class="dataTd" align="center">${t.price}</td>
 									<td class="dataTd" align="center">
 									  <a href="queryPricebyId.action?totype=1&id=${t.id}">修改</a> 
 									  <a href="queryPricebyId.action?totype=2&id=${t.id}">删除</a>

@@ -23,25 +23,23 @@
 		            <td width="30%" align="left" bgcolor="#FFFFFF">
 		                <s:textfield id="createtime" name="twitter.createtime" ></s:textfield></td>
 		            <td width="10%" align="center" bgcolor="#F3F8FE" class="dataTdText">客户端接受类型</td>
-				    <td width="35%" align="left" class="dataTd" >
-					        <s:radio label="用户端接受状态" name ="twitter.type" id="type"
+				    <td width="30%" align="left" class="dataTdText" bgcolor="#FFFFFF" >
+					    <s:select label="用户端接受状态" name ="twitter.type" id="type"
 					             list= "#{0:'司机端接受',1:'用户端接受'}"  
-					             listKey="key" listValue="value" value="twitter.type" />
+					             listKey="key" listValue="value" value="twitter.type" headerValue="请选择" headerKey="3" />
 				    </td>
                     <td rowspan="3" align="center" valign="middle" bgcolor="#FFFFFF">
-			            <input	type="submit" class="inputBtn"   value="提交" style="cursor: pointer"  />
+			            <input	type="submit" class="inputBtn"   value="查询" style="cursor: pointer"  />
 		                <input	type="button" class="inputBtn"   value="清空" onClick="clearForm('form1')" style="cursor: pointer" />
 		            </td>
 	            </tr>
 	            <tr>
-		            <td width="10%" align="center" bgcolor="#F3F8FE" class="dataTdText">推送类型</td>
-		            <td width="25%" align="left" bgcolor="#FFFFFF"> 
-		                <s:radio label="推送类型" name ="twitter.sendtype" id="sendtype"
-					             list= "#{0:'所有用户都收到',1:'按城市用户推送'}"  
-					             listKey="key" listValue="value" value="twitter.sendtype" />
-		            </td>
 		            <td width="10%" align="center" bgcolor="#F3F8FE" class="dataTdText">城市</td>
-		            <td width="30%" align="left" class="dataTdText" bgcolor="#FFFFFF" ></td>
+		            <td width="30%" align="left" class="dataTdText" bgcolor="#FFFFFF" >
+		                <s:select list="dmb_citylist" listKey="mc" listValue="mc" name ="twitter.mc" id="mc"  headerValue="请选择" headerKey="mc" ></s:select>
+		            </td>
+		            <td width="10%" align="center" bgcolor="#F3F8FE" class="dataTdText"></td>
+		            <td width="30%" align="left" class="dataTdText" bgcolor="#FFFFFF" > </td>
 	            </tr>
              </table>
         </div>
@@ -70,13 +68,13 @@
 								    <td class="dataTd" align="center">${t.content}</td>
 								    <td class="dataTd" align="center">${t.createtime}</td>
 									<td class="dataTd" align="center">
-									   <c:if test="${t.status eq 1}">按城市用户推送</c:if>
-								       <c:if test="${t.status eq 0}">所有用户都收到</c:if>	
+									   <c:if test="${t.sendtype eq 1}">按城市用户推送</c:if>
+								       <c:if test="${t.sendtype eq 0}">所有用户都收到</c:if>	
 								    </td>
-								    <td class="dataTd" align="center">${t.cityid}</td>
+								    <td class="dataTd" align="center">${t.mc}</td>
 								    <td class="dataTd" align="center">
-									   <c:if test="${t.status eq 1}">司机端接受</c:if>
-								       <c:if test="${t.status eq 0}">用户端接受</c:if>	
+									   <c:if test="${t.type eq 0}">司机端接受</c:if>
+								       <c:if test="${t.type eq 1}">用户端接受</c:if>	
 								    </td>
 									<td class="dataTd" align="center">
 									  <a href="queryTwitterbyId.action?totype=1&id=${t.id}">修改</a> 
