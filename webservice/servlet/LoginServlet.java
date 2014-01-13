@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 				
-		       request.setAttribute("videos","ÂÞ·ÉÏè");
+		       request.setAttribute("videos","ç½—é£žç¿”");
 		       request.getRequestDispatcher("/WEB-INF/json/jsonlogin.jsp").forward(request,response);			  
 	}   	  	    
 }

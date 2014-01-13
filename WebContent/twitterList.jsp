@@ -21,7 +21,9 @@
 	             <tr>
 		            <td width="10%" align="center" bgcolor="#F3F8FE" class="dataTdText">发送时间</td>
 		            <td width="30%" align="left" bgcolor="#FFFFFF">
-		                <s:textfield id="createtime" name="twitter.createtime" ></s:textfield></td>
+		             <input type="text" name="createtime" id="create_time" class="tcal"  />
+		            &nbsp;-<input type="text" name="tocreatetime" id="tocreate_time" class="tcal"  />
+		            </td>
 		            <td width="10%" align="center" bgcolor="#F3F8FE" class="dataTdText">客户端接受类型</td>
 				    <td width="30%" align="left" class="dataTdText" bgcolor="#FFFFFF" >
 					    <s:select label="用户端接受状态" name ="twitter.type" id="type"
@@ -66,7 +68,7 @@
 									</td>
 									<td class="dataTd" align="center">${t.title}</td>
 								    <td class="dataTd" align="center">${t.content}</td>
-								    <td class="dataTd" align="center">${t.createtime}</td>
+								    <td class="dataTd" align="center"><fmt:formatDate value="${t.createtime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 									<td class="dataTd" align="center">
 									   <c:if test="${t.sendtype eq 1}">按城市用户推送</c:if>
 								       <c:if test="${t.sendtype eq 0}">所有用户都收到</c:if>	
@@ -77,7 +79,7 @@
 								       <c:if test="${t.type eq 1}">用户端接受</c:if>	
 								    </td>
 									<td class="dataTd" align="center">
-									  <a href="queryTwitterbyId.action?totype=1&id=${t.id}">修改</a> 
+								      <a href="queryTwitterbyId.action?totype=1&id=${t.id}">详情</a>
 									  <a href="queryTwitterbyId.action?totype=2&id=${t.id}">删除</a>
 									</td>
 								</tr>
@@ -110,3 +112,5 @@
 		</div>
     </s:form>		
 </body>
+<link rel="stylesheet" type="text/css" href="${ctx}/scripts/tcal.css" />
+<script type="text/javascript" src="${ctx}/scripts/tcal.js"></script>  

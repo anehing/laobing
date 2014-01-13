@@ -5,6 +5,7 @@
 	   xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:jee="http://www.springframework.org/schema/jee"
        xmlns:context="http://www.springframework.org/schema/context"
+       
        xsi:schemaLocation="
        http://www.springframework.org/schema/beans 
        http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
@@ -15,13 +16,17 @@
        http://www.springframework.org/schema/tx
        http://www.springframework.org/schema/tx/spring-tx-2.0.xsd
        http://www.springframework.org/schema/jee 
-       http://www.springframework.org/schema/jee/spring-jee-2.0.xsd"
+       http://www.springframework.org/schema/jee/spring-jee-2.0.xsd
+       "
+       
         default-autowire="byName" default-lazy-init="false"
        >
  	 
  	<!-- 开启注释注入 -->
  	
  	<context:annotation-config />
+
+
 
 	<!--指定Spring配置中用到的属性文件-->
 	
@@ -33,6 +38,8 @@
 			</list>
 		</property>
 	</bean>
+
+
 
 	<!-- 配置系统的数据源 -->
 	<bean id="dataSource"

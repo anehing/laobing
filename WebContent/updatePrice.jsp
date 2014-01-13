@@ -11,7 +11,7 @@
 	    </div>
 	    <div class="titleDiv_b"></div>
 	 </div> 
-<s:form action="updatePrice" namespace="/base" onsubmit="return toSubmit()" id="form1" >
+<s:form action="updatePrice" namespace="/base" id="form1" onsubmit="return checkSubmit()" >
 	<div class="data0">
 		<div class="data1">
 			<table class="dataTable" width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -49,19 +49,19 @@
 </s:form>
 </body>
 <script type="text/javascript">
-function toSubmit(){
-	var username=document.getElementById("username").value;
-	var password=document.getElementById("password").value;
-
-	if(!checkNull(username)){
-	      showErrorMsg("请输入用户名称");
+function checkSubmit(){
+	
+	 var price=document.getElementById("price").value;
+	 if(!checkNull(price)){
+	      showErrorMsg("价格不能为空");
 	      return false;
+	 } else{
+		 var patrn=/^([+]?)\d*\.?\d+$/;
+		 if (!patrn.test(price)){
+			 showErrorMsg("价格输入格式不正确");
+			 return false
+		 }
 	 }
-	if(!checkNull(password)){
-	      showErrorMsg("请输入密码");
-	      return false;
-	 }
-
-	return ture;
+     return true;	
 }
 </script>

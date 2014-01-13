@@ -31,11 +31,11 @@
 		            </td>
 	            </tr>
 	            <tr>
-		            <td width="10%" align="center" bgcolor="#F3F8FE" class="dataTdText">姓&nbsp;&nbsp;&nbsp;名</td>
-		            <td width="25%" align="left" bgcolor="#FFFFFF"> <s:textfield name="admin.name" id="name"></s:textfield></td>
 		            <td width="10%" align="center" bgcolor="#F3F8FE" class="dataTdText">状&nbsp;&nbsp;&nbsp;态</td>
 		            <td width="30%" align="left" class="dataTdText" bgcolor="#FFFFFF" >
 		            <s:select list="#{0:'可用',1:'不可用'}" listKey="key" listValue="value" name ="admin.status" id="status"  headerValue="请选择" headerKey="3" ></s:select>
+	                <td width="10%" align="center" bgcolor="#F3F8FE" class="dataTdText"></td>
+		            <td width="25%" align="left" bgcolor="#FFFFFF"> </td>
 	            </tr>
              </table>
         </div>
@@ -100,3 +100,4 @@
 		</div>
     </s:form>		
 </body>
+ 

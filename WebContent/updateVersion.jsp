@@ -11,7 +11,7 @@
 	    </div>
 	    <div class="titleDiv_b"></div>
 	 </div> 
-<s:form action="updateVersion" namespace="/base" onsubmit="return toSubmit()" id="form1" >
+<s:form action="updateVersion" namespace="/base" onsubmit="return checkSubmit()" id="form1" >
 	<div class="data0">
 		<div class="data1">
 			<table class="dataTable" width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -49,19 +49,13 @@
 </s:form>
 </body>
 <script type="text/javascript">
-function toSubmit(){
-	var username=document.getElementById("username").value;
-	var password=document.getElementById("password").value;
-
-	if(!checkNull(username)){
-	      showErrorMsg("请输入用户名称");
+function checkSubmit(){
+	
+	 var version=document.getElementById("version").value;
+	 if(!checkNull(version)){
+	      showErrorMsg("版本号不能为空");
 	      return false;
 	 }
-	if(!checkNull(password)){
-	      showErrorMsg("请输入密码");
-	      return false;
-	 }
-
-	return ture;
+	 return true;	
 }
 </script>

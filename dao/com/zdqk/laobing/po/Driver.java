@@ -26,8 +26,8 @@ public class Driver implements Serializable{
     private int age;
 	@TODO("provinceid")		
     private int provinceid;
-	@TODO("cityid")		
-    private int cityid;
+	@TODO("mc")		
+    private String mc;
 	@TODO("year")		
     private int year;
 	@TODO("times")		
@@ -86,11 +86,12 @@ public class Driver implements Serializable{
 	public void setProvinceid(int provinceid) {
 		this.provinceid = provinceid;
 	}
-	public int getCityid() {
-		return cityid;
+
+	public String getMc() {
+		return mc;
 	}
-	public void setCityid(int cityid) {
-		this.cityid = cityid;
+	public void setMc(String mc) {
+		this.mc = mc;
 	}
 	public int getYear() {
 		return year;

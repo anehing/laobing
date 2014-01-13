@@ -32,9 +32,13 @@
 	            </tr>
 	            <tr>
 		            <td width="10%" align="center" bgcolor="#F3F8FE" class="dataTdText">更新时间</td>
-		            <td width="25%" align="left" bgcolor="#FFFFFF"> <s:textfield name="version.createtime" id="createtime"></s:textfield></td>
+		            <td width="25%" align="left" bgcolor="#FFFFFF"> 
+		              <input type="text" name="create_time" id="create_time" class="tcal"  />
+		            &nbsp;-<input type="text" name="tocreate_time" id="tocreate_time" class="tcal"  />
+		            </td>
 		            <td width="10%" align="center" bgcolor="#F3F8FE" class="dataTdText"></td>
-		            <td width="30%" align="left" class="dataTdText" bgcolor="#FFFFFF" ></td>
+		            <td width="30%" align="left" class="dataTdText" bgcolor="#FFFFFF" >
+		            </td>
 	            </tr>
              </table>
         </div>
@@ -62,7 +66,7 @@
 								       <c:if test="${t.type eq 3}">android（司机端）</c:if>							 
 								    </td>
 									<td class="dataTd" align="center">${t.version}</td>
-									<td class="dataTd" align="center">${t.createtime}</td>
+									<td class="dataTd" align="center"><fmt:formatDate value="${t.createtime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 									<td class="dataTd" align="center">
 									  <a href="queryVersionbyId.action?totype=1&id=${t.id}">修改</a> 
 									  <a href="queryVersionbyId.action?totype=2&id=${t.id}">删除</a>
@@ -97,3 +101,5 @@
 		</div>
     </s:form>		
 </body>
+<link rel="stylesheet" type="text/css" href="${ctx}/scripts/tcal.css" />
+<script type="text/javascript" src="${ctx}/scripts/tcal.js"></script>         

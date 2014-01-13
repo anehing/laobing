@@ -1,5 +1,6 @@
 package com.zdqk.laobing.action;
 
+import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +16,7 @@ import org.apache.struts2.convention.annotation.ParentPackage;
 import org.springframework.beans.factory.annotation.Autowired;
 
 
+import com.lfx.tools.DateConverter;
 import com.zdqk.laobing.dao.Dmb_cityDAO;
 import com.zdqk.laobing.dao.TwitterDAO;
 import com.zdqk.laobing.po.Dmb_city;
@@ -32,7 +34,7 @@ import com.zdqk.laobing.po.Twitter;
 @InterceptorRefs(value = { @InterceptorRef("annotationInterceptor"),
 		@InterceptorRef("simpleStack") })
 @Results({ @Result(name = "twitterList", location = "/twitterList.jsp"),
-	       @Result(name = "updateTwitter", location = "/twitterList.jsp"),
+	       @Result(name = "twitterDetail", location = "/twitterDetail.jsp"),
 	       @Result(name = "queryTwitter", type = "chain", location = "queryTwitter"),
 	       @Result(name = "addTwitter", location = "/addTwitter.jsp"),
 		})
@@ -53,10 +55,25 @@ public class TwitterAction extends BasePaginationAction {
 	
 	private List<Dmb_city> dmb_citylist;
 	
+    private String createtime;
+	private String tocreatetime;
+
 	
 	
 	
 	 
+	public String getCreatetime() {
+		return createtime;
+	}
+	public void setCreatetime(String createtime) {
+		this.createtime = createtime;
+	}
+	public String getTocreatetime() {
+		return tocreatetime;
+	}
+	public void setTocreatetime(String tocreatetime) {
+		this.tocreatetime = tocreatetime;
+	}
 	public List<Dmb_city> getDmb_citylist() {
 		return dmb_citylist;
 	}
@@ -72,9 +89,10 @@ public class TwitterAction extends BasePaginationAction {
 	/**
 	 * @author ane
 	 *  查询推送信息
+	 * @throws ParseException 
 	 */
 	@Action("queryTwitter")
-	public String queryTwitter() {
+	public String queryTwitter() throws ParseException {
 		this.dmb_citylist=getcity();
 		Twitter a = new Twitter();
 		Map<String, Object> map = this.getPmapNew();
@@ -85,13 +103,15 @@ public class TwitterAction extends BasePaginationAction {
 			if(twitter.getSendtype()!=3){
 				map.put("sendtype", twitter.getSendtype());
 				}
-			if(twitter.getCreatetime()!=null){
-				map.put("createtime", twitter.getCreatetime());
-				}
+			
 			if(!twitter.getMc().equals("mc")){
 				map.put("mc", twitter.getMc());
 				}
 			}
+		if(this.createtime!=null&&!this.createtime.trim().equals("")&&this.tocreatetime!=null&&!this.tocreatetime.trim().equals("")){
+			map.put("createtime", DateConverter.convertFromString(this.createtime));
+			map.put("tocreatetime", DateConverter.convertFromString(this.tocreatetime));
+		}
 		List<Twitter> list = publicQuery(map, a, twitterDAO); 
 		return "twitterList";
 	}
@@ -116,7 +136,7 @@ public class TwitterAction extends BasePaginationAction {
 		
 		if (totype == 1) {
 			this.dmb_citylist=getcity();
-			return "updateTwitter";
+			return "twitterDetail";
 		}
 		if (totype == 2) {
 			boolean flag;

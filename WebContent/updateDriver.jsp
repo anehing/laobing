@@ -7,11 +7,11 @@
 	 <div class="titleDiv">
 	 	<div class="titleDiv_a">
 			<img src="${ctx}/images/tb_1.png"  align="absmiddle" />
-			<span >编辑后台用户</span>
+			<span >编辑司机信息</span>
 	    </div>
 	    <div class="titleDiv_b"></div>
 	 </div> 
-<s:form action="updateDriver" namespace="/base" onsubmit="return toSubmit()" id="form1" >
+<s:form action="updateDriver" namespace="/base" onsubmit="return checkSubmit()" id="form1" enctype ="multipart/form-data" >
 	<div class="data0">
 		<div class="data1">
 			<table class="dataTable" width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -19,14 +19,17 @@
 				  <tr>
                         <td width="15%" align="center" class="dataTd" >头像</td>
 				    	<td width="35%" align="left" class="dataTd" >
-				        	<s:textfield name="driver.picture"  id="picture" /></td>  
+				    	 <s:file  name ="myFile" id="myFile" label ="Image File" onchange="copyBatchFile(this,1)"/>
+					      <input type="hidden" name="batchFileName" id="batchFileName" value="000000.png" /> 
+					    
+				        	<s:hidden name="driver.picture"  id="picture" /></td>  
 				    	<td width="15%" align="center" class="dataTd" >姓名</td>
 					    <td width="35%" align="left" class="dataTd" >
 					        <s:textfield id="name" name="driver.name"/>
 					    </td>    
 				   </tr>
 				   <tr>
-				        <td width="15%" align="center" class="dataTd" >性别</td>
+			            <td width="15%" align="center" class="dataTd" >性别</td>
 					    <td width="35%" align="left" class="dataTd" >
 					        <s:radio label="性别" name ="driver.sex" id="sex"
 					             list= "#{0:'&nbsp;男&nbsp;',1:' &nbsp;女&nbsp;'}"  
@@ -44,7 +47,7 @@
 					    </td> 
 					    <td width="15%" align="center" class="dataTd" >所在城市</td>
 					    <td width="35%" align="left" class="dataTd" >
-					        <s:textfield id="city" name="driver.city"/>
+					           <s:select list="dmb_citylist" listKey="mc" listValue="mc" name ="driver.mc" id="mc"  headerValue="请选择" headerKey="未知" ></s:select>
 					    </td> 
 				   </tr>
 				   <tr>
@@ -83,19 +86,66 @@
 </s:form>
 </body>
 <script type="text/javascript">
-function toSubmit(){
-	var username=document.getElementById("username").value;
-	var password=document.getElementById("password").value;
+function checkSubmit(){
 
-	if(!checkNull(username)){
-	      showErrorMsg("请输入用户名称");
+	 var batchFileName = document.getElementById("batchFileName").value;
+	 if(!checkFileType(batchFileName) ){
+			return false;
+	} 	   
+	 var name=document.getElementById("name").value;
+	 if(!checkNull(name)){
+	      showErrorMsg("姓名不能为空");
 	      return false;
 	 }
-	if(!checkNull(password)){
-	      showErrorMsg("请输入密码");
+	 var age=document.getElementById("age").value;
+	 if(!checkNull(age)){
+	      showErrorMsg("年龄不能为空");
 	      return false;
 	 }
-
-	return ture;
+	 var city=document.getElementById("city").value;
+	 if(!checkNull(city)){
+	      showErrorMsg("籍贯不能为空");
+	      return false;
+	 }
+	 var telphone=document.getElementById("telphone").value;
+	 if(!checkNull(telphone)){
+	      showErrorMsg("手机号不能为空");
+	      return false;
+	 }
+	
+	 var ident_num=document.getElementById("ident_num").value;
+	 if(!checkNull(ident_num)){
+	      showErrorMsg("身份证号不能为空");
+	      return false;
+	 }
+	 var drive_card=document.getElementById("drive_card").value;
+	 if(!checkNull(drive_card)){
+	      showErrorMsg("驾照号不能为空");
+	      return false;
+	 }
+	 var year=document.getElementById("year").value;
+	 if(!checkNull(year)){
+	      showErrorMsg("驾龄不能为空");
+	      return false;
+	 }
+	  
+	 return true;	
 }
+	function copyBatchFile(obj, n) {
+		var name=obj.value;
+	    document.getElementById("batchFileName").value=name.substring(name.lastIndexOf("\\")+1);
+	}
+	function checkFileType(filename){
+		if(filename != ""){
+			if(filename.indexOf(".")!=-1){
+				var  tem = filename.substring(filename.lastIndexOf(".")+1).toLowerCase();
+				if(tem == "png" || tem == "jpg" || tem == "jpeg" || tem == "gif" || tem == "bmp"){
+	                 return  true;
+				}else{
+					showErrorMsg("只能上传格式为png,jpg,gif,bmp,jpeg的图片文件");
+					return false;
+				}
+	        }
+		}
+	}
 </script>

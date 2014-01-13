@@ -32,37 +32,37 @@
   <select id="findNameById" parameterClass="java.lang.Integer" resultMap="couponResult">select * from COUPON where id = #id#</select>
   <select id="selectAll" parameterClass="java.util.Map" resultMap="couponResult">select ID,COUPON_NUM,TELPHONE,IS_USE,DISCOUNT_AMOUNT,USE_TIME,IS_INVITATION_CODE,CREATE_TIME,NOTE from COUPON
     <dynamic prepend="where">
-      <isNotNull prepend=" and " property="coupon_num">COUPON_NUM = #coupon_num#</isNotNull>
-      <isNotNull prepend=" and " property="telphone">TELPHONE = #telphone#</isNotNull>
+      <isNotNull prepend=" and " property="coupon_num">COUPON_NUM like '%$coupon_num$%'</isNotNull>
+      <isNotNull prepend=" and " property="telphone">TELPHONE like '%$telphone$%'</isNotNull>
       <isNotNull prepend=" and " property="is_use">IS_USE = #is_use#</isNotNull>
       <isNotNull prepend=" and " property="discount_amount">DISCOUNT_AMOUNT = #discount_amount#</isNotNull>
-      <isNotNull prepend=" and " property="use_time">USE_TIME = #use_time#</isNotNull>
+      <isNotNull prepend=" and " property="use_time">USE_TIME between #use_time# and #touse_time#</isNotNull>
       <isNotNull prepend=" and " property="is_invitation_code">IS_INVITATION_CODE = #is_invitation_code#</isNotNull>
-      <isNotNull prepend=" and " property="create_time">CREATE_TIME = #create_time#</isNotNull>
+      <isNotNull prepend=" and " property="create_time">CREATE_TIME between #create_time# and #tocreate_time#</isNotNull>
       <isNotNull prepend=" and " property="note">NOTE = #note#</isNotNull>
     </dynamic>
   </select>
   <select id="selectPage" parameterClass="java.util.Map" resultMap="couponResult">select ID,COUPON_NUM,TELPHONE,IS_USE,DISCOUNT_AMOUNT,USE_TIME,IS_INVITATION_CODE,CREATE_TIME,NOTE from COUPON
     <dynamic prepend="where">
-      <isNotNull prepend=" and " property="coupon_num">COUPON_NUM = #coupon_num#</isNotNull>
-      <isNotNull prepend=" and " property="telphone">TELPHONE = #telphone#</isNotNull>
+      <isNotNull prepend=" and " property="coupon_num">COUPON_NUM like '%$coupon_num$%'</isNotNull>
+      <isNotNull prepend=" and " property="telphone">TELPHONE like '%$telphone$%'</isNotNull>
       <isNotNull prepend=" and " property="is_use">IS_USE = #is_use#</isNotNull>
       <isNotNull prepend=" and " property="discount_amount">DISCOUNT_AMOUNT = #discount_amount#</isNotNull>
-      <isNotNull prepend=" and " property="use_time">USE_TIME = #use_time#</isNotNull>
+      <isNotNull prepend=" and " property="use_time">USE_TIME between #use_time# and #touse_time#</isNotNull>
       <isNotNull prepend=" and " property="is_invitation_code">IS_INVITATION_CODE = #is_invitation_code#</isNotNull>
-      <isNotNull prepend=" and " property="create_time">CREATE_TIME = #create_time#</isNotNull>
+      <isNotNull prepend=" and " property="create_time">CREATE_TIME between #create_time# and #tocreate_time#</isNotNull>
       <isNotNull prepend=" and " property="note">NOTE = #note#</isNotNull>
     </dynamic>order by id desc limit #startIndex#,#endIndex#
   </select>
   <select id="selectCount" parameterClass="java.util.Map" resultClass="java.lang.Long">select count(id) from COUPON 
     <dynamic prepend="where">
-      <isNotNull prepend=" and " property="coupon_num">COUPON_NUM = #coupon_num#</isNotNull>
-      <isNotNull prepend=" and " property="telphone">TELPHONE = #telphone#</isNotNull>
+      <isNotNull prepend=" and " property="coupon_num">COUPON_NUM like '%$coupon_num$%'</isNotNull>
+      <isNotNull prepend=" and " property="telphone">TELPHONE like '%$telphone$%'</isNotNull>
       <isNotNull prepend=" and " property="is_use">IS_USE = #is_use#</isNotNull>
       <isNotNull prepend=" and " property="discount_amount">DISCOUNT_AMOUNT = #discount_amount#</isNotNull>
-      <isNotNull prepend=" and " property="use_time">USE_TIME = #use_time#</isNotNull>
+      <isNotNull prepend=" and " property="use_time">USE_TIME between #use_time# and #touse_time#</isNotNull>
       <isNotNull prepend=" and " property="is_invitation_code">IS_INVITATION_CODE = #is_invitation_code#</isNotNull>
-      <isNotNull prepend=" and " property="create_time">CREATE_TIME = #create_time#</isNotNull>
+      <isNotNull prepend=" and " property="create_time">CREATE_TIME between #create_time# and #tocreate_time# </isNotNull>
       <isNotNull prepend=" and " property="note">NOTE = #note#</isNotNull>
     </dynamic>
   </select>

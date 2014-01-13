@@ -11,7 +11,7 @@
 	    </div>
 	    <div class="titleDiv_b"></div>
 	 </div> 
-<s:form action="updateDmb_city" namespace="/base" onsubmit="return toSubmit()" id="form1" >
+<s:form action="updateDmb_city" namespace="/base" onsubmit="return checkSubmit()" id="form1" >
 	<div class="data0">
 		<div class="data1">
 			<table class="dataTable" width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -23,7 +23,7 @@
 					             list= "#{0:'未开通',1:'已开通'}"  
 					             listKey="key" listValue="value" value="dmb_city.status" />
 					</td>
-					<td width="15%" align="center" class="dataTd" >用户类型</td>
+					<td width="15%" align="center" class="dataTd" >城市</td>
 					<td width="35%" align="left" class="dataTd" >
 					    <s:textfield name="dmb_city.mc"  id="mc" /> 
 					</td>
@@ -40,19 +40,13 @@
 </s:form>
 </body>
 <script type="text/javascript">
-function toSubmit(){
-	var username=document.getElementById("username").value;
-	var password=document.getElementById("password").value;
-
-	if(!checkNull(username)){
-	      showErrorMsg("请输入用户名称");
+function checkSubmit(){
+	
+	 var mc=document.getElementById("mc").value;
+	 if(!checkNull(mc)){
+	      showErrorMsg("城市不能为空");
 	      return false;
 	 }
-	if(!checkNull(password)){
-	      showErrorMsg("请输入密码");
-	      return false;
-	 }
-
-	return ture;
+	 return true;	
 }
 </script>

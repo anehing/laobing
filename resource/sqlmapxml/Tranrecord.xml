@@ -35,7 +35,7 @@
       <isNotNull prepend=" and " property="driverid">DRIVERID = #driverid#</isNotNull>
       <isNotNull prepend=" and " property="orderid">ORDERID = #orderid#</isNotNull>
       <isNotNull prepend=" and " property="type">TYPE = #type#</isNotNull>
-      <isNotNull prepend=" and " property="trans_datetime">TRANS_DATETIME = #trans_datetime#</isNotNull>
+      <isNotNull prepend=" and " property="trans_datetime">TRANS_DATETIME  between #createtime# and #tocreatetime#</isNotNull>
       <isNotNull prepend=" and " property="account">ACCOUNT = #account#</isNotNull>
       <isNotNull prepend=" and " property="note">NOTE = #note#</isNotNull>
       <isNotNull prepend=" and " property="name">NAME = #name#</isNotNull>
@@ -47,7 +47,7 @@
       <isNotNull prepend=" and " property="driverid">DRIVERID = #driverid#</isNotNull>
       <isNotNull prepend=" and " property="orderid">ORDERID = #orderid#</isNotNull>
       <isNotNull prepend=" and " property="type">TYPE = #type#</isNotNull>
-      <isNotNull prepend=" and " property="trans_datetime">TRANS_DATETIME = #trans_datetime#</isNotNull>
+      <isNotNull prepend=" and " property="trans_datetime">TRANS_DATETIME  between #createtime# and #tocreatetime#</isNotNull>
       <isNotNull prepend=" and " property="account">ACCOUNT = #account#</isNotNull>
       <isNotNull prepend=" and " property="note">NOTE = #note#</isNotNull>
       <isNotNull prepend=" and " property="name">NAME = #name#</isNotNull>
@@ -59,7 +59,7 @@
       <isNotNull prepend=" and " property="driverid">DRIVERID = #driverid#</isNotNull>
       <isNotNull prepend=" and " property="orderid">ORDERID = #orderid#</isNotNull>
       <isNotNull prepend=" and " property="type">TYPE = #type#</isNotNull>
-      <isNotNull prepend=" and " property="trans_datetime">TRANS_DATETIME = #trans_datetime#</isNotNull>
+      <isNotNull prepend=" and " property="trans_datetime">TRANS_DATETIME  between #createtime# and #tocreatetime#</isNotNull>
       <isNotNull prepend=" and " property="account">ACCOUNT = #account#</isNotNull>
       <isNotNull prepend=" and " property="note">NOTE = #note#</isNotNull>
       <isNotNull prepend=" and " property="name">NAME = #name#</isNotNull>

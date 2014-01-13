@@ -11,7 +11,7 @@
 	    </div>
 	    <div class="titleDiv_b"></div>
 	 </div> 
-<s:form action="updateAdmin" namespace="/base" onsubmit="return toSubmit()" id="form1" >
+<s:form action="updateAdmin" namespace="/base" onsubmit="return checkSubmit();" id="form1" >
 	<div class="data0">
 		<div class="data1">
 			<table class="dataTable" width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -41,24 +41,6 @@
 					</td>
 				</tr>
 				<tr>
-					<td width="15%" align="center" class="dataTd" >手机号码</td>
-					<td width="35%" align="left" class="dataTd" >
-				     	<s:textfield name="admin.mobile"  id="mobile" /></td>
-				    <td width="15%" align="center" class="dataTd" >电子邮件</td>
-					<td width="35%" align="left" class="dataTd" >
-			        	<s:textfield name="admin.email"  id="email" />
-				    </td>
-				</tr>
-				<tr>
-					<td width="15%" align="center" class="dataTd" >姓&nbsp;&nbsp;名</td>
-					<td width="35%" align="left" class="dataTd" >
-					    <s:textfield name="admin.name"  id="name" />
-					</td>
-					<td width="15%" align="center" class="dataTd" >座机号码</td>
-					<td width="35%" align="left" class="dataTd" >
-				     	<s:textfield name="admin.telphone"  id="telphone" /></td>  
-				</tr>	
-				<tr>
 					<td bgcolor="#edf2f8" colspan="8" align="center">
 						<input	type="submit" class="inputBtn"   value="确定" style="cursor: pointer" />
                         <input	type="button" class="inputBtn"   value="返回" onclick="javaScript:history.go(-1)" style="cursor: pointer" />
@@ -70,19 +52,30 @@
 </s:form>
 </body>
 <script type="text/javascript">
-function toSubmit(){
-	var username=document.getElementById("username").value;
-	var password=document.getElementById("password").value;
-
-	if(!checkNull(username)){
-	      showErrorMsg("请输入用户名称");
+function checkSubmit(){
+	
+	 var username=document.getElementById("username").value;
+	 var password=document.getElementById("password").value;
+	 if(!checkNull(username)){
+	      showErrorMsg("用户名称不能为空");
 	      return false;
-	 }
-	if(!checkNull(password)){
-	      showErrorMsg("请输入密码");
+	 } else{
+		 var patrn=/^[a-zA-Z]{1}([a-zA-Z0-9]|[._]){4,19}$/; 
+		 if (!patrn.exec(username)){
+			 showErrorMsg("用户名只能是5-20个以字母开头、可带数字、“_”、“.”的字串");
+			 return false
+		 }
+	 } 
+	 if(!checkNull(password)){
+	      showErrorMsg("密码不能为空");
 	      return false;
+	 } else{
+		 var patrn=/^[a-zA-Z]{1}([a-zA-Z0-9]|[._]){4,19}$/; 
+		 if (!patrn.exec(password)){
+			 showErrorMsg("密码只能是5-20个以字母开头、可带数字、“_”、“.”的字串");
+			 return false
+		 }
 	 }
-
-	return ture;
+    return true;	
 }
 </script>

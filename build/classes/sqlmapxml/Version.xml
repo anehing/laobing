@@ -24,26 +24,26 @@
   <select id="findNameById" parameterClass="java.lang.Integer" resultMap="versionResult">select * from VERSION where id = #id#</select>
   <select id="selectAll" parameterClass="java.util.Map" resultMap="versionResult">select ID,CREATETIME,TYPE,VERSION,URL from VERSION
     <dynamic prepend="where">
-      <isNotNull prepend=" and " property="createtime">CREATETIME = #createtime#</isNotNull>
+      <isNotNull prepend=" and " property="createtime">CREATETIME between #createtime# and #tocreatetime#</isNotNull>
       <isNotNull prepend=" and " property="type">TYPE = #type#</isNotNull>
-      <isNotNull prepend=" and " property="version">VERSION = #version#</isNotNull>
-      <isNotNull prepend=" and " property="url">URL = #url#</isNotNull>
+      <isNotNull prepend=" and " property="version">VERSION like '%$version$%'</isNotNull>
+      <isNotNull prepend=" and " property="url">URL like '%$url$%'</isNotNull>
     </dynamic>
   </select>
   <select id="selectPage" parameterClass="java.util.Map" resultMap="versionResult">select ID,CREATETIME,TYPE,VERSION,URL from VERSION
     <dynamic prepend="where">
-      <isNotNull prepend=" and " property="createtime">CREATETIME = #createtime#</isNotNull>
+      <isNotNull prepend=" and " property="createtime">CREATETIME between #createtime# and #tocreatetime#</isNotNull>
       <isNotNull prepend=" and " property="type">TYPE = #type#</isNotNull>
-      <isNotNull prepend=" and " property="version">VERSION = #version#</isNotNull>
-      <isNotNull prepend=" and " property="url">URL = #url#</isNotNull>
+      <isNotNull prepend=" and " property="version">VERSION like '%$version$%'</isNotNull>
+      <isNotNull prepend=" and " property="url">URL like '%$url$%'</isNotNull>
     </dynamic>order by id desc limit #startIndex#,#endIndex#
   </select>
   <select id="selectCount" parameterClass="java.util.Map" resultClass="java.lang.Long">select count(id) from VERSION 
     <dynamic prepend="where">
-      <isNotNull prepend=" and " property="createtime">CREATETIME = #createtime#</isNotNull>
+      <isNotNull prepend=" and " property="createtime">CREATETIME between #createtime# and #tocreatetime#</isNotNull>
       <isNotNull prepend=" and " property="type">TYPE = #type#</isNotNull>
-      <isNotNull prepend=" and " property="version">VERSION = #version#</isNotNull>
-      <isNotNull prepend=" and " property="url">URL = #url#</isNotNull>
+      <isNotNull prepend=" and " property="version">VERSION like '%$version$%'</isNotNull>
+      <isNotNull prepend=" and " property="url">URL like '%$url$%'</isNotNull>
     </dynamic>
   </select>
 </sqlMap>

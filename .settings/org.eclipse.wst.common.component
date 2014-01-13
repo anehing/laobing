@@ -7,6 +7,7 @@
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/service"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/tools"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/webservice"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/photo"/>
         <property name="java-output-path" value="build/classes"/>
         <property name="context-root" value="laobing"/>
     </wb-module>

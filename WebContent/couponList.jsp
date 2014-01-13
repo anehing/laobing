@@ -5,7 +5,7 @@
 	<div class="titleDiv">
 		<div class="titleDiv_a">
 			<img src="${ctx}/images/tb_1.png" align="absmiddle" /> 
-			<span>后台用户管理</span>
+			<span>优惠卷管理</span>
 		</div>
 		<div class="titleDiv_b"></div>
 	</div>
@@ -15,7 +15,7 @@
 		<img id="z0" style="cursor: pointer" align="middle" src="${ctx}/images/nxx8.png" width="80" height="22" />
 	</div>
 
-	<s:form action="queryCoupon" method="post" id="form1"  >
+	<s:form action="queryCoupon" method="post" id="form1" enctype ="multipart/form-data" >
 	    <div id="r0" align="center" >
              <table class="dataTable" width="97%" border="0" align="center" cellpadding="0" cellspacing="1"  bgcolor="#93b5d1">
 	             <tr>
@@ -33,13 +33,16 @@
 		            </td>
 	            </tr>
 	            <tr>   
-		            <td width="10%" align="center" bgcolor="#F3F8FE" class="dataTdText">优惠金额</td>
-		            <td width="30%" align="left" bgcolor="#FFFFFF"> 
-		                <s:textfield id="discount_amount" name="coupon.discount_amount" ></s:textfield>
-		            </td>
+		            
 		            <td width="10%" align="center" bgcolor="#F3F8FE" class="dataTdText">录入时间</td>
 		            <td width="30%" align="left" bgcolor="#FFFFFF"> 
-		                <s:textfield id="create_time" name="coupon.create_time" ></s:textfield>
+		                <input type="text" name="createtime" id="create_time" class="tcal"  />
+		            &nbsp;-<input type="text" name="tocreatetime" id="tocreate_time" class="tcal"  />
+		            </td>
+		            <td width="10%" align="center" bgcolor="#F3F8FE" class="dataTdText">使用时间</td>
+		            <td width="30%" align="left" bgcolor="#FFFFFF"> 
+		                <input type="text" name="use_time" id="use_time" class="tcal"  />
+		             &nbsp;-<input type="text" name="touse_time" id="touse_time" class="tcal"  />
 		            </td>
 		        </tr> 
 		        <tr>   
@@ -47,9 +50,8 @@
 		            <td width="30%" align="left" class="dataTdText" bgcolor="#FFFFFF" >
 		                <s:select list="#{0:'未使用',1:'已使用'}" listKey="key" listValue="value" name ="coupon.is_use" id="is_use"  headerValue="请选择" headerKey="3" ></s:select>
 		            </td>
-		            <td width="10%" align="center" bgcolor="#F3F8FE" class="dataTdText">使用时间</td>
+		            <td width="10%" align="center" bgcolor="#F3F8FE" class="dataTdText"></td>
 		            <td width="30%" align="left" bgcolor="#FFFFFF"> 
-		                <s:textfield id="use_time" name="coupon.use_time" ></s:textfield>
 		            </td>
 		        </tr>  
              </table>
@@ -61,7 +63,7 @@
 						<tr>
 							<td class="topTd" align="center" width="8%">序号</td>
 							<td class="topTd" align="center" width="8%">优惠卷号</td>
-							<td class="topTd" align="center" width="8%">优惠金额</td>
+							<td class="topTd" align="center" width="8%">优惠金额(￥)</td>
 							<td class="topTd" align="center" width="8%">是否已使用</td>
 							<td class="topTd" align="center" width="8%">使用时间</td>
 							<td class="topTd" align="center" width="8%">使用手机号</td>
@@ -80,9 +82,9 @@
 									   <c:if test="${t.is_use eq 0}">未使用 </c:if>
 								       <c:if test="${t.is_use eq 1}">已使用 </c:if>							 
 								    </td>
-								    <td class="dataTd" align="center">${t.use_time}</td>
+								    <td class="dataTd" align="center"><fmt:formatDate value="${t.use_time}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 								    <td class="dataTd" align="center">${t.telphone}</td>
-								    <td class="dataTd" align="center">${t.create_time}</td>
+								    <td class="dataTd" align="center"><fmt:formatDate value="${t.create_time}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 								    <td class="dataTd" align="center">
 									   <c:if test="${t.is_invitation_code eq 0}">是邀请码 </c:if>
 								       <c:if test="${t.is_invitation_code eq 1}">不是邀请码 </c:if>							 
@@ -117,3 +119,5 @@
 		</div>
     </s:form>		
 </body>
+<link rel="stylesheet" type="text/css" href="${ctx}/scripts/tcal.css" />
+<script type="text/javascript" src="${ctx}/scripts/tcal.js"></script>  

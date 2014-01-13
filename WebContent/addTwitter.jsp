@@ -30,23 +30,29 @@ html {
 					    <td width="35%" align="left" class="dataTd" >
 					        <s:textfield id="title" name="twitter.title"/>
 					    </td>    
-				        <td width="15%" align="center" class="dataTd" >正文</td>
+				        <td width="15%" align="center" class="dataTd" ></td>
 					    <td width="35%" align="left" class="dataTd" >
-					        <s:textfield name="twitter.content" id="content"/>
 				    	</td> 
+				   </tr>
+				   <tr>
+				        <td width="15%" align="center" class="dataTd" >正文</td>
+					    <td colspan="3"  >
+					        <s:textarea name="twitter.content" id="content" cols="130" rows="3"/>
+				    	</td> 
+				    	
 				   </tr>
 				   <tr>
 				        <td width="15%" align="center" class="dataTd" >推送类型</td>
 				     	<td width="35%" align="left" class="dataTd" >
 					        <s:radio label="推送类型" name ="twitter.sendtype" id="sendtype"
 					             list= "#{0:'&nbsp;所有用户都收到',1:'&nbsp;按城市用户推送'}"  
-					             listKey="key" listValue="value" value="twitter.sendtype" />
+					             listKey="key" listValue="value" value="0" />
 					   </td>
 					   <td width="15%" align="center" class="dataTd" >客户端接受类型</td>
 					   <td width="35%" align="left" class="dataTd" >
 				           <s:radio label="客户端接受类型" name ="twitter.type" id="type"
 						         list= "#{0:'&nbsp;司机端接受',1:'&nbsp;用户端接受'}"
-                                 listKey="key" listValue="value" value="twitter.type" />
+                                 listKey="key" listValue="value" value="1" />
 					   </td>
 				   </tr>
 				   <tr>
@@ -70,3 +76,19 @@ html {
 		</div>
 	</s:form>
 </body>
+<script type="text/javascript">
+function checkSubmit(){
+	 var title=document.getElementById("title").value;
+	 if(!checkNull(title)){
+	      showErrorMsg("标题不能为空");
+	      return false;
+	 }
+	 var content=document.getElementById("content").value;
+	 if(!checkNull(content)){
+	      showErrorMsg("正文不能为空");
+	      return false;
+	 }
+	
+	 return true;	
+}
+</script>

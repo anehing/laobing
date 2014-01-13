@@ -33,7 +33,7 @@ html {
 					   <td width="35%" align="left" class="dataTd" >
 				           <s:radio label="状态" name ="dmb_city.status" id="status"
 						         list= "#{0:'&nbsp;未开通&nbsp;',1:' &nbsp;已开通&nbsp;'}"
-                                 listKey="key" listValue="value" value="dmb_city.status" />
+                                 listKey="key" listValue="value" value="1" />
 					   </td>
 				   </tr>
 				   <tr>
@@ -48,3 +48,14 @@ html {
 		</div>
 	</s:form>
 </body>
+<script type="text/javascript">
+function checkSubmit(){
+	
+	 var mc=document.getElementById("mc").value;
+	 if(!checkNull(mc)){
+	      showErrorMsg("城市不能为空");
+	      return false;
+	 }
+	 return true;	
+}
+</script>

@@ -5,7 +5,7 @@
 	<div class="titleDiv">
 		<div class="titleDiv_a">
 			<img src="${ctx}/images/tb_1.png" align="absmiddle" /> 
-			<span>后台用户管理</span>
+			<span>手机端用户管理</span>
 		</div>
 		<div class="titleDiv_b"></div>
 	</div>
@@ -19,13 +19,14 @@
 	    <div id="r0" align="center" >
              <table class="dataTable" width="97%" border="0" align="center" cellpadding="0" cellspacing="1"  bgcolor="#93b5d1">
 	             <tr>
-		            <td width="10%" align="center" bgcolor="#F3F8FE" class="dataTdText">手机号</td>
+	              <td width="10%" align="center" bgcolor="#F3F8FE" class="dataTdText">手机号</td>
 		            <td width="25%" align="left" bgcolor="#FFFFFF"> 
 		                <s:textfield id="telphone" name="user.telphone" ></s:textfield>
 		            </td>
 		            <td width="10%" align="center" bgcolor="#F3F8FE" class="dataTdText">注册时间</td>
-		            <td width="25%" align="left" bgcolor="#FFFFFF"> 
-		                <s:textfield id="telphone" name="user.logintime" ></s:textfield>
+		            <td width="35%" align="left" bgcolor="#FFFFFF"> 
+		             <input type="text" name="logintime" id="logintime" class="tcal"  />
+		          &nbsp;-<input type="text" name="tologintime" id="tologintime" class="tcal"  />
 		            </td>
 		            <td rowspan="3" align="center" valign="middle" bgcolor="#FFFFFF">
 			            <input	type="submit" class="inputBtn"   value="查询" style="cursor: pointer"  />
@@ -50,7 +51,7 @@
 										${s.index+1+page.pageSize*(PageNo-1)}
 									</td>
 									<td class="dataTd" align="center">${t.telphone}</td>
-									<td class="dataTd" align="center">${t.logintime}</td>
+									<td class="dataTd" align="center"><fmt:formatDate value="${t.logintime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 								</tr>
 							</s:iterator>
 						</s:if>
@@ -81,3 +82,5 @@
 		</div>
     </s:form>		
 </body>
+<link rel="stylesheet" type="text/css" href="${ctx}/scripts/tcal.css" />
+<script type="text/javascript" src="${ctx}/scripts/tcal.js"></script>  

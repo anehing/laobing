@@ -69,6 +69,7 @@
   
   <script type="text/javascript">
   $(function(){
+	  alert("a");
   	 <s:if test="hasActionErrors()">
              var err="";
 	  		<s:iterator value="actionErrors" status="ae">
@@ -89,6 +90,7 @@
 			</s:iterator>
 				    showMsg(mess,'0');
 	  	</s:if>
+	  	
   });
   
 

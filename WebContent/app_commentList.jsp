@@ -21,9 +21,11 @@
 	             <tr>
 		            <td width="10%" align="center" bgcolor="#F3F8FE" class="dataTdText">评论时间</td>
 		            <td width="30%" align="left" bgcolor="#FFFFFF">
-		                <s:textfield id="createtime" name="app_comment.createtime" ></s:textfield></td>
+		             <input type="text" name="createtime" id="create_time" class="tcal"  />
+		            &nbsp;-<input type="text" name="tocreatetime" id="tocreate_time" class="tcal"  />
+		            </td>
 		            <td width="10%" align="center" bgcolor="#F3F8FE" class="dataTdText"></td>
-				    <td width="35%" align="left"  bgcolor="#FFFFFF" >
+				    <td width="30%" align="left"  bgcolor="#FFFFFF" >
 				    </td>
                     <td rowspan="3" align="center" valign="middle" bgcolor="#FFFFFF">
 			            <input	type="submit" class="inputBtn"   value="查询" style="cursor: pointer"  />
@@ -42,7 +44,7 @@
 							<td class="topTd" align="center" width="8%">手机号</td>
 							<td class="topTd" align="center" width="8%">评论时间</td>
 							<td class="topTd" align="center" width="8%">邮箱</td>
-							<td class="topTd" align="center" width="8%">内容预览</td>
+							<td class="topTd" align="center" width="8%">评论内容</td>
 						</tr>
 						<s:if test="page.data.size > 0">
 							<s:iterator value="page.data" var="t" status="s">
@@ -51,18 +53,11 @@
 										${s.index+1+page.pageSize*(PageNo-1)}
 									</td>
 									<td class="dataTd" align="center">${t.telphone}</td>
-								    <td class="dataTd" align="center">${t.createtime}</td>
+								    <td class="dataTd" align="center"><fmt:formatDate value="${t.createtime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 								    <td class="dataTd" align="center">${t.email}</td>
-									<td class="dataTd" align="center">
-									   <c:if test="${t.type eq 1}">按城市用户推送</c:if>
-								       <c:if test="${t.type eq 0}">所有用户都收到</c:if>	
-								       <c:if test="${t.type eq 2}">所有用户都收到</c:if>	
-								    </td>
-								    <td class="dataTd" align="center">${t.cityid}</td>
-								    <td class="dataTd" align="center">
-									   <c:if test="${t.status eq 1}">司机端接受</c:if>
-								       <c:if test="${t.status eq 0}">用户端接受</c:if>	
-								    </td>
+									
+								    <td class="dataTd" align="center"><a href="queryApp_commentbyId.action?totype=1&id=${t.id}">详情</a></td>
+								  
 								</tr>
 							</s:iterator>
 						</s:if>
@@ -93,3 +88,5 @@
 		</div>
     </s:form>		
 </body>
+<link rel="stylesheet" type="text/css" href="${ctx}/scripts/tcal.css" />
+<script type="text/javascript" src="${ctx}/scripts/tcal.js"></script>  

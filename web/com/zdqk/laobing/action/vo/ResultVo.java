@@ -3,7 +3,7 @@ package com.zdqk.laobing.action.vo;
 import java.io.Serializable;
 
 /**
- * �����������
+ * 操作结果代码表
  * */
 public class ResultVo implements Serializable{
 	
@@ -14,7 +14,7 @@ public class ResultVo implements Serializable{
 	private int reusltNumber;
 	private String reusltMessage;
 	public ResultVo(int reusltNumber, String reusltMessage) {
-		super();
+		//super();
 		this.reusltNumber = reusltNumber;
 		this.reusltMessage = reusltMessage;
 	}

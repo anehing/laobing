@@ -33,4 +33,11 @@
 		<nature>org.eclipse.wst.common.modulecore.ModuleCoreNature</nature>
 		<nature>org.eclipse.jem.workbench.JavaEMFNature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>photo</name>
+			<type>2</type>
+			<location>/Users/ane/workspace/laobing/WebContent/photo</location>
+		</link>
+	</linkedResources>
 </projectDescription>

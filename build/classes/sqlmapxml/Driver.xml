@@ -10,7 +10,7 @@
     <result property="sex" column="SEX"/>
     <result property="age" column="AGE"/>
     <result property="provinceid" column="PROVINCEID"/>
-    <result property="cityid" column="CITYID"/>
+    <result property="mc" column="MC"/>
     <result property="year" column="YEAR"/>
     <result property="times" column="TIMES"/>
     <result property="name" column="NAME"/>
@@ -21,7 +21,7 @@
     <result property="drive_card" column="DRIVE_CARD"/>
     <result property="servicefee" column="SERVICEFEE"/>
   </resultMap>
-  <insert id="insert" parameterClass="driver">insert into DRIVER( ID,JOB_STATUS,STARS,SEX,AGE,PROVINCEID,CITYID,YEAR,TIMES,NAME,TELPHONE,IDENT_NUM,PICTURE,CITY,DRIVE_CARD,SERVICEFEE ) values ( #id#,#job_status#,#stars#,#sex#,#age#,#provinceid#,#cityid#,#year#,#times#,#name#,#telphone#,#ident_num#,#picture#,#city#,#drive_card#,#servicefee# )</insert>
+  <insert id="insert" parameterClass="driver">insert into DRIVER( ID,JOB_STATUS,STARS,SEX,AGE,PROVINCEID,MC,YEAR,TIMES,NAME,TELPHONE,IDENT_NUM,PICTURE,CITY,DRIVE_CARD,SERVICEFEE ) values ( #id#,#job_status#,#stars#,#sex#,#age#,#provinceid#,#mc#,#year#,#times#,#name#,#telphone#,#ident_num#,#picture#,#city#,#drive_card#,#servicefee# )</insert>
   <delete id="delete" parameterClass="driver">delete from DRIVER where id = #id#</delete>
   <update id="update" parameterClass="driver">update DRIVER 
     <dynamic prepend="set">
@@ -30,7 +30,7 @@
       <isNotNull prepend="," property="sex">SEX = #sex#</isNotNull>
       <isNotNull prepend="," property="age">AGE = #age#</isNotNull>
       <isNotNull prepend="," property="provinceid">PROVINCEID = #provinceid#</isNotNull>
-      <isNotNull prepend="," property="cityid">CITYID = #cityid#</isNotNull>
+      <isNotNull prepend="," property="mc">MC = #mc#</isNotNull>
       <isNotNull prepend="," property="year">YEAR = #year#</isNotNull>
       <isNotNull prepend="," property="times">TIMES = #times#</isNotNull>
       <isNotNull prepend="," property="name">NAME = #name#</isNotNull>
@@ -44,18 +44,18 @@
   </update>
   <select id="findById" parameterClass="java.lang.Integer" resultMap="driverResult">select * from DRIVER where id = #id#</select>
   <select id="findNameById" parameterClass="java.lang.Integer" resultMap="driverResult">select * from DRIVER where id = #id#</select>
-  <select id="selectAll" parameterClass="java.util.Map" resultMap="driverResult">select ID,JOB_STATUS,STARS,SEX,AGE,PROVINCEID,CITYID,YEAR,TIMES,NAME,TELPHONE,IDENT_NUM,PICTURE,CITY,DRIVE_CARD,SERVICEFEE from DRIVER
+  <select id="selectAll" parameterClass="java.util.Map" resultMap="driverResult">select ID,JOB_STATUS,STARS,SEX,AGE,PROVINCEID,MC,YEAR,TIMES,NAME,TELPHONE,IDENT_NUM,PICTURE,CITY,DRIVE_CARD,SERVICEFEE from DRIVER
     <dynamic prepend="where">
       <isNotNull prepend=" and " property="job_status">JOB_STATUS = #job_status#</isNotNull>
       <isNotNull prepend=" and " property="stars">STARS = #stars#</isNotNull>
       <isNotNull prepend=" and " property="sex">SEX = #sex#</isNotNull>
       <isNotNull prepend=" and " property="age">AGE = #age#</isNotNull>
       <isNotNull prepend=" and " property="provinceid">PROVINCEID = #provinceid#</isNotNull>
-      <isNotNull prepend=" and " property="cityid">CITYID = #cityid#</isNotNull>
+      <isNotNull prepend=" and " property="mc">MC = #mc#</isNotNull>
       <isNotNull prepend=" and " property="year">YEAR = #year#</isNotNull>
       <isNotNull prepend=" and " property="times">TIMES = #times#</isNotNull>
       <isNotNull prepend=" and " property="name">NAME = #name#</isNotNull>
-      <isNotNull prepend=" and " property="telphone">TELPHONE like '%$telphone$%'</isNotNull>
+      <isNotNull prepend=" and " property="telphone">TELPHONE = #telphone#</isNotNull>
       <isNotNull prepend=" and " property="ident_num">IDENT_NUM = #ident_num#</isNotNull>
       <isNotNull prepend=" and " property="picture">PICTURE = #picture#</isNotNull>
       <isNotNull prepend=" and " property="city">CITY = #city#</isNotNull>
@@ -63,18 +63,18 @@
       <isNotNull prepend=" and " property="servicefee">SERVICEFEE = #servicefee#</isNotNull>
     </dynamic>
   </select>
-  <select id="selectPage" parameterClass="java.util.Map" resultMap="driverResult">select ID,JOB_STATUS,STARS,SEX,AGE,PROVINCEID,CITYID,YEAR,TIMES,NAME,TELPHONE,IDENT_NUM,PICTURE,CITY,DRIVE_CARD,SERVICEFEE from DRIVER
+  <select id="selectPage" parameterClass="java.util.Map" resultMap="driverResult">select ID,JOB_STATUS,STARS,SEX,AGE,PROVINCEID,MC,YEAR,TIMES,NAME,TELPHONE,IDENT_NUM,PICTURE,CITY,DRIVE_CARD,SERVICEFEE from DRIVER
     <dynamic prepend="where">
       <isNotNull prepend=" and " property="job_status">JOB_STATUS = #job_status#</isNotNull>
       <isNotNull prepend=" and " property="stars">STARS = #stars#</isNotNull>
       <isNotNull prepend=" and " property="sex">SEX = #sex#</isNotNull>
       <isNotNull prepend=" and " property="age">AGE = #age#</isNotNull>
       <isNotNull prepend=" and " property="provinceid">PROVINCEID = #provinceid#</isNotNull>
-      <isNotNull prepend=" and " property="cityid">CITYID = #cityid#</isNotNull>
+      <isNotNull prepend=" and " property="mc">MC = #mc#</isNotNull>
       <isNotNull prepend=" and " property="year">YEAR = #year#</isNotNull>
       <isNotNull prepend=" and " property="times">TIMES = #times#</isNotNull>
       <isNotNull prepend=" and " property="name">NAME = #name#</isNotNull>
-      <isNotNull prepend=" and " property="telphone">TELPHONE like '%$telphone$%'</isNotNull>
+      <isNotNull prepend=" and " property="telphone">TELPHONE = #telphone#</isNotNull>
       <isNotNull prepend=" and " property="ident_num">IDENT_NUM = #ident_num#</isNotNull>
       <isNotNull prepend=" and " property="picture">PICTURE = #picture#</isNotNull>
       <isNotNull prepend=" and " property="city">CITY = #city#</isNotNull>
@@ -89,11 +89,11 @@
       <isNotNull prepend=" and " property="sex">SEX = #sex#</isNotNull>
       <isNotNull prepend=" and " property="age">AGE = #age#</isNotNull>
       <isNotNull prepend=" and " property="provinceid">PROVINCEID = #provinceid#</isNotNull>
-      <isNotNull prepend=" and " property="cityid">CITYID = #cityid#</isNotNull>
+      <isNotNull prepend=" and " property="mc">MC = #mc#</isNotNull>
       <isNotNull prepend=" and " property="year">YEAR = #year#</isNotNull>
       <isNotNull prepend=" and " property="times">TIMES = #times#</isNotNull>
       <isNotNull prepend=" and " property="name">NAME = #name#</isNotNull>
-      <isNotNull prepend=" and " property="telphone">TELPHONE like '%$telphone$%'</isNotNull>
+      <isNotNull prepend=" and " property="telphone">TELPHONE = #telphone#</isNotNull>
       <isNotNull prepend=" and " property="ident_num">IDENT_NUM = #ident_num#</isNotNull>
       <isNotNull prepend=" and " property="picture">PICTURE = #picture#</isNotNull>
       <isNotNull prepend=" and " property="city">CITY = #city#</isNotNull>

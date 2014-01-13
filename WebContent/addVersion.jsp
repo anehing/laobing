@@ -34,7 +34,7 @@ html {
 				     	<td width="35%" align="left" class="dataTd" >
 					        <s:radio label="手机类型" name ="version.type" id="type"
 					             list= "#{0:'&nbsp;iphone（用户端）',1:'&nbsp;android（用户端）',2:'&nbsp;android（司机端）'}"  
-					             listKey="key" listValue="value" value="version.status" />
+					             listKey="key" listValue="value" value="0" />
 					   </td>
 				   </tr>
 				   <tr>
@@ -57,3 +57,14 @@ html {
 		</div>
 	</s:form>
 </body>
+<script type="text/javascript">
+function checkSubmit(){
+	
+	 var version=document.getElementById("version").value;
+	 if(!checkNull(version)){
+	      showErrorMsg("版本号不能为空");
+	      return false;
+	 }
+	 return true;	
+}
+</script>

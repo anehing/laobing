@@ -29,7 +29,7 @@
       <isNotNull prepend=" and " property="comment">COMMENT = #comment#</isNotNull>
       <isNotNull prepend=" and " property="telphone">TELPHONE = #telphone#</isNotNull>
       <isNotNull prepend=" and " property="type">TYPE = #type#</isNotNull>
-      <isNotNull prepend=" and " property="createtime">CREATETIME = #createtime#</isNotNull>
+      <isNotNull prepend=" and " property="createtime">CREATETIME between #createtime# and #tocreatetime#</isNotNull>
       <isNotNull prepend=" and " property="email">EMAIL = #email#</isNotNull>
     </dynamic>
   </select>
@@ -38,7 +38,7 @@
       <isNotNull prepend=" and " property="comment">COMMENT = #comment#</isNotNull>
       <isNotNull prepend=" and " property="telphone">TELPHONE = #telphone#</isNotNull>
       <isNotNull prepend=" and " property="type">TYPE = #type#</isNotNull>
-      <isNotNull prepend=" and " property="createtime">CREATETIME = #createtime#</isNotNull>
+      <isNotNull prepend=" and " property="createtime">CREATETIME between #createtime# and #tocreatetime#</isNotNull>
       <isNotNull prepend=" and " property="email">EMAIL = #email#</isNotNull>
     </dynamic>order by id desc limit #startIndex#,#endIndex#
   </select>
@@ -47,7 +47,7 @@
       <isNotNull prepend=" and " property="comment">COMMENT = #comment#</isNotNull>
       <isNotNull prepend=" and " property="telphone">TELPHONE = #telphone#</isNotNull>
       <isNotNull prepend=" and " property="type">TYPE = #type#</isNotNull>
-      <isNotNull prepend=" and " property="createtime">CREATETIME = #createtime#</isNotNull>
+      <isNotNull prepend=" and " property="createtime">CREATETIME between #createtime# and #tocreatetime#</isNotNull>
       <isNotNull prepend=" and " property="email">EMAIL = #email#</isNotNull>
     </dynamic>
   </select>

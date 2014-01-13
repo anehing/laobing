@@ -1,5 +1,6 @@
 package com.zdqk.laobing.action;
 
+import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +16,7 @@ import org.apache.struts2.convention.annotation.ParentPackage;
 import org.springframework.beans.factory.annotation.Autowired;
 
 
+import com.lfx.tools.DateConverter;
 import com.zdqk.laobing.dao.VersionDAO;
 import com.zdqk.laobing.po.Price;
 import com.zdqk.laobing.po.Version;
@@ -48,9 +50,23 @@ public class VersionAction extends BasePaginationAction {
 	
 	private Version version;
 	
-	
-	 
+    private String createtime;
+    private String tocreatetime;
 
+    
+    
+	public String getCreatetime() {
+		return createtime;
+	}
+	public void setCreate_time(String createtime) {
+		this.createtime = createtime;
+	}
+	public String getTocreatetime() {
+		return tocreatetime;
+	}
+	public void setTocreate_time(String tocreatetime) {
+		this.tocreatetime = tocreatetime;
+	}
 	public Version getVersion() {
 		return version;
 	}
@@ -60,9 +76,10 @@ public class VersionAction extends BasePaginationAction {
 	/**
 	 * @author ane
 	 *  后台查询版本
+	 * @throws ParseException 
 	 */
 	@Action("queryVersion")
-	public String queryVersion() {
+	public String queryVersion() throws ParseException {
 		Version a = new Version();
 		Map<String, Object> map = this.getPmapNew();
 		if(this.version!=null){
@@ -73,6 +90,10 @@ public class VersionAction extends BasePaginationAction {
 				map.put("type", version.getType());
 				}
 			}
+		if(this.createtime!=null&&!this.createtime.trim().equals("")&&this.tocreatetime!=null&&!this.tocreatetime.trim().equals("")){
+			map.put("createtime", DateConverter.convertFromString(this.createtime));
+			map.put("tocreatetime", DateConverter.convertFromString(this.tocreatetime));
+		}
 		List<Price> list = publicQuery(map, a, versionDAO); 
 		return "versionList";
 	}

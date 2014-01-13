@@ -26,6 +26,10 @@ public class User implements Serializable{
     private Date logintime;
 	@TODO("use_time")
     private Date use_time;
+	@TODO("askcode")	
+    private String askcode;//邀请码
+	@TODO("asktime")
+    private int asktime;
 	public int getId() {
 		return id;
 	}
@@ -61,6 +65,18 @@ public class User implements Serializable{
 	}
 	public void setUse_time(Date use_time) {
 		this.use_time = use_time;
+	}
+	public String getAskcode() {
+		return askcode;
+	}
+	public void setAskcode(String askcode) {
+		this.askcode = askcode;
+	}
+	public int getAsktime() {
+		return asktime;
+	}
+	public void setAsktime(int asktime) {
+		this.asktime = asktime;
 	}
 	
 	

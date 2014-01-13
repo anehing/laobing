@@ -30,7 +30,7 @@ html {
 					    <td width="35%" align="left" class="dataTd" >
 					        <s:textfield id="coupon_num" name="coupon.coupon_num"/>
 					    </td>    
-				        <td width="15%" align="center" class="dataTd" >优惠券面值</td>
+				        <td width="15%" align="center" class="dataTd" >优惠券面值(￥)</td>
 					    <td width="35%" align="left" class="dataTd" >
 					        <s:textfield name="coupon.discount_amount" id="discount_amount"/>
 				    	</td> 
@@ -40,7 +40,7 @@ html {
 				     	<td width="35%" align="left" class="dataTd" >
 					        <s:radio label="状态" name ="coupon.is_invitation_code" id="is_invitation_code"
 					             list= "#{0:'&nbsp;邀请码&nbsp;',1:' &nbsp;非邀请码&nbsp;'}"  
-					             listKey="key" listValue="value" value="coupon.is_invitation_code" />
+					             listKey="key" listValue="value" value="1" />
 					   </td>
 					   <td width="15%" align="center" class="dataTd" ></td>
 					   <td width="35%" align="left" class="dataTd" ></td>
@@ -57,3 +57,25 @@ html {
 		</div>
 	</s:form>
 </body>
+<script type="text/javascript">
+function checkSubmit(){
+	
+	 var coupon_num=document.getElementById("coupon_num").value;
+	 var discount_amount=document.getElementById("discount_amount").value;
+	 if(!checkNull(coupon_num)){
+	      showErrorMsg("优惠卷码不能为空");
+	      return false;
+	 } 
+	 if(!checkNull(discount_amount)){
+	      showErrorMsg("面值不能为空");
+	      return false;
+	 } else{
+		 var patrn=/^([+]?)\d*\.?\d+$/;
+		 if (!patrn.test(discount_amount)){
+			 showErrorMsg("面值输入格式不正确");
+			 return false
+		 }
+	 }
+     return true;	
+}
+</script>

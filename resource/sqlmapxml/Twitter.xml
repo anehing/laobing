@@ -32,7 +32,7 @@
     <dynamic prepend="where">
       <isNotNull prepend=" and " property="title">TITLE = #title#</isNotNull>
       <isNotNull prepend=" and " property="content">CONTENT = #content#</isNotNull>
-      <isNotNull prepend=" and " property="createtime">CREATETIME = #createtime#</isNotNull>
+      <isNotNull prepend=" and " property="createtime">CREATETIME between #createtime# and #tocreatetime#</isNotNull>
       <isNotNull prepend=" and " property="sendtype">SENDTYPE = #sendtype#</isNotNull>
       <isNotNull prepend=" and " property="type">TYPE = #type#</isNotNull>
       <isNotNull prepend=" and " property="cityid">CITYID = #cityid#</isNotNull>
@@ -43,7 +43,7 @@
     <dynamic prepend="where">
       <isNotNull prepend=" and " property="title">TITLE = #title#</isNotNull>
       <isNotNull prepend=" and " property="content">CONTENT = #content#</isNotNull>
-      <isNotNull prepend=" and " property="createtime">CREATETIME = #createtime#</isNotNull>
+      <isNotNull prepend=" and " property="createtime">CREATETIME between #createtime# and #tocreatetime#</isNotNull>
       <isNotNull prepend=" and " property="sendtype">SENDTYPE = #sendtype#</isNotNull>
       <isNotNull prepend=" and " property="type">TYPE = #type#</isNotNull>
       <isNotNull prepend=" and " property="cityid">CITYID = #cityid#</isNotNull>
@@ -54,7 +54,7 @@
     <dynamic prepend="where">
       <isNotNull prepend=" and " property="title">TITLE = #title#</isNotNull>
       <isNotNull prepend=" and " property="content">CONTENT = #content#</isNotNull>
-      <isNotNull prepend=" and " property="createtime">CREATETIME = #createtime#</isNotNull>
+      <isNotNull prepend=" and " property="createtime">CREATETIME between #createtime# and #tocreatetime#</isNotNull>
       <isNotNull prepend=" and " property="sendtype">SENDTYPE = #sendtype#</isNotNull>
       <isNotNull prepend=" and " property="type">TYPE = #type#</isNotNull>
       <isNotNull prepend=" and " property="cityid">CITYID = #cityid#</isNotNull>
