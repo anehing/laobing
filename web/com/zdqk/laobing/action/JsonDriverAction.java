@@ -22,16 +22,9 @@ import com.zdqk.laobing.action.vo.ResultVo;
 import com.zdqk.laobing.action.vo.DriverIncome;
 import com.zdqk.laobing.dao.Customer_judge_driverDAO;
 import com.zdqk.laobing.dao.DriverDAO;
-import com.zdqk.laobing.dao.PriceDAO;
-import com.zdqk.laobing.dao.UserDAO;
 import com.zdqk.laobing.po.Customer_judge_driver;
 import com.zdqk.laobing.po.Driver;
-import com.zdqk.laobing.po.Price;
-import com.zdqk.laobing.po.User;
-import com.zdqk.laobing.service.ILoginService;
 import com.zdqk.laobing.tools.FxJsonUtil;
-import com.zdqk.laobing.tools.ValidateTools;
-import com.zdqk.laobing.tools.ibatis.TODO;
 /**
  * @author：lfx
  */
@@ -47,6 +40,7 @@ public class JsonDriverAction extends JsonBaseAction {
 	private static final long serialVersionUID = 1L;
 	private static String resutUrl = "UserJsonList";	
 	 private final double EARTH_RADIUS = 6378.0; //千米 
+	 
 	@Autowired
 	private DriverDAO driverDAO;
 	@Autowired

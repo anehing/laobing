@@ -194,37 +194,7 @@ public class JsonCustomerOrderAction extends JsonBaseAction {
         return   df.format(basicDate); 
     } 
 
-	/**
-	 * 用户查看下单
-	 * */
-	@Action("getcustomerorderlist")
-	public String getcustomerorderlistAction(){
-		ResultVo rv = null;
-		if(this.customer_telphone==null||this.customer_telphone.trim().equals("")){
-			rv = new ResultVo(3,"缺少参数:telphone");
-			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
-		}
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("customer_telphone", this.customer_telphone);
-        List<Customer_order> clist =customer_orderDAO.selectByTel(map, "selectByTel");
-        if (clist==null||clist.size()<=0) {
-        	rv = new ResultVo(2,"暂无记录");
-			return FxJsonUtil.jsonHandle(rv,resutUrl,request);
-        }else{
-        	com.zdqk.laobing.action.vo.Customer_orderList clistvo=new com.zdqk.laobing.action.vo.Customer_orderList();
-        	List<com.zdqk.laobing.action.vo.Customer_order> list= new ArrayList<com.zdqk.laobing.action.vo.Customer_order>();
-        	for(Customer_order c_order:clist){
-        		com.zdqk.laobing.action.vo.Customer_order cvo =new com.zdqk.laobing.action.vo.Customer_order(); 
-        		BeanUtils.copyProperties(c_order,cvo);
-        		list.add(cvo);
-        	}
-        	clistvo.setCustomer_orderlistvo(list);
-        	clistvo.setReusltMessage("查询成功");
-        	clistvo.setReusltNumber(0);
-        	return FxJsonUtil.jsonListHandle(clistvo,resutUrl,request);
-        }
-       
-   }
+	
 	/**
 	 * 司机查看未处理下单
 	 * */

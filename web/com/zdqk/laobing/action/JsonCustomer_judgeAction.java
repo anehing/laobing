@@ -1,7 +1,9 @@
 package com.zdqk.laobing.action;
 
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,7 +18,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import com.zdqk.laobing.action.vo.ResultVo;
 import com.zdqk.laobing.dao.Customer_judge_driverDAO;
+import com.zdqk.laobing.dao.Driver_judge_CustomerDAO;
+import com.zdqk.laobing.dao.Driver_orderDAO;
 import com.zdqk.laobing.po.Customer_judge_driver;
+import com.zdqk.laobing.po.Driver_judge_Customer;
+import com.zdqk.laobing.po.Driver_order;
 import com.zdqk.laobing.tools.FxJsonUtil;
 /**
  * @author：lfx
@@ -35,11 +41,16 @@ public class JsonCustomer_judgeAction extends JsonBaseAction {
 	
 	@Autowired
 	private Customer_judge_driverDAO customer_judge_driverDAO;
-	
+	@Autowired
+	private Driver_judge_CustomerDAO driver_judge_customerDAO;
 	private Customer_judge_driver customer_judge_driver;
     private String drivertelphone;
-    
-
+    private String customertelphone;
+    private Driver_order driver_order;
+    private String telphone;
+    private int score;
+    private int orderid;
+    private int judge;
 	public Customer_judge_driver getCustomer_judge_driver() {
 		return customer_judge_driver;
 	}
@@ -53,10 +64,48 @@ public class JsonCustomer_judgeAction extends JsonBaseAction {
 		this.drivertelphone = drivertelphone;
 	}
 
-
-
-
-
+	public String getCustomertelphone() {
+		return customertelphone;
+	}
+	public void setCustomertelphone(String customertelphone) {
+		this.customertelphone = customertelphone;
+	}
+	public Driver_order getDriver_order() {
+		return driver_order;
+	}
+	public void setDriver_order(Driver_order driver_order) {
+		this.driver_order = driver_order;
+	}
+	public String getTelphone() {
+		return telphone;
+	}
+	public void setTelphone(String telphone) {
+		this.telphone = telphone;
+	}
+	public int getScore() {
+		return score;
+	}
+	public void setScore(int score) {
+		this.score = score;
+	}
+	public int getOrderid() {
+		return orderid;
+	}
+	public void setOrderid(int orderid) {
+		this.orderid = orderid;
+	}
+	public int getJudge() {
+		return judge;
+	}
+	public void setJudge(int judge) {
+		this.judge = judge;
+	}
+	
+	
+	
+	
+	
+	
 	/**
 	 * 获取司机评价
 	 * */
@@ -88,4 +137,73 @@ public class JsonCustomer_judgeAction extends JsonBaseAction {
 	    	return FxJsonUtil.jsonListHandle(judgelist,resutUrl,request);
 		}
    }
+	
+	/**
+	 * 客户评价司机
+	 * */
+	@Action("judgedriver")
+	public String judgedriverAction(){
+		ResultVo rv = null;
+		Boolean flag=null;
+		if(this.drivertelphone==null||this.drivertelphone.trim().equals("")){
+			rv = new ResultVo(3,"缺少参数:drivertelphone");
+			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
+		}if(this.telphone==null||this.telphone.trim().equals("")){
+			rv = new ResultVo(3,"缺少参数:telphone");
+			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
+		}
+		if(this.score==0){
+			rv = new ResultVo(3,"缺少参数:score");
+			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
+		}
+		Customer_judge_driver c=new Customer_judge_driver();
+		c.setDrivertelphone(this.drivertelphone);
+		c.setTelphone(this.telphone);
+		c.setScore(this.score);
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm"); 
+		c.setJudge_time(df.format(new Date()));
+		flag=customer_judge_driverDAO.insert(c);
+		if(flag){
+			rv = new ResultVo(2,"评论成功");
+			return FxJsonUtil.jsonHandle(rv,resutUrl,request);
+		}else{
+			rv = new ResultVo(1,"评论失败");
+			return FxJsonUtil.jsonHandle(rv,resutUrl,request);
+		}
+   }
+	
+	/**
+	 * 司机评价客户
+	 * */
+	@Action("judgecustomer")
+	public String judgecustomerAction(){
+		ResultVo rv = null;
+		Boolean flag=null;
+		if(this.drivertelphone==null||this.drivertelphone.trim().equals("")){
+			rv = new ResultVo(3,"缺少参数:drivertelphone");
+			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
+		}if(this.telphone==null||this.telphone.trim().equals("")){
+			rv = new ResultVo(3,"缺少参数:telphone");
+			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
+		}
+		if(this.orderid==0){
+			rv = new ResultVo(3,"缺少参数:orderid");
+			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
+		}
+		Driver_judge_Customer d=new Driver_judge_Customer();
+		d.setDrivertelphone(this.drivertelphone);
+		d.setCustomertelphone(this.telphone);
+		d.setJudge(this.judge);
+		d.setOrderid(this.orderid);
+		d.setCreate_time(new Date());
+		flag=driver_judge_customerDAO.insert(d);
+		if(flag){
+			rv = new ResultVo(2,"评论成功");
+			return FxJsonUtil.jsonHandle(rv,resutUrl,request);
+		}else{
+			rv = new ResultVo(1,"评论失败");
+			return FxJsonUtil.jsonHandle(rv,resutUrl,request);
+		}
+   }
+  
 }

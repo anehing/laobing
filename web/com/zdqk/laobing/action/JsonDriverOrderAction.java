@@ -3,7 +3,11 @@ package com.zdqk.laobing.action;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.InterceptorRef;
@@ -11,11 +15,13 @@ import org.apache.struts2.convention.annotation.InterceptorRefs;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.apache.struts2.convention.annotation.ParentPackage;
 
 import com.zdqk.laobing.action.vo.ResultVo;
 import com.zdqk.laobing.dao.Driver_orderDAO;
+import com.zdqk.laobing.po.Customer_order;
 import com.zdqk.laobing.po.Driver_order;
 import com.zdqk.laobing.tools.DateConverter;
 import com.zdqk.laobing.tools.FxJsonUtil;
@@ -54,8 +60,8 @@ public class JsonDriverOrderAction extends JsonBaseAction {
     private int id;
     private Driver_order driver_order;
     private String createtime;
-    
-    
+    private String telphone;
+    private int type;
     
 	public String getDrivertelphone() {
 		return drivertelphone;
@@ -159,6 +165,23 @@ public class JsonDriverOrderAction extends JsonBaseAction {
 	public void setId(int id) {
 		this.id = id;
 	}
+	public String getTelphone() {
+		return telphone;
+	}
+	public void setTelphone(String telphone) {
+		this.telphone = telphone;
+	}
+	public int getType() {
+		return type;
+	}
+	public void setType(int type) {
+		this.type = type;
+	}
+	
+	
+	
+	
+	
 	/**
 	 * 司机下单开始代驾
 	 * @throws ParseException 
@@ -332,4 +355,44 @@ public class JsonDriverOrderAction extends JsonBaseAction {
 		}
 	}
       
+	
+	/**
+	 * 用户和司机查历史看下单
+	 * */
+	@Action("getcustomerorderlist")
+	public String getcustomerorderlistAction(){
+		ResultVo rv = null;
+		if(this.telphone==null||this.telphone.trim().equals("")){
+			rv = new ResultVo(3,"缺少参数:telphone");
+			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
+		}
+		Map<String, String> map = new HashMap<String, String>();
+		if(this.type==1){
+			map.put("drivertelphone", this.telphone);
+		}else if(this.type==2){
+			map.put("customertelphone", this.telphone);
+		}else{
+			rv = new ResultVo(3,"缺少参数:type");
+			return FxJsonUtil.jsonHandle(rv,resutUrl,request);
+		}
+        List<Driver_order> clist =driver_orderDAO.findObjects(map, "selectAll");
+        if (clist==null||clist.size()<=0) {
+        	rv = new ResultVo(2,"暂无记录");
+			return FxJsonUtil.jsonHandle(rv,resutUrl,request);
+        }else{
+        	com.zdqk.laobing.action.vo.Driver_orderList clistvo=new com.zdqk.laobing.action.vo.Driver_orderList();
+        	List<com.zdqk.laobing.action.vo.Driver_order> list= new ArrayList<com.zdqk.laobing.action.vo.Driver_order>();
+        	com.zdqk.laobing.action.vo.Driver_order cvo=null;
+        	for(Driver_order c_order:clist){
+        		cvo=new com.zdqk.laobing.action.vo.Driver_order(); 
+        		BeanUtils.copyProperties(c_order,cvo);
+        		list.add(cvo);
+        	}
+        	clistvo.setDriverorderlistvo(list);
+        	clistvo.setReusltMessage("查询成功");
+        	clistvo.setReusltNumber(0);
+        	return FxJsonUtil.jsonListHandle(clistvo,resutUrl,request);
+        }
+       
+   }
 }
