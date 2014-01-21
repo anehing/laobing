@@ -30,7 +30,6 @@ import com.zdqk.laobing.tools.ValidateTools;
 		@InterceptorRef("simpleStack") })
 @Results( {
 		@Result(name = "UserJsonList", location = "/WEB-INF/json/json.jsp"),
-		@Result(name = "JsonUpdateUser", location = "/JsonUpdateUser.jsp"),
 		})
 public class JsonUsersAction extends JsonBaseAction {
 	
@@ -67,7 +66,7 @@ public class JsonUsersAction extends JsonBaseAction {
 
 
 	/**
-	 * 登陆接口
+	 * 用户登陆接口
 	 * 
 	 * */
 	@Action("loginJson")

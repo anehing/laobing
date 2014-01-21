@@ -53,7 +53,6 @@
 						<tr>
 							<td class="topTd" align="center" width="8%">序号</td>
 							<td class="topTd" align="center" width="8%">标题</td>
-							<td class="topTd" align="center" width="8%">正文缩略</td>
 							<td class="topTd" align="center" width="8%">发送时间</td>
 							<td class="topTd" align="center" width="8%">推送类型</td>
 							<td class="topTd" align="center" width="8%">城市</td>
@@ -67,7 +66,6 @@
 										${s.index+1+page.pageSize*(PageNo-1)}
 									</td>
 									<td class="dataTd" align="center">${t.title}</td>
-								    <td class="dataTd" align="center">${t.content}</td>
 								    <td class="dataTd" align="center"><fmt:formatDate value="${t.createtime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 									<td class="dataTd" align="center">
 									   <c:if test="${t.sendtype eq 1}">按城市用户推送</c:if>

@@ -61,4 +61,5 @@
       <isNotNull prepend=" and " property="mc">MC = #mc#</isNotNull>
     </dynamic>
   </select>
+  
 </sqlMap>

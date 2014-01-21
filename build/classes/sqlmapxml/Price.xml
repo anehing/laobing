@@ -46,4 +46,9 @@
       <isNotNull prepend=" and " property="note">NOTE = #note#</isNotNull>
     </dynamic>
   </select>
+  <select id="selectByCity" parameterClass="java.util.Map" resultMap="priceResult">select * from price
+	    <dynamic prepend="where">
+		      <isNotNull prepend=" and " property="cityid">CITYID = #cityid#</isNotNull>
+	    </dynamic>
+  </select>
 </sqlMap>

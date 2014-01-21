@@ -15,7 +15,7 @@
 	<div class="data0">
 		<div class="data1">
 			<table class="dataTable" width="100%" border="0" cellspacing="0" cellpadding="0">
-			    <s:hidden  name="price.id" id="id" />
+			    <s:hidden  name="twitter.id" id="id" />
 				<tr>
 					<td width="15%" align="center" class="dataTd" >标题</td>
 					<td width="35%" align="left" class="dataTd" >

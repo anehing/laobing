@@ -30,6 +30,8 @@ public class User implements Serializable{
     private String askcode;//邀请码
 	@TODO("asktime")
     private int asktime;
+	@TODO("isbind")
+    private int isbind;//是否绑定优惠券1：是
 	public int getId() {
 		return id;
 	}
@@ -77,6 +79,12 @@ public class User implements Serializable{
 	}
 	public void setAsktime(int asktime) {
 		this.asktime = asktime;
+	}
+	public int getIsbind() {
+		return isbind;
+	}
+	public void setIsbind(int isbind) {
+		this.isbind = isbind;
 	}
 	
 	

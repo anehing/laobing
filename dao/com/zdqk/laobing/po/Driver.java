@@ -24,8 +24,8 @@ public class Driver implements Serializable{
     private int sex;
 	@TODO("age")		
     private int age;
-	@TODO("provinceid")		
-    private int provinceid;
+	@TODO("cityid")		
+    private int cityid;
 	@TODO("mc")		
     private String mc;
 	@TODO("year")		
@@ -46,9 +46,12 @@ public class Driver implements Serializable{
 	private String drive_card;
 	@TODO("servicefee")		
     private float servicefee;
-	
-	
-	
+	@TODO("longitude")	
+	private double longitude;
+	@TODO("latitude")	
+	private double latitude;
+	@TODO("distance")	
+	private String distance;
 	
 	public int getId() {
 		return id;
@@ -80,13 +83,14 @@ public class Driver implements Serializable{
 	public void setAge(int age) {
 		this.age = age;
 	}
-	public int getProvinceid() {
-		return provinceid;
-	}
-	public void setProvinceid(int provinceid) {
-		this.provinceid = provinceid;
-	}
 
+
+	public int getCityid() {
+		return cityid;
+	}
+	public void setCityid(int cityid) {
+		this.cityid = cityid;
+	}
 	public String getMc() {
 		return mc;
 	}
@@ -146,6 +150,25 @@ public class Driver implements Serializable{
 	}
 	public void setServicefee(float servicefee) {
 		this.servicefee = servicefee;
+	}
+
+	public double getLongitude() {
+		return longitude;
+	}
+	public void setLongitude(double longitude) {
+		this.longitude = longitude;
+	}
+	public double getLatitude() {
+		return latitude;
+	}
+	public void setLatitude(double latitude) {
+		this.latitude = latitude;
+	}
+	public String getDistance() {
+		return distance;
+	}
+	public void setDistance(String distance) {
+		this.distance = distance;
 	}
 	
 	

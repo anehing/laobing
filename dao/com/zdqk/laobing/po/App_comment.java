@@ -18,13 +18,12 @@ public class App_comment implements Serializable{
 	@PK		
 	@TODO("id")		
     private int id;
-	
+	@TODO("type")		
+    private int type;//0:用户，1司机
 	@TODO("comment")	
 	private String comment;	
 	@TODO("telphone")
 	private String telphone;
-	@TODO("type")		
-    private int type;
 	@TODO("createtime")		
     private Date createtime;
 	@TODO("email")		
@@ -47,12 +46,6 @@ public class App_comment implements Serializable{
 	public void setTelphone(String telphone) {
 		this.telphone = telphone;
 	}
-	public int getType() {
-		return type;
-	}
-	public void setType(int type) {
-		this.type = type;
-	}
 	public Date getCreatetime() {
 		return createtime;
 	}
@@ -64,6 +57,12 @@ public class App_comment implements Serializable{
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	public int getType() {
+		return type;
+	}
+	public void setType(int type) {
+		this.type = type;
 	}
 
 	

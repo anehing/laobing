@@ -16,6 +16,7 @@
 		<div class="data1">
 			<table class="dataTable" width="100%" border="0" cellspacing="0" cellpadding="0">
 			    <s:hidden  name="driver.id" id="id" />
+			    <s:hidden name="driver.mc" id="mc"/>
 				  <tr>
                         <td width="15%" align="center" class="dataTd" >头像</td>
 				    	<td width="35%" align="left" class="dataTd" >
@@ -47,7 +48,7 @@
 					    </td> 
 					    <td width="15%" align="center" class="dataTd" >所在城市</td>
 					    <td width="35%" align="left" class="dataTd" >
-					           <s:select list="dmb_citylist" listKey="mc" listValue="mc" name ="driver.mc" id="mc"  headerValue="请选择" headerKey="未知" ></s:select>
+					           <s:select list="dmb_citylist" listKey="id" listValue="mc" name ="driver.cityid" id="cityid"  headerValue="请选择" headerKey="0" onchange="set(this);"></s:select>
 					    </td> 
 				   </tr>
 				   <tr>
@@ -147,5 +148,9 @@ function checkSubmit(){
 				}
 	        }
 		}
+	}
+	function set(obj){
+		var checkText=$("#cityid").find("option:selected").text();  //获取Select选择的Text
+		 document.getElementById("mc").value = checkText;
 	}
 </script>

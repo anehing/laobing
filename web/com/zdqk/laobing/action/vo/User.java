@@ -21,6 +21,7 @@ public class User extends ResultVo implements Serializable{
 	private Date use_time;
 	private String askcode;//邀请码
     private int asktime;
+    private int isbind;//是否绑定优惠卷
 	public String getUserIdStr() {
 		return userIdStr;
 	}
@@ -74,6 +75,12 @@ public class User extends ResultVo implements Serializable{
 	}
 	public void setAsktime(int asktime) {
 		this.asktime = asktime;
+	}
+	public int getIsbind() {
+		return isbind;
+	}
+	public void setIsbind(int isbind) {
+		this.isbind = isbind;
 	}
 	
 

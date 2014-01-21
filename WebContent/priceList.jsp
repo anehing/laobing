@@ -21,7 +21,7 @@
 	             <tr>
 		            <td width="10%" align="center" bgcolor="#F3F8FE" class="dataTdText">城市</td>
 		            <td width="30%" align="left" bgcolor="#FFFFFF"> 
-		                 <s:select list="dmb_citylist" listKey="mc" listValue="mc" name ="price.note" id="note"  headerValue="请选择" headerKey="0" ></s:select>
+		                 <s:select list="dmb_citylist" listKey="mc" listValue="mc" name ="price.note" id="note"  headerValue="请选择" headerKey="请选择" ></s:select>
 		            </td>
 		            <td width="10%" align="center" bgcolor="#F3F8FE" class="dataTdText"></td>
 		            <td width="30%" align="left" class="dataTdText" bgcolor="#FFFFFF" >

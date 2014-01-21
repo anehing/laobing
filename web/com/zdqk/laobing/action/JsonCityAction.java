@@ -33,12 +33,11 @@ import com.zdqk.laobing.tools.ValidateTools;
 		@InterceptorRef("simpleStack") })
 @Results( {
 		@Result(name = "UserJsonList", location = "/WEB-INF/json/json.jsp"),
-		@Result(name = "JsonUpdateUser", location = "/JsonUpdateUser.jsp"),
 		})
 public class JsonCityAction extends JsonBaseAction {
 	
 	private static final long serialVersionUID = 1L;
-	private static String resutUrl = "CityJsonList";	
+	private static String resutUrl = "UserJsonList";	
 	
 	@Autowired
 	private Dmb_cityDAO dmb_cityDAO;
@@ -58,7 +57,6 @@ public class JsonCityAction extends JsonBaseAction {
 	 * */
 	@Action("selectCityAllbyStatus")
 	public String selectCityAllbyStatus(){
-		ResultVo rv = null;
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		map.put("status",1);
 		List <Dmb_city> list= dmb_cityDAO.selectAllbyStatus(map, "selectAllbyStatus");
@@ -80,6 +78,6 @@ public class JsonCityAction extends JsonBaseAction {
 			dmb_citylistvo.setReusltNumber(1);
 			dmb_citylistvo.setReusltMessage("操作失败，没有城市可用");
 		}
-		return FxJsonUtil.jsonHandle(dmb_citylistvo,resutUrl,request);
+		return FxJsonUtil.jsonListHandle(dmb_citylistvo,resutUrl,request);
 	}
 }

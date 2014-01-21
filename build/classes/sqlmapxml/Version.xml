@@ -46,4 +46,9 @@
       <isNotNull prepend=" and " property="url">URL like '%$url$%'</isNotNull>
     </dynamic>
   </select>
+  <select id="selectByType" parameterClass="java.util.Map" resultMap="versionResult"> select * from VERSION
+     <dynamic prepend="where">
+      <isNotNull prepend=" and " property="type">TYPE = #type#</isNotNull>
+    </dynamic>
+  </select>
 </sqlMap>

@@ -21,14 +21,15 @@ html {
 		</div>
 		<div class="titleDiv_b"></div>
 	</div>
-	<s:form action="addPrice" namespace="/base" method="post"  id="form1" onsubmit="return checkSubmit()" >
+	<s:form action="addPrice" namespace="/base" method="post"  id="form1" onsubmit="return checkSubmit()" name="addPrice" >
 		<div class="data0">
 			<div class="data1">
 				<table class="dataTable" width="100%" border="0" cellspacing="0" cellpadding="0">
+			         	<s:hidden name="price.note" id="note"/>
                     <tr>
 				    	<td width="15%" align="center" class="dataTd" >城市</td>
 					    <td width="35%" align="left" class="dataTd" >
-					         <s:select list="dmb_citylist" listKey="mc" listValue="mc" name ="price.note" id="note"  headerValue="请选择" headerKey="0" ></s:select>
+					         <s:select list="dmb_citylist" listKey="id" listValue="mc" name ="price.cityid" id="cityid"  headerValue="请选择" headerKey="0" onchange="set(this);"></s:select>
 					    </td>    
 				        <td width="15%" align="center" class="dataTd" >时间段</td>
 					    <td width="35%" align="left" class="dataTd" >
@@ -72,5 +73,9 @@ function checkSubmit(){
 		 }
 	 }
      return true;	
+}
+function set(obj){
+	var checkText=$("#cityid").find("option:selected").text();  //获取Select选择的Text
+	 document.getElementById("note").value = checkText;
 }
 </script>

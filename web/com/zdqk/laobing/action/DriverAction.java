@@ -106,7 +106,8 @@ public class DriverAction extends BasePaginationAction {
 			}
 			if(!this.driver.getMc().equals("请选择")){
 				map.put("mc", this.driver.getMc());
-			}if(this.driver.getName()!=null&&!this.driver.getName().trim().equals("")){
+			}
+			if(this.driver.getName()!=null&&!this.driver.getName().trim().equals("")){
 				map.put("name", this.driver.getName());
 			}if(this.driver.getTelphone()!=null&&!this.driver.getTelphone().trim().equals("")){
 				map.put("telphone", this.driver.getTelphone());

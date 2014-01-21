@@ -77,11 +77,8 @@ public class PriceAction extends BasePaginationAction {
 		Price a = new Price();
 		Map<String, Object> map = this.getPmapNew();
 		if(this.price!=null){
-			if(price.getTime()!=null&& !price.getTime().trim().equals("")){
-				map.put("time",price.getTime());
-				}
-			if(price.getCityid()!=0){
-				map.put("cityid", price.getCityid());
+			if(!price.getNote().equals("请选择")){
+				map.put("note", price.getNote());
 				}
 			}
 		List<Price> list = publicQuery(map, a, priceDAO); 

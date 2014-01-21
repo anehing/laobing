@@ -66,4 +66,10 @@
       <isNotNull prepend=" and " property="note">NOTE = #note#</isNotNull>
     </dynamic>
   </select>
+   <select id="selectByNum" parameterClass="java.util.Map" resultMap="couponResult">select * from COUPON 
+    <dynamic prepend="where">
+      <isNotNull prepend=" and " property="coupon_num">COUPON_NUM = #coupon_num#</isNotNull>
+      <isNotNull prepend=" and " property="telphone">TELPHONE = #telphone#</isNotNull>
+    </dynamic>
+  </select>
 </sqlMap>

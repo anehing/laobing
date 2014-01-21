@@ -16,36 +16,40 @@ public class Driver_order implements Serializable{
 	@TODO("id")		
     private int id;
 	
-	@TODO("customer_order_id")		
-    private int customer_order_id;
-	@TODO("driver_id")		
-    private int driver_id;
-	@TODO("telphone")	
-	private String telphone;
-	@TODO("order_status")
-    private int order_status;
-	@TODO("create_time")
-    private Date create_time;
-	@TODO("start_place")
-	private String start_place;	
+	@TODO("drivertelphone")		
+    private String drivertelphone;
+	@TODO("customertelphone")		
+    private String customertelphone;
+	@TODO("start_place")	
+	private String start_place;
+	@TODO("start_time")
+	private int start_time;	
+	@TODO("startwait")
+    private Date startwait;
+	@TODO("endwait")
+    private Date endwait;
 	@TODO("end_place")
 	private String end_place;	
-	@TODO("distance")	
-    private String distance;
-	@TODO("wait_start")
-    private Date wait_start;
-	@TODO("wait_end")
-    private Date wait_end;
-	@TODO("call_time")
-    private Date call_time;
-	@TODO("price")
-    private float price;
-	@TODO("driver_card")
-    private int driver_card;
+	@TODO("end_time")	
+    private Date end_time;
+	@TODO("distance")
+    private float distance;
+	@TODO("fee")
+    private float fee;
+	@TODO("status")
+    private int status;
 	@TODO("source")
-    private String source;
-	@TODO("judge")		
-    private int judge;
+    private int source;
+	@TODO("judgecustomer")		
+    private int judgecustomer;
+	@TODO("judgedriver")		
+    private int judgedriver;
+	@TODO("ordernum")		
+    private String ordernum;
+	@TODO("createtime")		
+    private Date createtime;
+	@TODO("time")		
+    private long time;
 	
 	
 	public int getId() {
@@ -54,35 +58,17 @@ public class Driver_order implements Serializable{
 	public void setId(int id) {
 		this.id = id;
 	}
-	public int getCustomer_order_id() {
-		return customer_order_id;
+	public String getDrivertelphone() {
+		return drivertelphone;
 	}
-	public void setCustomer_order_id(int customer_order_id) {
-		this.customer_order_id = customer_order_id;
+	public void setDrivertelphone(String drivertelphone) {
+		this.drivertelphone = drivertelphone;
 	}
-	public int getDriver_id() {
-		return driver_id;
+	public String getCustomertelphone() {
+		return customertelphone;
 	}
-	public void setDriver_id(int driver_id) {
-		this.driver_id = driver_id;
-	}
-	public String getTelphone() {
-		return telphone;
-	}
-	public void setTelphone(String telphone) {
-		this.telphone = telphone;
-	}
-	public int getOrder_status() {
-		return order_status;
-	}
-	public void setOrder_status(int order_status) {
-		this.order_status = order_status;
-	}
-	public Date getCreate_time() {
-		return create_time;
-	}
-	public void setCreate_time(Date create_time) {
-		this.create_time = create_time;
+	public void setCustomertelphone(String customertelphone) {
+		this.customertelphone = customertelphone;
 	}
 	public String getStart_place() {
 		return start_place;
@@ -90,61 +76,95 @@ public class Driver_order implements Serializable{
 	public void setStart_place(String start_place) {
 		this.start_place = start_place;
 	}
+	public int getStart_time() {
+		return start_time;
+	}
+	public void setStart_time(int start_time) {
+		this.start_time = start_time;
+	}
+	public Date getStartwait() {
+		return startwait;
+	}
+	public void setStartwait(Date startwait) {
+		this.startwait = startwait;
+	}
+	public Date getEndwait() {
+		return endwait;
+	}
+	public void setEndwait(Date endwait) {
+		this.endwait = endwait;
+	}
 	public String getEnd_place() {
 		return end_place;
 	}
 	public void setEnd_place(String end_place) {
 		this.end_place = end_place;
 	}
-	public String getDistance() {
+	public Date getEnd_time() {
+		return end_time;
+	}
+	public void setEnd_time(Date end_time) {
+		this.end_time = end_time;
+	}
+	public float getDistance() {
 		return distance;
 	}
-	public void setDistance(String distance) {
+	public void setDistance(float distance) {
 		this.distance = distance;
 	}
-	public Date getWait_start() {
-		return wait_start;
+	public float getFee() {
+		return fee;
 	}
-	public void setWait_start(Date wait_start) {
-		this.wait_start = wait_start;
+	public void setFee(float fee) {
+		this.fee = fee;
 	}
-	public Date getWait_end() {
-		return wait_end;
+	public int getStatus() {
+		return status;
 	}
-	public void setWait_end(Date wait_end) {
-		this.wait_end = wait_end;
+	public void setStatus(int status) {
+		this.status = status;
 	}
-	public Date getCall_time() {
-		return call_time;
-	}
-	public void setCall_time(Date call_time) {
-		this.call_time = call_time;
-	}
-	public float getPrice() {
-		return price;
-	}
-	public void setPrice(float price) {
-		this.price = price;
-	}
-	public int getDriver_card() {
-		return driver_card;
-	}
-	public void setDriver_card(int driver_card) {
-		this.driver_card = driver_card;
-	}
-	public String getSource() {
+	public int getSource() {
 		return source;
 	}
-	public void setSource(String source) {
+	public void setSource(int source) {
 		this.source = source;
 	}
-	public int getJudge() {
-		return judge;
+	public int getJudgecustomer() {
+		return judgecustomer;
 	}
-	public void setJudge(int judge) {
-		this.judge = judge;
+	public void setJudgecustomer(int judgecustomer) {
+		this.judgecustomer = judgecustomer;
 	}
-
+	public int getJudgedriver() {
+		return judgedriver;
+	}
+	public void setJudgedriver(int judgedriver) {
+		this.judgedriver = judgedriver;
+	}
+	public String getOrdernum() {
+		return ordernum;
+	}
+	public void setOrdernum(String ordernum) {
+		this.ordernum = ordernum;
+	}
+	public Date getCreatetime() {
+		return createtime;
+	}
+	public void setCreatetime(Date createtime) {
+		this.createtime = createtime;
+	}
+	public long getTime() {
+		return time;
+	}
+	public void setTime(long time) {
+		this.time = time;
+	}
+	
+	
+	
+	
+	
 	
 	
 }

@@ -15,75 +15,45 @@ public class Customer_judge_driver implements Serializable{
 	@PK		
 	@TODO("id")		
     private int id;
-	@TODO("orderid")		
-    private int orderid;
-	@TODO("driverid")		
-    private int driverid;
 	@TODO("score")		
     private int score;
 	@TODO("telphone")	
 	private String telphone;	
-	@TODO("note")
-	private String note;	
-
+	@TODO("drivertelphone")
+	private String drivertelphone;	
 	@TODO("judge_time")
-    private Date judge_time;
-
+    private String judge_time;
 	public int getId() {
 		return id;
 	}
-
 	public void setId(int id) {
 		this.id = id;
 	}
-
-	public int getOrderid() {
-		return orderid;
-	}
-
-	public void setOrderid(int orderid) {
-		this.orderid = orderid;
-	}
-
-	public int getDriverid() {
-		return driverid;
-	}
-
-	public void setDriverid(int driverid) {
-		this.driverid = driverid;
-	}
-
 	public int getScore() {
 		return score;
 	}
-
 	public void setScore(int score) {
 		this.score = score;
 	}
-
 	public String getTelphone() {
 		return telphone;
 	}
-
 	public void setTelphone(String telphone) {
 		this.telphone = telphone;
 	}
-
-	public String getNote() {
-		return note;
+	public String getDrivertelphone() {
+		return drivertelphone;
 	}
-
-	public void setNote(String note) {
-		this.note = note;
+	public void setDrivertelphone(String drivertelphone) {
+		this.drivertelphone = drivertelphone;
 	}
-
-	public Date getJudge_time() {
+	public String getJudge_time() {
 		return judge_time;
 	}
-
-	public void setJudge_time(Date judge_time) {
+	public void setJudge_time(String judge_time) {
 		this.judge_time = judge_time;
 	}
+	
 	
 	
 }
