@@ -66,10 +66,7 @@
 			    </table>
     	</div>
   </div>
-  
   <script type="text/javascript">
-  $(function(){
-	  alert("a");
   	 <s:if test="hasActionErrors()">
              var err="";
 	  		<s:iterator value="actionErrors" status="ae">
@@ -88,10 +85,10 @@
 	  		      mess+="<s:property/>";
 	  		     </s:if>
 			</s:iterator>
+			
 				    showMsg(mess,'0');
 	  	</s:if>
 	  	
-  });
   
 
 function showErrorMsg(str){
@@ -104,7 +101,6 @@ function showTipMsg(str){
   	   showMsg(str,'0')
   	
 }
-
 //window.alert=showErrorMsg;
 
 function showMsg(str,type){ 

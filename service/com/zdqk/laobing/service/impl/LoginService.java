@@ -9,7 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.zdqk.laobing.dao.AdminDAO;
+import com.zdqk.laobing.dao.PermissionDAO;
+import com.zdqk.laobing.dao.UrlDAO;
 import com.zdqk.laobing.po.Admin;
+import com.zdqk.laobing.po.Permission;
+import com.zdqk.laobing.po.Url;
 import com.zdqk.laobing.service.ILoginService;
 
 
@@ -18,6 +22,10 @@ public class LoginService implements ILoginService {
 
 	@Autowired
 	private AdminDAO<Admin> adminDAO;
+	@Autowired
+	private UrlDAO<Url> urlDAO;
+	@Autowired
+	private PermissionDAO<Permission> permissionDAO;
 	/**
 	 * @author  验证用户
 	 * 
@@ -27,40 +35,26 @@ public class LoginService implements ILoginService {
 	 */
 	@Override
 	public String loadPopedomTree(Admin admin) {
-
 		String tree = "";
-//		
-//		if ("1".equals(admin.getUsertype()+"")) {
-//			tree+="<div id='ss'><div id='ss_1' class='normal_txt1' onclick='nos(1)'>超级管理员</div></div>";
-//			tree+="<!-- q0到q4 -->";
-//			tree+="<div class='xt_r' id='r1' style='display:block'>";
-//    		tree+="";
-//			tree+="<div id='2b_9' class='normal_txt2' onclick='nxx(12);'><img class='jm_1' align='middle' src='images/ip _beianTJ.png' width='16' height='16' />&nbsp;&nbsp;&nbsp;系统管理</div>";
-//			tree+="<ul style='display:none;' id='q12'>";
-//			tree+="<li id='xx'>&nbsp;&nbsp;&nbsp;<span id='1b_100' class='normal_txt' onclick='Hover1(100);'><a onclick=goTarget('base/queryUserbyId.action?id="+admin.getId()+"&totype=1');>修改密码</a></span></li>";
-//			tree+="<li id='xx'>&nbsp;&nbsp;&nbsp;<span id='1b_101' class='normal_txt' onclick='Hover1(101);'><a onclick=goTarget('base/queryUserbyId.action?id="+admin.getId()+"&totype=4');>账户信息</a></span></li>";
-//			tree+="<li id='xx'>&nbsp;&nbsp;&nbsp;<span id='1b_102' class='normal_txt' onclick='Hover1(102);'><a onclick=goTarget('base/queryUserbyId.action?id="+admin.getId()+"&totype=2');>编辑信息</a></span></li>";
-//			tree+="<li id='xx'>&nbsp;&nbsp;&nbsp;<span id='1b_102' class='normal_txt' onclick='Hover1(102);'><a onclick=goTarget('base/queryAccountManagement.action?id="+admin.getId()+"');>账户管理</a></span></li>";
-//			tree+="</ul>";				
-//			
-//			tree+="";
-//			tree+="<div id='2b_5' class='normal_txt2' onclick='nxx(1);'><img class='jm_1' align='middle' src='images/ip _beianTJ.png' width='16' height='16' />&nbsp;&nbsp;&nbsp;用户管理</div>";
-//			tree+="<ul style='display:block;' id='q1'>";
-//			tree+="<li id='xx'>&nbsp;&nbsp;&nbsp;<span id='1b_120' class='normal_txt' onclick='Hover1(120);'><a onclick=goTarget('addUser.jsp');>用户注册</a></span></li>";
-//			tree+="<li id='xx'>&nbsp;&nbsp;&nbsp;<span id='1b_121' class='normal_txt' onclick='Hover1(121);'><a onclick=goTarget('base/queryUsers.action');>用户列表</a></span></li>";
-//			tree+="</ul>";
-//			tree+="";
-//			tree+="<div id='2b_11' class='normal_txt2' onclick='nxx(2);'><img class='jm_1' align='middle' src='images/ip _beianTJ.png' width='16' height='16' />&nbsp;&nbsp;&nbsp;事件/日志</div>";
-//			tree+="<ul style='display:none;' id='q2'>";
-//			tree+="<li id='xx'>&nbsp;&nbsp;&nbsp;<span id='1b_130' class='normal_txt' onclick='Hover1(130);'><a onclick=goTarget('base/queryUserLogs.action');>日志管理</a></span></li>";
-//			tree+="<li id='xx'>&nbsp;&nbsp;&nbsp;<span id='1b_131' class='normal_txt' onclick='Hover1(131);'><a onclick=goTarget('base/queryComms.action');>设备管理</a></span></li>";
-//			tree+="</ul>";	
-//
-//			
-//			tree+="";
-//			tree+="</div>";			
-//		}
-
+		Url u = new Url();
+		Map<String, Object> map =new HashMap();
+		if(admin!=null&&admin.getUsertype()==1){//管理员
+			List<Url> li=urlDAO.findObjects(map, u);
+			for(Url url :li){
+				tree+="<a href=\""+url.getUrl()+"\" target=\"main\">"+url.getUrl_name()+"</a>";
+			}
+		}else{
+			map.put("adminid", admin.getId());
+			Permission p=new Permission();
+			List<Permission> permissionli=permissionDAO.findObjects(map, p);
+			for(Permission p1 :permissionli){
+				Map<String, Object> map2 =new HashMap();
+				map2.put("id", p1.getUrlid());
+				u=null;
+			    u=urlDAO.selectById(map2);
+				tree+="<a href=\""+u.getUrl()+"\" target=\"main\">"+u.getUrl_name()+"</a>";
+			}
+		}
 		return tree;
 	}
 
@@ -69,7 +63,7 @@ public class LoginService implements ILoginService {
 	public Boolean queryUserNameIsExist(String username) {
 		boolean flag =false;
 		Admin admin = new Admin();
-		Map<String,String> map = new HashMap<String,String>();
+		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("username", username);
 		List<Admin> listAdmin = adminDAO.findObjects(map, admin);		
 		if(listAdmin.size()==0){

@@ -56,7 +56,7 @@ public class BasicDaoImpl<T> extends SqlMapClientDaoSupport implements BasicDao<
 
 	
 	@Override
-	public List<T> findObjectsPage(Map<String, String> mapConditions,T t) {
+	public List<T> findObjectsPage(Map<String, Object> mapConditions,T t) {
 		try {
 			List<T> list=(List<T>)getSqlMapClientTemplate().queryForList(t.getClass().getName()+".selectPage",mapConditions);
 			return list;
@@ -68,7 +68,7 @@ public class BasicDaoImpl<T> extends SqlMapClientDaoSupport implements BasicDao<
 	}
 
 	@Override
-	public Long findObjectsPageCount(Map<String, String> mapConditions, T t) {
+	public Long findObjectsPageCount(Map<String, Object> mapConditions, T t) {
 		try {	
 			return (Long)getSqlMapClientTemplate().queryForObject(t.getClass().getName()+".selectCount",mapConditions);
 		} catch (Exception e) {
@@ -91,7 +91,7 @@ public class BasicDaoImpl<T> extends SqlMapClientDaoSupport implements BasicDao<
 	}
 
 	@Override
-	public List<T> findObjects(Map<String, String> mapConditions, T t) {
+	public List<T> findObjects(Map<String, Object> mapConditions, T t) {
 		try {
 			List<T> list=(List<T>)getSqlMapClientTemplate().queryForList(t.getClass().getName()+".selectAll",mapConditions);
 			return list;

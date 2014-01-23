@@ -18,14 +18,14 @@ public interface BasicDao<T> {
 	
 	public abstract boolean delete(T t);
 	
-	public abstract List<T> findObjectsPage(Map<String,String> mapConditions,T t);
+	public abstract List<T> findObjectsPage(Map<String,Object> mapConditions,T t);
 	
-	public abstract Long findObjectsPageCount(Map<String,String> mapConditions,T t);
+	public abstract Long findObjectsPageCount(Map<String,Object> mapConditions,T t);
 	
 	public abstract T findObjectById(int long1,T t);	
 	
 	public abstract T findObjectNameById(int long1,T t);	
 	
-	public abstract List<T> findObjects(Map<String,String> mapConditions,T t);	
+	public abstract List<T> findObjects(Map<String, Object> map,T t);	
 	
 }

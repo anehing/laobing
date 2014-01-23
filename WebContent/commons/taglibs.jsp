@@ -44,11 +44,9 @@
 <script src="${ctx}/scripts/jquery.simplemodal-1.3.3.min.js" ></script>
 <script src="${ctx}/scripts/tools.js" ></script>
 <script src="${ctx}/scripts/tools2.js" ></script>
-<!--<script src="${ctx}/scripts/company.js" ></script>-->
 <script src="${ctx}/scripts/utilCode.js" ></script>
 <script src="${ctx}/scripts/ValidateTools.js" ></script>
 <script src="${ctx}/scripts/jquery.tablesorter.js" ></script>
-<!--<script src="${ctx}/My97DatePicker/WdatePicker.js" ></script>-->
 <noscript> <iframe   src="*.htm"> </iframe> </noscript>
 <noscript> <iframe   src="*.jsp"> </iframe> </noscript>
 <script type="text/javascript">

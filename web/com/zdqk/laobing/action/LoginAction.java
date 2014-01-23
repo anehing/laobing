@@ -133,7 +133,7 @@ public class LoginAction extends ActionSupport{
 			e.printStackTrace();
 			return result;
 		}	
-		if(null!=adminInfo){
+		if(adminInfo!=null){
 			if(adminInfo.getStatus()==1){
 				session.setAttribute("result", false);
 				session.setAttribute("error", "-1");
@@ -150,6 +150,8 @@ public class LoginAction extends ActionSupport{
 				
 				String tree=iLoginService.loadPopedomTree(adminInfo);
 				session.setAttribute("tree", tree);//设置右边树的列表
+				
+			//	session.setAttribute("tree2", "<a href=\"base/queryAdmin.action\" target=\"main\">后台用户2管理</a>");//设置右边树的列表
 				logger.info("登陆成功，正在转发 : ");
 				result = "success";
 

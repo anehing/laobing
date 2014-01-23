@@ -66,7 +66,7 @@ function checkSubmit(){
 			 return false
 		 }
 	 } 
-	 if(!checkNull(password)){
+/* 	 if(!checkNull(password)){
 	      showErrorMsg("密码不能为空");
 	      return false;
 	 } else{
@@ -75,7 +75,7 @@ function checkSubmit(){
 			 showErrorMsg("密码只能是5-20个以字母开头、可带数字、“_”、“.”的字串");
 			 return false
 		 }
-	 }
+	 } */
     return true;	
 }
 </script>

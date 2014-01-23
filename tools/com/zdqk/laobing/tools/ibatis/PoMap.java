@@ -12,6 +12,7 @@ import com.zdqk.laobing.po.Driver_order;
 import com.zdqk.laobing.po.PublicNote;
 import com.zdqk.laobing.po.Tranrecord;
 import com.zdqk.laobing.po.Twitter;
+import com.zdqk.laobing.po.Url;
 import com.zdqk.laobing.po.User;
 
 
@@ -29,8 +30,8 @@ public class PoMap {
 	//	hashmap.put("PublicNote",PublicNote);
     //	Driver_order Driver_order =new Driver_order();
       //  hashmap.put("Driver_order", Driver_order);
-   	Driver_judge_Customer Driver_judge_Customer =new Driver_judge_Customer();
-        hashmap.put("Driver_judge_Customer", Driver_judge_Customer);
+  // 	Driver_judge_Customer Driver_judge_Customer =new Driver_judge_Customer();
+    //    hashmap.put("Driver_judge_Customer", Driver_judge_Customer);
    //   Customer_order Customer_order = new Customer_order();
      //  hashmap.put("Customer_order", Customer_order);
    //  Driver Driver = new Driver();
@@ -45,8 +46,8 @@ public class PoMap {
      //  hashmap.put("Tranrecord", Tranrecord);
    //    Twitter Twitter =new Twitter();
      //  hashmap.put("Twitter", Twitter);
-//        Url Url=new Url();
-//        hashmap.put("Url", Url);
+       Url Url=new Url();
+        hashmap.put("Url", Url);
    //   User User =new User();
    //     hashmap.put("User", User);
 //        Version Version =new Version();
