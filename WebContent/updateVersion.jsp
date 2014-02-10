@@ -29,7 +29,7 @@
 					</td>
 				</tr>
 				<tr>
-				    <td width="15%" align="center" class="dataTd" >载地址</td>
+				    <td width="15%" align="center" class="dataTd" >下载地址</td>
 					<td width="35%" align="left" class="dataTd" >
 					    <s:textfield name="version.url" id="url"/>
 					</td>

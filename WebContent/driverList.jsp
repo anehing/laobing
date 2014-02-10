@@ -111,7 +111,7 @@
 						</s:if>
 						<s:else>
 							<tr>
-								<td class="dataTd" align="center" colspan="8">
+								<td class="dataTd" align="center" colspan="15">
 								    <font color="red">暂无数据！</font>
 								</td>
 							</tr>

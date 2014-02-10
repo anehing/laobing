@@ -75,7 +75,12 @@ function checkSubmit(){
 			 showErrorMsg("面值输入格式不正确");
 			 return false
 		 }
+		 if(discount_amount<=0){
+			 showErrorMsg("面值必须大于0");
+			 return false
+		 }
 	 }
+	 
      return true;	
 }
 </script>

@@ -67,7 +67,7 @@
       <isNotNull prepend=" and " property="city">CITY = #city#</isNotNull>
       <isNotNull prepend=" and " property="drive_card">DRIVE_CARD = #drive_card#</isNotNull>
       <isNotNull prepend=" and " property="servicefee">SERVICEFEE = #servicefee#</isNotNull>
-      <isNotNull prepend=" and " property="longitude">LONGITUDE = #longitude#</isNotNull>
+       <isNotNull prepend=" and " property="longitude">LONGITUDE = #longitude#</isNotNull>
       <isNotNull prepend=" and " property="latitude">LATITUDE = #latitude#</isNotNull>
       <isNotNull prepend=" and " property="distance">DISTANCE = #distance#</isNotNull>
     </dynamic>
@@ -89,7 +89,7 @@
       <isNotNull prepend=" and " property="city">CITY = #city#</isNotNull>
       <isNotNull prepend=" and " property="drive_card">DRIVE_CARD = #drive_card#</isNotNull>
       <isNotNull prepend=" and " property="servicefee">SERVICEFEE = #servicefee#</isNotNull>
-      <isNotNull prepend=" and " property="longitude">LONGITUDE = #longitude#</isNotNull>
+       <isNotNull prepend=" and " property="longitude">LONGITUDE = #longitude#</isNotNull>
       <isNotNull prepend=" and " property="latitude">LATITUDE = #latitude#</isNotNull>
       <isNotNull prepend=" and " property="distance">DISTANCE = #distance#</isNotNull>
     </dynamic>order by id desc limit #startIndex#,#endIndex#

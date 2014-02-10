@@ -5,7 +5,7 @@
 	<div class="titleDiv">
 		<div class="titleDiv_a">
 			<img src="${ctx}/images/tb_1.png" align="absmiddle" /> 
-			<span>优惠卷管理</span>
+			<span>优惠券管理</span>
 		</div>
 		<div class="titleDiv_b"></div>
 	</div>
@@ -19,13 +19,13 @@
 	    <div id="r0" align="center" >
              <table class="dataTable" width="97%" border="0" align="center" cellpadding="0" cellspacing="1"  bgcolor="#93b5d1">
 	             <tr>
-		            <td width="10%" align="center" bgcolor="#F3F8FE" class="dataTdText">优惠卷号码</td>
+		            <td width="10%" align="center" bgcolor="#F3F8FE" class="dataTdText">优惠券号码</td>
 		            <td width="30%" align="left" bgcolor="#FFFFFF"> 
 		                <s:textfield id="coupon_num" name="coupon.coupon_num" ></s:textfield>
 		            </td>
 		            <td width="10%" align="center" bgcolor="#F3F8FE" class="dataTdText">是否是邀请码</td>
 		            <td width="30%" align="left" class="dataTdText" bgcolor="#FFFFFF" >
-		                <s:select list="#{0:'邀请码',1:'优惠卷'}" listKey="key" listValue="value" name ="coupon.is_invitation_code" id="is_invitation_code"  headerValue="请选择" headerKey="3" ></s:select>
+		                <s:select list="#{0:'邀请码',1:'优惠券'}" listKey="key" listValue="value" name ="coupon.is_invitation_code" id="is_invitation_code"  headerValue="请选择" headerKey="3" ></s:select>
 		            </td>
 		            <td rowspan="3" align="center" valign="middle" bgcolor="#FFFFFF">
 			            <input	type="submit" class="inputBtn"   value="查询" style="cursor: pointer"  />
@@ -36,8 +36,8 @@
 		            
 		            <td width="10%" align="center" bgcolor="#F3F8FE" class="dataTdText">录入时间</td>
 		            <td width="30%" align="left" bgcolor="#FFFFFF"> 
-		                <input type="text" name="createtime" id="create_time" class="tcal"  />
-		            &nbsp;-<input type="text" name="tocreatetime" id="tocreate_time" class="tcal"  />
+		                <input type="text" name="create_time" id="create_time" class="tcal"  />
+		            &nbsp;-<input type="text" name="tocreate_time" id="tocreate_time" class="tcal"  />
 		            </td>
 		            <td width="10%" align="center" bgcolor="#F3F8FE" class="dataTdText">使用时间</td>
 		            <td width="30%" align="left" bgcolor="#FFFFFF"> 
@@ -62,7 +62,7 @@
 					<table class="dataTable" width="100%" border="0" cellspacing="0" cellpadding="0">
 						<tr>
 							<td class="topTd" align="center" width="8%">序号</td>
-							<td class="topTd" align="center" width="8%">优惠卷号</td>
+							<td class="topTd" align="center" width="8%">优惠券号</td>
 							<td class="topTd" align="center" width="8%">优惠金额(￥)</td>
 							<td class="topTd" align="center" width="8%">是否已使用</td>
 							<td class="topTd" align="center" width="8%">使用时间</td>

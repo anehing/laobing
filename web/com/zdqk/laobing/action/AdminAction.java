@@ -1,5 +1,6 @@
 package com.zdqk.laobing.action;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -128,6 +129,13 @@ public class AdminAction extends BasePaginationAction {
 	@Action("addAdmin")
 	public String addAdmin() {
 		if(this.admin!=null){
+			Map map=new HashMap();
+			map.put("username", admin.getUsername());
+	    	Admin a= (Admin) adminDAO.findAdminByUsernameAndPassword(map, "loginByUsernameAndPassword");
+		    if(a!=null){
+		    	this.addActionError("用户名已存在");
+		    	return "addAdmin";
+		    }
 			boolean  flag=adminDAO.insert(this.admin);
 		    if(flag)  this.addActionMessage("新增成功");
 			else this.addActionError("新增失败");
