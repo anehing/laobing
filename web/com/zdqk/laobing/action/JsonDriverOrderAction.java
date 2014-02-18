@@ -48,20 +48,20 @@ public class JsonDriverOrderAction extends JsonBaseAction {
 	private String start_place;
 	private String startwait;
 	private String endwait;
-	private int start_time;
+	private String start_time;
 	private String end_place;
 	private String end_time;
-	private float distance;
-	private float fee;
-    private int status;
-    private int judgecustomer;
-    private int source;
-    private int judgedriver;
-    private int id;
+	private String distance;
+	private String fee;
+    private String status;
+    private String judgecustomer;
+    private String source;
+    private String judgedriver;
+    private String id;
     private Driver_order driver_order;
     private String createtime;
     private String telphone;
-    private int type;
+    private String type;
     
 	public String getDrivertelphone() {
 		return drivertelphone;
@@ -93,12 +93,7 @@ public class JsonDriverOrderAction extends JsonBaseAction {
 	public void setEndwait(String endwait) {
 		this.endwait = endwait;
 	}
-	public int getStart_time() {
-		return start_time;
-	}
-	public void setStart_time(int start_time) {
-		this.start_time = start_time;
-	}
+	
 	public String getEnd_place() {
 		return end_place;
 	}
@@ -111,41 +106,18 @@ public class JsonDriverOrderAction extends JsonBaseAction {
 	public void setEnd_time(String end_time) {
 		this.end_time = end_time;
 	}
-	public float getDistance() {
+
+	public String getDistance() {
 		return distance;
 	}
-	public void setDistance(float distance) {
+	public void setDistance(String distance) {
 		this.distance = distance;
 	}
-	public float getFee() {
+	public String getFee() {
 		return fee;
 	}
-	public void setFee(float fee) {
+	public void setFee(String fee) {
 		this.fee = fee;
-	}
-	public int getStatus() {
-		return status;
-	}
-	public void setStatus(int status) {
-		this.status = status;
-	}
-	public int getJudgecustomer() {
-		return judgecustomer;
-	}
-	public void setJudgecustomer(int judgecustomer) {
-		this.judgecustomer = judgecustomer;
-	}
-	public int getSource() {
-		return source;
-	}
-	public void setSource(int source) {
-		this.source = source;
-	}
-	public int getJudgedriver() {
-		return judgedriver;
-	}
-	public void setJudgedriver(int judgedriver) {
-		this.judgedriver = judgedriver;
 	}
 	public Driver_order getDriver_order() {
 		return driver_order;
@@ -159,29 +131,59 @@ public class JsonDriverOrderAction extends JsonBaseAction {
 	public void setCreatetime(String createtime) {
 		this.createtime = createtime;
 	}
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
 	public String getTelphone() {
 		return telphone;
 	}
 	public void setTelphone(String telphone) {
 		this.telphone = telphone;
 	}
-	public int getType() {
+
+	
+	
+	
+	
+	public String getStart_time() {
+		return start_time;
+	}
+	public void setStart_time(String start_time) {
+		this.start_time = start_time;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	public String getJudgecustomer() {
+		return judgecustomer;
+	}
+	public void setJudgecustomer(String judgecustomer) {
+		this.judgecustomer = judgecustomer;
+	}
+	public String getSource() {
+		return source;
+	}
+	public void setSource(String source) {
+		this.source = source;
+	}
+	public String getJudgedriver() {
+		return judgedriver;
+	}
+	public void setJudgedriver(String judgedriver) {
+		this.judgedriver = judgedriver;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	public String getType() {
 		return type;
 	}
-	public void setType(int type) {
+	public void setType(String type) {
 		this.type = type;
 	}
-	
-	
-	
-	
-	
 	/**
 	 * 司机下单开始代驾
 	 * @throws ParseException 
@@ -207,7 +209,7 @@ public class JsonDriverOrderAction extends JsonBaseAction {
 		d_order.setDrivertelphone(this.drivertelphone);
 		d_order.setCustomertelphone(this.customertelphone);
 		d_order.setStart_place(this.start_place);
-		d_order.setStart_time(this.start_time);
+		d_order.setStart_time(Integer.parseInt(this.start_time));
 		d_order.setSource(1);
 		d_order.setCreatetime(dt);
 		d_order.setTime(dt.getTime());
@@ -244,15 +246,15 @@ public class JsonDriverOrderAction extends JsonBaseAction {
 	@Action("enddriverorder")
 	public String enddriverorderAction() throws ParseException{
 		ResultVo rv = null;
-		if(this.id==0){
+		if(this.id==null||this.id.trim().equals("")){
 			rv = new ResultVo(3,"缺少参数:id");
 			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
 		}
-		if(this.distance==0){
+		if(this.distance==null||this.distance.trim().equals("")){
 			rv = new ResultVo(3,"缺少参数:distance");
 			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
 		}
-		if(this.fee==0){
+		if(this.fee==null||this.fee.trim().equals("")){
 			rv = new ResultVo(3,"缺少参数:fee");
 			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
 		}
@@ -263,9 +265,9 @@ public class JsonDriverOrderAction extends JsonBaseAction {
 		Date dt=new Date();
 		Driver_order d_order =new Driver_order();
 		boolean flag=false;
-		d_order.setId(this.id);
-		d_order.setDistance(this.distance);
-		d_order.setFee(this.fee);
+		d_order.setId(Integer.parseInt(this.id));
+		d_order.setDistance(Float.parseFloat(this.distance));
+		d_order.setFee(Float.parseFloat(this.fee));
 		d_order.setEnd_place(this.end_place);
 		d_order.setStatus(1);
 	    flag=driver_orderDAO.update(d_order);
@@ -321,11 +323,11 @@ public class JsonDriverOrderAction extends JsonBaseAction {
 			rv = new ResultVo(3,"缺少参数:start_place");
 			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
 		}
-		if(this.distance==0){
+		if(this.distance==null||this.distance.trim().equals("")){
 			rv = new ResultVo(3,"缺少参数:distance");
 			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
 		}
-		if(this.fee==0){
+		if(this.fee==null||this.fee.trim().equals("")){
 			rv = new ResultVo(3,"缺少参数:fee");
 			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
 		}
@@ -335,13 +337,13 @@ public class JsonDriverOrderAction extends JsonBaseAction {
 		d_order.setCustomertelphone(this.customertelphone);
 		d_order.setStart_place(this.start_place);
 		d_order.setEnd_place(this.end_place);
-		d_order.setStart_time(this.start_time);
-		d_order.setSource(this.source);
+		d_order.setStart_time(Integer.parseInt(this.start_time));
+		d_order.setSource(Integer.parseInt(this.source));
 		d_order.setCreatetime(DateConverter.convertFromString(this.createtime));
 		d_order.setStartwait(DateConverter.convertFromString(this.startwait));
 		d_order.setEndwait(DateConverter.convertFromString(this.endwait));
-		d_order.setFee(this.fee);
-		d_order.setDistance(this.distance);
+		d_order.setFee(Float.parseFloat(this.fee));
+		d_order.setDistance(Float.parseFloat(this.distance));
 		d_order.setStatus(1);
 		long num=Math.round(Math.random() * 1000) +Math.round(Math.random() * 1000);
         d_order.setOrdernum(num+this.customertelphone.substring(customertelphone.length()-4));
@@ -367,9 +369,9 @@ public class JsonDriverOrderAction extends JsonBaseAction {
 			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
 		}
 		Map<String, String> map = new HashMap<String, String>();
-		if(this.type==1){
+		if(this.type.equals("1")){
 			map.put("drivertelphone", this.telphone);
-		}else if(this.type==2){
+		}else if(this.type.equals("2")){
 			map.put("customertelphone", this.telphone);
 		}else{
 			rv = new ResultVo(3,"缺少参数:type");

@@ -55,14 +55,14 @@ public class JsonCustomerOrderAction extends JsonBaseAction {
 	private String telphone3;
 	private String telphone4;
 	private String start_place;
-	private int start_time;
-	private int dirver;
-	private double longitude;
-	private double latitude;
+	private String start_time;
+	private String dirver;
+	private String longitude;
+	private String latitude;
 	private Customer_order customer_order;
     private String customer_telphone;
     private String drivertelphone;
-    private int source;
+    private String source;
 	public String getTelphone1() {
 		return telphone1;
 	}
@@ -93,30 +93,7 @@ public class JsonCustomerOrderAction extends JsonBaseAction {
 	public void setStart_place(String start_place) {
 		this.start_place = start_place;
 	}
-	public int getStart_time() {
-		return start_time;
-	}
-	public void setStart_time(int start_time) {
-		this.start_time = start_time;
-	}
-	public int getDirver() {
-		return dirver;
-	}
-	public void setDirver(int dirver) {
-		this.dirver = dirver;
-	}
-	public double getLongitude() {
-		return longitude;
-	}
-	public void setLongitude(double longitude) {
-		this.longitude = longitude;
-	}
-	public double getLatitude() {
-		return latitude;
-	}
-	public void setLatitude(double latitude) {
-		this.latitude = latitude;
-	}
+	
 	public Customer_order getCustomer_order() {
 		return customer_order;
 	}
@@ -136,11 +113,37 @@ public class JsonCustomerOrderAction extends JsonBaseAction {
 		this.drivertelphone = drivertelphone;
 	}
 	
-	public int getSource() {
+
+	public String getStart_time() {
+		return start_time;
+	}
+	public void setStart_time(String start_time) {
+		this.start_time = start_time;
+	}
+	public String getLongitude() {
+		return longitude;
+	}
+	public void setLongitude(String longitude) {
+		this.longitude = longitude;
+	}
+	public String getLatitude() {
+		return latitude;
+	}
+	public void setLatitude(String latitude) {
+		this.latitude = latitude;
+	}
+	public String getSource() {
 		return source;
 	}
-	public void setSource(int source) {
+	public void setSource(String source) {
 		this.source = source;
+	}
+	
+	public String getDirver() {
+		return dirver;
+	}
+	public void setDirver(String dirver) {
+		this.dirver = dirver;
 	}
 	/**
 	 * 用户下单
@@ -152,7 +155,7 @@ public class JsonCustomerOrderAction extends JsonBaseAction {
 			rv = new ResultVo(3,"缺少参数:start_place");
 			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
 		}
-		if(this.longitude==0||this.latitude==0){
+		if(this.longitude==null||this.latitude==null||this.latitude.trim().equals("")||this.longitude.trim().equals("")){
 			rv = new ResultVo(3,"缺少参数:longitude,latitude");
 			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
 		}
@@ -164,14 +167,14 @@ public class JsonCustomerOrderAction extends JsonBaseAction {
 		    	Customer_order c_order =new Customer_order(); 
 		    	boolean flag=false;
 		        c_order.setCustomer_telphone(this.customer_telphone);
-		        c_order.setDriver(this.dirver);
+		        c_order.setDriver(Integer.parseInt(this.dirver));
 		        c_order.setStart_place(this.start_place);
-		        c_order.setStart_time(this.start_time);
+		        c_order.setStart_time(Integer.parseInt(this.start_time));
 		        c_order.setCreate_time(dt);
-		        c_order.setLatitude(this.latitude);
-		        c_order.setLongitude(this.longitude);
+		        c_order.setLatitude(Double.parseDouble(this.latitude));
+		        c_order.setLongitude(Double.parseDouble(this.longitude));
 		        c_order.setStatus(0);
-		        String return_time=nDaysAfterOneDate(dt,this.start_time);
+		        String return_time=nDaysAfterOneDate(dt,Integer.parseInt(this.start_time));
 		        c_order.setReturn_time(return_time);
 		        c_order.setSource(0);
 		        long num=Math.round(Math.random() * 1000) +Math.round(Math.random() * 1000);

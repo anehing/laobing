@@ -47,9 +47,12 @@ public class JsonCustomer_judgeAction extends JsonBaseAction {
     private String customertelphone;
     private Driver_order driver_order;
     private String telphone;
-    private int score;
-    private int orderid;
-    private int judge;
+    private String score;
+  
+    private String orderid;
+
+    private String judge;
+  
 	public Customer_judge_driver getCustomer_judge_driver() {
 		return customer_judge_driver;
 	}
@@ -81,30 +84,25 @@ public class JsonCustomer_judgeAction extends JsonBaseAction {
 	public void setTelphone(String telphone) {
 		this.telphone = telphone;
 	}
-	public int getScore() {
+	
+	public String getScore() {
 		return score;
 	}
-	public void setScore(int score) {
+	public void setScore(String score) {
 		this.score = score;
 	}
-	public int getOrderid() {
+	public String getOrderid() {
 		return orderid;
 	}
-	public void setOrderid(int orderid) {
+	public void setOrderid(String orderid) {
 		this.orderid = orderid;
 	}
-	public int getJudge() {
+	public String getJudge() {
 		return judge;
 	}
-	public void setJudge(int judge) {
+	public void setJudge(String judge) {
 		this.judge = judge;
 	}
-	
-	
-	
-	
-	
-	
 	/**
 	 * 获取司机评价
 	 * */
@@ -151,14 +149,14 @@ public class JsonCustomer_judgeAction extends JsonBaseAction {
 			rv = new ResultVo(3,"缺少参数:telphone");
 			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
 		}
-		if(this.score==0){
+		if(this.score==null||this.score.trim().equals("")){
 			rv = new ResultVo(3,"缺少参数:score");
 			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
 		}
 		Customer_judge_driver c=new Customer_judge_driver();
 		c.setDrivertelphone(this.drivertelphone);
 		c.setTelphone(this.telphone);
-		c.setScore(this.score);
+		c.setScore(Integer.parseInt(this.score));
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm"); 
 		c.setJudge_time(df.format(new Date()));
 		flag=customer_judge_driverDAO.insert(c);
@@ -185,15 +183,15 @@ public class JsonCustomer_judgeAction extends JsonBaseAction {
 			rv = new ResultVo(3,"缺少参数:telphone");
 			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
 		}
-		if(this.orderid==0){
+		if(this.orderid==null||this.orderid.trim().equals("")){
 			rv = new ResultVo(3,"缺少参数:orderid");
 			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
 		}
 		Driver_judge_Customer d=new Driver_judge_Customer();
 		d.setDrivertelphone(this.drivertelphone);
 		d.setCustomertelphone(this.telphone);
-		d.setJudge(this.judge);
-		d.setOrderid(this.orderid);
+		d.setJudge(Integer.parseInt(this.judge));
+		d.setOrderid(Integer.parseInt(this.orderid));
 		d.setCreate_time(new Date());
 		flag=driver_judge_customerDAO.insert(d);
 		if(flag){

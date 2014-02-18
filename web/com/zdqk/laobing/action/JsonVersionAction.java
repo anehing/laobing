@@ -44,14 +44,15 @@ public class JsonVersionAction extends JsonBaseAction {
 	@Autowired
 	private VersionDAO versionDAO;
 	
-    private int type;//0：用户，1：司机
+    private String type;//0：用户，1：司机
     private String version;
 	
 	
-	public int getType() {
+
+	public String getType() {
 		return type;
 	}
-	public void setType(int type) {
+	public void setType(String type) {
 		this.type = type;
 	}
 	public String getVersion() {
@@ -73,10 +74,10 @@ public class JsonVersionAction extends JsonBaseAction {
 			rv = new ResultVo(3,"缺少参数:version");
 			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
 		}
-		map.put("type",this.type);
+		map.put("type",Integer.parseInt(this.type));
 	    Version version=(Version) versionDAO.updateApp(map, this.version);
 	    if(version==null){
-	    	if(this.type==1){
+	    	if(this.type.equals("1")){
 	    		rv = new ResultVo(1,"没有最新的司机版本");
 	    	}else{
 		    	rv = new ResultVo(1,"没有最新的用户版本");

@@ -123,6 +123,11 @@ public class CouponAction extends BasePaginationAction {
 	@Action("addCoupon")
 	public String addCoupon() {
 		if(this.coupon!=null){
+			Object c= couponDAO.selectByNum(coupon.getCoupon_num());
+			if(c!=null){
+				this.addActionError("号码已存在");
+				return "addCoupon";
+			}
 			this.coupon.setCreate_time(new Date());
 			boolean  flag=couponDAO.insert(this.coupon);
 		    if(flag)  this.addActionMessage("新增成功");

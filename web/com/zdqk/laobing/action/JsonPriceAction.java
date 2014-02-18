@@ -45,7 +45,7 @@ public class JsonPriceAction extends JsonBaseAction {
 	private Price price;
 
     
-	private int cityid;
+	private String cityid;
 	
 	public Price getPrice() {
 		return price;
@@ -54,10 +54,11 @@ public class JsonPriceAction extends JsonBaseAction {
 		this.price = price;
 	}
 
-	public int getCityid() {
+
+	public String getCityid() {
 		return cityid;
 	}
-	public void setCityid(int cityid) {
+	public void setCityid(String cityid) {
 		this.cityid = cityid;
 	}
 	/**
@@ -67,11 +68,11 @@ public class JsonPriceAction extends JsonBaseAction {
 	public String selectByCity(){
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		ResultVo rv = null;
-		if(this.cityid==0){
+		if(this.cityid==null||this.cityid.trim().equals("")){
 			rv = new ResultVo(3,"缺少参数:cityid");
 			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
 		}
-		map.put("cityid",this.cityid);
+		map.put("cityid",Integer.parseInt(this.cityid));
 		List <Price> list= priceDAO.selectByCity(map, "selectByCity");
 		List <com.zdqk.laobing.action.vo.Price> listvo=new ArrayList<com.zdqk.laobing.action.vo.Price>();
 		com.zdqk.laobing.action.vo.PriceList Pricelistvo=new com.zdqk.laobing.action.vo.PriceList();

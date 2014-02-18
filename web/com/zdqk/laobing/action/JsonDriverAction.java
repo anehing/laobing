@@ -116,7 +116,7 @@ public class JsonDriverAction extends JsonBaseAction {
 	public String selectByjobstatusAciton(){
 		Map<String, Object> map = new HashMap<String, Object>();
 		ResultVo rv = null;
-		if(this.mc!=null){
+		if(this.mc==null){
 			rv = new ResultVo(3,"缺少参数:mc");
 			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
 		}

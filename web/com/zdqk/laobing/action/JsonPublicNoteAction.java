@@ -46,14 +46,12 @@ public class JsonPublicNoteAction extends JsonBaseAction {
 	@Autowired
 	private PublicNoteDAO publicnoteDAO;
 	
-    private int id;
+    private String id;
     
-    
-
-	public int getId() {
+	public String getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	/**
@@ -88,11 +86,11 @@ public class JsonPublicNoteAction extends JsonBaseAction {
 	@Action("getPublicNoteById")
 	public String getPublicNoteById(){
 		ResultVo rv = null;
-		if(this.id==0){
+		if(this.id==null||this.id.trim().equals("")){
 			rv = new ResultVo(1,"缺少参数id");
 	    	return FxJsonUtil.jsonHandle(rv,resutUrl,request);
 		}
-		PublicNote p = (PublicNote) publicnoteDAO.selectAllById(this.id);
+		PublicNote p = (PublicNote) publicnoteDAO.selectAllById(Integer.parseInt(this.id));
 	    if(p==null){
 		    	rv = new ResultVo(1,"公告内容获取失败，请稍后尝试");
 		    	return FxJsonUtil.jsonHandle(rv,resutUrl,request);
