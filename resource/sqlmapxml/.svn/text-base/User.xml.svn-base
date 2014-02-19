@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="com.zdqk.laobing.po.User">
+  <typeAlias alias="user" type="com.zdqk.laobing.po.User"/>
+  <resultMap id="userResult" class="user">
+    <result property="id" column="ID"/>
+    <result property="telphone" column="TELPHONE"/>
+    <result property="self_code" column="SELF_CODE"/>
+    <result property="use_code" column="USE_CODE"/>
+    <result property="logintime" column="LOGINTIME"/>
+    <result property="use_time" column="USE_TIME"/>
+    <result property="askcode" column="ASKCODE"/>
+    <result property="asktime" column="ASKTIME"/>
+    <result property="isbind" column="ISBIND" />
+  </resultMap>
+  <insert id="insert" parameterClass="user">insert into USER( ID,TELPHONE,SELF_CODE,USE_CODE,LOGINTIME,USE_TIME,ASKCODE,ASKTIME,ISBIND ) values ( #id#,#telphone#,#self_code#,#use_code#,#logintime#,#use_time#,#askcode#,#asktime#,#isbind# )</insert>
+  <delete id="delete" parameterClass="user">delete from USER where id = #id#</delete>
+  <update id="update" parameterClass="user">update USER 
+    <dynamic prepend="set">
+      <isNotNull prepend="," property="telphone">TELPHONE = #telphone#</isNotNull>
+      <isNotNull prepend="," property="self_code">SELF_CODE = #self_code#</isNotNull>
+      <isNotNull prepend="," property="use_code">USE_CODE = #use_code#</isNotNull>
+      <isNotNull prepend="," property="logintime">LOGINTIME = #logintime#</isNotNull>
+      <isNotNull prepend="," property="use_time">USE_TIME = #use_time#</isNotNull>
+      <isNotNull prepend="," property="askcode">ASKCODE = #askcode#</isNotNull>
+      <isNotNull prepend="," property="asktime">ASKTIME = #asktime#</isNotNull>
+      <isNotNull prepend="," property="isbind">ISBIND = #isbind#</isNotNull>
+    </dynamic>where id = #id#
+  </update>
+  <select id="findById" parameterClass="java.lang.Integer" resultMap="userResult">select * from USER where id = #id#</select>
+  <select id="findNameById" parameterClass="java.lang.Integer" resultMap="userResult">select * from USER where id = #id#</select>
+  <select id="selectAll" parameterClass="java.util.Map" resultMap="userResult">select ID,TELPHONE,SELF_CODE,USE_CODE,LOGINTIME,USE_TIME,ISBIND from USER
+    <dynamic prepend="where">
+      <isNotNull prepend=" and " property="telphone">TELPHONE like '%$telphone$%'</isNotNull>
+      <isNotNull prepend=" and " property="self_code">SELF_CODE = #self_code#</isNotNull>
+      <isNotNull prepend=" and " property="use_code">USE_CODE = #use_code#</isNotNull>
+      <isNotNull prepend=" and " property="logintime">LOGINTIME between #logintime# and #tologintime# </isNotNull>
+      <isNotNull prepend=" and " property="use_time">USE_TIME = #use_time#</isNotNull>
+      <isNotNull prepend=" and " property="isbind">ISBIND = #isbind#</isNotNull>
+    </dynamic>
+  </select>
+  <select id="selectPage" parameterClass="java.util.Map" resultMap="userResult">select ID,TELPHONE,SELF_CODE,USE_CODE,LOGINTIME,USE_TIME,ISBIND from USER
+    <dynamic prepend="where">
+      <isNotNull prepend=" and " property="telphone">TELPHONE like '%$telphone$%'</isNotNull>
+      <isNotNull prepend=" and " property="self_code">SELF_CODE = #self_code#</isNotNull>
+      <isNotNull prepend=" and " property="use_code">USE_CODE = #use_code#</isNotNull>
+      <isNotNull prepend=" and " property="logintime">LOGINTIME between #logintime# and #tologintime# </isNotNull>
+      <isNotNull prepend=" and " property="use_time">USE_TIME = #use_time#</isNotNull>
+      <isNotNull prepend=" and " property="isbind">ISBIND = #isbind#</isNotNull>
+    </dynamic>order by id desc limit #startIndex#,#endIndex#
+  </select>
+  <select id="selectCount" parameterClass="java.util.Map" resultClass="java.lang.Long">select count(id) from USER 
+    <dynamic prepend="where">
+      <isNotNull prepend=" and " property="telphone">TELPHONE like '%$telphone$%'</isNotNull>
+      <isNotNull prepend=" and " property="self_code">SELF_CODE = #self_code#</isNotNull>
+      <isNotNull prepend=" and " property="use_code">USE_CODE = #use_code#</isNotNull>
+      <isNotNull prepend=" and " property="logintime">LOGINTIME between #logintime# and #tologintime# </isNotNull>
+      <isNotNull prepend=" and " property="use_time">USE_TIME = #use_time#</isNotNull>
+      <isNotNull prepend=" and " property="isbind">ISBIND = #isbind#</isNotNull>
+    </dynamic>
+  </select>
+  <select id="loginByTelphone" parameterClass="java.util.Map" resultMap="userResult">select * from user
+	    <dynamic prepend="where">
+		      <isNotNull prepend=" and " property="telphone">TELPHONE = #telphone#</isNotNull>
+		       <isNotNull prepend=" and " property="asktime">
+		        <![CDATA[ 
+                   STATUS ＝ 1
+                 ]]> 
+		      </isNotNull>
+	    </dynamic>
+  </select>
+   <select id="loginByTelphoneAndAskcode" parameterClass="java.util.Map" resultMap="userResult">select * from user
+	    <dynamic prepend="where">
+		      <isNotNull prepend=" and " property="telphone">TELPHONE = #telphone#</isNotNull>
+		      <isNotNull prepend=" and " property="askcode">ASKCODE = #askcode#</isNotNull>
+		      <isNotNull prepend=" and " property="asktime">
+		        <![CDATA[ 
+                   ASKTIME <＝ #asktime# 
+                 ]]> 
+		      </isNotNull>
+	    </dynamic>
+  </select>
+</sqlMap>

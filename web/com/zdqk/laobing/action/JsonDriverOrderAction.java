@@ -188,7 +188,7 @@ public class JsonDriverOrderAction extends JsonBaseAction {
 	 * 司机下单开始代驾
 	 * @throws ParseException 
 	 * */
-	@Action("postcoustomerorder")
+	@Action("postDriverOrder")
 	public String postcoustomerorderAction() throws ParseException{
 		ResultVo rv = null;
 		if(this.drivertelphone==null||this.drivertelphone.trim().equals("")){
@@ -368,7 +368,7 @@ public class JsonDriverOrderAction extends JsonBaseAction {
 			rv = new ResultVo(3,"缺少参数:telphone");
 			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
 		}
-		Map<String, String> map = new HashMap<String, String>();
+		Map<String, Object> map = new HashMap<String, Object>();
 		if(this.type.equals("1")){
 			map.put("drivertelphone", this.telphone);
 		}else if(this.type.equals("2")){
@@ -377,7 +377,43 @@ public class JsonDriverOrderAction extends JsonBaseAction {
 			rv = new ResultVo(3,"缺少参数:type");
 			return FxJsonUtil.jsonHandle(rv,resutUrl,request);
 		}
-        List<Driver_order> clist =driver_orderDAO.findObjects(map, "selectAll");
+		Driver_order  driver_order  =new Driver_order();
+        List<Driver_order> clist =driver_orderDAO.findObjects(map,driver_order);
+        if (clist==null||clist.size()<=0) {
+        	rv = new ResultVo(2,"暂无记录");
+			return FxJsonUtil.jsonHandle(rv,resutUrl,request);
+        }else{
+        	com.zdqk.laobing.action.vo.Driver_orderList clistvo=new com.zdqk.laobing.action.vo.Driver_orderList();
+        	List<com.zdqk.laobing.action.vo.Driver_order> list= new ArrayList<com.zdqk.laobing.action.vo.Driver_order>();
+        	com.zdqk.laobing.action.vo.Driver_order cvo=null;
+        	for(Driver_order c_order:clist){
+        		cvo=new com.zdqk.laobing.action.vo.Driver_order(); 
+        		BeanUtils.copyProperties(c_order,cvo);
+        		list.add(cvo);
+        	}
+        	clistvo.setDriverorderlistvo(list);
+        	clistvo.setReusltMessage("查询成功");
+        	clistvo.setReusltNumber(0);
+        	return FxJsonUtil.jsonListHandle(clistvo,resutUrl,request);
+        }
+       
+   }
+	
+	/**
+	 * 司机查看未处理下单
+	 * */
+	@Action("getDriverOrderList")
+	public String getdriverorderlistAction(){
+		ResultVo rv = null;
+		if(this.drivertelphone==null||this.drivertelphone.trim().equals("")){
+			rv = new ResultVo(3,"缺少参数:telphone");
+			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
+		}
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("drivertelphone", this.drivertelphone);
+		map.put("status", 2);
+		Driver_order  driver_order  =new Driver_order();
+        List<Driver_order> clist =driver_orderDAO.findObjects(map,driver_order);
         if (clist==null||clist.size()<=0) {
         	rv = new ResultVo(2,"暂无记录");
 			return FxJsonUtil.jsonHandle(rv,resutUrl,request);

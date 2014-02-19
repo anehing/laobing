@@ -1,0 +1,71 @@
+10
+
+dir
+3
+http://www.svnchina.com/svn/designated_driver/server/laobing/WebContent/WEB-INF
+http://www.svnchina.com/svn/designated_driver
+
+
+
+2014-01-07T02:21:33.264643Z
+3
+lhq2013
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+ac60b7ec-9232-43cb-983f-404c32153242
+
+json
+dir
+
+lib
+dir
+
+tlds
+dir
+
+web.xml
+file
+
+
+
+
+2013-12-30T08:32:52.000000Z
+3d64451713f8c6f9180a21fe4e08585a
+2014-01-07T02:21:33.264643Z
+3
+lhq2013
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2510
+

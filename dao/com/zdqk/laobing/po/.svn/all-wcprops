@@ -1,0 +1,113 @@
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/designated_driver/!svn/ver/3/server/laobing/dao/com/zdqk/laobing/po
+END
+Admin.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/designated_driver/!svn/ver/3/server/laobing/dao/com/zdqk/laobing/po/Admin.java
+END
+Permission.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/designated_driver/!svn/ver/3/server/laobing/dao/com/zdqk/laobing/po/Permission.java
+END
+Url.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/designated_driver/!svn/ver/13/server/laobing/dao/com/zdqk/laobing/po/Url.java
+END
+Customer_order.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/designated_driver/!svn/ver/10/server/laobing/dao/com/zdqk/laobing/po/Customer_order.java
+END
+Pre_price.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/designated_driver/!svn/ver/3/server/laobing/dao/com/zdqk/laobing/po/Pre_price.java
+END
+User.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/designated_driver/!svn/ver/10/server/laobing/dao/com/zdqk/laobing/po/User.java
+END
+Price.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/designated_driver/!svn/ver/5/server/laobing/dao/com/zdqk/laobing/po/Price.java
+END
+Driver.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/designated_driver/!svn/ver/10/server/laobing/dao/com/zdqk/laobing/po/Driver.java
+END
+Coupon.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/designated_driver/!svn/ver/3/server/laobing/dao/com/zdqk/laobing/po/Coupon.java
+END
+App_comment.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/designated_driver/!svn/ver/10/server/laobing/dao/com/zdqk/laobing/po/App_comment.java
+END
+Driver_judge_Customer.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/designated_driver/!svn/ver/12/server/laobing/dao/com/zdqk/laobing/po/Driver_judge_Customer.java
+END
+Tranrecord.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/designated_driver/!svn/ver/5/server/laobing/dao/com/zdqk/laobing/po/Tranrecord.java
+END
+PublicNote.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/designated_driver/!svn/ver/10/server/laobing/dao/com/zdqk/laobing/po/PublicNote.java
+END
+Version.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/designated_driver/!svn/ver/3/server/laobing/dao/com/zdqk/laobing/po/Version.java
+END
+Driver_order.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/designated_driver/!svn/ver/27/server/laobing/dao/com/zdqk/laobing/po/Driver_order.java
+END
+Twitter.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/designated_driver/!svn/ver/5/server/laobing/dao/com/zdqk/laobing/po/Twitter.java
+END
+Customer_judge_driver.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/designated_driver/!svn/ver/10/server/laobing/dao/com/zdqk/laobing/po/Customer_judge_driver.java
+END
+Dmb_city.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/designated_driver/!svn/ver/9/server/laobing/dao/com/zdqk/laobing/po/Dmb_city.java
+END

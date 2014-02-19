@@ -4,6 +4,7 @@ package com.zdqk.laobing.action;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,8 +23,10 @@ import com.zdqk.laobing.action.vo.ResultVo;
 import com.zdqk.laobing.action.vo.DriverIncome;
 import com.zdqk.laobing.dao.Customer_judge_driverDAO;
 import com.zdqk.laobing.dao.DriverDAO;
+import com.zdqk.laobing.dao.Driver_orderDAO;
 import com.zdqk.laobing.po.Customer_judge_driver;
 import com.zdqk.laobing.po.Driver;
+import com.zdqk.laobing.po.Driver_order;
 import com.zdqk.laobing.tools.FxJsonUtil;
 /**
  * @author：lfx
@@ -42,23 +45,29 @@ public class JsonDriverAction extends JsonBaseAction {
 	 private final double EARTH_RADIUS = 6378.0; //千米 
 	 
 	@Autowired
+	private Driver_orderDAO driver_orderDAO;
+	@Autowired
 	private DriverDAO driverDAO;
 	@Autowired
 	private Customer_judge_driverDAO customer_judge_driverDAO;
-	private int id;
+	private String id;
 	private Driver driver;
-	private Double longitude;
-	private Double latitude;
+	private String longitude;
+	private String latitude;
 	private String mc;
-	private int jobstatus;
+	private String jobstatus;
 	private String name;
 	private String telphone;
 	
-	public int getId() {
+	
+	public String getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
+	}
+	public void setJobstatus(String jobstatus) {
+		this.jobstatus = jobstatus;
 	}
 	public Driver getDriver() {
 		return driver;
@@ -67,16 +76,17 @@ public class JsonDriverAction extends JsonBaseAction {
 		this.driver = driver;
 	}
 
-	public Double getLongitude() {
+	
+	public String getLongitude() {
 		return longitude;
 	}
-	public void setLongitude(Double longitude) {
+	public void setLongitude(String longitude) {
 		this.longitude = longitude;
 	}
-	public Double getLatitude() {
+	public String getLatitude() {
 		return latitude;
 	}
-	public void setLatitude(Double latitude) {
+	public void setLatitude(String latitude) {
 		this.latitude = latitude;
 	}
 	public String getMc() {
@@ -86,13 +96,7 @@ public class JsonDriverAction extends JsonBaseAction {
 		this.mc = mc;
 	}
 	
-	public int getJobstatus() {
-		return jobstatus;
-	}
-	public void setJobstatus(int jobstatus) {
-		this.jobstatus = jobstatus;
-	}
-	
+
 	
 	
 	
@@ -116,8 +120,16 @@ public class JsonDriverAction extends JsonBaseAction {
 	public String selectByjobstatusAciton(){
 		Map<String, Object> map = new HashMap<String, Object>();
 		ResultVo rv = null;
-		if(this.mc==null){
+		if(this.mc==null||this.mc.trim().equals("")){
 			rv = new ResultVo(3,"缺少参数:mc");
+			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
+		}
+		if(this.latitude==null||this.latitude.trim().equals("")){
+			rv = new ResultVo(3,"缺少参数:latitude");
+			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
+		}
+		if(this.longitude==null||this.longitude.trim().equals("")){
+			rv = new ResultVo(3,"缺少参数:longitude");
 			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
 		}
      	map.put("mc",this.mc);
@@ -131,7 +143,7 @@ public class JsonDriverAction extends JsonBaseAction {
 			com.zdqk.laobing.action.vo.DriverList Driverlistvo=new com.zdqk.laobing.action.vo.DriverList();
 			com.zdqk.laobing.action.vo.Driver drivervo = null;	
 			for(Driver driver : list){
-				double gpsdis= gps2m(driver.getLatitude(),driver.getLongitude(),this.latitude,this.longitude);
+				double gpsdis= gps2m(driver.getLatitude(),driver.getLongitude(),Double.parseDouble(this.latitude),Double.parseDouble(this.longitude));
 				    if(gpsdis<=10){
 				    	driver.setDistance(gpsdis+"公里");
 				    	drivervo = new com.zdqk.laobing.action.vo.Driver();
@@ -169,12 +181,12 @@ public class JsonDriverAction extends JsonBaseAction {
 	public String selectDriverDetialAction(){
 		Map<String, Object> map = new HashMap<String, Object>();
 		ResultVo rv = null;
-		if(this.id==0){
-			rv = new ResultVo(3,"缺少参数:id");
+		if(this.telphone==null||this.telphone.trim().equals("")){
+			rv = new ResultVo(3,"缺少参数:telphone");
 			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
 		}
-		map.put("id",this.id);
-		List <Customer_judge_driver> list= customer_judge_driverDAO.selectByDriverid(map, "selectByDriverid");
+		map.put("telphone",this.telphone);
+		List <Customer_judge_driver> list= customer_judge_driverDAO.selectByDrivertelphone(map, "selectByDrivertelphone");
 		if(list==null||list.size()<=0){
 			rv = new ResultVo(1,"该司机暂无车主短信评价");
 			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
@@ -200,18 +212,18 @@ public class JsonDriverAction extends JsonBaseAction {
 	public String adjustJobStatusAction(){
 		Map<String, Object> map = new HashMap<String, Object>();
 		ResultVo rv = null;
-		if(this.id==0){
+		if(this.id==null||this.id.trim().equals("")){
 			rv = new ResultVo(3,"缺少参数:id");
 			return FxJsonUtil.jsonHandle(rv,resutUrl,request);
 		}
-		map.put("id",this.id);
+		map.put("id",Integer.parseInt(this.id));
 		Driver d=new Driver();
-		Driver ds= (Driver) driverDAO.findObjectById(this.id,d);
+		Driver ds= (Driver) driverDAO.findObjectById(Integer.parseInt(this.id),d);
 		if(ds==null){
 			rv = new ResultVo(1,"暂时没有找到该司机信息");
 			return FxJsonUtil.jsonHandle(rv,resutUrl,request);
 		}else{
-			ds.setAge(this.jobstatus);
+			ds.setAge(Integer.parseInt(this.jobstatus));
 			boolean flag= driverDAO.update(ds);
 			if(flag){
 				rv = new ResultVo(0,"操作成功");
@@ -239,7 +251,7 @@ public class JsonDriverAction extends JsonBaseAction {
 		}
 		map.put("name",this.name);
 		map.put("telphone",this.telphone);
-		Driver dr= (Driver) driverDAO.selectByjobstatus(map, "loginByNameAndTel");
+		Driver dr= (Driver) driverDAO.loginByNameAndTel(map, "loginByNameAndTel");
 		if(dr==null){
 			rv = new ResultVo(2,"用户名或者密码错误");
 			return FxJsonUtil.jsonHandle(rv,resutUrl,request);
@@ -264,15 +276,15 @@ public class JsonDriverAction extends JsonBaseAction {
 			return FxJsonUtil.jsonHandle(rv,resutUrl,request);
 		}
 		Map conditionMap =new HashMap();
-		conditionMap.put("telphone", telphone);
+		conditionMap.put("drivertelphone", telphone);
 		conditionMap.put("status", 1);
-		Driver d=new Driver();
-		float yesfee = selectIncome(conditionMap, d, driverDAO,"selectyesincome");
-		float monthfee = selectIncome(conditionMap, d, driverDAO,"selectmonthincome");
-		float allfee = selectIncome(conditionMap, d, driverDAO,"selectallincome");
+	
+		float yesfee = driver_orderDAO.selectyesincome(conditionMap, "selectyesincome");
+	//	float monthfee = driver_orderDAO.selectallincome(conditionMap, "selectmonthincome");
+//		float allfee = driver_orderDAO.selectallincome(conditionMap,"selectallincome");
 		DriverIncome income=new DriverIncome();
-		income.setAllfee(allfee);
-		income.setMonthfee(monthfee);
+//		income.setAllfee(allfee);
+	//	income.setMonthfee(monthfee);
 		income.setYesfee(yesfee);
 		income.setReusltNumber(0);
 		income.setReusltMessage("操作成功");
@@ -280,24 +292,5 @@ public class JsonDriverAction extends JsonBaseAction {
 	}
 	
 	
-	private float selectIncome(Object mapObject,
-			Object object,Object daoObject,String select) throws SecurityException, NoSuchMethodException,
-			IllegalArgumentException, IllegalAccessException,
-			InvocationTargetException {
-		
-		float fee =0;
-			
-		Object returnObject = null;
-		
-		Method invokeMethod = daoObject.getClass().getMethod(select, new Class[]{Map.class,Object.class});
-		
-		invokeMethod.setAccessible(true);
-
-		returnObject = invokeMethod.invoke(daoObject,mapObject,object);	
-		
-		fee = (Float) returnObject;
-		
-		return fee;
-		
-	}
+	
 }

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:aop="http://www.springframework.org/schema/aop"
+	   xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:jee="http://www.springframework.org/schema/jee"
+       xmlns:context="http://www.springframework.org/schema/context"
+       
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans 
+       http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+       http://www.springframework.org/schema/context  
+	   http://www.springframework.org/schema/context/spring-context-2.5.xsd
+       http://www.springframework.org/schema/aop 
+       http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx-2.0.xsd
+       http://www.springframework.org/schema/jee 
+       http://www.springframework.org/schema/jee/spring-jee-2.0.xsd
+       "
+       
+        default-autowire="byName" default-lazy-init="false"
+       >
+ 	 
+ 	<!-- 开启注释注入 -->
+ 	
+ 	<context:annotation-config />
+
+
+
+	<!--指定Spring配置中用到的属性文件-->
+	
+	<bean id="propertyConfig"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:jdbc.properties</value>
+			</list>
+		</property>
+	</bean>
+
+
+
+	<!-- 配置系统的数据源 -->
+	<bean id="dataSource"
+		class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName">
+			<value>${jdbc.driver}</value>
+		</property>
+		<property name="url">
+			<value>${jdbc.url}</value>
+		</property>
+		<property name="username">
+			<value>${jdbc.username}</value>
+		</property>
+		<property name="password">
+			<value>${jdbc.password}</value>
+		</property>
+	</bean>
+	
+	<!-- 配置iBatis的sqlMapClient -->
+	
+	<bean id="sqlMapClient"
+		class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+		
+		<property name="configLocation">
+			<value>classpath:SqlMapConfig.xml</value>
+		</property>
+		<property name="dataSource">
+			<ref local="dataSource" />
+		</property>
+		
+	</bean>
+	
+	 
+
+	  	 
+	<!-- 业务逻辑自动注入检索路径 -->
+	<!-- base-package属性指定了需要扫描的类包，类包及其递归子包中所有的类都会被处理。 -->
+	<context:component-scan base-package="com.zdqk.laobing.service"/>
+	
+	<!-- Spring 2.5 提供的AutoWired功能 -->
+	<!-- 该 BeanPostProcessor 将自动起作用，对标注 @Autowired 的 Bean 进行自动注入 -->
+    <bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>	
+	<context:component-scan base-package="com.zdqk.laobing" />    
+	<!-- 事务配置 -->
+
+	<aop:config>
+		<aop:advisor pointcut="execution(* com.zdqk.laobing.service..*Service.*(..))" advice-ref="txAdvice" />
+	</aop:config>
+	
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="get*" read-only="true" />
+			<tx:method name="find*" read-only="true"/>
+			<tx:method name="query*" read-only="true"/>
+			<tx:method name="*" propagation="REQUIRED"/>
+		</tx:attributes>
+	</tx:advice>
+  
+</beans>

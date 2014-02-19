@@ -115,7 +115,7 @@ public class JsonCustomer_judgeAction extends JsonBaseAction {
 		}
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("drivertelphone", this.drivertelphone);
-		List<Customer_judge_driver> list=customer_judge_driverDAO.selectByDriverid(map, "selectAll");
+		List<Customer_judge_driver> list=customer_judge_driverDAO.selectByDrivertelphone(map, "selectAll");
 		if(list==null||list.size()<=0){
 			rv = new ResultVo(7,"暂无评论");
 			return FxJsonUtil.jsonHandle(rv,resutUrl,request);

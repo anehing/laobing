@@ -46,4 +46,11 @@
       <isNotNull prepend=" and " property="judge_time">JUDGE_TIME = #judge_time#</isNotNull>
     </dynamic>
   </select>
+   <select id="selectByDrivertelphone" parameterClass="java.util.Map" resultMap="customer_judge_driverResult">select ID,SCORE,TELPHONE,DRIVERTELPHONE,JUDGE_TIME from CUSTOMER_JUDGE_DRIVER
+    <dynamic prepend="where">
+       <isNotNull prepend=" and " property="telphone">TELPHONE = #telphone#</isNotNull>
+    </dynamic>
+  </select>
+
+  
 </sqlMap>

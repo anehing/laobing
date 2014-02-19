@@ -1,0 +1,7 @@
+/******ÇÐ»»Ò³******/
+.tab1 {width:96%; margin:auto; padding-top:20px;}
+.tab2{font-weight: bold;border-bottom:2px solid #b7c8f6;}
+.tabfont{width:90%;font-size:14px;line-height: 24px; color:#666; font-weight:bold;text-decoration: none;}
+.tabfont:hover{width:90%;font-size:14px;line-height: 24px; color:#00C;text-decoration: none;}
+
+
