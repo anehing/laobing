@@ -22,19 +22,27 @@
   </update>
   <select id="findById" parameterClass="java.lang.Integer" resultMap="publicNoteResult">select * from PUBLICNOTE where id = #id#</select>
   <select id="findNameById" parameterClass="java.lang.Integer" resultMap="publicNoteResult">select * from PUBLICNOTE where id = #id#</select>
-  <select id="selectAll" parameterClass="java.util.Map" resultMap="publicNoteResult">select ID,TITLE,CONTENT,CREATETIME,APPSHOWDATE from PUBLICNOTE
+  <select id="selectAll" parameterClass="java.util.Map" resultMap="publicNoteResult">select * from PUBLICNOTE
     <dynamic prepend="where">
       <isNotNull prepend=" and " property="title">TITLE = #title#</isNotNull>
       <isNotNull prepend=" and " property="content">CONTENT = #content#</isNotNull>
-      <isNotNull prepend=" and " property="createtime">CREATETIME = #createtime#</isNotNull>
+      <isNotNull prepend=" and " property="createtime">
+      	 <![CDATA[ 
+	         CREATETIME between #createtime# and #tocreatetime# 
+	      ]]>
+      </isNotNull>
       <isNotNull prepend=" and " property="appshowdate">APPSHOWDATE = #appshowdate#</isNotNull>
     </dynamic>
   </select>
-  <select id="selectPage" parameterClass="java.util.Map" resultMap="publicNoteResult">select ID,TITLE,CONTENT,CREATETIME,APPSHOWDATE from PUBLICNOTE
+  <select id="selectPage" parameterClass="java.util.Map" resultMap="publicNoteResult">select * from PUBLICNOTE
     <dynamic prepend="where">
       <isNotNull prepend=" and " property="title">TITLE = #title#</isNotNull>
       <isNotNull prepend=" and " property="content">CONTENT = #content#</isNotNull>
-      <isNotNull prepend=" and " property="createtime">CREATETIME = #createtime#</isNotNull>
+      <isNotNull prepend=" and " property="createtime">
+	  	 <![CDATA[ 
+	         CREATETIME between #createtime# and #tocreatetime# 
+	      ]]>
+	  </isNotNull>
       <isNotNull prepend=" and " property="appshowdate">APPSHOWDATE = #appshowdate#</isNotNull>
     </dynamic>order by id desc limit #startIndex#,#endIndex#
   </select>
@@ -42,7 +50,11 @@
     <dynamic prepend="where">
       <isNotNull prepend=" and " property="title">TITLE = #title#</isNotNull>
       <isNotNull prepend=" and " property="content">CONTENT = #content#</isNotNull>
-      <isNotNull prepend=" and " property="createtime">CREATETIME = #createtime#</isNotNull>
+      <isNotNull prepend=" and " property="createtime">
+      	 <![CDATA[ 
+	         CREATETIME between #createtime# and #tocreatetime# 
+	      ]]>
+      </isNotNull>
       <isNotNull prepend=" and " property="appshowdate">APPSHOWDATE = #appshowdate#</isNotNull>
     </dynamic>
   </select>

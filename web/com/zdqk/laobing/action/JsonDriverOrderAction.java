@@ -62,7 +62,7 @@ public class JsonDriverOrderAction extends JsonBaseAction {
     private String createtime;
     private String telphone;
     private String type;
-    
+    private SimpleDateFormat sdf  =   new  SimpleDateFormat( "yyyy-MM-dd HH:mm:ss" );
 	public String getDrivertelphone() {
 		return drivertelphone;
 	}
@@ -213,11 +213,12 @@ public class JsonDriverOrderAction extends JsonBaseAction {
 		d_order.setSource(1);
 		d_order.setCreatetime(dt);
 		d_order.setTime(dt.getTime());
+		
 		if(this.startwait!=null||!this.startwait.trim().equals("")){
-			d_order.setStartwait(DateConverter.convertFromString(this.startwait));
+			d_order.setStartwait(sdf.parse(this.startwait));
 		}
 		if(this.endwait!=null||!this.endwait.trim().equals("")){
-			d_order.setEndwait(DateConverter.convertFromString(this.endwait));
+			d_order.setEndwait(sdf.parse(this.endwait));
 		}
 		long num=Math.round(Math.random() * 1000) +Math.round(Math.random() * 1000);
         d_order.setOrdernum(num+this.customertelphone.substring(customertelphone.length()-4));
@@ -337,11 +338,11 @@ public class JsonDriverOrderAction extends JsonBaseAction {
 		d_order.setCustomertelphone(this.customertelphone);
 		d_order.setStart_place(this.start_place);
 		d_order.setEnd_place(this.end_place);
-		d_order.setStart_time(Integer.parseInt(this.start_time));
+		//d_order.setStart_time(Integer.parseInt(this.start_time));
 		d_order.setSource(Integer.parseInt(this.source));
-		d_order.setCreatetime(DateConverter.convertFromString(this.createtime));
-		d_order.setStartwait(DateConverter.convertFromString(this.startwait));
-		d_order.setEndwait(DateConverter.convertFromString(this.endwait));
+		d_order.setCreatetime(sdf.parse(this.createtime));
+		d_order.setStartwait(sdf.parse(this.startwait));
+		d_order.setEndwait(sdf.parse(this.endwait));
 		d_order.setFee(Float.parseFloat(this.fee));
 		d_order.setDistance(Float.parseFloat(this.distance));
 		d_order.setStatus(1);
@@ -359,10 +360,10 @@ public class JsonDriverOrderAction extends JsonBaseAction {
       
 	
 	/**
-	 * 用户和司机查历史看下单
+	 * 司机查历史看下单
 	 * */
-	@Action("getcustomerorderlist")
-	public String getcustomerorderlistAction(){
+	@Action("getdriverrorderlist")
+	public String getdriverrorderlistAction(){
 		ResultVo rv = null;
 		if(this.telphone==null||this.telphone.trim().equals("")){
 			rv = new ResultVo(3,"缺少参数:telphone");

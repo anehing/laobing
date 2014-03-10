@@ -36,13 +36,13 @@
 		            
 		            <td width="10%" align="center" bgcolor="#F3F8FE" class="dataTdText">录入时间</td>
 		            <td width="30%" align="left" bgcolor="#FFFFFF"> 
-		                <input type="text" name="create_time" id="create_time" class="tcal"  />
-		            &nbsp;-<input type="text" name="tocreate_time" id="tocreate_time" class="tcal"  />
+		                <input type="text" name="create_time" id="create_time" class="tcal" value="${create_time}"  />
+		            &nbsp;-<input type="text" name="tocreate_time" id="tocreate_time" class="tcal" value="${tocreate_time}" />
 		            </td>
 		            <td width="10%" align="center" bgcolor="#F3F8FE" class="dataTdText">使用时间</td>
 		            <td width="30%" align="left" bgcolor="#FFFFFF"> 
-		                <input type="text" name="use_time" id="use_time" class="tcal"  />
-		             &nbsp;-<input type="text" name="touse_time" id="touse_time" class="tcal"  />
+		                <input type="text" name="use_time" id="use_time" class="tcal" value="${use_time}" />
+		             &nbsp;-<input type="text" name="touse_time" id="touse_time" class="tcal" value="${touse_time}" />
 		            </td>
 		        </tr> 
 		        <tr>   

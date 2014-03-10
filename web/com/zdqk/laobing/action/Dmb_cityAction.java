@@ -62,7 +62,7 @@ public class Dmb_cityAction extends BasePaginationAction {
 		Dmb_city a = new Dmb_city();
 		Map<String, Object> map = this.getPmapNew();
 		if(this.dmb_city!=null){
-			
+			map.put("status", dmb_city.getStatus());
 			}
 		List<Dmb_city> list = publicQuery(map, a, dmb_cityDAO); 
 		return "dmb_cityList";

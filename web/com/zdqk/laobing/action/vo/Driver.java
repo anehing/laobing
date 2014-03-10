@@ -28,6 +28,8 @@ public class Driver extends ResultVo implements Serializable{
 	private float yesterdayincome;
 	private float monthincome;
 	private float allincome;
+	private double longitude;	
+	private double latitude;
 	
 	public int getId() {
 		return id;
@@ -112,6 +114,18 @@ public class Driver extends ResultVo implements Serializable{
 	}
 	public void setAllincome(float allincome) {
 		this.allincome = allincome;
+	}
+	public double getLongitude() {
+		return longitude;
+	}
+	public void setLongitude(double longitude) {
+		this.longitude = longitude;
+	}
+	public double getLatitude() {
+		return latitude;
+	}
+	public void setLatitude(double latitude) {
+		this.latitude = latitude;
 	}
 	
     

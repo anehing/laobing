@@ -27,6 +27,7 @@ import com.zdqk.laobing.dao.UserDAO;
 import com.zdqk.laobing.po.App_comment;
 import com.zdqk.laobing.po.Coupon;
 import com.zdqk.laobing.po.Customer_order;
+import com.zdqk.laobing.po.Driver_order;
 import com.zdqk.laobing.po.Price;
 import com.zdqk.laobing.po.User;
 import com.zdqk.laobing.service.ILoginService;
@@ -49,7 +50,7 @@ public class JsonCustomerOrderAction extends JsonBaseAction {
 	
 	@Autowired
 	private Customer_orderDAO customer_orderDAO;
-	
+	private String telphone;
 	private String telphone1;
 	private String telphone2;
 	private String telphone3;
@@ -146,6 +147,13 @@ public class JsonCustomerOrderAction extends JsonBaseAction {
 	public void setDriver(String driver) {
 		this.driver = driver;
 	}
+	
+	public String getTelphone() {
+		return telphone;
+	}
+	public void setTelphone(String telphone) {
+		this.telphone = telphone;
+	}
 	/**
 	 * 用户下单
 	 * */
@@ -206,30 +214,31 @@ public class JsonCustomerOrderAction extends JsonBaseAction {
         return   df.format(basicDate); 
     } 
 
-	
 	/**
-	 * 司机查看未处理下单
+	 * 用户查历史看下单
 	 * */
-	@Action("getdriverorderlist")
-	public String getdriverorderlistAction(){
+	@Action("getCustomerOrderlist")
+	public String getcustomerorderlistAction(){
 		ResultVo rv = null;
-		if(this.drivertelphone==null||this.drivertelphone.trim().equals("")){
+		if(this.telphone==null||this.telphone.trim().equals("")){
 			rv = new ResultVo(3,"缺少参数:telphone");
 			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
 		}
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("drivertelphone", this.drivertelphone);
-		map.put("status", 0);
-        List<Customer_order> clist =customer_orderDAO.selectByTel(map, "selectByTel");
+		map.put(customer_telphone, this.telphone);
+	
+		Customer_order c_order =new Customer_order(); 
+        List<Customer_order> clist =customer_orderDAO.findObjects(map,c_order);
         if (clist==null||clist.size()<=0) {
         	rv = new ResultVo(2,"暂无记录");
 			return FxJsonUtil.jsonHandle(rv,resutUrl,request);
         }else{
         	com.zdqk.laobing.action.vo.Customer_orderList clistvo=new com.zdqk.laobing.action.vo.Customer_orderList();
         	List<com.zdqk.laobing.action.vo.Customer_order> list= new ArrayList<com.zdqk.laobing.action.vo.Customer_order>();
-        	for(Customer_order c_order:clist){
-        		com.zdqk.laobing.action.vo.Customer_order cvo =new com.zdqk.laobing.action.vo.Customer_order(); 
-        		BeanUtils.copyProperties(c_order,cvo);
+        	com.zdqk.laobing.action.vo.Customer_order cvo=null;
+        	for(Customer_order corder:clist){
+        		cvo=new com.zdqk.laobing.action.vo.Customer_order(); 
+        		BeanUtils.copyProperties(corder,cvo);
         		list.add(cvo);
         	}
         	clistvo.setCustomer_orderlistvo(list);
@@ -239,4 +248,36 @@ public class JsonCustomerOrderAction extends JsonBaseAction {
         }
        
    }
+//	/**
+//	 * 司机查看未处理下单
+//	 * */
+//	@Action("getdriverorderlist")
+//	public String getdriverorderlistAction(){
+//		ResultVo rv = null;
+//		if(this.drivertelphone==null||this.drivertelphone.trim().equals("")){
+//			rv = new ResultVo(3,"缺少参数:telphone");
+//			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
+//		}
+//		Map<String, Object> map = new HashMap<String, Object>();
+//		map.put("drivertelphone", this.drivertelphone);
+//		map.put("status", 0);
+//        List<Customer_order> clist =customer_orderDAO.selectByTel(map, "selectByTel");
+//        if (clist==null||clist.size()<=0) {
+//        	rv = new ResultVo(2,"暂无记录");
+//			return FxJsonUtil.jsonHandle(rv,resutUrl,request);
+//        }else{
+//        	com.zdqk.laobing.action.vo.Customer_orderList clistvo=new com.zdqk.laobing.action.vo.Customer_orderList();
+//        	List<com.zdqk.laobing.action.vo.Customer_order> list= new ArrayList<com.zdqk.laobing.action.vo.Customer_order>();
+//        	for(Customer_order c_order:clist){
+//        		com.zdqk.laobing.action.vo.Customer_order cvo =new com.zdqk.laobing.action.vo.Customer_order(); 
+//        		BeanUtils.copyProperties(c_order,cvo);
+//        		list.add(cvo);
+//        	}
+//        	clistvo.setCustomer_orderlistvo(list);
+//        	clistvo.setReusltMessage("查询成功");
+//        	clistvo.setReusltNumber(0);
+//        	return FxJsonUtil.jsonListHandle(clistvo,resutUrl,request);
+//        }
+//       
+//   }
 }

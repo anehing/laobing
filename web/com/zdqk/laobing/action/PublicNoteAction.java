@@ -55,8 +55,8 @@ public class PublicNoteAction extends BasePaginationAction {
 	
 	private PublicNote publicnote;
 	
-    private String createtime;
-	private String tocreatetime;
+    private String create_time;
+	private String tocreate_time;
 
 	
 	public PublicNote getPublicnote() {
@@ -67,20 +67,20 @@ public class PublicNoteAction extends BasePaginationAction {
 		this.publicnote = publicnote;
 	}
 
-	public String getCreatetime() {
-		return createtime;
+	public String getCreate_time() {
+		return create_time;
 	}
 
-	public void setCreatetime(String createtime) {
-		this.createtime = createtime;
+	public void setCreate_time(String create_time) {
+		this.create_time = create_time;
 	}
 
-	public String getTocreatetime() {
-		return tocreatetime;
+	public String getTocreate_time() {
+		return tocreate_time;
 	}
 
-	public void setTocreatetime(String tocreatetime) {
-		this.tocreatetime = tocreatetime;
+	public void setTocreate_time(String tocreate_time) {
+		this.tocreate_time = tocreate_time;
 	}
 
 	/**
@@ -93,11 +93,9 @@ public class PublicNoteAction extends BasePaginationAction {
 	public String queryPublicNote() throws ParseException {
 		PublicNote p = new PublicNote();
 		Map<String, Object> map = this.getPmapNew();
-		if(publicnote!=null){
-			if(this.createtime!=null&&!this.createtime.trim().equals("")&&this.tocreatetime!=null&&!this.tocreatetime.trim().equals("")){
-				map.put("createtime", DateConverter.convertFromString(this.createtime));
-				map.put("tocreatetime", DateConverter.convertFromString(this.tocreatetime));
-			}
+		if(this.create_time!=null&&!this.create_time.trim().equals("")&&this.tocreate_time!=null&&!this.tocreate_time.trim().equals("")){
+			map.put("createtime", DateConverter.convertFromString(this.create_time));
+			map.put("tocreatetime", DateConverter.convertFromString(this.tocreate_time));
 		}
 			List<PublicNote> list = publicQuery(map, p, publicnoteDAO); 
 			return "publicNoteList";

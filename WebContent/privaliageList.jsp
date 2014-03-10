@@ -51,7 +51,7 @@
 function checkSubmit()
 {
 	 var url_name = document.getElementsByName("url_name");
-	 var adminid = document.getElementById("adminid");
+	 var adminid = document.getElementById("adminid").value;
 	 var value = new Array();
 	 for(var i = 0; i<url_name.length; i++){
 	   if(url_name[i].checked)

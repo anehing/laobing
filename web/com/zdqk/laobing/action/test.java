@@ -1,32 +1,32 @@
 package com.zdqk.laobing.action;
+import java.net.MalformedURLException; 
+import java.rmi.RemoteException;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
+import javax.xml.rpc.ServiceException; 
 
-import org.springframework.beans.BeanUtils;
-
-import com.zdqk.laobing.po.Driver;
-
+import com.jtd.sms.SmsImpl;
+import com.jtd.sms.SmsInterface;
+ 
+ 
 public class test {
-
-	/**
-	 * @param args
-	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-       
-		
-		String telphone="15122554903";
-		long num=Math.round(Math.random() * 100000);
-		System.out.println(num); 
-
+		try {
+			  
+			SmsInterface s=SmsImpl.getInterface("http://116.90.87.221/qxt_jtd/service/SmsService"); 
+			System.out.println(s.getBalance("jddl", "jddl123"));
+			String mes=s.sendSms("jddl", "jddl123", "15122554903,15033987695", "laobing2", "43");
+			System.out.println(s.getReport("jddl", "jddl123")); 
+			System.out.println(mes); 
+			 
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ServiceException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
-	public String nDaysAfterOneDate(Date basicDate,int  n) { 
-		SimpleDateFormat df = new SimpleDateFormat("yyddhhmmss"); 
-        long nDay= (basicDate.getTime()+2*n*30*60*1000); 
-        basicDate.setTime(nDay); 
-        return   df.format(basicDate); 
-    } 
-
 }

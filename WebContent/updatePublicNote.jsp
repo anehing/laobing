@@ -21,10 +21,14 @@
 					<td width="35%" align="left" class="dataTd" >
 					    <s:textfield id="title" name="publicnote.title"/>
 					</td>    
-					<td width="15%" align="center" class="dataTd" >正文</td>
-					<td width="35%" align="left" class="dataTd" >
-					    <s:textfield id="content" name="publicnote.content"/>
-					</td>    
+					 <td width="15%" align="center" class="dataTd" ></td>
+					 <td width="35%" align="left" class="dataTd" > </td> 
+			    </tr>
+				<tr>
+				     <td width="15%" align="center" class="dataTd" >正文</td>
+					 <td colspan="3"  >
+					 	<s:textarea id="content" name="publicnote.content"  cols="130" rows="3" />
+					 </td>  
 				</tr>
 				<tr>
 					<td bgcolor="#edf2f8" colspan="8" align="center">

@@ -46,22 +46,11 @@ html {
 				     	<td width="35%" align="left" class="dataTd" >
 					        <s:radio label="推送类型" name ="twitter.sendtype" id="sendtype"
 					             list= "#{0:'&nbsp;所有用户都收到',1:'&nbsp;按城市用户推送'}"  
-					             listKey="key" listValue="value" value="0" />
+					             listKey="key" listValue="value" value="0"/>
 					   </td>
-					   <td width="15%" align="center" class="dataTd" >客户端接受类型</td>
-					   <td width="35%" align="left" class="dataTd" >
-				           <s:radio label="客户端接受类型" name ="twitter.type" id="type"
-						         list= "#{0:'&nbsp;司机端接受',1:'&nbsp;用户端接受'}"
-                                 listKey="key" listValue="value" value="1" />
-					   </td>
-				   </tr>
-				   <tr>
-				        <td width="15%" align="center" class="dataTd" >城市</td>
+					 <td width="15%" align="center" class="dataTd" >城市</td>
 				     	<td width="35%" align="left" class="dataTd" >
-					        <s:select list="dmb_citylist" listKey="mc" listValue="mc" name ="twitter.mc" id="mc"  headerValue="请选择" headerKey="0" ></s:select>
-					    </td>
-					    <td width="15%" align="center" class="dataTd" ></td>
-					    <td width="35%" align="left" class="dataTd" >
+					        <s:select list="dmb_citylist" listKey="mc" listValue="mc" name ="twitter.mc" id="mc"  headerValue="请选择" headerKey="0"  ></s:select>
 					    </td>
 				   </tr>
 				   <tr>
@@ -78,6 +67,16 @@ html {
 </body>
 <script type="text/javascript">
 function checkSubmit(){
+	 var Radio2= $("input[name='twitter\\.sendtype']:checked").val() //选择被选中Radio的Value值
+     var checkText=$("#mc").find("option:selected").text();  //获取Select选择的Text
+     if(Radio2==0&&checkText!="请选择"){
+    	 showErrorMsg("推送类型为所有用户时，不可选择城市");
+    	 return false;
+     }
+     if(Radio2==1&&checkText=="请选择"){
+    	 showErrorMsg("推送类型为按城市时，城市不可为空");
+    	 return false;
+     }
 	 var title=document.getElementById("title").value;
 	 if(!checkNull(title)){
 	      showErrorMsg("标题不能为空");
@@ -91,4 +90,8 @@ function checkSubmit(){
 	
 	 return true;	
 }
+function myfunction(obj){
+	var radioValue = obj.value;
+}
+
 </script>

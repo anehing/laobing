@@ -1,6 +1,7 @@
 package com.zdqk.laobing.action;
 
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -45,7 +46,7 @@ public class JsonPriceAction extends JsonBaseAction {
 	private Price price;
 
     
-	private String cityid;
+	private String note;
 	
 	public Price getPrice() {
 		return price;
@@ -55,24 +56,27 @@ public class JsonPriceAction extends JsonBaseAction {
 	}
 
 
-	public String getCityid() {
-		return cityid;
+
+	public String getNote() {
+		return note;
 	}
-	public void setCityid(String cityid) {
-		this.cityid = cityid;
+	public void setNote(String note) {
+		this.note = note;
 	}
 	/**
 	 * 选择城市，提供价格信息
+	 * @throws UnsupportedEncodingException 
 	 * */
 	@Action("selectByCity")
-	public String selectByCity(){
-		Map<String, Integer> map = new HashMap<String, Integer>();
+	public String selectByCity() {
+		Map<String, String> map = new HashMap<String, String>();
 		ResultVo rv = null;
-		if(this.cityid==null||this.cityid.trim().equals("")){
-			rv = new ResultVo(3,"缺少参数:cityid");
+		if(this.note==null||this.note.trim().equals("")){
+			rv = new ResultVo(3,"缺少参数:note");
 			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
 		}
-		map.put("cityid",Integer.parseInt(this.cityid));
+		 
+		map.put("note",this.note);
 		List <Price> list= priceDAO.selectByCity(map, "selectByCity");
 		List <com.zdqk.laobing.action.vo.Price> listvo=new ArrayList<com.zdqk.laobing.action.vo.Price>();
 		com.zdqk.laobing.action.vo.PriceList Pricelistvo=new com.zdqk.laobing.action.vo.PriceList();
@@ -90,7 +94,7 @@ public class JsonPriceAction extends JsonBaseAction {
 		
 	   }else{
 			Pricelistvo.setReusltNumber(1);
-			Pricelistvo.setReusltMessage("操作失败，该城市没有价格信息可用");
+			Pricelistvo.setReusltMessage("操作失败，该城市没有价格信息可用"+this.note);
 		}
 		return FxJsonUtil.jsonListHandle(Pricelistvo,resutUrl,request);
 	}

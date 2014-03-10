@@ -21,8 +21,8 @@
 	             <tr>
 		            <td width="10%" align="center" bgcolor="#F3F8FE" class="dataTdText">评论时间</td>
 		            <td width="30%" align="left" bgcolor="#FFFFFF">
-		             <input type="text" name="createtime" id="create_time" class="tcal"  />
-		            &nbsp;-<input type="text" name="tocreatetime" id="tocreate_time" class="tcal"  />
+		             <input type="text" name="createtime" id="create_time" class="tcal" value="${createtime}"  />
+		            &nbsp;-<input type="text" name="tocreatetime" id="tocreate_time" class="tcal" value="${tocreatetime}" />
 		            </td>
 		            <td width="10%" align="center" bgcolor="#F3F8FE" class="dataTdText"></td>
 				    <td width="30%" align="left"  bgcolor="#FFFFFF" >

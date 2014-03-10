@@ -21,8 +21,8 @@
 	             <tr>
 		            <td width="10%" align="center" bgcolor="#F3F8FE" class="dataTdText">发布时间</td>
 		            <td width="35%" align="left" bgcolor="#FFFFFF">
-		             <input type="text" name="createtime" id="create_time" class="tcal"  />
-		            &nbsp;-<input type="text" name="tocreatetime" id="tocreate_time" class="tcal"  />
+		             <input type="text" name="create_time" id="create_time" class="tcal"  />
+		            &nbsp;-<input type="text" name="tocreate_time" id="tocreate_time" class="tcal"  />
 		            </td>
 		           
                     <td rowspan="3" align="center" valign="middle" bgcolor="#FFFFFF">

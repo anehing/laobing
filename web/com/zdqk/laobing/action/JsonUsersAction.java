@@ -2,9 +2,13 @@ package com.zdqk.laobing.action;
 
 
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.rmi.RemoteException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.xml.rpc.ServiceException;
 
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpException;
@@ -20,6 +24,8 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.apache.struts2.convention.annotation.ParentPackage;
 
+import com.jtd.sms.SmsImpl;
+import com.jtd.sms.SmsInterface;
 import com.zdqk.laobing.action.vo.ResultVo;
 import com.zdqk.laobing.dao.UserDAO;
 import com.zdqk.laobing.po.User;
@@ -40,7 +46,10 @@ public class JsonUsersAction extends JsonBaseAction {
 	
 	private static final long serialVersionUID = 1L;
 	private static String resutUrl = "UserJsonList";	
-	private static String Url = "http://116.213.72.20/SMSHttpService/send.aspx";
+	private static String Url = "http://116.90.87.221/qxt_jtd/service/SmsService";
+	private String username="jddl";
+	private String password="jddl123";
+	
 	@Autowired
 	private UserDAO<User> userDAO;	
 	@Autowired
@@ -49,6 +58,7 @@ public class JsonUsersAction extends JsonBaseAction {
 	private User user;	
 	private String telphone;
 	private String askcode;
+	
 	
 	public User getUser() {
 		return user;
@@ -123,7 +133,7 @@ public class JsonUsersAction extends JsonBaseAction {
 			return FxJsonUtil.jsonHandle(rv,resutUrl,request);
 		}else{
 			Map map = new HashMap();
-			map.put("isbind",1);
+			//map.put("isbind",1);
 			map.put("telphone",this.telphone);
 			List<User> userList = publicQueryNoPage(map, new User(), userDAO);
 			if(userList!=null && userList.size()>0){
@@ -131,29 +141,24 @@ public class JsonUsersAction extends JsonBaseAction {
 				return FxJsonUtil.jsonHandle(rv,resutUrl,request);					
 			}else{
 				//发送验证码
-				HttpClient client = new HttpClient();
-				PostMethod method = new PostMethod(Url);
-				// client.getParams().setContentCharset("GBK");
-				client.getParams().setContentCharset("UTF-8");
-				method.setRequestHeader("ContentType",
-						"application/x-www-form-urlencoded;charset=UTF-8");
 				Long num=Math.round(Math.random() * 100000);
 				String content = new String("您的验证码是："+num.toString()+"。请不要把验证码泄露给其他人。");
-
-				NameValuePair[] data = {// 提交短信
-				new NameValuePair("username", "cf_aameimei"),
-						new NameValuePair("password", "784533"),
-						new NameValuePair("mobile", this.telphone),
-						new NameValuePair("content", content), };
-				method.setRequestBody(data);
 				try {
-					client.executeMethod(method);
-					System.out.println(method.getResponseBodyAsString());
-				} catch (HttpException e) {
+					SmsInterface s=SmsImpl.getInterface(this.Url);
+					System.out.println(s.getBalance("jddl", "jddl123"));
+					String mes=s.sendSms(this.username, this.password, this.telphone, content, "43");
+					System.out.println(s.getReport("jddl", "jddl123")); 
+					System.out.println(mes); 
+					 
+				} catch (MalformedURLException e) {
 					// TODO Auto-generated catch block
 					 rv = new ResultVo(7,"验证码发送失败");
 					 return FxJsonUtil.jsonHandle(rv,resutUrl,request);
-				} catch (IOException e) {
+				} catch (RemoteException e) {
+					// TODO Auto-generated catch block
+					 rv = new ResultVo(7,"验证码发送失败");
+					 return FxJsonUtil.jsonHandle(rv,resutUrl,request);
+				} catch (ServiceException e) {
 					// TODO Auto-generated catch block
 					 rv = new ResultVo(7,"验证码发送失败");
 					 return FxJsonUtil.jsonHandle(rv,resutUrl,request);
@@ -167,14 +172,13 @@ public class JsonUsersAction extends JsonBaseAction {
 					System.out.println("短信提交成功");
 					rv = new ResultVo(2,"验证码发送成功");
 					return FxJsonUtil.jsonHandle(rv,resutUrl,request);
-				}
-				else{
+				}else{
 					rv = new ResultVo(7,"验证码发送失败");
 					return FxJsonUtil.jsonHandle(rv,resutUrl,request);
 				}
 			}
-		}	
-	}
+		}
+	}	
 	/**
 	 * 验证短信码借口
 	 * 

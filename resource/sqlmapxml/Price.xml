@@ -9,8 +9,9 @@
     <result property="time" column="TIME"/>
     <result property="price" column="PRICE"/>
     <result property="note" column="NOTE"/>
+    <result property="sort" column="sort"/>
   </resultMap>
-  <insert id="insert" parameterClass="price">insert into PRICE( ID,CITYID,TIME,PRICE,NOTE ) values ( #id#,#cityid#,#time#,#price#,#note# )</insert>
+  <insert id="insert" parameterClass="price">insert into PRICE( ID,CITYID,TIME,PRICE,NOTE,SORT ) values ( #id#,#cityid#,#time#,#price#,#note#,#sort# )</insert>
   <delete id="delete" parameterClass="price">delete from PRICE where id = #id#</delete>
   <update id="update" parameterClass="price">update PRICE 
     <dynamic prepend="set">
@@ -18,24 +19,27 @@
       <isNotNull prepend="," property="time">TIME = #time#</isNotNull>
       <isNotNull prepend="," property="price">PRICE = #price#</isNotNull>
       <isNotNull prepend="," property="note">NOTE = #note#</isNotNull>
+      <isNotNull prepend="," property="sort">SORT = #sort#</isNotNull>
     </dynamic>where id = #id#
   </update>
   <select id="findById" parameterClass="java.lang.Integer" resultMap="priceResult">select * from PRICE where id = #id#</select>
   <select id="findNameById" parameterClass="java.lang.Integer" resultMap="priceResult">select * from PRICE where id = #id#</select>
-  <select id="selectAll" parameterClass="java.util.Map" resultMap="priceResult">select ID,CITYID,TIME,PRICE,NOTE from PRICE
+  <select id="selectAll" parameterClass="java.util.Map" resultMap="priceResult">select ID,CITYID,TIME,PRICE,NOTE,SORT from PRICE
     <dynamic prepend="where">
       <isNotNull prepend=" and " property="cityid">CITYID = #cityid#</isNotNull>
       <isNotNull prepend=" and " property="time">TIME = #time#</isNotNull>
       <isNotNull prepend=" and " property="price">PRICE = #price#</isNotNull>
       <isNotNull prepend=" and " property="note">NOTE = #note#</isNotNull>
+      <isNotNull prepend=" and " property="sort">SORT = #sort#</isNotNull>
     </dynamic>
   </select>
-  <select id="selectPage" parameterClass="java.util.Map" resultMap="priceResult">select ID,CITYID,TIME,PRICE,NOTE from PRICE
+  <select id="selectPage" parameterClass="java.util.Map" resultMap="priceResult">select ID,CITYID,TIME,PRICE,NOTE,SORT from PRICE
     <dynamic prepend="where">
       <isNotNull prepend=" and " property="cityid">CITYID = #cityid#</isNotNull>
       <isNotNull prepend=" and " property="time">TIME = #time#</isNotNull>
       <isNotNull prepend=" and " property="price">PRICE = #price#</isNotNull>
       <isNotNull prepend=" and " property="note">NOTE = #note#</isNotNull>
+      <isNotNull prepend=" and " property="sort">SORT = #sort#</isNotNull>
     </dynamic>order by id desc limit #startIndex#,#endIndex#
   </select>
   <select id="selectCount" parameterClass="java.util.Map" resultClass="java.lang.Long">select count(id) from PRICE 
@@ -44,11 +48,13 @@
       <isNotNull prepend=" and " property="time">TIME = #time#</isNotNull>
       <isNotNull prepend=" and " property="price">PRICE = #price#</isNotNull>
       <isNotNull prepend=" and " property="note">NOTE = #note#</isNotNull>
+      <isNotNull prepend=" and " property="sort">SORT = #sort#</isNotNull>
     </dynamic>
   </select>
   <select id="selectByCity" parameterClass="java.util.Map" resultMap="priceResult">select * from price
 	    <dynamic prepend="where">
-		      <isNotNull prepend=" and " property="cityid">CITYID = #cityid#</isNotNull>
-	    </dynamic>
+		      <isNotNull prepend=" and " property="note">NOTE = #note#</isNotNull>
+		      <isNotNull prepend=" and " property="sort">SORT = #sort#</isNotNull>
+	    </dynamic> order by sort asc
   </select>
 </sqlMap>

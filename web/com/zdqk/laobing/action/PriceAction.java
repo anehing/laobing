@@ -1,5 +1,6 @@
 package com.zdqk.laobing.action;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -127,6 +128,21 @@ public class PriceAction extends BasePaginationAction {
 	public String updatePrice() {
 		this.dmb_citylist=getcity();
 		if(this.price!=null){
+			int sort =price.getSort();
+			switch (sort){
+				case 1: 
+					price.setTime("07:00-21:59");
+					break;
+				case 2: 
+					price.setTime("22:00-22:59");
+					break;
+				case 3: 
+					price.setTime("23:00-23:59");
+					break;
+				case 4: 
+					price.setTime("00:00-06:59");
+					break;
+			}
 			boolean  flag=priceDAO.update(this.price);
 		    if(flag)  this.addActionMessage("更新成功");
 			else this.addActionError("更新失败");
@@ -142,6 +158,28 @@ public class PriceAction extends BasePaginationAction {
 	public String addPrice() {
 		this.dmb_citylist=getcity();
 		if(this.price!=null){
+			int sort =price.getSort();
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("note",price.getNote());
+			map.put("sort",sort);
+			List <Price> list= priceDAO.selectByCity(map, "selectByCity");
+			if(list.size()>0){
+				this.addActionError("该城市已存在该时间段的价格信息");
+			}
+			switch (sort){
+				case 1: 
+					price.setTime("07:00-21:59");
+					break;
+				case 2: 
+					price.setTime("22:00-22:59");
+					break;
+				case 3: 
+					price.setTime("23:00-23:59");
+					break;
+				case 4: 
+					price.setTime("00:00-06:59");
+					break;
+			}
 			boolean  flag=priceDAO.insert(this.price);
 		    if(flag)  this.addActionMessage("新增成功");
 			else this.addActionError("新增失败");

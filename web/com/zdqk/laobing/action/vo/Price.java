@@ -16,6 +16,7 @@ public class Price extends ResultVo implements Serializable{
     private String time;
     private float price;
     private String note;//存放城市名称
+    private int sort;
 	public int getId() {
 		return id;
 	}
@@ -45,6 +46,12 @@ public class Price extends ResultVo implements Serializable{
 	}
 	public void setNote(String note) {
 		this.note = note;
+	}
+	public int getSort() {
+		return sort;
+	}
+	public void setSort(int sort) {
+		this.sort = sort;
 	}
 	
 	

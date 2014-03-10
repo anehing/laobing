@@ -10,7 +10,7 @@ public class FxJsonUtil {
 
 	public static String jsonHandle(Object object,String url,HttpServletRequest request) {
 		JSONObject json = JSONObject.fromObject(object);  
-		System.out.println(json.toString());  		
+		System.out.println(json.toString());
 		request.setAttribute("jsondata", json.toString());
 		return url;	
 	}	

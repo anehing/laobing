@@ -36,49 +36,34 @@
   </update>
   <select id="findById" parameterClass="java.lang.Integer" resultMap="customer_orderResult">select * from CUSTOMER_ORDER where id = #id#</select>
   <select id="findNameById" parameterClass="java.lang.Integer" resultMap="customer_orderResult">select * from CUSTOMER_ORDER where id = #id#</select>
-  <select id="selectAll" parameterClass="java.util.Map" resultMap="customer_orderResult">select ID,CUSTOMER_TELPHONE,START_PLACE,START_TIME,STATUS,DRIVER,CREATE_TIME,LATITUDE,LONGITUDE,RETURN_TIME,ORDERNUM,SOURCE from CUSTOMER_ORDER
+  <select id="selectAll" parameterClass="java.util.Map" resultMap="customer_orderResult">select * from CUSTOMER_ORDER
     <dynamic prepend="where">
-      <isNotNull prepend=" and " property="customer_telphone">CUSTOMER_TELPHONE = #customer_telphone#</isNotNull>
-      <isNotNull prepend=" and " property="start_place">START_PLACE = #start_place#</isNotNull>
-      <isNotNull prepend=" and " property="start_time">START_TIME = #start_time#</isNotNull>
+      <isNotNull prepend=" and " property="create_time">
+	      <![CDATA[ 
+	         CREATE_TIME between #create_time# and #tocreate_time# 
+	      ]]> 
+      </isNotNull>   
       <isNotNull prepend=" and " property="status">STATUS = #status#</isNotNull>
-      <isNotNull prepend=" and " property="driver">DRIVER = #driver#</isNotNull>
-      <isNotNull prepend=" and " property="create_time">CREATE_TIME = #create_time#</isNotNull>
-      <isNotNull prepend=" and " property="latitude">LATITUDE = #latitude#</isNotNull>
-      <isNotNull prepend=" and " property="longitude">LONGITUDE = #longitude#</isNotNull>
-      <isNotNull prepend=" and " property="return_time">RETURN_TIME = #return_time#</isNotNull>
-      <isNotNull prepend=" and " property="ordernum">ORDERNUM = #ordernum#</isNotNull>
-      <isNotNull prepend=" and " property="source">SOURCE = #source#</isNotNull>
     </dynamic>
   </select>
-  <select id="selectPage" parameterClass="java.util.Map" resultMap="customer_orderResult">select ID,CUSTOMER_TELPHONE,START_PLACE,START_TIME,STATUS,DRIVER,CREATE_TIME,LATITUDE,LONGITUDE,RETURN_TIME,ORDERNUM,SOURCE from CUSTOMER_ORDER
+  <select id="selectPage" parameterClass="java.util.Map" resultMap="customer_orderResult">select * from CUSTOMER_ORDER
     <dynamic prepend="where">
-      <isNotNull prepend=" and " property="customer_telphone">CUSTOMER_TELPHONE = #customer_telphone#</isNotNull>
-      <isNotNull prepend=" and " property="start_place">START_PLACE = #start_place#</isNotNull>
-      <isNotNull prepend=" and " property="start_time">START_TIME = #start_time#</isNotNull>
+      <isNotNull prepend=" and " property="create_time">
+      	 <![CDATA[ 
+	         CREATE_TIME between #create_time# and #tocreate_time# 
+	      ]]>
+      </isNotNull>
       <isNotNull prepend=" and " property="status">STATUS = #status#</isNotNull>
-      <isNotNull prepend=" and " property="driver">DRIVER = #driver#</isNotNull>
-      <isNotNull prepend=" and " property="create_time">CREATE_TIME = #create_time#</isNotNull>
-      <isNotNull prepend=" and " property="latitude">LATITUDE = #latitude#</isNotNull>
-      <isNotNull prepend=" and " property="longitude">LONGITUDE = #longitude#</isNotNull>
-      <isNotNull prepend=" and " property="return_time">RETURN_TIME = #return_time#</isNotNull>
-      <isNotNull prepend=" and " property="ordernum">ORDERNUM = #ordernum#</isNotNull>
-      <isNotNull prepend=" and " property="source">SOURCE = #source#</isNotNull>
     </dynamic>order by id desc limit #startIndex#,#endIndex#
   </select>
   <select id="selectCount" parameterClass="java.util.Map" resultClass="java.lang.Long">select count(id) from CUSTOMER_ORDER 
     <dynamic prepend="where">
-      <isNotNull prepend=" and " property="customer_telphone">CUSTOMER_TELPHONE = #customer_telphone#</isNotNull>
-      <isNotNull prepend=" and " property="start_place">START_PLACE = #start_place#</isNotNull>
-      <isNotNull prepend=" and " property="start_time">START_TIME = #start_time#</isNotNull>
+      <isNotNull prepend=" and " property="create_time">
+      	 <![CDATA[ 
+	         CREATE_TIME between #create_time# and #tocreate_time# 
+	      ]]>
+      </isNotNull>
       <isNotNull prepend=" and " property="status">STATUS = #status#</isNotNull>
-      <isNotNull prepend=" and " property="driver">DRIVER = #driver#</isNotNull>
-      <isNotNull prepend=" and " property="create_time">CREATE_TIME = #create_time#</isNotNull>
-      <isNotNull prepend=" and " property="latitude">LATITUDE = #latitude#</isNotNull>
-      <isNotNull prepend=" and " property="longitude">LONGITUDE = #longitude#</isNotNull>
-      <isNotNull prepend=" and " property="return_time">RETURN_TIME = #return_time#</isNotNull>
-      <isNotNull prepend=" and " property="ordernum">ORDERNUM = #ordernum#</isNotNull>
-      <isNotNull prepend=" and " property="source">SOURCE = #source#</isNotNull>
     </dynamic>
   </select>
   

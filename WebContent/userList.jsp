@@ -25,8 +25,8 @@
 		            </td>
 		            <td width="10%" align="center" bgcolor="#F3F8FE" class="dataTdText">注册时间</td>
 		            <td width="35%" align="left" bgcolor="#FFFFFF"> 
-		             <input type="text" name="logintime" id="logintime" class="tcal"  />
-		          &nbsp;-<input type="text" name="tologintime" id="tologintime" class="tcal"  />
+		             <input type="text" name="logintime" id="logintime" class="tcal" value="${logintime}" />
+		          &nbsp;-<input type="text" name="tologintime" id="tologintime" class="tcal" value="${tologintime}" />
 		            </td>
 		            <td rowspan="3" align="center" valign="middle" bgcolor="#FFFFFF">
 			            <input	type="submit" class="inputBtn"   value="查询" style="cursor: pointer"  />

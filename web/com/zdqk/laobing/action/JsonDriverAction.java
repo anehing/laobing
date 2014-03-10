@@ -185,7 +185,7 @@ public class JsonDriverAction extends JsonBaseAction {
 			rv = new ResultVo(3,"缺少参数:telphone");
 			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
 		}
-		map.put("telphone",this.telphone);
+		map.put("drivertelphone",this.telphone);
 		List <Customer_judge_driver> list= customer_judge_driverDAO.selectByDrivertelphone(map, "selectByDrivertelphone");
 		if(list==null||list.size()<=0){
 			rv = new ResultVo(1,"该司机暂无车主短信评价");
@@ -280,11 +280,11 @@ public class JsonDriverAction extends JsonBaseAction {
 		conditionMap.put("status", 1);
 	
 		float yesfee = driver_orderDAO.selectyesincome(conditionMap, "selectyesincome");
-	//	float monthfee = driver_orderDAO.selectallincome(conditionMap, "selectmonthincome");
-//		float allfee = driver_orderDAO.selectallincome(conditionMap,"selectallincome");
+		float monthfee = driver_orderDAO.selectallincome(conditionMap, "selectmonthincome");
+		float allfee = driver_orderDAO.selectallincome(conditionMap,"selectallincome");
 		DriverIncome income=new DriverIncome();
-//		income.setAllfee(allfee);
-	//	income.setMonthfee(monthfee);
+		income.setAllfee(allfee);
+		income.setMonthfee(monthfee);
 		income.setYesfee(yesfee);
 		income.setReusltNumber(0);
 		income.setReusltMessage("操作成功");

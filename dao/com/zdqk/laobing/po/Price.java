@@ -24,6 +24,8 @@ public class Price implements Serializable{
     private float price;
 	@TODO("note")		
     private String note;//存放城市名称
+	@TODO("sort")		
+    private int sort;//存放城市名称
 	
 	public int getId() {
 		return id;
@@ -54,6 +56,12 @@ public class Price implements Serializable{
 	}
 	public void setNote(String note) {
 		this.note = note;
+	}
+	public int getSort() {
+		return sort;
+	}
+	public void setSort(int sort) {
+		this.sort = sort;
 	}
 	
 	

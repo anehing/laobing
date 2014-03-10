@@ -16,6 +16,9 @@ import org.apache.struts2.convention.annotation.ParentPackage;
 import org.springframework.beans.factory.annotation.Autowired;
 
 
+import cn.jpush.api.JPushClient;
+import cn.jpush.api.MessageResult;
+
 import com.lfx.tools.DateConverter;
 import com.zdqk.laobing.dao.Dmb_cityDAO;
 import com.zdqk.laobing.dao.TwitterDAO;
@@ -57,8 +60,13 @@ public class TwitterAction extends BasePaginationAction {
 	
     private String createtime;
 	private String tocreatetime;
+    
+	private String masterSecret;
+	private String appKey;
+	private  JPushClient jpush = null;
 
-	
+    public static final int MAX = Integer.MAX_VALUE;
+    public static final int MIN = MAX/2;
 	
 	
 	 
@@ -97,17 +105,14 @@ public class TwitterAction extends BasePaginationAction {
 		Twitter a = new Twitter();
 		Map<String, Object> map = this.getPmapNew();
 		if(twitter!=null){
-			if(twitter.getType()!=3){
-				map.put("type", twitter.getType());
-				}
-			if(twitter.getSendtype()!=3){
-				map.put("sendtype", twitter.getSendtype());
-				}
-			
 			if(!twitter.getMc().equals("mc")){
 				map.put("mc", twitter.getMc());
+				map.put("sendtype", 1);
+				}else{
+					map.put("sendtype", 0);
 				}
 			}
+		
 		if(this.createtime!=null&&!this.createtime.trim().equals("")&&this.tocreatetime!=null&&!this.tocreatetime.trim().equals("")){
 			map.put("createtime", DateConverter.convertFromString(this.createtime));
 			map.put("tocreatetime", DateConverter.convertFromString(this.tocreatetime));
@@ -173,12 +178,13 @@ public class TwitterAction extends BasePaginationAction {
 	public String addTwitter() {
 		this.dmb_citylist=getcity();
 		if(this.twitter!=null){
+			Jpush(twitter);
 			this.twitter.setCreatetime(new Date());
 			boolean  flag=twitterDAO.insert(this.twitter);
 		    if(flag)  this.addActionMessage("新增成功");
 			else this.addActionError("新增失败");
 		}
-			
+		
 			return "addTwitter";
 		
 	}
@@ -189,4 +195,29 @@ public class TwitterAction extends BasePaginationAction {
 		List<Dmb_city> list = publicQuery(map, a, dmb_cityDAO);
 		return list;
 	}
+	private void Jpush(Twitter twitter){
+
+		// 对android和ios设备发送
+		 jpush = new JPushClient(masterSecret, appKey);
+		 int sendNo = getRandomSendNo();// 在实际业务中，建议 sendNo 是一个你自己的业务可以处理的一个自增数字。
+		 String tag = twitter.getMc();
+		 String msgTitle = "";
+		 String msgContent = twitter.getContent();
+		 MessageResult result =null;
+		 if (tag.equals("0")){
+			  result = jpush.sendNotificationWithAppKey(sendNo, msgTitle, msgContent);
+		 }else{
+			  result = jpush.sendNotificationWithTag(sendNo, tag, msgTitle, msgContent);
+		 }
+		
+	}
+	/**
+	 * 保持 sendNo 的唯一性是有必要的
+	 * It is very important to keep sendNo unique.
+	 * @return sendNo
+	 */
+	public static int getRandomSendNo() {
+	    return (int) (MIN + Math.random() * (MAX - MIN));
+	}
+	 
 }

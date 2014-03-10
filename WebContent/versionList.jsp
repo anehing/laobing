@@ -33,8 +33,8 @@
 	            <tr>
 		            <td width="10%" align="center" bgcolor="#F3F8FE" class="dataTdText">更新时间</td>
 		            <td width="25%" align="left" bgcolor="#FFFFFF"> 
-		              <input type="text" name="create_time" id="create_time" class="tcal"  />
-		            &nbsp;-<input type="text" name="tocreate_time" id="tocreate_time" class="tcal"  />
+		              <input type="text" name="create_time" id="create_time" class="tcal" value="${create_time}" />
+		            &nbsp;-<input type="text" name="tocreate_time" id="tocreate_time" class="tcal" value="${tocreate_time}" />
 		            </td>
 		            <td width="10%" align="center" bgcolor="#F3F8FE" class="dataTdText"></td>
 		            <td width="30%" align="left" class="dataTdText" bgcolor="#FFFFFF" >
