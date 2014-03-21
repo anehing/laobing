@@ -135,7 +135,7 @@ public class PrivaliageAction extends BasePaginationAction {
 				permissionDAO.insert(this.permission);
 			}
 		}
-		
+		this.addActionMessage("新增成功");
 		return "queryprivaliage";
 	}
 }

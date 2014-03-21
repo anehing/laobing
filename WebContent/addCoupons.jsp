@@ -17,19 +17,19 @@ html {
 <body >
 	<div class="titleDiv">
 		<div class="titleDiv_a">
-			<img src="${ctx}/images/tb_1.png" align="absmiddle" /> <span>新增优惠券</span>
+			<img src="${ctx}/images/tb_1.png" align="absmiddle" /> <span>批量新增优惠券</span>
 		</div>
 		<div class="titleDiv_b"></div>
 	</div>
-	<s:form action="addCoupon" namespace="/base" method="post" onsubmit="return checkSubmit()" id="form1" >
+	<s:form action="addCoupons" namespace="/base" method="post" onsubmit="return checkSubmit()" id="form1" >
 		<div class="data0">
 			<div class="data1">
 				<table class="dataTable" width="100%" border="0" cellspacing="0" cellpadding="0">
-                    <tr>
-				    	<td width="15%" align="center" class="dataTd" >优惠券号</td>
-					    <td width="35%" align="left" class="dataTd" >
-					        <s:textfield id="coupon_num" name="coupon.coupon_num"/>
-					    </td> 
+				    <tr>   
+				        <td width="15%" align="center" class="dataTd" >张数</td>
+					    <td width="70%" align="left" class="dataTd" >
+					        <s:textfield name="num" id="num"/>
+				    	</td> 
 				   </tr>
 				   <tr>   
 				        <td width="15%" align="center" class="dataTd" >优惠券面值(￥)</td>
@@ -60,12 +60,7 @@ html {
 <script type="text/javascript">
 function checkSubmit(){
 	
-	 var coupon_num=document.getElementById("coupon_num").value;
 	 var discount_amount=document.getElementById("discount_amount").value;
-	 if(!checkNull(coupon_num)){
-	      showErrorMsg("优惠卷码不能为空");
-	      return false;
-	 } 
 	 if(!checkNull(discount_amount)){
 	      showErrorMsg("面值不能为空");
 	      return false;

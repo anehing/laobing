@@ -27,11 +27,8 @@ html {
 				<table class="dataTable" width="100%" border="0" cellspacing="0" cellpadding="0">
                     <tr>
 				    	<td width="15%" align="center" class="dataTd" >标题</td>
-					    <td width="35%" align="left" class="dataTd">${twitter.title}
+					    <td width="60%" align="left" class="dataTd">${twitter.title}
 					    </td>    
-				        <td width="15%" align="center" class="dataTd" ></td>
-					    <td width="35%" align="left" class="dataTd" >
-				    	</td> 
 				   </tr>
 				   <tr>
 				        <td width="15%" align="center" class="dataTd" >正文</td>

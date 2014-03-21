@@ -19,12 +19,11 @@
 	    <div id="r0" align="center" >
              <table class="dataTable" width="97%" border="0" align="center" cellpadding="0" cellspacing="1"  bgcolor="#93b5d1">
 	             <tr>
-		            <td width="10%" align="center" bgcolor="#F3F8FE" class="dataTdText">状态</td>
-		            <td width="30%" align="left" class="dataTdText" bgcolor="#FFFFFF" >
+		            <td width="15%" align="center" bgcolor="#F3F8FE" class="dataTdText">状态</td>
+		            <td width="60%" align="left" class="dataTdText" bgcolor="#FFFFFF" >
 		               <s:select list="#{0:'未开通',1:'已开通'}" listKey="key" listValue="value" name ="dmb_city.status" id="status"  headerValue="请选择" headerKey="3" ></s:select>
 		            </td>
-		             <td width="10%" align="center" bgcolor="#F3F8FE" class="dataTdText"></td>
-		            <td width="25%" align="left" bgcolor="#FFFFFF"></td>
+		             
 		            <td rowspan="3" align="center" valign="middle" bgcolor="#FFFFFF">
 			            <input	type="submit" class="inputBtn"   value="查询" style="cursor: pointer"  />
 		                <input	type="button" class="inputBtn"   value="清空" onClick="clearForm('form1')" style="cursor: pointer" />

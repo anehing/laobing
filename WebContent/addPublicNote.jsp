@@ -27,13 +27,13 @@ html {
 				<table class="dataTable" width="100%" border="0" cellspacing="0" cellpadding="0">
                     <tr>
 				    	<td width="15%" align="center" class="dataTd" >标题</td>
-					    <td colspan="3" >
+					    <td colspan="3" class="dataTd" >
 					        <s:textfield id="title" name="publicnote.title" cols="130" rows="3"/>
 					    </td>    
 				   </tr>
 				   <tr>
 				        <td width="15%" align="center" class="dataTd" >正文</td>
-					    <td colspan="3"  >
+					    <td colspan="3" class="dataTd" >
 					        <s:textarea name="publicnote.content" id="content" cols="130" rows="3"/>
 				    	</td> 
 				    	

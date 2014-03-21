@@ -13,8 +13,10 @@
     <result property="askcode" column="ASKCODE"/>
     <result property="asktime" column="ASKTIME"/>
     <result property="isbind" column="ISBIND" />
+    <result property="useaskcode" column="USEASKCODE" />
+     <result property="discount_amount" column="DISCOUNT_AMOUNT" />
   </resultMap>
-  <insert id="insert" parameterClass="user">insert into USER( ID,TELPHONE,SELF_CODE,USE_CODE,LOGINTIME,USE_TIME,ASKCODE,ASKTIME,ISBIND ) values ( #id#,#telphone#,#self_code#,#use_code#,#logintime#,#use_time#,#askcode#,#asktime#,#isbind# )</insert>
+  <insert id="insert" parameterClass="user">insert into USER( ID,TELPHONE,SELF_CODE,USE_CODE,LOGINTIME,USE_TIME,ASKCODE,ASKTIME,ISBIND,USEASKCODE,DISCOUNT_AMOUNT ) values ( #id#,#telphone#,#self_code#,#use_code#,#logintime#,#use_time#,#askcode#,#asktime#,#isbind#,#useaskcode#,#discount_amount# )</insert>
   <delete id="delete" parameterClass="user">delete from USER where id = #id#</delete>
   <update id="update" parameterClass="user">update USER 
     <dynamic prepend="set">
@@ -26,28 +28,38 @@
       <isNotNull prepend="," property="askcode">ASKCODE = #askcode#</isNotNull>
       <isNotNull prepend="," property="asktime">ASKTIME = #asktime#</isNotNull>
       <isNotNull prepend="," property="isbind">ISBIND = #isbind#</isNotNull>
+      <isNotNull prepend="," property="useaskcode">USEASKCODE = #useaskcode#</isNotNull>
+      <isNotNull prepend="," property="discount_amount">DISCOUNT_AMOUNT = #discount_amount#</isNotNull>
     </dynamic>where id = #id#
   </update>
   <select id="findById" parameterClass="java.lang.Integer" resultMap="userResult">select * from USER where id = #id#</select>
   <select id="findNameById" parameterClass="java.lang.Integer" resultMap="userResult">select * from USER where id = #id#</select>
-  <select id="selectAll" parameterClass="java.util.Map" resultMap="userResult">select ID,TELPHONE,SELF_CODE,USE_CODE,LOGINTIME,USE_TIME,ISBIND from USER
+  <select id="selectAll" parameterClass="java.util.Map" resultMap="userResult">select * from USER
     <dynamic prepend="where">
       <isNotNull prepend=" and " property="telphone">TELPHONE like '%$telphone$%'</isNotNull>
       <isNotNull prepend=" and " property="self_code">SELF_CODE = #self_code#</isNotNull>
       <isNotNull prepend=" and " property="use_code">USE_CODE = #use_code#</isNotNull>
       <isNotNull prepend=" and " property="logintime">LOGINTIME between #logintime# and #tologintime# </isNotNull>
       <isNotNull prepend=" and " property="use_time">USE_TIME = #use_time#</isNotNull>
+      <isNotNull prepend=" and " property="askcode">ASKCODE = #askcode#</isNotNull>
+      <isNotNull prepend=" and " property="asktime">ASKTIME = #asktime#</isNotNull>
       <isNotNull prepend=" and " property="isbind">ISBIND = #isbind#</isNotNull>
+      <isNotNull prepend=" and " property="useaskcode">USEASKCODE = #useaskcode#</isNotNull>
+      <isNotNull prepend=" and " property="discount_amount">DISCOUNT_AMOUNT = #discount_amount#</isNotNull>
     </dynamic>
   </select>
-  <select id="selectPage" parameterClass="java.util.Map" resultMap="userResult">select ID,TELPHONE,SELF_CODE,USE_CODE,LOGINTIME,USE_TIME,ISBIND from USER
+  <select id="selectPage" parameterClass="java.util.Map" resultMap="userResult">select * from USER
     <dynamic prepend="where">
       <isNotNull prepend=" and " property="telphone">TELPHONE like '%$telphone$%'</isNotNull>
       <isNotNull prepend=" and " property="self_code">SELF_CODE = #self_code#</isNotNull>
       <isNotNull prepend=" and " property="use_code">USE_CODE = #use_code#</isNotNull>
       <isNotNull prepend=" and " property="logintime">LOGINTIME between #logintime# and #tologintime# </isNotNull>
       <isNotNull prepend=" and " property="use_time">USE_TIME = #use_time#</isNotNull>
+      <isNotNull prepend=" and " property="askcode">ASKCODE = #askcode#</isNotNull>
+      <isNotNull prepend=" and " property="asktime">ASKTIME = #asktime#</isNotNull>
       <isNotNull prepend=" and " property="isbind">ISBIND = #isbind#</isNotNull>
+      <isNotNull prepend=" and " property="useaskcode">USEASKCODE = #useaskcode#</isNotNull>
+      <isNotNull prepend=" and " property="discount_amount">DISCOUNT_AMOUNT = #discount_amount#</isNotNull>
     </dynamic>order by id desc limit #startIndex#,#endIndex#
   </select>
   <select id="selectCount" parameterClass="java.util.Map" resultClass="java.lang.Long">select count(id) from USER 
@@ -57,12 +69,20 @@
       <isNotNull prepend=" and " property="use_code">USE_CODE = #use_code#</isNotNull>
       <isNotNull prepend=" and " property="logintime">LOGINTIME between #logintime# and #tologintime# </isNotNull>
       <isNotNull prepend=" and " property="use_time">USE_TIME = #use_time#</isNotNull>
+      <isNotNull prepend=" and " property="askcode">ASKCODE = #askcode#</isNotNull>
+      <isNotNull prepend=" and " property="asktime">ASKTIME = #asktime#</isNotNull>
       <isNotNull prepend=" and " property="isbind">ISBIND = #isbind#</isNotNull>
+      <isNotNull prepend=" and " property="useaskcode">USEASKCODE = #useaskcode#</isNotNull>
+       <isNotNull prepend=" and " property="discount_amount">DISCOUNT_AMOUNT = #discount_amount#</isNotNull>
     </dynamic>
   </select>
   <select id="loginByTelphone" parameterClass="java.util.Map" resultMap="userResult">select * from user
 	    <dynamic prepend="where">
 		      <isNotNull prepend=" and " property="telphone">TELPHONE = #telphone#</isNotNull>
+		       <isNotNull prepend=" and " property="askcode">ASKCODE = #askcode#</isNotNull>
+		       <isNotNull prepend=" and " property="isbind">ISBIND = #isbind#</isNotNull>
+		       <isNotNull prepend=" and " property="useaskcode">USEASKCODE = #useaskcode#</isNotNull>
+		        <isNotNull prepend=" and " property="discount_amount">DISCOUNT_AMOUNT = #discount_amount#</isNotNull>
 		       <isNotNull prepend=" and " property="asktime">
 		        <![CDATA[ 
                    STATUS ＝ 1
@@ -74,6 +94,8 @@
 	    <dynamic prepend="where">
 		      <isNotNull prepend=" and " property="telphone">TELPHONE = #telphone#</isNotNull>
 		      <isNotNull prepend=" and " property="askcode">ASKCODE = #askcode#</isNotNull>
+		      <isNotNull prepend=" and " property="isbind">ISBIND = #isbind#</isNotNull>
+		       <isNotNull prepend=" and " property="discount_amount">DISCOUNT_AMOUNT = #discount_amount#</isNotNull>
 		      <isNotNull prepend=" and " property="asktime">
 		        <![CDATA[ 
                    ASKTIME <＝ #asktime# 

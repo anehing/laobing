@@ -1,6 +1,7 @@
 package com.zdqk.laobing.action;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -17,10 +18,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 
 import com.lfx.tools.Base64Utils;
+import com.zdqk.laobing.dao.Customer_judge_driverDAO;
 import com.zdqk.laobing.dao.Dmb_cityDAO;
 import com.zdqk.laobing.dao.DriverDAO;
+import com.zdqk.laobing.dao.Driver_orderDAO;
+import com.zdqk.laobing.dao.Pre_priceDAO;
+import com.zdqk.laobing.po.Customer_judge_driver;
 import com.zdqk.laobing.po.Dmb_city;
 import com.zdqk.laobing.po.Driver;
+import com.zdqk.laobing.po.Pre_price;
 import com.zdqk.laobing.tools.ComStaticValue;
 import com.zdqk.laobing.tools.DateConverter;
 
@@ -39,6 +45,7 @@ import com.zdqk.laobing.tools.DateConverter;
 	       @Result(name = "updateDriver", location = "/updateDriver.jsp"),
 	       @Result(name = "queryDriver", type = "chain", location = "queryDriver"),
 	       @Result(name = "addDriver", location = "/addDriver.jsp"),
+	       @Result(name = "Driverdetil", location = "/driverDetil.jsp"),
 		})
 
 public class DriverAction extends BasePaginationAction {
@@ -50,14 +57,55 @@ public class DriverAction extends BasePaginationAction {
 	
 	@Autowired
 	private DriverDAO driverDAO;
-	
+	@Autowired
+	private Pre_priceDAO pre_priceDAO;
+	@Autowired
+	private Driver_orderDAO driver_orderDAO;
+	@Autowired
+	private Customer_judge_driverDAO customer_judge_driverDAO;
+	private Customer_judge_driver customer_judge_driver;
+	private Pre_price pre_price;
 	private Driver driver;
 	private String batchFileName;
 	private File myFile;
+	private float price;
+	private float yesfee;
+	private float monthfee;
+	private float allfee;
+    private int score=0;
+    
 	
 	
-
-	
+	public int getScore() {
+		return score;
+	}
+	public void setScore(int score) {
+		this.score = score;
+	}
+	public float getYesfee() {
+		return yesfee;
+	}
+	public void setYesfee(float yesfee) {
+		this.yesfee = yesfee;
+	}
+	public float getMonthfee() {
+		return monthfee;
+	}
+	public void setMonthfee(float monthfee) {
+		this.monthfee = monthfee;
+	}
+	public float getAllfee() {
+		return allfee;
+	}
+	public void setAllfee(float allfee) {
+		this.allfee = allfee;
+	}
+	public float getPrice() {
+		return price;
+	}
+	public void setPrice(float price) {
+		this.price = price;
+	}
 	public File getMyFile() {
 		return myFile;
 	}
@@ -125,7 +173,7 @@ public class DriverAction extends BasePaginationAction {
 				map.put("drive_card", this.driver.getDrive_card());
 			}if(this.driver.getDrive_card()!=null&&!this.driver.getDrive_card().trim().equals("")){
 				map.put("drive_card", this.driver.getDrive_card());
-			}	
+			}
 			}
 		List<Driver> list = publicQuery(map, a, driverDAO); 
 		if (list != null && list.size() > 0) {
@@ -148,13 +196,14 @@ public class DriverAction extends BasePaginationAction {
 	public String queryDriverbyId() {
 		int id = 0;
 		int totype = 0;
+		Driver a=new Driver();
 		try {
 			id = Integer.parseInt(request.getParameter("id"));
 			totype = Integer.parseInt(request.getParameter("totype"));
 		} catch (Exception e) {
 			System.out.print("数据异常");
 		} 
-		Driver a=new Driver();
+	
 		this.driver = (Driver) driverDAO.findObjectById(id, a);
 		
 		if (totype == 1) {
@@ -167,6 +216,26 @@ public class DriverAction extends BasePaginationAction {
 		    if(flag)  this.addActionMessage("删除成功");
 		    else this.addActionError("删除失败");
 		    return "queryDriver";
+		}if (totype == 3) {
+			Map conditionMap =new HashMap();
+			conditionMap.put("drivertelphone", this.driver.getTelphone());
+			conditionMap.put("status", 1);
+		
+			this.yesfee = driver_orderDAO.selectyesincome(conditionMap, "selectyesincome");
+			this.monthfee = driver_orderDAO.selectmonthincome(conditionMap, "selectmonthincome");
+			this.allfee = driver_orderDAO.selectallincome(conditionMap,"selectallincome");
+			
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("drivertelphone", this.driver.getTelphone());
+			Customer_judge_driver c =new Customer_judge_driver();
+			long count = customer_judge_driverDAO.findObjectsPageCount(map, c);
+			long sum = customer_judge_driverDAO.getscore(map);
+			if(sum>0&&count>0){
+				this.score = (int) (sum/count);
+			}
+			this.driver.setStars(this.score);
+			driverDAO.update(this.driver);
+		    return "Driverdetil";
 		}
 		
 		return null;
@@ -201,6 +270,13 @@ public class DriverAction extends BasePaginationAction {
 		if(this.driver!=null){
 			if(!this.batchFileName.equals("000000.png")){
 				this.driver.setPicture(this.getURL());
+			}
+			if(this.price>0){
+				Pre_price p =new Pre_price();
+				p.setDrivername(this.driver.getName());
+				p.setDrivertelphone(this.driver.getTelphone());
+				p.setPre_price(this.price);
+				pre_priceDAO.insert(p);//给司机添加预付款
 			}
 			boolean  flag=driverDAO.insert(this.driver);
 		    if(flag)  this.addActionMessage("新增成功");

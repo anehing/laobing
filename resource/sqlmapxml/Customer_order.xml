@@ -16,8 +16,13 @@
     <result property="return_time" column="RETURN_TIME"/>
     <result property="ordernum" column="ORDERNUM"/>
     <result property="source" column="SOURCE"/>
+    <result property="drivernum1" column="DRIVERNUM1"/>
+    <result property="drivernum2" column="DRIVERNUM2"/>
+    <result property="drivernum3" column="DRIVERNUM3"/>
+    <result property="drivernum4" column="DRIVERNUM4"/>
+    <result property="isvalue" column="ISVALUE"/>
   </resultMap>
-  <insert id="insert" parameterClass="customer_order">insert into CUSTOMER_ORDER( ID,CUSTOMER_TELPHONE,START_PLACE,START_TIME,STATUS,DRIVER,CREATE_TIME,LATITUDE,LONGITUDE,RETURN_TIME,ORDERNUM,SOURCE ) values ( #id#,#customer_telphone#,#start_place#,#start_time#,#status#,#driver#,#create_time#,#latitude#,#longitude#,#return_time#,#ordernum#,#source# )</insert>
+  <insert id="insert" parameterClass="customer_order">insert into CUSTOMER_ORDER( ID,CUSTOMER_TELPHONE,START_PLACE,START_TIME,STATUS,DRIVER,CREATE_TIME,LATITUDE,LONGITUDE,RETURN_TIME,ORDERNUM,SOURCE,DRIVERNUM1,DRIVERNUM2,DRIVERNUM3,DRIVERNUM4,ISVALUE ) values ( #id#,#customer_telphone#,#start_place#,#start_time#,#status#,#driver#,#create_time#,#latitude#,#longitude#,#return_time#,#ordernum#,#source#,#drivernum1#,#drivernum2#,#drivernum3#,#drivernum4#,#isvalue# )</insert>
   <delete id="delete" parameterClass="customer_order">delete from CUSTOMER_ORDER where id = #id#</delete>
   <update id="update" parameterClass="customer_order">update CUSTOMER_ORDER 
     <dynamic prepend="set">
@@ -32,12 +37,18 @@
       <isNotNull prepend="," property="return_time">RETURN_TIME = #return_time#</isNotNull>
       <isNotNull prepend="," property="ordernum">ORDERNUM = #ordernum#</isNotNull>
       <isNotNull prepend="," property="source">SOURCE = #source#</isNotNull>
+      <isNotNull prepend="," property="drivernum1">DRIVERNUM1 = #drivernum1#</isNotNull>
+      <isNotNull prepend="," property="drivernum2">DRIVERNUM2 = #drivernum2#</isNotNull>
+      <isNotNull prepend="," property="drivernum3">DRIVERNUM3 = #drivernum3#</isNotNull>
+      <isNotNull prepend="," property="drivernum4">DRIVERNUM4 = #drivernum4#</isNotNull>
+      <isNotNull prepend="," property="isvalue">ISVALUE = #isvalue#</isNotNull>
     </dynamic>where id = #id#
   </update>
   <select id="findById" parameterClass="java.lang.Integer" resultMap="customer_orderResult">select * from CUSTOMER_ORDER where id = #id#</select>
   <select id="findNameById" parameterClass="java.lang.Integer" resultMap="customer_orderResult">select * from CUSTOMER_ORDER where id = #id#</select>
   <select id="selectAll" parameterClass="java.util.Map" resultMap="customer_orderResult">select * from CUSTOMER_ORDER
     <dynamic prepend="where">
+		<isNotNull prepend=" and " property="customer_telphone">customer_telphone = #customer_telphone#</isNotNull>
       <isNotNull prepend=" and " property="create_time">
 	      <![CDATA[ 
 	         CREATE_TIME between #create_time# and #tocreate_time# 
@@ -48,6 +59,7 @@
   </select>
   <select id="selectPage" parameterClass="java.util.Map" resultMap="customer_orderResult">select * from CUSTOMER_ORDER
     <dynamic prepend="where">
+		<isNotNull prepend=" and " property="customer_telphone">customer_telphone = #customer_telphone#</isNotNull>
       <isNotNull prepend=" and " property="create_time">
       	 <![CDATA[ 
 	         CREATE_TIME between #create_time# and #tocreate_time# 
@@ -58,6 +70,7 @@
   </select>
   <select id="selectCount" parameterClass="java.util.Map" resultClass="java.lang.Long">select count(id) from CUSTOMER_ORDER 
     <dynamic prepend="where">
+		<isNotNull prepend=" and " property="customer_telphone">customer_telphone = #customer_telphone#</isNotNull>
       <isNotNull prepend=" and " property="create_time">
       	 <![CDATA[ 
 	         CREATE_TIME between #create_time# and #tocreate_time# 

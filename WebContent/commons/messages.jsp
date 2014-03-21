@@ -53,7 +53,7 @@
 						</div>
 						<div style="float: left;width: 30px; height: 57px;">
 								<div style="overflow: hidden; width: 10px; height: 30px;"></div>
-								<div style="overflow: hidden; width: 90px; "><input type="button" class="inputBtn" id="b2" name="msgBtns" value="返回" onclick="timerClose('2')" style="cursor:pointer"/><input id="msgTimer2" type="hidden"  value="5"></div>
+								<div style="overflow: hidden; width: 90px; "><input type="button" class="inputBtn" id="b2" name="msgBtns" value="返回" onclick="javaScript:history.go(-1)" style="cursor:pointer"/><input id="msgTimer2" type="hidden"  value="5"></div>
 						</div>
 						
 			        </td>

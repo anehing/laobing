@@ -21,8 +21,14 @@ import org.apache.struts2.convention.annotation.ParentPackage;
 
 import com.zdqk.laobing.action.vo.ResultVo;
 import com.zdqk.laobing.dao.Driver_orderDAO;
+import com.zdqk.laobing.dao.Pre_priceDAO;
+import com.zdqk.laobing.dao.TranrecordDAO;
+import com.zdqk.laobing.dao.UserDAO;
 import com.zdqk.laobing.po.Customer_order;
 import com.zdqk.laobing.po.Driver_order;
+import com.zdqk.laobing.po.Pre_price;
+import com.zdqk.laobing.po.Tranrecord;
+import com.zdqk.laobing.po.User;
 import com.zdqk.laobing.tools.DateConverter;
 import com.zdqk.laobing.tools.FxJsonUtil;
 /**
@@ -42,7 +48,17 @@ public class JsonDriverOrderAction extends JsonBaseAction {
 	
 	@Autowired
 	private Driver_orderDAO driver_orderDAO;
+	@Autowired
+	private UserDAO userDAO;
+	@Autowired
+	private Pre_priceDAO pre_priceDAO;
 	
+	private Pre_price pre_price;
+	@Autowired
+	private TranrecordDAO tranrecordDAO;
+	
+	private Tranrecord tranrecord;
+	private User user;
 	private String drivertelphone;
 	private String customertelphone;
 	private String start_place;
@@ -62,7 +78,51 @@ public class JsonDriverOrderAction extends JsonBaseAction {
     private String createtime;
     private String telphone;
     private String type;
-    private SimpleDateFormat sdf  =   new  SimpleDateFormat( "yyyy-MM-dd HH:mm:ss" );
+    private String orderunm;
+    private String waittime;
+    private String begintime;
+    private String endtime;
+    private String discount_amount;
+    private String askcode;
+    
+    public String getWaittime() {
+		return waittime;
+	}
+	public void setWaittime(String waittime) {
+		this.waittime = waittime;
+	}
+	public String getBegintime() {
+		return begintime;
+	}
+	public void setBegintime(String begintime) {
+		this.begintime = begintime;
+	}
+	public String getEndtime() {
+		return endtime;
+	}
+	public void setEndtime(String endtime) {
+		this.endtime = endtime;
+	}
+	public String getDiscount_amount() {
+		return discount_amount;
+	}
+	public void setDiscount_amount(String discount_amount) {
+		this.discount_amount = discount_amount;
+	}
+	public String getAskcode() {
+		return askcode;
+	}
+	public void setAskcode(String askcode) {
+		this.askcode = askcode;
+	}
+	public String getOrderunm() {
+		return orderunm;
+	}
+	public void setOrderunm(String orderunm) {
+		this.orderunm = orderunm;
+	}
+
+	private SimpleDateFormat sdf  =   new  SimpleDateFormat( "yyyy-MM-dd HH:mm:ss" );
 	public String getDrivertelphone() {
 		return drivertelphone;
 	}
@@ -199,33 +259,34 @@ public class JsonDriverOrderAction extends JsonBaseAction {
 			rv = new ResultVo(3,"缺少参数:customertelphone");
 			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
 		}
-		if(this.start_place==null||this.start_place.trim().equals("")){
-			rv = new ResultVo(3,"缺少参数:start_place");
-			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
-		}
+		Map<String, Object> userMap = new HashMap<String, Object>();
+		userMap.put("telphone",this.customertelphone);
+		userMap.put("isbind",1);
+		userMap.put("useaskcode",0);
+		User userInfo= (User) userDAO.findUserByTelphone(userMap, "loginByTelphone");
+	
 		Date dt=new Date();
 		Driver_order d_order =new Driver_order();
 		boolean flag=false;
 		d_order.setDrivertelphone(this.drivertelphone);
 		d_order.setCustomertelphone(this.customertelphone);
-		d_order.setStart_place(this.start_place);
-		d_order.setStart_time(Integer.parseInt(this.start_time));
 		d_order.setSource(1);
+		d_order.setStatus(0);
 		d_order.setCreatetime(dt);
 		d_order.setTime(dt.getTime());
-		
-		if(this.startwait!=null||!this.startwait.trim().equals("")){
-			d_order.setStartwait(sdf.parse(this.startwait));
-		}
-		if(this.endwait!=null||!this.endwait.trim().equals("")){
-			d_order.setEndwait(sdf.parse(this.endwait));
+	    if(userInfo!=null){
+	    	d_order.setAskcode(userInfo.getAskcode());
+	    	d_order.setDiscount_amount(userInfo.getDiscount_amount()+"");
 		}
 		long num=Math.round(Math.random() * 1000) +Math.round(Math.random() * 1000);
         d_order.setOrdernum(num+this.customertelphone.substring(customertelphone.length()-4));
 	    flag=driver_orderDAO.insert(d_order);
         if(flag){
-			rv = new ResultVo(0,"下单成功");
-			return FxJsonUtil.jsonHandle(rv,resutUrl,request);
+        	com.zdqk.laobing.action.vo.Driver_order driver_order =  new com.zdqk.laobing.action.vo.Driver_order();;	
+			BeanUtils.copyProperties(d_order,driver_order);
+			driver_order.setReusltNumber(0);
+			driver_order.setReusltMessage("下单成功");
+			return FxJsonUtil.jsonHandle(driver_order,resutUrl,request);
 		}else{
 			rv = new ResultVo(1,"下单失败");
 			return FxJsonUtil.jsonHandle(rv,resutUrl,request);
@@ -247,8 +308,44 @@ public class JsonDriverOrderAction extends JsonBaseAction {
 	@Action("enddriverorder")
 	public String enddriverorderAction() throws ParseException{
 		ResultVo rv = null;
-		if(this.id==null||this.id.trim().equals("")){
-			rv = new ResultVo(3,"缺少参数:id");
+		if(this.drivertelphone==null||this.drivertelphone.trim().equals("")){
+			rv = new ResultVo(3,"缺少参数:drivertelphone");
+			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
+		}
+		if(this.customertelphone==null||this.customertelphone.trim().equals("")){
+			rv = new ResultVo(3,"缺少参数:customertelphone");
+			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
+		}
+		if(this.orderunm==null||this.orderunm.trim().equals("")){
+			rv = new ResultVo(3,"缺少参数:orderunm");
+			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
+		}
+		if(this.waittime==null||this.waittime.trim().equals("")){
+			rv = new ResultVo(3,"缺少参数:waittime");
+			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
+		}
+		if(this.begintime==null||this.begintime.trim().equals("")){
+			rv = new ResultVo(3,"缺少参数:begintime");
+			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
+		}
+		if(this.endtime==null||this.endtime.trim().equals("")){
+			rv = new ResultVo(3,"缺少参数:endtime");
+			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
+		}
+		if(this.start_place==null||this.start_place.trim().equals("")){
+			rv = new ResultVo(3,"缺少参数:start_place");
+			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
+		}
+		if(this.end_place==null||this.end_place.trim().equals("")){
+			rv = new ResultVo(3,"缺少参数:end_place");
+			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
+		}
+		if(this.askcode==null||this.askcode.trim().equals("")){
+			rv = new ResultVo(3,"缺少参数:askcode");
+			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
+		}
+		if(this.discount_amount==null||this.discount_amount.trim().equals("")){
+			rv = new ResultVo(3,"缺少参数:discount_amount");
 			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
 		}
 		if(this.distance==null||this.distance.trim().equals("")){
@@ -259,24 +356,56 @@ public class JsonDriverOrderAction extends JsonBaseAction {
 			rv = new ResultVo(3,"缺少参数:fee");
 			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
 		}
-		if(this.end_place==null||this.end_place.trim().equals("")){
-			rv = new ResultVo(3,"缺少参数:end_place");
-			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("drivertelphone",this.drivertelphone);
+		map.put("customertelphone", this.customertelphone);
+		map.put("orderunm", this.orderunm);
+		map.put("status", 0);
+		Driver_order d = (Driver_order) driver_orderDAO.selectdriverorder(map, "selectAll");
+		if (d ==null){
+			rv = new ResultVo(1,"订单确认失败，请联系管理员");
+			return FxJsonUtil.jsonHandle(rv,resutUrl,request);
 		}
-		Date dt=new Date();
-		Driver_order d_order =new Driver_order();
 		boolean flag=false;
-		d_order.setId(Integer.parseInt(this.id));
-		d_order.setDistance(Float.parseFloat(this.distance));
-		d_order.setFee(Float.parseFloat(this.fee));
-		d_order.setEnd_place(this.end_place);
-		d_order.setStatus(1);
-	    flag=driver_orderDAO.update(d_order);
+		d.setBegintime(this.begintime);
+		d.setEndtime(this.endtime);
+		d.setAskcode(this.askcode);
+		d.setDiscount_amount(this.discount_amount);
+		d.setDistance(Float.parseFloat(this.distance));
+		float count = Float.parseFloat(this.fee);
+		d.setFee(count);
+		d.setStatus(1);
+	    flag=driver_orderDAO.update(d);
         if(flag){
-			rv = new ResultVo(0,"确认成功");
+        	Map<String, Object> mapprice = new HashMap<String, Object>();
+        	mapprice.put("drivertelphone", this.drivertelphone);
+        	Pre_price p =(Pre_price) pre_priceDAO.seletcbytel(mapprice, "selectAll");
+        	if(p==null || p.getPre_price()<=15){
+        		rv = new ResultVo(1,"司机不存在,或者账户额度太低");
+    			return FxJsonUtil.jsonHandle(rv,resutUrl,request);
+        	}
+        	float price =p.getPre_price();
+        	if(count<=58){
+        		p.setPre_price(price-2);
+        	}else if (58<count&&count<=79){
+        		p.setPre_price(price-5);
+        	}else if (79<count&&count<=98){
+        		p.setPre_price(price-10);
+        	}else{
+        		p.setPre_price(price-15);
+        	}
+        	pre_priceDAO.update(p);//修改预付款
+        	Tranrecord t =new Tranrecord();
+        	t.setOrder_num(this.orderunm);
+        	t.setTrans_datetime(new Date());
+        	t.setType(0);//0:扣款，1：充值
+        	t.setOrder_num("充值");
+        	t.setTelphone(this.drivertelphone);
+        	tranrecordDAO.insert(t);
+			rv = new ResultVo(0,"订单确认成功");
 			return FxJsonUtil.jsonHandle(rv,resutUrl,request);
 		}else{
-			rv = new ResultVo(1,"确认失败");
+			rv = new ResultVo(1,"订单确认失败");
 			return FxJsonUtil.jsonHandle(rv,resutUrl,request);
 		}
 	}
@@ -296,6 +425,22 @@ public class JsonDriverOrderAction extends JsonBaseAction {
 			rv = new ResultVo(3,"缺少参数:customertelphone");
 			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
 		}
+		if(this.orderunm==null||this.orderunm.trim().equals("")){
+			rv = new ResultVo(3,"缺少参数:orderunm");
+			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
+		}
+		if(this.waittime==null||this.waittime.trim().equals("")){
+			rv = new ResultVo(3,"缺少参数:waittime");
+			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
+		}
+		if(this.begintime==null||this.begintime.trim().equals("")){
+			rv = new ResultVo(3,"缺少参数:begintime");
+			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
+		}
+		if(this.endtime==null||this.endtime.trim().equals("")){
+			rv = new ResultVo(3,"缺少参数:endtime");
+			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
+		}
 		if(this.start_place==null||this.start_place.trim().equals("")){
 			rv = new ResultVo(3,"缺少参数:start_place");
 			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
@@ -304,24 +449,12 @@ public class JsonDriverOrderAction extends JsonBaseAction {
 			rv = new ResultVo(3,"缺少参数:end_place");
 			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
 		}
-		if(this.createtime==null||this.createtime.trim().equals("")){
-			rv = new ResultVo(3,"缺少参数:createtime");
+		if(this.askcode==null||this.askcode.trim().equals("")){
+			rv = new ResultVo(3,"缺少参数:askcode");
 			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
 		}
-		if(this.startwait==null||this.startwait.trim().equals("")){
-			rv = new ResultVo(3,"缺少参数:startwait");
-			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
-		}
-		if(this.endwait==null||this.endwait.trim().equals("")){
-			rv = new ResultVo(3,"缺少参数:endwait");
-			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
-		}
-		if(this.end_time==null||this.end_time.trim().equals("")){
-			rv = new ResultVo(3,"缺少参数:end_time");
-			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
-		}
-		if(this.endwait==null||this.endwait.trim().equals("")){
-			rv = new ResultVo(3,"缺少参数:start_place");
+		if(this.discount_amount==null||this.discount_amount.trim().equals("")){
+			rv = new ResultVo(3,"缺少参数:discount_amount");
 			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
 		}
 		if(this.distance==null||this.distance.trim().equals("")){
@@ -332,28 +465,45 @@ public class JsonDriverOrderAction extends JsonBaseAction {
 			rv = new ResultVo(3,"缺少参数:fee");
 			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
 		}
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("drivertelphone",this.drivertelphone);
+		map.put("customertelphone", this.customertelphone);
+		map.put("orderunm", this.orderunm);
+		map.put("status", 0);
+		Driver_order d = (Driver_order) driver_orderDAO.selectdriverorder(map, "selectAll");
+		if (d ==null){
+			rv = new ResultVo(1,"订单确认失败，请联系管理员");
+			return FxJsonUtil.jsonHandle(rv,resutUrl,request);
+		}
+		d.setStatus(2);//订单作废
+	    driver_orderDAO.update(d);
 		Driver_order d_order =new Driver_order();
 		boolean flag=false;
 		d_order.setDrivertelphone(this.drivertelphone);
 		d_order.setCustomertelphone(this.customertelphone);
 		d_order.setStart_place(this.start_place);
 		d_order.setEnd_place(this.end_place);
-		//d_order.setStart_time(Integer.parseInt(this.start_time));
-		d_order.setSource(Integer.parseInt(this.source));
-		d_order.setCreatetime(sdf.parse(this.createtime));
-		d_order.setStartwait(sdf.parse(this.startwait));
-		d_order.setEndwait(sdf.parse(this.endwait));
+		d_order.setBegintime(this.begintime);
+		d_order.setEndtime(this.endtime);
+		d_order.setAskcode(this.askcode);
+		d_order.setDiscount_amount(this.discount_amount);
+		d_order.setOrdernum(this.orderunm);
+		d_order.setCreatetime(new Date());
 		d_order.setFee(Float.parseFloat(this.fee));
 		d_order.setDistance(Float.parseFloat(this.distance));
 		d_order.setStatus(1);
-		long num=Math.round(Math.random() * 1000) +Math.round(Math.random() * 1000);
-        d_order.setOrdernum(num+this.customertelphone.substring(customertelphone.length()-4));
 	    flag=driver_orderDAO.insert(d_order);
         if(flag){
-			rv = new ResultVo(0,"下单成功");
+        	Tranrecord t =new Tranrecord();
+        	t.setOrder_num(this.orderunm);
+        	t.setTrans_datetime(new Date());
+        	t.setType(0);//0:扣款，1：充值
+        	t.setTelphone(this.drivertelphone);
+        	tranrecordDAO.insert(t);
+			rv = new ResultVo(0,"补单成功");
 			return FxJsonUtil.jsonHandle(rv,resutUrl,request);
 		}else{
-			rv = new ResultVo(1,"下单失败");
+			rv = new ResultVo(1,"补单失败");
 			return FxJsonUtil.jsonHandle(rv,resutUrl,request);
 		}
 	}
@@ -412,7 +562,7 @@ public class JsonDriverOrderAction extends JsonBaseAction {
 		}
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("drivertelphone", this.drivertelphone);
-		map.put("status", 2);
+		map.put("status", 0);
 		Driver_order  driver_order  =new Driver_order();
         List<Driver_order> clist =driver_orderDAO.findObjects(map,driver_order);
         if (clist==null||clist.size()<=0) {

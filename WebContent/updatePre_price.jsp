@@ -16,10 +16,12 @@
 		<div class="data1">
 			<table class="dataTable" width="100%" border="0" cellspacing="0" cellpadding="0">
 			    <s:hidden  name="pre_price.id" id="id" />
+			    <s:hidden  name="pre_price.pre_price" id="pre_price" />
+			    <s:hidden  name="pre_price.drivertelphone" id="drivertelphone" />
 				<tr>
-					<td width="15%" align="center" class="dataTd" >预付款额度</td>
+					<td width="15%" align="center" class="dataTd" >预付款充值金额</td>
 					<td width="35%" align="left" class="dataTd" >
-					    <s:textfield id="pre_price" name="pre_price.pre_price"/>
+					    <s:textfield id="price" name="price"/>
 					</td>    
 				    <td width="15%" align="center" class="dataTd" ></td>
 					<td width="35%" align="left" class="dataTd" ></td> 

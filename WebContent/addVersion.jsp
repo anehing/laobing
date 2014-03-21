@@ -29,21 +29,22 @@ html {
 				    	<td width="15%" align="center" class="dataTd" >版本号</td>
 					    <td width="35%" align="left" class="dataTd" >
 					        <s:textfield id="version" name="version.version"/>
-					    </td>    
-				         <td width="15%" align="center" class="dataTd" >手机类型</td>
-				     	<td width="35%" align="left" class="dataTd" >
-					        <s:radio label="手机类型" name ="version.type" id="type"
-					             list= "#{0:'&nbsp;iphone（用户端）',1:'&nbsp;android（用户端）',2:'&nbsp;android（司机端）'}"  
-					             listKey="key" listValue="value" value="version.type" />
-					   </td>
-				   </tr>
+					    </td>  
+					 </tr>
+				
 				   <tr>
 				        <td width="15%" align="center" class="dataTd" >下载路径</td>
 				    	<td width="35%" align="left" class="dataTd" >
 				        	<s:textfield name="version.url"  id="url" /></td>
-				        <td width="15%" align="center" class="dataTd" ></td>
-					    <td width="35%" align="left" class="dataTd" >
-				        </td>
+				      
+				   </tr>
+				    <tr>  
+				         <td width="15%" align="center" class="dataTd" >手机类型</td>
+				     	<td width="70%" align="left" class="dataTd" >
+					        <s:radio label="手机类型" name ="version.type" id="type"
+					             list= "#{0:'&nbsp;iphone（用户端）',1:'&nbsp;android（用户端）',2:'&nbsp;android（司机端）'}"  
+					             listKey="key" listValue="value" value="0" />
+					   </td>
 				   </tr>
 				   <tr>
 				 		<td bgcolor="#edf2f8" colspan="8" align="center">
@@ -61,10 +62,22 @@ html {
 function checkSubmit(){
 	
 	 var version=document.getElementById("version").value;
+	 var url=document.getElementById("url").value;
 	 if(!checkNull(version)){
 	      showErrorMsg("版本号不能为空");
 	      return false;
+	 }else{
+		 var strP=/^\d+(\.\d+)?$/; 
+		 if(!strP.test(version)){
+			 showErrorMsg("版本号只能为数字");
+		      return false;
+		 } 
 	 }
+	 if(!checkNull(url)){
+	      showErrorMsg("下载路径不能为空");
+	      return false;
+	 }
+	 
 	 return true;	
 }
 </script>

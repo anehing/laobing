@@ -32,5 +32,24 @@ public class Customer_judge_driverDAOImpl extends BasicDaoImpl<Customer_judge_dr
 		return list;
 	}
 	
+	@Override
+	public long getscore(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		Customer_judge_driver c= new Customer_judge_driver();
+		long sum =0;
+      try{
+			
+    	  Long score = (Long)getSqlMapClientTemplate().queryForObject(c.getClass().getName()+".selectscore",map);
+    	  if (score == null){
+    		return sum;
+    	  }
+    	  sum = score;
+    	  return sum;
+				
+		}catch(Exception e){
+			System.out.println("数据连接失败，请检查数据服务是否开启");
+			throw new RuntimeException(e.getMessage());
+		}
+	}
 	
 }

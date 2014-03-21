@@ -22,8 +22,12 @@
     <result property="ordernum" column="ORDERNUM"/>
     <result property="createtime" column="CREATETIME"/>
     <result property="time" column="TIME"/>
+    <result property="begintime" column="BEGINTIME"/>
+    <result property="endtime" column="ENDTIME"/>
+    <result property="discount_amount" column="DISCOUNT_AMOUNT"/>
+    <result property="askcode" column="ASKCODE"/>
   </resultMap>
-  <insert id="insert" parameterClass="driver_order">insert into Driver_order( ID,DRIVERTELPHONE,CUSTOMERTELPHONE,START_PLACE,START_TIME,STARTWAIT,ENDWAIT,END_PLACE,END_TIME,DISTANCE,FEE,STATUS,SOURCE,JUDGECUSTOMER,JUDGEDRIVER,ORDERNUM,CREATETIME,TIME ) values ( #id#,#drivertelphone#,#customertelphone#,#start_place#,#start_time#,#startwait#,#endwait#,#end_place#,#end_time#,#distance#,#fee#,#status#,#source#,#judgecustomer#,#judgedriver#,#ordernum#,#createtime#,#time# )</insert>
+  <insert id="insert" parameterClass="driver_order">insert into Driver_order( ID,DRIVERTELPHONE,CUSTOMERTELPHONE,START_PLACE,START_TIME,STARTWAIT,ENDWAIT,END_PLACE,END_TIME,DISTANCE,FEE,STATUS,SOURCE,JUDGECUSTOMER,JUDGEDRIVER,ORDERNUM,CREATETIME,TIME,BEGINTIME,ENDTIME,DISCOUNT_AMOUNT,ASKCODE ) values ( #id#,#drivertelphone#,#customertelphone#,#start_place#,#start_time#,#startwait#,#endwait#,#end_place#,#end_time#,#distance#,#fee#,#status#,#source#,#judgecustomer#,#judgedriver#,#ordernum#,#createtime#,#time#,#begintime#,#endtime#,#discount_amount#,#askcode# )</insert>
   <delete id="delete" parameterClass="driver_order">delete from Driver_order where id = #id#</delete>
   <update id="update" parameterClass="driver_order">update Driver_order 
     <dynamic prepend="set">
@@ -44,11 +48,15 @@
       <isNotNull prepend="," property="ordernum">ORDERNUM = #ordernum#</isNotNull>
       <isNotNull prepend="," property="createtime">CREATETIME = #createtime#</isNotNull>
       <isNotNull prepend="," property="time">TIME = #time#</isNotNull>
+      <isNotNull prepend="," property="begintime">BEGINTIME = #begintime#</isNotNull>
+      <isNotNull prepend="," property="endtime">ENDTIME = #endtime#</isNotNull>
+      <isNotNull prepend="," property="discount_amount">DISCOUNT_AMOUNT = #discount_amount#</isNotNull>
+      <isNotNull prepend="," property="askcode">ASKCODE = #askcode#</isNotNull>
     </dynamic>where id = #id#
   </update>
   <select id="findById" parameterClass="java.lang.Integer" resultMap="driver_orderResult">select * from Driver_order where id = #id#</select>
   <select id="findNameById" parameterClass="java.lang.Integer" resultMap="driver_orderResult">select * from Driver_order where id = #id#</select>
-  <select id="selectAll" parameterClass="java.util.Map" resultMap="driver_orderResult">select ID,DRIVERTELPHONE,CUSTOMERTELPHONE,START_PLACE,START_TIME,STARTWAIT,ENDWAIT,END_PLACE,END_TIME,DISTANCE,FEE,STATUS,SOURCE,JUDGECUSTOMER,JUDGEDRIVER,ORDERNUM,CREATETIME,TIME from Driver_order
+  <select id="selectAll" parameterClass="java.util.Map" resultMap="driver_orderResult">select * from Driver_order
     <dynamic prepend="where">
       <isNotNull prepend=" and " property="drivertelphone">DRIVERTELPHONE = #drivertelphone#</isNotNull>
       <isNotNull prepend=" and " property="customertelphone">CUSTOMERTELPHONE = #customertelphone#</isNotNull>
@@ -67,9 +75,13 @@
       <isNotNull prepend=" and " property="ordernum">ORDERNUM = #ordernum#</isNotNull>
       <isNotNull prepend=" and " property="createtime">CREATETIME = #createtime#</isNotNull>
       <isNotNull prepend=" and " property="time">TIME = #time#</isNotNull>
+      <isNotNull prepend=" and " property="begintime">BEGINTIME = #begintime#</isNotNull>
+      <isNotNull prepend=" and " property="endtime">ENDTIME = #endtime#</isNotNull>
+      <isNotNull prepend=" and " property="discount_amount">DISCOUNT_AMOUNT = #discount_amount#</isNotNull>
+      <isNotNull prepend=" and " property="askcode">ASKCODE = #askcode#</isNotNull>
     </dynamic>
   </select>
-  <select id="selectPage" parameterClass="java.util.Map" resultMap="driver_orderResult">select ID,DRIVERTELPHONE,CUSTOMERTELPHONE,START_PLACE,START_TIME,STARTWAIT,ENDWAIT,END_PLACE,END_TIME,DISTANCE,FEE,STATUS,SOURCE,JUDGECUSTOMER,JUDGEDRIVER,ORDERNUM,CREATETIME,TIME from Driver_order
+  <select id="selectPage" parameterClass="java.util.Map" resultMap="driver_orderResult">select *  from Driver_order
     <dynamic prepend="where">
       <isNotNull prepend=" and " property="drivertelphone">DRIVERTELPHONE = #drivertelphone#</isNotNull>
       <isNotNull prepend=" and " property="customertelphone">CUSTOMERTELPHONE = #customertelphone#</isNotNull>
@@ -88,6 +100,10 @@
       <isNotNull prepend=" and " property="ordernum">ORDERNUM = #ordernum#</isNotNull>
       <isNotNull prepend=" and " property="createtime">CREATETIME = #createtime#</isNotNull>
       <isNotNull prepend=" and " property="time">TIME = #time#</isNotNull>
+      <isNotNull prepend=" and " property="begintime">BEGINTIME = #begintime#</isNotNull>
+      <isNotNull prepend=" and " property="endtime">ENDTIME = #endtime#</isNotNull>
+      <isNotNull prepend=" and " property="discount_amount">DISCOUNT_AMOUNT = #discount_amount#</isNotNull>
+      <isNotNull prepend=" and " property="askcode">ASKCODE = #askcode#</isNotNull>
     </dynamic>order by id desc limit #startIndex#,#endIndex#
   </select>
   <select id="selectCount" parameterClass="java.util.Map" resultClass="java.lang.Long">select count(id) from Driver_order 
@@ -109,6 +125,10 @@
       <isNotNull prepend=" and " property="ordernum">ORDERNUM = #ordernum#</isNotNull>
       <isNotNull prepend=" and " property="createtime">CREATETIME = #createtime#</isNotNull>
       <isNotNull prepend=" and " property="time">TIME = #time#</isNotNull>
+      <isNotNull prepend=" and " property="begintime">BEGINTIME = #begintime#</isNotNull>
+      <isNotNull prepend=" and " property="endtime">ENDTIME = #endtime#</isNotNull>
+      <isNotNull prepend=" and " property="discount_amount">DISCOUNT_AMOUNT = #discount_amount#</isNotNull>
+      <isNotNull prepend=" and " property="askcode">ASKCODE = #askcode#</isNotNull>
     </dynamic>
   </select>
   <select id="selectyesincome" parameterClass="java.util.Map" resultClass="java.lang.Float">select sum(fee) from Driver_order 

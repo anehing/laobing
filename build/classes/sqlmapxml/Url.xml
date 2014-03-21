@@ -18,16 +18,17 @@
       <isNotNull prepend="," property="url">URL = #url#</isNotNull>
     </dynamic>where id = #id#
   </update>
+  
   <select id="findById" parameterClass="java.lang.Integer" resultMap="urlResult">select * from URL where id = #id#</select>
   <select id="findNameById" parameterClass="java.lang.Integer" resultMap="urlResult">select * from URL where id = #id#</select>
-  <select id="selectAll" parameterClass="java.util.Map" resultMap="urlResult">select ID,PARENT_URL_ID,URL_NAME,URL from URL
+  <select id="selectAll" parameterClass="java.util.Map" resultMap="urlResult">select * from URL
     <dynamic prepend="where">
       <isNotNull prepend=" and " property="parent_url_id">PARENT_URL_ID = #parent_url_id#</isNotNull>
       <isNotNull prepend=" and " property="url_name">URL_NAME = #url_name#</isNotNull>
       <isNotNull prepend=" and " property="url">URL = #url#</isNotNull>
     </dynamic> order by id asc
   </select>
-  <select id="selectPage" parameterClass="java.util.Map" resultMap="urlResult">select ID,PARENT_URL_ID,URL_NAME,URL from URL
+  <select id="selectPage" parameterClass="java.util.Map" resultMap="urlResult">select * from URL
     <dynamic prepend="where">
       <isNotNull prepend=" and " property="parent_url_id">PARENT_URL_ID = #parent_url_id#</isNotNull>
       <isNotNull prepend=" and " property="url_name">URL_NAME = #url_name#</isNotNull>

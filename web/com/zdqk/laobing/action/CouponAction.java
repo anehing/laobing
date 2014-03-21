@@ -33,6 +33,7 @@ import com.zdqk.laobing.po.Coupon;
 		@InterceptorRef("simpleStack") })
 @Results({ @Result(name = "couponList", location = "/couponList.jsp"),
 	       @Result(name = "addCoupon", location = "/addCoupon.jsp"),
+	       @Result(name = "addCoupons", location = "/addCoupons.jsp"),
 	       @Result(name = "queryUser", type = "chain", location = "queryUser"),
 	       @Result(name = "addUser", location = "/addUser.jsp"),
 		})
@@ -53,9 +54,15 @@ public class CouponAction extends BasePaginationAction {
 	private String create_time;
 	private String touse_time;
 	private String tocreate_time;
-	
+	private int num;
 	 
-
+    
+	public int getNum() {
+		return num;
+	}
+	public void setNum(int num) {
+		this.num = num;
+	}
 	public String getTouse_time() {
 		return touse_time;
 	}
@@ -135,6 +142,32 @@ public class CouponAction extends BasePaginationAction {
 		}
 			
 			return "addCoupon";
+		
+	}
+	/**
+	 * @author ane
+	 *  添加后台账户
+	 */
+	@Action("addCoupons")
+	public String addCoupons() {
+		if(this.coupon!=null){
+			long code = new Date().getTime();
+			this.coupon.setCreate_time(new Date());
+			if (this.num>0){
+				for(int i=1;i<=num;i++){
+					this.coupon.setCoupon_num(code+""+i);
+					couponDAO.insert(this.coupon);
+				}
+				this.addActionMessage("新增成功");
+			}else{
+				this.addActionError("张数必须大于0");
+			}
+			
+		    
+			
+		}
+			
+			return "addCoupons";
 		
 	}
 	

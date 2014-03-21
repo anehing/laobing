@@ -18,11 +18,10 @@
 			    <s:hidden  name="publicnote.id" id="id" />
 				<tr>
 					<td width="15%" align="center" class="dataTd" >标题</td>
-					<td width="35%" align="left" class="dataTd" >
+					<td width="60%" align="left" class="dataTd" >
 					    <s:textfield id="title" name="publicnote.title"/>
 					</td>    
-					 <td width="15%" align="center" class="dataTd" ></td>
-					 <td width="35%" align="left" class="dataTd" > </td> 
+					 
 			    </tr>
 				<tr>
 				     <td width="15%" align="center" class="dataTd" >正文</td>

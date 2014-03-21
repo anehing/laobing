@@ -21,13 +21,15 @@
 	             <tr>
 		            <td width="10%" align="center" bgcolor="#F3F8FE" class="dataTdText">版本号</td>
 		            <td width="30%" align="left" bgcolor="#FFFFFF"> <s:textfield id="version" name="version.version" ></s:textfield></td>
-		            <td width="10%" align="center" bgcolor="#F3F8FE" class="dataTdText">手机类型</td>
-		            <td width="30%" align="left" class="dataTdText" bgcolor="#FFFFFF" >
-		               <s:select list="#{0:'iphone（用户端）',1:'android（用户端）',2:'android（司机端）'}" listKey="key" listValue="value" name ="version.type" id="type"  headerValue="请选择" headerKey="3" ></s:select>
-		            </td>
-                    <td rowspan="3" align="center" valign="middle" bgcolor="#FFFFFF">
+		            <td rowspan="3" align="center" valign="middle" bgcolor="#FFFFFF">
 			            <input	type="submit" class="inputBtn"   value="查询" style="cursor: pointer"  />
 		                <input	type="button" class="inputBtn"   value="清空" onClick="clearForm('form1')" style="cursor: pointer" />
+		            </td>
+		        </tr>
+	            <tr>
+		            <td width="15%" align="center" bgcolor="#F3F8FE" class="dataTdText">手机类型</td>
+		            <td width="60%" align="left" class="dataTdText" bgcolor="#FFFFFF" >
+		               <s:select list="#{0:'iphone（用户端）',1:'android（用户端）',2:'android（司机端）'}" listKey="key" listValue="value" name ="version.type" id="type"  headerValue="请选择" headerKey="3" ></s:select>
 		            </td>
 	            </tr>
 	            <tr>
@@ -35,9 +37,6 @@
 		            <td width="25%" align="left" bgcolor="#FFFFFF"> 
 		              <input type="text" name="create_time" id="create_time" class="tcal" value="${create_time}" />
 		            &nbsp;-<input type="text" name="tocreate_time" id="tocreate_time" class="tcal" value="${tocreate_time}" />
-		            </td>
-		            <td width="10%" align="center" bgcolor="#F3F8FE" class="dataTdText"></td>
-		            <td width="30%" align="left" class="dataTdText" bgcolor="#FFFFFF" >
 		            </td>
 	            </tr>
              </table>
@@ -52,6 +51,7 @@
 							<td class="topTd" align="center" width="8%">手机类型</td>
 							<td class="topTd" align="center" width="8%">版本号</td>
 							<td class="topTd" align="center" width="8%">更新时间</td>
+							<td class="topTd" align="center" width="8%">下载路径</td>
 							<td class="topTd" align="center" width="8%">操作</td>
 						</tr>
 						<s:if test="page.data.size > 0">
@@ -67,6 +67,7 @@
 								    </td>
 									<td class="dataTd" align="center">${t.version}</td>
 									<td class="dataTd" align="center"><fmt:formatDate value="${t.createtime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+									<td class="dataTd" align="center">${t.url}</td>
 									<td class="dataTd" align="center">
 									  <a href="queryVersionbyId.action?totype=1&id=${t.id}">修改</a> 
 									  <a href="queryVersionbyId.action?totype=2&id=${t.id}">删除</a>

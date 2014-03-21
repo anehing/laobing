@@ -21,7 +21,9 @@ public class User extends ResultVo implements Serializable{
 	private Date use_time;
 	private String askcode;//邀请码
     private int asktime;
-    private int isbind;//是否绑定优惠卷
+    private int isbind;//是否绑定短信验证码
+    private int useaskcode;//是否使用
+    private float discount_amount;
 	public String getUserIdStr() {
 		return userIdStr;
 	}
@@ -81,6 +83,18 @@ public class User extends ResultVo implements Serializable{
 	}
 	public void setIsbind(int isbind) {
 		this.isbind = isbind;
+	}
+	public int getUseaskcode() {
+		return useaskcode;
+	}
+	public void setUseaskcode(int useaskcode) {
+		this.useaskcode = useaskcode;
+	}
+	public float getDiscount_amount() {
+		return discount_amount;
+	}
+	public void setDiscount_amount(float discount_amount) {
+		this.discount_amount = discount_amount;
 	}
 	
 

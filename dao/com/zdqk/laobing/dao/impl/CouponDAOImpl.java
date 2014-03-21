@@ -40,5 +40,27 @@ public class CouponDAOImpl extends BasicDaoImpl<Coupon> implements CouponDAO<Cou
 	
 	}
 	
+	@Override
+	public Coupon selectByuse() {
+		// TODO Auto-generated method stub
+
+		Coupon Coupon = new Coupon();
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("is_use", 0);
+		map.put("is_invitation_code", 0);
+		List<Coupon> list=null;
+		try {
+			list=getSqlMapClientTemplate().queryForList(Coupon.getClass().getName()+".selectByNum",map);
+			
+		} catch (Exception e) {
+			System.out.println("数据连接失败，请检查数据服务是否开启");
+			throw new RuntimeException(e.getMessage());
+		}
+		if(list!=null && list.size()>0){
+			return list.get(0);
+		}else{
+			return null;
+		}
 	
+	}
 }

@@ -16,12 +16,26 @@
 	</div>
 
 	<s:form action="queryPre_price" method="post" id="form1" >
+	<div id="r0" align="center" >
+             <table class="dataTable" width="97%" border="0" align="center" cellpadding="0" cellspacing="1"  bgcolor="#93b5d1">
+	             <tr>
+		            <td width="10%" align="center" bgcolor="#F3F8FE" class="dataTdText">司机手机号</td>
+		            <td width="60%" align="left" bgcolor="#FFFFFF"> <s:textfield id="drivertelphone" name="pre_price.drivertelphone" ></s:textfield></td>
+		            <td rowspan="3" align="center" valign="middle" bgcolor="#FFFFFF">
+			            <input	type="submit" class="inputBtn"   value="查询" style="cursor: pointer"  />
+		                <input	type="button" class="inputBtn"   value="清空" onClick="clearForm('form1')" style="cursor: pointer" />
+		            </td>
+		        </tr>
+             </table>
+        </div>
 		<div align="center">
 			<div class="data0">
 				<div class="data1">
 					<table class="dataTable" width="100%" border="0" cellspacing="0" cellpadding="0">
 						<tr>
 							<td class="topTd" align="center" width="8%">序号</td>
+							<td class="topTd" align="center" width="8%">司机姓名</td>
+							<td class="topTd" align="center" width="8%">司机手机号</td>
 							<td class="topTd" align="center" width="8%">预付款额度</td>
 							<td class="topTd" align="center" width="8%">操作</td>
 						</tr>
@@ -31,9 +45,11 @@
 									<td class="dataTd" align="center">
 										${s.index+1+page.pageSize*(PageNo-1)}
 									</td>
+									<td class="dataTd" align="center">${t.drivername}</td>
+									<td class="dataTd" align="center">${t.drivertelphone}</td>
 									<td class="dataTd" align="center">${t.pre_price}元</td>
 									<td class="dataTd" align="center">
-									  <a href="queryPre_pricebyId.action?totype=2&id=${t.id}">删除</a>
+									<a href="querypre_pricebyId.action?totype=1&id=${t.id}">充值</a>
 									</td>
 								</tr>
 							</s:iterator>

@@ -83,7 +83,11 @@ html {
 				    	<td width="35%" align="left" class="dataTd" >
 				        	<s:textfield name="driver.times"  id="times" /></td>
 				   </tr>	
-				  
+				   <tr>
+				    	<td width="15%" align="center" class="dataTd" >预付款金额</td>
+				    	<td width="35%" align="left" class="dataTd" >
+				        	<s:textfield name="price"  id="price" /></td>
+				   </tr>
 				   <tr>
 						<td bgcolor="#edf2f8" colspan="8" align="center">
 						    <input	type="submit" class="inputBtn"   value="提交" style="cursor: pointer" />
@@ -114,6 +118,11 @@ function checkSubmit(){
 	 if(!checkNull(age)){
 	      showErrorMsg("年龄不能为空");
 	      return false;
+	 }else{
+		 if(age<=18||age>=60){
+			  showErrorMsg("年龄应该为18到60岁");
+		      return false;
+		 }
 	 }
 	 var city=document.getElementById("city").value;
 	 if(!checkNull(city)){
@@ -124,12 +133,22 @@ function checkSubmit(){
 	 if(!checkNull(telphone)){
 	      showErrorMsg("手机号不能为空");
 	      return false;
+	 }else{
+		 var pattern=/(^13\d{9}$)|(^15[0,1,2,3,5,6,7,8,9]\d{8}$)|(^18[0,2,5,6,7,8,9]\d{8}$)|(^147\d{8}$)/g;
+		 if(!pattern.test(telphone)) {
+			 showErrorMsg("手机号格式不正确");
+		     return false; 
+		 }
 	 }
-	
 	 var ident_num=document.getElementById("ident_num").value;
 	 if(!checkNull(ident_num)){
 	      showErrorMsg("身份证号不能为空");
 	      return false;
+	 }else{
+		 if(!/^\d{6}(18|19|20)?\d{2}(0[1-9]|1[12])(0[1-9]|[12]\d|3[01])\d{3}(\d|X)$/i.test(ident_num)){
+			 showErrorMsg("身份证号格式不正确");
+		      return false;
+		 }
 	 }
 	 var drive_card=document.getElementById("drive_card").value;
 	 if(!checkNull(drive_card)){
@@ -141,7 +160,29 @@ function checkSubmit(){
 	      showErrorMsg("驾龄不能为空");
 	      return false;
 	 }
-	 
+	 var times = document.getElementById("times").value;
+	 if(checkNull(times)){
+		 var strP=/^\d+(\.\d+)?$/; 
+		 if(!strP.test(times)){
+			 showErrorMsg("代驾次数只能为数字");
+		      return false;
+		 } 
+	 }
+	 var price=document.getElementById("price").value;
+	 if(!checkNull(price)){
+	      showErrorMsg("预付款不能为空");
+	      return false;
+	 }else if(price<=0){
+		 showErrorMsg("预付款必须大于0");
+	      return false;
+	 } 
+	 else{
+		 var patrn=/^([+]?)\d*\.?\d+$/;
+		 if (!patrn.test(price)){
+			 showErrorMsg("预付款输入格式不正确");
+			 return false
+		 }
+	 }
 	 return true;	
 }
 function checkFileType(filename){
@@ -165,4 +206,5 @@ function set(obj){
 	var checkText=$("#cityid").find("option:selected").text();  //获取Select选择的Text
 	 document.getElementById("mc").value = checkText;
 }
+
 </script>

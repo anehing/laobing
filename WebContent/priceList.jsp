@@ -19,12 +19,9 @@
 	    <div id="r0" align="center" >
              <table class="dataTable" width="97%" border="0" align="center" cellpadding="0" cellspacing="1"  bgcolor="#93b5d1">
 	             <tr>
-		            <td width="10%" align="center" bgcolor="#F3F8FE" class="dataTdText">城市</td>
-		            <td width="30%" align="left" bgcolor="#FFFFFF"> 
+		            <td width="15%" align="center" bgcolor="#F3F8FE" class="dataTdText">城市</td>
+		            <td width="60%" align="left" bgcolor="#FFFFFF"> 
 		                 <s:select list="dmb_citylist" listKey="mc" listValue="mc" name ="price.note" id="note"  headerValue="请选择" headerKey="请选择" ></s:select>
-		            </td>
-		            <td width="10%" align="center" bgcolor="#F3F8FE" class="dataTdText"></td>
-		            <td width="30%" align="left" class="dataTdText" bgcolor="#FFFFFF" >
 		            </td>
                     <td rowspan="3" align="center" valign="middle" bgcolor="#FFFFFF">
 			            <input	type="submit" class="inputBtn"   value="查询" style="cursor: pointer"  />

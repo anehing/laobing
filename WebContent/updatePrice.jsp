@@ -21,22 +21,22 @@
 					<td width="15%" align="center" class="dataTd" >城市</td>
 					<td width="35%" align="left" class="dataTd" >
 					    <s:select list="dmb_citylist" listKey="id" listValue="mc" name ="price.cityid" id="cityid"  headerValue="请选择" headerKey="0" onchange="set(this);"></s:select>
-					</td>    
+					</td>   
+				</tr>
+			
+				<tr>
+				    <td width="15%" align="center" class="dataTd" >价格（￥）</td>
+					<td width="60%" align="left" class="dataTd" >
+					    <s:textfield name="price.price" id="price"/>
+					</td>
+				</tr>
+				<tr> 
 				    <td width="15%" align="center" class="dataTd" >时间段</td>
 					<td width="35%" align="left" class="dataTd" >
 					    <s:radio label="时间段" name ="price.time" id="time"
 					             list= "#{'07:00-21:59':'&nbsp;07:00-21:59','22:00-22:59':'&nbsp;22:00-22:59','23:00-23:59':'&nbsp;23:00-23:59','00:00-06:59':'&nbsp;00:00-06:59'}"  
 					             listKey="key" listValue="value" value="price.time" />
 					</td> 
-				</tr>
-				<tr>
-				    <td width="15%" align="center" class="dataTd" >价格（￥）</td>
-					<td width="35%" align="left" class="dataTd" >
-					    <s:textfield name="price.price" id="price"/>
-					</td>
-					<td width="15%" align="center" class="dataTd" ></td>
-					<td width="35%" align="left" class="dataTd" >
-					</td>
 				</tr>
 				<tr>
 					<td bgcolor="#edf2f8" colspan="8" align="center">

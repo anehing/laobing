@@ -25,13 +25,13 @@ public class Coupon implements Serializable{
 	@TODO("telphone")
 	private String telphone;
 	@TODO("is_use")		
-    private int is_use;
+    private int is_use;//0:未使用。1:使用
 	@TODO("discount_amount")		
     private float discount_amount;
 	@TODO("use_time")		
     private Date use_time;
 	@TODO("is_invitation_code")		
-    private int is_invitation_code;
+    private int is_invitation_code;//0:邀请码，1:优惠券
 	@TODO("create_time")		
     private Date create_time;
 	@TODO("note")		

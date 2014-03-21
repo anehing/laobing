@@ -18,23 +18,22 @@
 			    <s:hidden  name="version.id" id="id" />
 				<tr>
 					<td width="15%" align="center" class="dataTd" >版本号</td>
-					<td width="35%" align="left" class="dataTd" >
+					<td width="60%" align="left" class="dataTd" >
 					    <s:textfield id="version" name="version.version"/>
-					</td>    
-				    <td width="15%" align="center" class="dataTd" >手机类型</td>
-					<td width="35%" align="left" class="dataTd" >
-					    <s:radio label="手机类型" name ="version.type" id="type"
-					             list= "#{0:'&nbsp;iphone（用户端）',1:'&nbsp;android（用户端）',2:'&nbsp;android（司机端）'}"  
-					             listKey="key" listValue="value" value="version.type" />
-					</td>
+					</td> 
 				</tr>
 				<tr>
 				    <td width="15%" align="center" class="dataTd" >下载地址</td>
 					<td width="35%" align="left" class="dataTd" >
 					    <s:textfield name="version.url" id="url"/>
 					</td>
-					<td width="15%" align="center" class="dataTd" ></td>
+				</tr>
+				<tr>   
+				    <td width="15%" align="center" class="dataTd" >手机类型</td>
 					<td width="35%" align="left" class="dataTd" >
+					    <s:radio label="手机类型" name ="version.type" id="type"
+					             list= "#{0:'&nbsp;iphone（用户端）',1:'&nbsp;android（用户端）',2:'&nbsp;android（司机端）'}"  
+					             listKey="key" listValue="value" value="version.type" />
 					</td>
 				</tr>
 				<tr>

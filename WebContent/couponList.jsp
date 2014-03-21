@@ -23,15 +23,24 @@
 		            <td width="30%" align="left" bgcolor="#FFFFFF"> 
 		                <s:textfield id="coupon_num" name="coupon.coupon_num" ></s:textfield>
 		            </td>
-		            <td width="10%" align="center" bgcolor="#F3F8FE" class="dataTdText">是否是邀请码</td>
-		            <td width="30%" align="left" class="dataTdText" bgcolor="#FFFFFF" >
-		                <s:select list="#{0:'邀请码',1:'优惠券'}" listKey="key" listValue="value" name ="coupon.is_invitation_code" id="is_invitation_code"  headerValue="请选择" headerKey="3" ></s:select>
-		            </td>
-		            <td rowspan="3" align="center" valign="middle" bgcolor="#FFFFFF">
+		             <td rowspan="5" align="center" valign="middle" bgcolor="#FFFFFF">
 			            <input	type="submit" class="inputBtn"   value="查询" style="cursor: pointer"  />
 		                <input	type="button" class="inputBtn"   value="清空" onClick="clearForm('form1')" style="cursor: pointer" />
 		            </td>
+		        </tr>
+	            <tr>
+		            <td width="15%" align="center" bgcolor="#F3F8FE" class="dataTdText">是否是邀请码</td>
+		            <td width="60%" align="left" class="dataTdText" bgcolor="#FFFFFF" >
+		                <s:select list="#{0:'邀请码',1:'优惠券'}" listKey="key" listValue="value" name ="coupon.is_invitation_code" id="is_invitation_code"  headerValue="请选择" headerKey="3" ></s:select>
+		            </td>
+		           
 	            </tr>
+	            <tr>   
+		            <td width="10%" align="center" bgcolor="#F3F8FE" class="dataTdText">是否已使用</td>
+		            <td width="30%" align="left" class="dataTdText" bgcolor="#FFFFFF" >
+		                <s:select list="#{0:'未使用',1:'已使用'}" listKey="key" listValue="value" name ="coupon.is_use" id="is_use"  headerValue="请选择" headerKey="3" ></s:select>
+		            </td>
+		        </tr>  
 	            <tr>   
 		            
 		            <td width="10%" align="center" bgcolor="#F3F8FE" class="dataTdText">录入时间</td>
@@ -39,21 +48,15 @@
 		                <input type="text" name="create_time" id="create_time" class="tcal" value="${create_time}"  />
 		            &nbsp;-<input type="text" name="tocreate_time" id="tocreate_time" class="tcal" value="${tocreate_time}" />
 		            </td>
+		         </tr>  
+	            <tr>
 		            <td width="10%" align="center" bgcolor="#F3F8FE" class="dataTdText">使用时间</td>
 		            <td width="30%" align="left" bgcolor="#FFFFFF"> 
 		                <input type="text" name="use_time" id="use_time" class="tcal" value="${use_time}" />
 		             &nbsp;-<input type="text" name="touse_time" id="touse_time" class="tcal" value="${touse_time}" />
 		            </td>
 		        </tr> 
-		        <tr>   
-		            <td width="10%" align="center" bgcolor="#F3F8FE" class="dataTdText">是否已使用</td>
-		            <td width="30%" align="left" class="dataTdText" bgcolor="#FFFFFF" >
-		                <s:select list="#{0:'未使用',1:'已使用'}" listKey="key" listValue="value" name ="coupon.is_use" id="is_use"  headerValue="请选择" headerKey="3" ></s:select>
-		            </td>
-		            <td width="10%" align="center" bgcolor="#F3F8FE" class="dataTdText"></td>
-		            <td width="30%" align="left" bgcolor="#FFFFFF"> 
-		            </td>
-		        </tr>  
+		        
              </table>
         </div>
 		<div align="center">

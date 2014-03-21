@@ -38,6 +38,29 @@
 					             listKey="key" listValue="value" value="customer_order.status" />
 					    </td>
 				   </tr>
+				   <tr>
+				    	<td width="15%" align="center" class="dataTd" >司机手机号</td>
+					    <td colspan="3" align="left" class="dataTd" >
+					    	<c:if test="${customer_order.driver eq 1}">
+					    		<s:textfield name="customer_order.drivernum1" id="drivernum1"/>
+					    	</c:if>
+						 	<c:if test="${customer_order.driver eq 2}">
+						 		<s:textfield name="customer_order.drivernum1" id="drivernum1"/>
+						 		<s:textfield name="customer_order.drivernum2" id="drivernum2"/>
+						 	</c:if>	
+						 	<c:if test="${customer_order.driver eq 3}">
+						 		<s:textfield name="customer_order.drivernum1" id="drivernum1"/>
+						 		<s:textfield name="customer_order.drivernum2" id="drivernum2"/>
+						 		<s:textfield name="customer_order.drivernum3" id="drivernum3"/>
+						 	</c:if>
+							<c:if test="${customer_order.driver eq 4}">
+								<s:textfield name="customer_order.drivernum1" id="drivernum1"/>
+								<s:textfield name="customer_order.drivernum2" id="drivernum2"/>
+								<s:textfield name="customer_order.drivernum3" id="drivernum3"/>
+								<s:textfield name="customer_order.drivernum4" id="drivernum4"/>
+							</c:if>
+				    	</td> 
+				   </tr>
 				<tr>
 					<td bgcolor="#edf2f8" colspan="8" align="center">
 						<input	type="submit" class="inputBtn"   value="确定" style="cursor: pointer" />
@@ -51,69 +74,59 @@
 </body>
 <script type="text/javascript">
 function checkSubmit(){
-
-	 var batchFileName = document.getElementById("batchFileName").value;
-	 if(!checkFileType(batchFileName) ){
-			return false;
-	} 	   
-	 var name=document.getElementById("name").value;
-	 if(!checkNull(name)){
-	      showErrorMsg("姓名不能为空");
-	      return false;
-	 }
-	 var age=document.getElementById("age").value;
-	 if(!checkNull(age)){
-	      showErrorMsg("年龄不能为空");
-	      return false;
-	 }
-	 var city=document.getElementById("city").value;
-	 if(!checkNull(city)){
-	      showErrorMsg("籍贯不能为空");
-	      return false;
-	 }
-	 var telphone=document.getElementById("telphone").value;
-	 if(!checkNull(telphone)){
-	      showErrorMsg("手机号不能为空");
-	      return false;
-	 }
+	/*  var driver = document.getElementById("driver").value;
+	 var telphone1=document.getElementById("drivernum1").value;
+	 var telphone2=document.getElementById("drivernum2").value;
+	 var telphone3=document.getElementById("drivernum3").value;
+	 var telphone4=document.getElementById("drivernum4").value;
+	 if (driver = 1){
+		 if(!checkNull(telphone1)){
+		      showErrorMsg("司机手机号不能为空");
+		      return false;
+		 }  
+	 }else if (driver = 2){
+		 if(!checkNull(telphone1)){
+		      showErrorMsg("司机手机号不能为空");
+		      return false;
+		 }  
+		 if(!checkNull(telphone2)){
+		      showErrorMsg("司机手机号不能为空");
+		      return false;
+		 }  
+	 }else if (driver = 3){
+		 if(!checkNull(telphone1)){
+		      showErrorMsg("司机手机号不能为空");
+		      return false;
+		 }  
+		 if(!checkNull(telphone2)){
+		      showErrorMsg("司机手机号不能为空");
+		      return false;
+		 }  
+		 if(!checkNull(telphone3)){
+		      showErrorMsg("司机手机号不能为空");
+		      return false;
+		 }  
+	 }else{
+		 if(!checkNull(telphone1)){
+		      showErrorMsg("司机手机号不能为空");
+		      return false;
+		 }  
+		 if(!checkNull(telphone2)){
+		      showErrorMsg("司机手机号不能为空");
+		      return false;
+		 }  
+		 if(!checkNull(telphone3)){
+		      showErrorMsg("司机手机号不能为空");
+		      return false;
+		 } 
+		 if(!checkNull(telphone4)){
+		      showErrorMsg("司机手机号不能为空");
+		      return false;
+		 } 
+	 } */
 	
-	 var ident_num=document.getElementById("ident_num").value;
-	 if(!checkNull(ident_num)){
-	      showErrorMsg("身份证号不能为空");
-	      return false;
-	 }
-	 var drive_card=document.getElementById("drive_card").value;
-	 if(!checkNull(drive_card)){
-	      showErrorMsg("驾照号不能为空");
-	      return false;
-	 }
-	 var year=document.getElementById("year").value;
-	 if(!checkNull(year)){
-	      showErrorMsg("驾龄不能为空");
-	      return false;
-	 }
-	  
+	 
 	 return true;	
 }
-	function copyBatchFile(obj, n) {
-		var name=obj.value;
-	    document.getElementById("batchFileName").value=name.substring(name.lastIndexOf("\\")+1);
-	}
-	function checkFileType(filename){
-		if(filename != ""){
-			if(filename.indexOf(".")!=-1){
-				var  tem = filename.substring(filename.lastIndexOf(".")+1).toLowerCase();
-				if(tem == "png" || tem == "jpg" || tem == "jpeg" || tem == "gif" || tem == "bmp"){
-	                 return  true;
-				}else{
-					showErrorMsg("只能上传格式为png,jpg,gif,bmp,jpeg的图片文件");
-					return false;
-				}
-	        }
-		}
-	}
-	function set(obj){
-		var checkText=$("#cityid").find("option:selected").text();  //获取Select选择的Text
-		 document.getElementById("mc").value = checkText;
-	}
+	
 </script>

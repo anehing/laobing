@@ -70,6 +70,7 @@
     <dynamic prepend="where">
       <isNotNull prepend=" and " property="coupon_num">COUPON_NUM = #coupon_num#</isNotNull>
       <isNotNull prepend=" and " property="telphone">TELPHONE = #telphone#</isNotNull>
+      <isNotNull prepend=" and " property="is_use">IS_USE = #is_use#</isNotNull>
     </dynamic>
   </select>
 </sqlMap>

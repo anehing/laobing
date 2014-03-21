@@ -27,7 +27,9 @@ import org.apache.struts2.convention.annotation.ParentPackage;
 import com.jtd.sms.SmsImpl;
 import com.jtd.sms.SmsInterface;
 import com.zdqk.laobing.action.vo.ResultVo;
+import com.zdqk.laobing.dao.CouponDAO;
 import com.zdqk.laobing.dao.UserDAO;
+import com.zdqk.laobing.po.Coupon;
 import com.zdqk.laobing.po.User;
 import com.zdqk.laobing.service.ILoginService;
 import com.zdqk.laobing.tools.FxJsonUtil;
@@ -46,15 +48,17 @@ public class JsonUsersAction extends JsonBaseAction {
 	
 	private static final long serialVersionUID = 1L;
 	private static String resutUrl = "UserJsonList";	
-	private static String Url = "http://116.90.87.221/qxt_jtd/service/SmsService";
-	private String username="jddl";
-	private String password="jddl123";
+	private String username="jddlwl";
+	private String password="jddlwl";
 	
 	@Autowired
 	private UserDAO<User> userDAO;	
 	@Autowired
-	private ILoginService iLoginService;	
+	private ILoginService iLoginService;
+	@Autowired
+	private CouponDAO couponDAO;
 	
+	private Coupon coupon;
 	private User user;	
 	private String telphone;
 	private String askcode;
@@ -133,7 +137,7 @@ public class JsonUsersAction extends JsonBaseAction {
 			return FxJsonUtil.jsonHandle(rv,resutUrl,request);
 		}else{
 			Map map = new HashMap();
-			//map.put("isbind",1);
+			map.put("isbind",1);
 			map.put("telphone",this.telphone);
 			List<User> userList = publicQueryNoPage(map, new User(), userDAO);
 			if(userList!=null && userList.size()>0){
@@ -143,30 +147,42 @@ public class JsonUsersAction extends JsonBaseAction {
 				//发送验证码
 				Long num=Math.round(Math.random() * 100000);
 				String content = new String("您的验证码是："+num.toString()+"。请不要把验证码泄露给其他人。");
+				
 				try {
-					SmsInterface s=SmsImpl.getInterface(this.Url);
-					System.out.println(s.getBalance("jddl", "jddl123"));
-					String mes=s.sendSms(this.username, this.password, this.telphone, content, "43");
-					System.out.println(s.getReport("jddl", "jddl123")); 
-					System.out.println(mes); 
-					 
-				} catch (MalformedURLException e) {
+					sendsms.sendmsg(username, password, this.telphone, content);
+				} catch (HttpException e) {
 					// TODO Auto-generated catch block
 					 rv = new ResultVo(7,"验证码发送失败");
-					 return FxJsonUtil.jsonHandle(rv,resutUrl,request);
-				} catch (RemoteException e) {
+				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					 rv = new ResultVo(7,"验证码发送失败");
-					 return FxJsonUtil.jsonHandle(rv,resutUrl,request);
-				} catch (ServiceException e) {
-					// TODO Auto-generated catch block
-					 rv = new ResultVo(7,"验证码发送失败");
-					 return FxJsonUtil.jsonHandle(rv,resutUrl,request);
 				}
+//				try {
+//					SmsInterface s=SmsImpl.getInterface(this.Url);
+//					System.out.println(s.getBalance("jddl", "jddl123"));
+//					String mes=s.sendSms(this.username, this.password, this.telphone, content, "43");
+//					System.out.println(s.getReport("jddl", "jddl123")); 
+//					System.out.println(mes); 
+//					 
+//				} catch (MalformedURLException e) {
+//					// TODO Auto-generated catch block
+//					 rv = new ResultVo(7,"验证码发送失败");
+//					 return FxJsonUtil.jsonHandle(rv,resutUrl,request);
+//				} catch (RemoteException e) {
+//					// TODO Auto-generated catch block
+//					 rv = new ResultVo(7,"验证码发送失败");
+//					 return FxJsonUtil.jsonHandle(rv,resutUrl,request);
+//				} catch (ServiceException e) {
+//					// TODO Auto-generated catch block
+//					 rv = new ResultVo(7,"验证码发送失败");
+//					 return FxJsonUtil.jsonHandle(rv,resutUrl,request);
+//				}
 				User u=new User();
 				u.setTelphone(this.telphone);
 				u.setIsbind(0);
-				u.setAskcode(num.toString());
+				Coupon c= (Coupon) couponDAO.selectByuse();
+				u.setAskcode(c.getCoupon_num());
+				u.setUseaskcode(0);
 				flag=userDAO.insert(u);
 				if(flag){
 					System.out.println("短信提交成功");

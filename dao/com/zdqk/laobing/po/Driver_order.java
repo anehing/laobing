@@ -22,14 +22,15 @@ public class Driver_order implements Serializable{
     private String customertelphone;
 	@TODO("start_place")	
 	private String start_place;
+	@TODO("end_place")
+	private String end_place;
 	@TODO("start_time")
 	private int start_time;	
 	@TODO("startwait")
     private Date startwait;
 	@TODO("endwait")
     private Date endwait;
-	@TODO("end_place")
-	private String end_place;	
+		
 	@TODO("end_time")	
     private Date end_time;
 	@TODO("distance")
@@ -50,8 +51,14 @@ public class Driver_order implements Serializable{
     private Date createtime;
 	@TODO("time")		
     private long time;
-	
-	
+	@TODO("begintime")		
+    private String begintime;
+	@TODO("endtime")		
+    private String endtime;
+	@TODO("discount_amount")
+	private String discount_amount;
+	@TODO("askcode")		
+    private String askcode;
 	public int getId() {
 		return id;
 	}
@@ -159,6 +166,30 @@ public class Driver_order implements Serializable{
 	}
 	public void setTime(long time) {
 		this.time = time;
+	}
+	public String getBegintime() {
+		return begintime;
+	}
+	public void setBegintime(String begintime) {
+		this.begintime = begintime;
+	}
+	public String getEndtime() {
+		return endtime;
+	}
+	public void setEndtime(String endtime) {
+		this.endtime = endtime;
+	}
+	public String getDiscount_amount() {
+		return discount_amount;
+	}
+	public void setDiscount_amount(String discount_amount) {
+		this.discount_amount = discount_amount;
+	}
+	public String getAskcode() {
+		return askcode;
+	}
+	public void setAskcode(String askcode) {
+		this.askcode = askcode;
 	}
 	
 	

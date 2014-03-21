@@ -49,6 +49,10 @@
   <select id="selectByType" parameterClass="java.util.Map" resultMap="versionResult"> select * from VERSION
      <dynamic prepend="where">
       <isNotNull prepend=" and " property="type">TYPE = #type#</isNotNull>
+      <isNotNull prepend=" and " property="version">
+       <![CDATA[ 
+	         version > #version#
+	      ]]></isNotNull>
     </dynamic>
   </select>
 </sqlMap>

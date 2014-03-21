@@ -30,29 +30,33 @@ html {
 					    <td width="35%" align="left" class="dataTd" >
 					        <s:textfield id="title" name="twitter.title"/>
 					    </td>    
-				        <td width="15%" align="center" class="dataTd" ></td>
+		<!-- 		        <td width="15%" align="center" class="dataTd" ></td>
 					    <td width="35%" align="left" class="dataTd" >
-				    	</td> 
+				    	</td>  -->
 				   </tr>
-				   <tr>
-				        <td width="15%" align="center" class="dataTd" >正文</td>
-					    <td colspan="3"  >
-					        <s:textarea name="twitter.content" id="content" cols="130" rows="3"/>
-				    	</td> 
-				    	
+				      <tr>
+					 <td width="15%" align="center" class="dataTd" >城市</td>
+				     	<td width="70%" align="left" class="dataTd" >
+					        <s:select list="dmb_citylist" listKey="mc" listValue="mc" name ="twitter.mc" id="mc"  headerValue="请选择" headerKey="0"  ></s:select>
+					    </td>
 				   </tr>
-				   <tr>
+				     <tr>
 				        <td width="15%" align="center" class="dataTd" >推送类型</td>
 				     	<td width="35%" align="left" class="dataTd" >
 					        <s:radio label="推送类型" name ="twitter.sendtype" id="sendtype"
 					             list= "#{0:'&nbsp;所有用户都收到',1:'&nbsp;按城市用户推送'}"  
 					             listKey="key" listValue="value" value="0"/>
 					   </td>
-					 <td width="15%" align="center" class="dataTd" >城市</td>
-				     	<td width="35%" align="left" class="dataTd" >
-					        <s:select list="dmb_citylist" listKey="mc" listValue="mc" name ="twitter.mc" id="mc"  headerValue="请选择" headerKey="0"  ></s:select>
-					    </td>
+					   </tr>
+				  
+				   <tr>
+				        <td width="15%"  align="center" class="dataTd" >正文</td>
+					    <td colspan="3"   >
+					        <s:textarea name="twitter.content" id="content" cols="130" rows="3"/>
+				    	</td> 
+				    	
 				   </tr>
+				 
 				   <tr>
 						<td bgcolor="#edf2f8" colspan="8" align="center">
 						    <input	type="submit" class="inputBtn"   value="提交" style="cursor: pointer" />

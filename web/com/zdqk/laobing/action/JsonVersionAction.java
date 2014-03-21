@@ -68,13 +68,24 @@ public class JsonVersionAction extends JsonBaseAction {
 	 * */
 	@Action("updateApp")
 	public String updateAppAction(){
-		Map<String, Integer> map = new HashMap<String, Integer>();
+		Map<String, Object> map = new HashMap<String, Object>();
 		ResultVo rv = null;
 		if(this.version==null){
 			rv = new ResultVo(3,"缺少参数:version");
 			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
 		}
+		double ver=0;
+		try{
+			ver= Double.parseDouble(this.version);
+		}catch(Exception e){
+			rv = new ResultVo(3,"版本必须为数字");
+			return FxJsonUtil.jsonHandle(rv,resutUrl,request);
+		}if(ver ==0){
+			rv = new ResultVo(3,"版本必须为数字");
+			return FxJsonUtil.jsonHandle(rv,resutUrl,request);
+		}
 		map.put("type",Integer.parseInt(this.type));
+		map.put("version",ver);
 	    Version version=(Version) versionDAO.updateApp(map, this.version);
 	    if(version==null){
 	    	if(this.type.equals("1")){

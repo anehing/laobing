@@ -19,7 +19,7 @@ public class User implements Serializable{
 	@TODO("telphone")	
 	private String telphone;	
 	@TODO("self_code")
-	private String self_code;	
+	private String self_code;
 	@TODO("use_code")	
     private String use_code;
 	@TODO("logintime")
@@ -31,7 +31,11 @@ public class User implements Serializable{
 	@TODO("asktime")
     private int asktime;
 	@TODO("isbind")
-    private int isbind;//是否绑定优惠券1：是
+    private int isbind;//是否绑定验证码1：是
+	@TODO("useaskcode")
+    private int useaskcode;//是否使用过优惠券0：没有:有
+	@TODO("discount_amount")		
+    private float discount_amount;
 	public int getId() {
 		return id;
 	}
@@ -85,6 +89,18 @@ public class User implements Serializable{
 	}
 	public void setIsbind(int isbind) {
 		this.isbind = isbind;
+	}
+	public int getUseaskcode() {
+		return useaskcode;
+	}
+	public void setUseaskcode(int useaskcode) {
+		this.useaskcode = useaskcode;
+	}
+	public float getDiscount_amount() {
+		return discount_amount;
+	}
+	public void setDiscount_amount(float discount_amount) {
+		this.discount_amount = discount_amount;
 	}
 	
 	

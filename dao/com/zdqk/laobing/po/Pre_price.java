@@ -18,6 +18,10 @@ public class Pre_price implements Serializable{
     private int id;
 	@TODO("pre_price")		
     private float pre_price;
+	@TODO("drivername")		
+    private String drivername;
+	@TODO("drivertelphone")		
+    private String drivertelphone;
 	public int getId() {
 		return id;
 	}
@@ -29,6 +33,18 @@ public class Pre_price implements Serializable{
 	}
 	public void setPre_price(float pre_price) {
 		this.pre_price = pre_price;
+	}
+	public String getDrivername() {
+		return drivername;
+	}
+	public void setDrivername(String drivername) {
+		this.drivername = drivername;
+	}
+	public String getDrivertelphone() {
+		return drivertelphone;
+	}
+	public void setDrivertelphone(String drivertelphone) {
+		this.drivertelphone = drivertelphone;
 	}
 	
 	

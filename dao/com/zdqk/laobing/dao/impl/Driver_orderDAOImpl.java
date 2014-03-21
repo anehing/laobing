@@ -2,11 +2,13 @@ package com.zdqk.laobing.dao.impl;
 
 
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Component;
 
 import com.zdqk.laobing.dao.Driver_orderDAO;
+import com.zdqk.laobing.po.Customer_order;
 import com.zdqk.laobing.po.Driver_order;
 
 
@@ -78,6 +80,25 @@ public class Driver_orderDAOImpl extends BasicDaoImpl<Driver_order> implements D
 
 		return selectallincome;
 	}
-	
+	@Override
+	public Driver_order selectdriverorder(Map<String, Object> map, String hzm) {
+		// TODO Auto-generated method stub
+		   Driver_order d= new Driver_order();
+		   List<Driver_order> list=null;
+		try{
+			
+			list=getSqlMapClientTemplate().queryForList(d.getClass().getName()+"."+hzm,map);
+				
+		}catch(Exception e){
+			System.out.println("数据连接失败，请检查数据服务是否开启");
+			throw new RuntimeException(e.getMessage());
+		}
+		if(list!=null && list.size()>0){ 
+			return list.get(0);
+        }	
+		
+		return null;
+		
+	}
 	
 }

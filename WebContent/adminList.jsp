@@ -21,10 +21,10 @@
 	             <tr>
 		            <td width="10%" align="center" bgcolor="#F3F8FE" class="dataTdText">用户名称</td>
 		            <td width="30%" align="left" bgcolor="#FFFFFF"> <s:textfield id="username" name="admin.username" ></s:textfield></td>
-		            <td width="10%" align="center" bgcolor="#F3F8FE" class="dataTdText">用户类型</td>
+		           <%--  <td width="10%" align="center" bgcolor="#F3F8FE" class="dataTdText">用户类型</td>
 		            <td width="30%" align="left" class="dataTdText" bgcolor="#FFFFFF" >
 		               <s:select list="#{0:'普通用户',1:'管理员'}" listKey="key" listValue="value" name ="admin.usertype" id="usertype"  headerValue="请选择" headerKey="3" ></s:select>
-		            </td>
+		            </td> --%>
                     <td rowspan="3" align="center" valign="middle" bgcolor="#FFFFFF">
 			            <input	type="submit" class="inputBtn"   value="查询" style="cursor: pointer"  />
 		                <input	type="button" class="inputBtn"   value="清空" onClick="clearForm('form1')" style="cursor: pointer" />
@@ -34,8 +34,15 @@
 		            <td width="10%" align="center" bgcolor="#F3F8FE" class="dataTdText">状&nbsp;&nbsp;&nbsp;态</td>
 		            <td width="30%" align="left" class="dataTdText" bgcolor="#FFFFFF" >
 		            <s:select list="#{0:'可用',1:'不可用'}" listKey="key" listValue="value" name ="admin.status" id="status"  headerValue="请选择" headerKey="3" ></s:select>
-	                <td width="10%" align="center" bgcolor="#F3F8FE" class="dataTdText"></td>
-		            <td width="25%" align="left" bgcolor="#FFFFFF"> </td>
+	                <!-- <td width="10%" align="center" bgcolor="#F3F8FE" class="dataTdText"></td>
+		            <td width="25%" align="left" bgcolor="#FFFFFF"> </td> -->
+	            </tr>
+	             <tr>
+		            <td width="10%" align="center" bgcolor="#F3F8FE" class="dataTdText">用户类型</td>
+		            <td width="70%" align="left" class="dataTdText" bgcolor="#FFFFFF" >
+		               <s:select list="#{0:'普通用户',1:'管理员'}" listKey="key" listValue="value" name ="admin.usertype" id="usertype"  headerValue="请选择" headerKey="3" ></s:select>
+		            </td> 
+		             
 	            </tr>
              </table>
         </div>

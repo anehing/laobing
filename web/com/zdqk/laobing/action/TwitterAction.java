@@ -61,8 +61,8 @@ public class TwitterAction extends BasePaginationAction {
     private String createtime;
 	private String tocreatetime;
     
-	private String masterSecret;
-	private String appKey;
+	private String masterSecret = "0777d1b54666a10bd10d7b2f";
+	private String appKey= "69ea07bcd736023af6ed3b3c";
 	private  JPushClient jpush = null;
 
     public static final int MAX = Integer.MAX_VALUE;

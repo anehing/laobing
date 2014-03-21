@@ -1,5 +1,7 @@
 package com.zdqk.laobing.action;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -60,6 +62,10 @@ public class AdminAction extends BasePaginationAction {
 	 */
 	@Action("queryAdmin")
 	public String queryAdmin() {
+	
+
+
+		
 		Admin a = new Admin();
 		Map<String, Object> map = this.getPmapNew();
 		if(admin!=null){

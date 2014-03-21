@@ -24,7 +24,7 @@
   <select id="findNameById" parameterClass="java.lang.Integer" resultMap="publicNoteResult">select * from PUBLICNOTE where id = #id#</select>
   <select id="selectAll" parameterClass="java.util.Map" resultMap="publicNoteResult">select * from PUBLICNOTE
     <dynamic prepend="where">
-      <isNotNull prepend=" and " property="title">TITLE = #title#</isNotNull>
+      
       <isNotNull prepend=" and " property="content">CONTENT = #content#</isNotNull>
       <isNotNull prepend=" and " property="createtime">
       	 <![CDATA[ 
@@ -36,7 +36,7 @@
   </select>
   <select id="selectPage" parameterClass="java.util.Map" resultMap="publicNoteResult">select * from PUBLICNOTE
     <dynamic prepend="where">
-      <isNotNull prepend=" and " property="title">TITLE = #title#</isNotNull>
+     
       <isNotNull prepend=" and " property="content">CONTENT = #content#</isNotNull>
       <isNotNull prepend=" and " property="createtime">
 	  	 <![CDATA[ 
@@ -48,7 +48,7 @@
   </select>
   <select id="selectCount" parameterClass="java.util.Map" resultClass="java.lang.Long">select count(id) from PUBLICNOTE 
     <dynamic prepend="where">
-      <isNotNull prepend=" and " property="title">TITLE = #title#</isNotNull>
+      
       <isNotNull prepend=" and " property="content">CONTENT = #content#</isNotNull>
       <isNotNull prepend=" and " property="createtime">
       	 <![CDATA[ 

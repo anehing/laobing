@@ -225,7 +225,7 @@ public class JsonCustomerOrderAction extends JsonBaseAction {
 			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
 		}
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put(customer_telphone, this.telphone);
+		map.put("customer_telphone", this.telphone);
 	
 		Customer_order c_order =new Customer_order(); 
         List<Customer_order> clist =customer_orderDAO.findObjects(map,c_order);

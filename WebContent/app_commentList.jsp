@@ -20,12 +20,12 @@
              <table class="dataTable" width="97%" border="0" align="center" cellpadding="0" cellspacing="1"  bgcolor="#93b5d1">
 	             <tr>
 		            <td width="10%" align="center" bgcolor="#F3F8FE" class="dataTdText">评论时间</td>
-		            <td width="30%" align="left" bgcolor="#FFFFFF">
+		            <td width="60%" align="left" bgcolor="#FFFFFF">
 		             <input type="text" name="createtime" id="create_time" class="tcal" value="${createtime}"  />
 		            &nbsp;-<input type="text" name="tocreatetime" id="tocreate_time" class="tcal" value="${tocreatetime}" />
 		            </td>
-		            <td width="10%" align="center" bgcolor="#F3F8FE" class="dataTdText"></td>
-				    <td width="30%" align="left"  bgcolor="#FFFFFF" >
+		            <!-- <td width="10%" align="center" bgcolor="#F3F8FE" class="dataTdText"></td>
+				    <td width="30%" align="left"  bgcolor="#FFFFFF" > -->
 				    </td>
                     <td rowspan="3" align="center" valign="middle" bgcolor="#FFFFFF">
 			            <input	type="submit" class="inputBtn"   value="查询" style="cursor: pointer"  />

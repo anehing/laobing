@@ -25,6 +25,20 @@ html {
 		<div class="data0">
 			<div class="data1">
 				<table class="dataTable" width="100%" border="0" cellspacing="0" cellpadding="0">
+				  <tr>
+				    	<td width="15%" align="center" class="dataTd" >评论邮箱</td>
+					    <td width="35%" align="left" class="dataTd" >
+					    ${app_comment.email}
+					    </td>    
+				      
+				   </tr>
+				  <tr>
+				    	<td width="15%" align="center" class="dataTd" >评论时间</td>
+					    <td width="35%" align="left" class="dataTd" >
+					    <fmt:formatDate value="${app_comment.createtime}" pattern="yyyy-MM-dd HH:mm:ss"/>
+					    </td>    
+				      
+				   </tr>
                     <tr>
 				    	<td width="15%" align="center" class="dataTd" >评论内容</td>
 					    <td width="35%" align="left" class="dataTd" >${app_comment.comment}

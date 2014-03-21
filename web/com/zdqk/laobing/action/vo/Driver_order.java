@@ -3,6 +3,8 @@ package com.zdqk.laobing.action.vo;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.zdqk.laobing.tools.ibatis.TODO;
+
 
 
 
@@ -32,6 +34,10 @@ public class Driver_order extends ResultVo implements Serializable{
     private String ordernum;
     private Date createtime;
     private long time;
+    private String begintime;
+    private String endtime;
+	private String discount_amount;
+    private String askcode;
 	public int getId() {
 		return id;
 	}
@@ -139,6 +145,30 @@ public class Driver_order extends ResultVo implements Serializable{
 	}
 	public void setTime(long time) {
 		this.time = time;
+	}
+	public String getBegintime() {
+		return begintime;
+	}
+	public void setBegintime(String begintime) {
+		this.begintime = begintime;
+	}
+	public String getEndtime() {
+		return endtime;
+	}
+	public void setEndtime(String endtime) {
+		this.endtime = endtime;
+	}
+	public String getDiscount_amount() {
+		return discount_amount;
+	}
+	public void setDiscount_amount(String discount_amount) {
+		this.discount_amount = discount_amount;
+	}
+	public String getAskcode() {
+		return askcode;
+	}
+	public void setAskcode(String askcode) {
+		this.askcode = askcode;
 	}
 
 }

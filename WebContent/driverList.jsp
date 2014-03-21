@@ -67,15 +67,8 @@
 							<td class="topTd" align="center" width="6%">头像</td>
 							<td class="topTd" align="center" width="3%">姓名</td>
 							<td class="topTd" align="center" width="3%">年龄</td>
-							<td class="topTd" align="center" width="3%">籍贯</td>
-							<td class="topTd" align="center" width="6%">身份证号</td>
 							<td class="topTd" align="center" width="4%">手机号</td>
-							<td class="topTd" align="center" width="4%">驾照号</td>
-							<td class="topTd" align="center" width="3%">驾龄(年)</td>
-							<td class="topTd" align="center" width="3%">星好评级</td>
-							<td class="topTd" align="center" width="3%">代驾次数</td>
 							<td class="topTd" align="center" width="3%">所在城市</td>
-							<td class="topTd" align="center" width="3%">账户费用</td>
 							<td class="topTd" align="center" width="4%">操作</td>
 						</tr>
 						<s:if test="page.data.size > 0">
@@ -93,18 +86,12 @@
 									<td class="dataTd" align="center">${t.name}</td>
 									
 									<td class="dataTd" align="center">${t.age}</td>
-									<td class="dataTd" align="center">${t.city}</td>
-									<td class="dataTd" align="center">${t.ident_num}</td>
 									<td class="dataTd" align="center">${t.telphone}</td>
-									<td class="dataTd" align="center">${t.drive_card}</td>
-									<td class="dataTd" align="center">${t.year}</td>
-									<td class="dataTd" align="center">${t.stars}</td>
-									<td class="dataTd" align="center">${t.times}</td>
 									<td class="dataTd" align="center">${t.mc}</td>
-									<td class="dataTd" align="center">${t.servicefee}</td>
 									<td class="dataTd" align="center">
 									  <a href="queryDriverbyId.action?totype=1&id=${t.id}">修改</a> 
 									  <a href="queryDriverbyId.action?totype=2&id=${t.id}">删除</a>
+									  <a href="queryDriverbyId.action?totype=3&id=${t.id}">详情</a>
 									</td>
 								</tr>
 							</s:iterator>

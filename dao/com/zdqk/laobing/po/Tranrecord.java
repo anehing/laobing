@@ -28,8 +28,8 @@ public class Tranrecord implements Serializable{
     private float account;
 	@TODO("note")
 	private String note;
-	@TODO("name")		
-    private String name;
+	@TODO("telphone")		
+    private String telphone;
 	@TODO("order_num")		
     private String order_num;
 	
@@ -75,17 +75,18 @@ public class Tranrecord implements Serializable{
 	public void setNote(String note) {
 		this.note = note;
 	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
+
 	public String getOrder_num() {
 		return order_num;
 	}
 	public void setOrder_num(String order_num) {
 		this.order_num = order_num;
+	}
+	public String getTelphone() {
+		return telphone;
+	}
+	public void setTelphone(String telphone) {
+		this.telphone = telphone;
 	}	
 	
 	

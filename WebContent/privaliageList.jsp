@@ -21,11 +21,10 @@
 	             <s:hidden name="value" id="value"></s:hidden>
 	             <tr>
 	                <td width="15%" align="center" bgcolor="#F3F8FE" class="dataTdText">选择用户</td>
-				    <td width="30%" align="left" class="dataTdText" bgcolor="#FFFFFF" >
+				    <td width="60%" align="left" class="dataTdText" bgcolor="#FFFFFF" >
 				        <s:select list="adminlist" listKey="id" listValue="username" name ="permission.adminid" id="adminid"  headerValue="请选择" headerKey="0"></s:select>
 				    </td>
-				    <td width="15%" align="center" bgcolor="#F3F8FE" class="dataTdText"></td>
-				    <td width="30%" align="left"  bgcolor="#FFFFFF" >
+				 
 				     
 				  </tr>
 				  
