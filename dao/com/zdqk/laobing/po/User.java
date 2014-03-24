@@ -21,13 +21,13 @@ public class User implements Serializable{
 	@TODO("self_code")
 	private String self_code;
 	@TODO("use_code")	
-    private String use_code;
+    private String use_code;//邀请码
 	@TODO("logintime")
     private Date logintime;
 	@TODO("use_time")
     private Date use_time;
 	@TODO("askcode")	
-    private String askcode;//邀请码
+    private String askcode;//短信验证码
 	@TODO("asktime")
     private int asktime;
 	@TODO("isbind")

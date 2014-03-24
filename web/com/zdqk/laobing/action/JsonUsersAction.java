@@ -182,9 +182,10 @@ public class JsonUsersAction extends JsonBaseAction {
 				u.setTelphone(this.telphone);
 				u.setIsbind(0);
 				u.setLogintime(new Date());
+				u.setAskcode(num.toString());
 				Coupon c= (Coupon) couponDAO.selectByuse();
 				if (c!=null){
-					u.setAskcode(c.getCoupon_num());
+					u.setUse_code(c.getCoupon_num());
 					u.setUseaskcode(0);
 				}
 				flag=userDAO.insert(u);
