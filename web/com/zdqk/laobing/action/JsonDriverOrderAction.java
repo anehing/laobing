@@ -84,8 +84,15 @@ public class JsonDriverOrderAction extends JsonBaseAction {
     private String endtime;
     private String discount_amount;
     private String askcode;
+    private String city;
     
-    public String getWaittime() {
+    public String getCity() {
+		return city;
+	}
+	public void setCity(String city) {
+		this.city = city;
+	}
+	public String getWaittime() {
 		return waittime;
 	}
 	public void setWaittime(String waittime) {
@@ -271,7 +278,7 @@ public class JsonDriverOrderAction extends JsonBaseAction {
 		d_order.setDrivertelphone(this.drivertelphone);
 		d_order.setCustomertelphone(this.customertelphone);
 		d_order.setSource(1);
-		d_order.setStatus(0);
+		d_order.setStatus(0);//0:输入订单
 		d_order.setCreatetime(dt);
 		d_order.setTime(dt.getTime());
 	    if(userInfo!=null){
@@ -281,6 +288,7 @@ public class JsonDriverOrderAction extends JsonBaseAction {
 		long num=Math.round(Math.random() * 1000) +Math.round(Math.random() * 1000);
         d_order.setOrdernum(num+this.customertelphone.substring(customertelphone.length()-4));
 	    flag=driver_orderDAO.insert(d_order);
+	    //获取代价价格
         if(flag){
         	com.zdqk.laobing.action.vo.Driver_order driver_order =  new com.zdqk.laobing.action.vo.Driver_order();;	
 			BeanUtils.copyProperties(d_order,driver_order);
@@ -374,7 +382,7 @@ public class JsonDriverOrderAction extends JsonBaseAction {
 		d.setDistance(Float.parseFloat(this.distance));
 		float count = Float.parseFloat(this.fee);
 		d.setFee(count);
-		d.setStatus(1);
+		d.setStatus(1);//1:订单完成
 	    flag=driver_orderDAO.update(d);
         if(flag){
         	Map<String, Object> mapprice = new HashMap<String, Object>();
@@ -584,4 +592,5 @@ public class JsonDriverOrderAction extends JsonBaseAction {
         }
        
    }
+
 }

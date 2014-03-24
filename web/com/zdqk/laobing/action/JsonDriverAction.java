@@ -349,6 +349,45 @@ public class JsonDriverAction extends JsonBaseAction {
 		}
 		
 	}
+	/**
+	 * 司机更新位置接口
+	 * */
+	@Action("updatelocation")
+	public String updatelocationAction(){
+		Map<String, Object> map = new HashMap<String, Object>();
+		ResultVo rv = null;
+		if(this.telphone==null||this.telphone.trim().equals("")){
+			rv = new ResultVo(3,"缺少参数:telphone");
+			return FxJsonUtil.jsonHandle(rv,resutUrl,request);
+		}
+		if(this.latitude==null||this.latitude.trim().equals("")){
+			rv = new ResultVo(3,"缺少参数:latitude");
+			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
+		}
+		if(this.longitude==null||this.longitude.trim().equals("")){
+			rv = new ResultVo(3,"缺少参数:longitude");
+			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
+		}
+		map.put("telphone",this.telphone);
+		Driver dr= (Driver) driverDAO.loginByNameAndTel(map, "loginByNameAndTel");
+		if(dr==null){
+			rv = new ResultVo(2,"目前查询不到该司机信息");
+			return FxJsonUtil.jsonHandle(rv,resutUrl,request);
+		}else{
+			try {
+				dr.setLatitude(Double.parseDouble(this.latitude));
+				dr.setLongitude(Double.parseDouble(this.longitude));
+			} catch (NumberFormatException e) {
+				// TODO Auto-generated catch block
+				rv = new ResultVo(2,"更新失败");
+				return FxJsonUtil.jsonHandle(rv,resutUrl,request);
+			}
+			driverDAO.insert(dr);
+			rv = new ResultVo(0,"更新成功");
+			return FxJsonUtil.jsonHandle(rv,resutUrl,request);
+		}
+		
+	}
 	
 	
 }

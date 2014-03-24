@@ -4,6 +4,7 @@ package com.zdqk.laobing.action;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.rmi.RemoteException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -180,9 +181,12 @@ public class JsonUsersAction extends JsonBaseAction {
 				User u=new User();
 				u.setTelphone(this.telphone);
 				u.setIsbind(0);
+				u.setLogintime(new Date());
 				Coupon c= (Coupon) couponDAO.selectByuse();
-				u.setAskcode(c.getCoupon_num());
-				u.setUseaskcode(0);
+				if (c!=null){
+					u.setAskcode(c.getCoupon_num());
+					u.setUseaskcode(0);
+				}
 				flag=userDAO.insert(u);
 				if(flag){
 					System.out.println("短信提交成功");
