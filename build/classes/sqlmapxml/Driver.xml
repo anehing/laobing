@@ -119,7 +119,7 @@
     <select id="selectByjobstatus" parameterClass="java.util.Map" resultMap="driverResult">select * from DRIVER
 	    <dynamic prepend="where">
 		      <isNotNull prepend=" and " property="mc">MC = #mc#</isNotNull>
-		       <isNotNull prepend=" and " property="job_status">JOB_STATUS = #job_status#</isNotNull>
+		       <isNotNull prepend=" and " property="job_status">JOB_STATUS in (0,2,3)</isNotNull>
 	   </dynamic>
   </select>
   <select id="loginByNameAndTel" parameterClass="java.util.Map" resultMap="driverResult">select * from DRIVER

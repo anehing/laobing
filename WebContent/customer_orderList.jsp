@@ -20,12 +20,12 @@
              <table class="dataTable" width="97%" border="0" align="center" cellpadding="0" cellspacing="1"  bgcolor="#93b5d1">
 	            <tr>   
 		            <td width="10%" align="center" bgcolor="#F3F8FE" class="dataTdText">下单时间</td>
-		            <td width="30%" align="left" bgcolor="#FFFFFF"> 
+		            <td width="45%" align="left" bgcolor="#FFFFFF"> 
 		                <input type="text" name="create_time" id="create_time" class="tcal" value="${create_time}"  />
 		            &nbsp;-<input type="text" name="tocreate_time" id="tocreate_time" class="tcal" value="${tocreate_time}" />
 		            </td>
 		            <td width="10%" align="center" bgcolor="#F3F8FE" class="dataTdText">订单状态</td>
-				    <td width="30%" align="left" class="dataTdText" bgcolor="#FFFFFF" >
+				    <td width="15%" align="left" class="dataTdText" bgcolor="#FFFFFF" >
 					    <s:select label="用户端接受状态" name ="customer_order.status" id="status"
 					             list= "#{0:'接受',1:'服务中',2:'服务结束',3:'取消'}"  
 					             listKey="key" listValue="value" value="customer_order.status" headerValue="请选择" headerKey="4" />

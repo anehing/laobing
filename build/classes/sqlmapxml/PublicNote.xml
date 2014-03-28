@@ -58,7 +58,7 @@
       <isNotNull prepend=" and " property="appshowdate">APPSHOWDATE = #appshowdate#</isNotNull>
     </dynamic>
   </select>
-  <select id="selectAllByDesc"  resultMap="publicNoteResult">select * from PUBLICNOTE order by id desc
+  <select id="selectAllByDesc"  resultMap="publicNoteResult">select * from PUBLICNOTE order by id desc LIMIT #offset#,#rows#;
   </select>
    <select id="selectAllById" parameterClass="java.util.Map" resultMap="publicNoteResult">select * from PUBLICNOTE 
     <dynamic prepend="where">

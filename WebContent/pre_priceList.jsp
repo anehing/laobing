@@ -37,6 +37,7 @@
 							<td class="topTd" align="center" width="8%">司机姓名</td>
 							<td class="topTd" align="center" width="8%">司机手机号</td>
 							<td class="topTd" align="center" width="8%">预付款额度</td>
+							<td class="topTd" align="center" width="8%">预付款底线</td>
 							<td class="topTd" align="center" width="8%">操作</td>
 						</tr>
 						<s:if test="page.data.size > 0">
@@ -48,8 +49,10 @@
 									<td class="dataTd" align="center">${t.drivername}</td>
 									<td class="dataTd" align="center">${t.drivertelphone}</td>
 									<td class="dataTd" align="center">${t.pre_price}元</td>
+									<td class="dataTd" align="center">${t.pre_account}元</td>
 									<td class="dataTd" align="center">
 									<a href="querypre_pricebyId.action?totype=1&id=${t.id}">充值</a>
+									<a href="querypre_pricebyId.action?totype=2&id=${t.id}">设置</a>
 									</td>
 								</tr>
 							</s:iterator>

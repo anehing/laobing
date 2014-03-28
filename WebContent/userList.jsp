@@ -41,6 +41,7 @@
 					<table class="dataTable" width="100%" border="0" cellspacing="0" cellpadding="0">
 						<tr>
 							<td class="topTd" align="center" width="8%">序号</td>
+							<td class="topTd" align="center" width="8%">是否绑定</td>
 							<td class="topTd" align="center" width="8%">手机号</td>
 							<td class="topTd" align="center" width="12%">注册时间</td>
 							<td class="topTd" align="center" width="8%">短信验证码</td>
@@ -51,6 +52,10 @@
 									<td class="dataTd" align="center">
 										${s.index+1+page.pageSize*(PageNo-1)}
 									</td>
+									<td class="dataTd" align="center">
+									   <c:if test="${t.isbind eq 1}">已绑定 </c:if>
+								       <c:if test="${t.isbind eq 0}">未绑定</c:if>
+								     </td>  
 									<td class="dataTd" align="center">${t.telphone}</td>
 									<td class="dataTd" align="center"><fmt:formatDate value="${t.logintime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 								    <td class="dataTd" align="center">${t.askcode}</td>

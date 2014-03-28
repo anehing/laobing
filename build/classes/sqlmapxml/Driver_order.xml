@@ -79,7 +79,7 @@
       <isNotNull prepend=" and " property="endtime">ENDTIME = #endtime#</isNotNull>
       <isNotNull prepend=" and " property="discount_amount">DISCOUNT_AMOUNT = #discount_amount#</isNotNull>
       <isNotNull prepend=" and " property="askcode">ASKCODE = #askcode#</isNotNull>
-    </dynamic>
+    </dynamic>order by id desc LIMIT #offset#,#rows#;
   </select>
   <select id="selectPage" parameterClass="java.util.Map" resultMap="driver_orderResult">select *  from Driver_order
     <dynamic prepend="where">
@@ -153,6 +153,14 @@
     <dynamic prepend="where">
       <isNotNull prepend=" and " property="status">STATUS = #status#</isNotNull>
       <isNotNull prepend=" and " property="drivertelphone">DRIVERTELPHONE = #drivertelphone#</isNotNull>
+    </dynamic>
+  </select>
+    <select id="selectall2" parameterClass="java.util.Map" resultMap="driver_orderResult">select *  from Driver_order
+    <dynamic prepend="where">
+      <isNotNull prepend=" and " property="drivertelphone">DRIVERTELPHONE = #drivertelphone#</isNotNull>
+      <isNotNull prepend=" and " property="customertelphone">CUSTOMERTELPHONE = #customertelphone#</isNotNull>
+      <isNotNull prepend=" and " property="status">STATUS = #status#</isNotNull>
+      <isNotNull prepend=" and " property="ordernum">ORDERNUM = #ordernum#</isNotNull>
     </dynamic>
   </select>
 </sqlMap>

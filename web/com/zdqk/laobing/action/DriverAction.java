@@ -278,6 +278,7 @@ public class DriverAction extends BasePaginationAction {
 				p.setPre_price(this.price);
 				pre_priceDAO.insert(p);//给司机添加预付款
 			}
+			this.driver.setJob_status(1);
 			boolean  flag=driverDAO.insert(this.driver);
 		    if(flag)  this.addActionMessage("新增成功");
 			else this.addActionError("新增失败");

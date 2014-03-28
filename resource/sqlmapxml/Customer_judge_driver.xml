@@ -28,7 +28,7 @@
       <isNotNull prepend=" and " property="telphone">TELPHONE = #telphone#</isNotNull>
       <isNotNull prepend=" and " property="drivertelphone">DRIVERTELPHONE = #drivertelphone#</isNotNull>
       <isNotNull prepend=" and " property="judge_time">JUDGE_TIME = #judge_time#</isNotNull>
-    </dynamic>
+    </dynamic>LIMIT #offset#,#rows#;
   </select>
   <select id="selectPage" parameterClass="java.util.Map" resultMap="customer_judge_driverResult">select ID,SCORE,TELPHONE,DRIVERTELPHONE,JUDGE_TIME from CUSTOMER_JUDGE_DRIVER
     <dynamic prepend="where">

@@ -147,8 +147,7 @@ public class JsonUsersAction extends JsonBaseAction {
 			}else{
 				//发送验证码
 				Long num=Math.round(Math.random() * 100000);
-				String content = new String("您的验证码是："+num.toString()+"。请不要把验证码泄露给其他人。");
-				
+				String content ="您申请注册会员，账户您申请注册会员，账户"+this.telphone+"，验证码："+num.toString()+"，谢谢！如非本人操作，请忽略本信息。【老兵代驾】"; 
 				try {
 					sendsms.sendmsg(username, password, this.telphone, content);
 				} catch (HttpException e) {

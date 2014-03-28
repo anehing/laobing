@@ -38,6 +38,14 @@ public class Driver_order extends ResultVo implements Serializable{
     private String endtime;
 	private String discount_amount;
     private String askcode;
+    private String clientdatetime;
+    
+	public String getClientdatetime() {
+		return clientdatetime;
+	}
+	public void setClientdatetime(String clientdatetime) {
+		this.clientdatetime = clientdatetime;
+	}
 	public int getId() {
 		return id;
 	}

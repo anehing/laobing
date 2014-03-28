@@ -74,6 +74,12 @@
 				    	<td width="15%" align="center" class="dataTd" >代驾次数</td>
 				    	<td width="35%" align="left" class="dataTd" >
 				        	<s:textfield name="driver.times"  id="times" /></td>
+				       <td width="15%" align="center" class="dataTd" >司机状态</td>
+					<td width="35%" align="left" class="dataTd" >
+				        <s:radio label="类型" name ="driver.job_status" id="job_status"
+						         list= "#{0:'&nbsp;空闲&nbsp;',1:' &nbsp;结束代驾&nbsp;',2:' &nbsp;忙碌&nbsp;',3:' &nbsp;等待结伴返程&nbsp;'}"
+                                 listKey="key" listValue="value" value="driver.job_status" />
+					</td>
 				   </tr>
 				<tr>
 					<td bgcolor="#edf2f8" colspan="8" align="center">
@@ -128,6 +134,12 @@ function checkSubmit(){
 	 if(!checkNull(year)){
 	      showErrorMsg("驾龄不能为空");
 	      return false;
+	 }else{
+	 var strP=/^\d+(\.\d+)?$/; 
+	 if(!strP.test(year)){
+		 showErrorMsg("驾龄只能为数字");
+	      return false;
+	 } 
 	 }
 	  
 	 return true;	

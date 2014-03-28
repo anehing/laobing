@@ -34,8 +34,25 @@ public class JsonBaseAction extends ActionSupport{
 	protected Page page = new Page();
 
 	private long pageNo = 1L;
+	public String offset;
+    public String rows;
 	
-	
+	public String getOffset() {
+		return offset;
+	}
+
+	public void setOffset(String offset) {
+		this.offset = offset;
+	}
+
+	public String getRows() {
+		return rows;
+	}
+
+	public void setRows(String rows) {
+		this.rows = rows;
+	}
+
 	@Autowired
 	protected CommonService commonService;		
 

@@ -78,9 +78,10 @@
 										${s.index+1+page.pageSize*(PageNo-1)}
 									</td>
 									<td class="dataTd" align="center">
-									   <c:if test="${t.job_status eq 2}">结束工作</c:if>
-								       <c:if test="${t.job_status eq 1}">繁忙</c:if>	
-								       <c:if test="${t.job_status eq 0}">空闲</c:if>							 
+									   <c:if test="${t.job_status eq 1}">结束工作</c:if>
+								       <c:if test="${t.job_status eq 2}">繁忙</c:if>	
+								       <c:if test="${t.job_status eq 0}">空闲</c:if>		
+									    <c:if test="${t.job_status eq 3}">等待结伴返程</c:if>						 
 								    </td>
 								    <td class="dataTd" align="center"> <img  width="40" height="40" src="${t.picture}"></img></td>
 									<td class="dataTd" align="center">${t.name}</td>

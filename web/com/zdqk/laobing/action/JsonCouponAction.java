@@ -1,6 +1,7 @@
 package com.zdqk.laobing.action;
 
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import org.apache.struts2.convention.annotation.Action;
@@ -81,7 +82,7 @@ public class JsonCouponAction extends JsonBaseAction {
 				return FxJsonUtil.jsonHandle(rv,resutUrl,request);
 			}
 			coupon.setTelphone(this.telphone);
-			
+			coupon.setUse_time(new Date());
 			boolean flag= couponDAO.update(coupon);
 			User use=new User();
 			use.setTelphone(this.telphone);

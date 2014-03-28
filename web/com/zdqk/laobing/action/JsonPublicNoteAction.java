@@ -60,7 +60,19 @@ public class JsonPublicNoteAction extends JsonBaseAction {
 	@Action("getPublicNote")
 	public String getPublicNoteAction(){
 		ResultVo rv = null;
-		List<PublicNote> list= publicnoteDAO.selectAllByDesc();
+		if(this.rows==null||this.rows.trim().equals("")){
+			rv = new ResultVo(3,"缺少参数:rows");
+			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
+		}
+		if(this.offset==null||this.offset.trim().equals("")){
+			rv = new ResultVo(3,"缺少参数:offset");
+			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
+		}
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("rows", Integer.parseInt(this.rows));
+		map.put("offset", Integer.parseInt(this.offset));
+		List<PublicNote> list= publicnoteDAO.selectAllByDesc(map);
+		
 	    if(list==null){
 		    	rv = new ResultVo(1,"暂时没有公告");
 		    	return FxJsonUtil.jsonHandle(rv,resutUrl,request);

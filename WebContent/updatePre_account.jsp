@@ -11,17 +11,18 @@
 	    </div>
 	    <div class="titleDiv_b"></div>
 	 </div> 
-<s:form action="updatePre_price" namespace="/base" onsubmit="return toSubmit()" id="form1" >
+<s:form action="updatePre_account" namespace="/base" onsubmit="return toSubmit()" id="form1" >
 	<div class="data0">
 		<div class="data1">
 			<table class="dataTable" width="100%" border="0" cellspacing="0" cellpadding="0">
 			    <s:hidden  name="pre_price.id" id="id" />
-			    <s:hidden  name="pre_price.pre_price" id="pre_price" />
-			    <s:hidden  name="pre_price.drivertelphone" id="drivertelphone" />
+			     <s:hidden  name="pre_price.pre_price" id="pre_price" />
+			      <s:hidden  name="pre_price.drivername" id="drivername" />
+			       <s:hidden  name="pre_price.drivertelphone" id="drivername" />
 				<tr>
-					<td width="15%" align="center" class="dataTd" >预付款充值金额</td>
+					<td width="15%" align="center" class="dataTd" >设置预付款金额底线</td>
 					<td width="35%" align="left" class="dataTd" >
-					    <s:textfield id="price" name="price"/>
+					    <s:textfield name="pre_price.pre_account" id="pre_account"/>
 					</td>    
 				    <td width="15%" align="center" class="dataTd" ></td>
 					<td width="35%" align="left" class="dataTd" ></td> 
@@ -40,7 +41,7 @@
 <script type="text/javascript">
 function toSubmit(){
 
-	var price=document.getElementById("price").value;
+	var price=document.getElementById("pre_account").value;
 	 if(!checkNull(price)){
 	      showErrorMsg("预付款不能为空");
 	      return false;

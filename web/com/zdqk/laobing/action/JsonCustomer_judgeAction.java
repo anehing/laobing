@@ -113,8 +113,18 @@ public class JsonCustomer_judgeAction extends JsonBaseAction {
 			rv = new ResultVo(3,"缺少参数:drivertelphone");
 			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
 		}
+		if(this.rows==null||this.rows.trim().equals("")){
+			rv = new ResultVo(3,"缺少参数:rows");
+			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
+		}
+		if(this.offset==null||this.offset.trim().equals("")){
+			rv = new ResultVo(3,"缺少参数:offset");
+			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
+		}
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("drivertelphone", this.drivertelphone);
+		map.put("rows", Integer.parseInt(this.rows));
+		map.put("offset", Integer.parseInt(this.offset));
 		List<Customer_judge_driver> list=customer_judge_driverDAO.selectByDrivertelphone(map, "selectAll");
 		if(list==null||list.size()<=0){
 			rv = new ResultVo(7,"暂无评论");
@@ -195,7 +205,7 @@ public class JsonCustomer_judgeAction extends JsonBaseAction {
 		d.setCreate_time(new Date());
 		flag=driver_judge_customerDAO.insert(d);
 		if(flag){
-			rv = new ResultVo(2,"评论成功");
+			rv = new ResultVo(0,"评论成功");
 			return FxJsonUtil.jsonHandle(rv,resutUrl,request);
 		}else{
 			rv = new ResultVo(1,"评论失败");

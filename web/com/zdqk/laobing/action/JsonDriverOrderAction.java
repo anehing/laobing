@@ -20,11 +20,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.apache.struts2.convention.annotation.ParentPackage;
 
 import com.zdqk.laobing.action.vo.ResultVo;
+import com.zdqk.laobing.dao.DriverDAO;
 import com.zdqk.laobing.dao.Driver_orderDAO;
 import com.zdqk.laobing.dao.Pre_priceDAO;
 import com.zdqk.laobing.dao.TranrecordDAO;
 import com.zdqk.laobing.dao.UserDAO;
 import com.zdqk.laobing.po.Customer_order;
+import com.zdqk.laobing.po.Driver;
 import com.zdqk.laobing.po.Driver_order;
 import com.zdqk.laobing.po.Pre_price;
 import com.zdqk.laobing.po.Tranrecord;
@@ -52,6 +54,8 @@ public class JsonDriverOrderAction extends JsonBaseAction {
 	private UserDAO userDAO;
 	@Autowired
 	private Pre_priceDAO pre_priceDAO;
+	@Autowired
+	private DriverDAO driverDAO;
 	
 	private Pre_price pre_price;
 	@Autowired
@@ -85,8 +89,17 @@ public class JsonDriverOrderAction extends JsonBaseAction {
     private String discount_amount;
     private String askcode;
     private String city;
+    private String use_code;
     
-    public String getCity() {
+    
+    
+	public String getUse_code() {
+		return use_code;
+	}
+	public void setUse_code(String use_code) {
+		this.use_code = use_code;
+	}
+	public String getCity() {
 		return city;
 	}
 	public void setCity(String city) {
@@ -251,6 +264,7 @@ public class JsonDriverOrderAction extends JsonBaseAction {
 	public void setType(String type) {
 		this.type = type;
 	}
+	
 	/**
 	 * 司机下单开始代驾
 	 * @throws ParseException 
@@ -294,6 +308,15 @@ public class JsonDriverOrderAction extends JsonBaseAction {
 			BeanUtils.copyProperties(d_order,driver_order);
 			driver_order.setReusltNumber(0);
 			driver_order.setReusltMessage("下单成功");
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("telphone",this.drivertelphone);
+			Driver dr= (Driver) driverDAO.loginByNameAndTel(map, "loginByNameAndTel");
+			if (dr==null){
+				rv = new ResultVo(1,"司机不存在");
+				return FxJsonUtil.jsonHandle(rv,resutUrl,request);
+			}
+			dr.setJob_status(2);//忙碌
+			driverDAO.update(dr);
 			return FxJsonUtil.jsonHandle(driver_order,resutUrl,request);
 		}else{
 			rv = new ResultVo(1,"下单失败");
@@ -348,14 +371,6 @@ public class JsonDriverOrderAction extends JsonBaseAction {
 			rv = new ResultVo(3,"缺少参数:end_place");
 			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
 		}
-		if(this.askcode==null||this.askcode.trim().equals("")){
-			rv = new ResultVo(3,"缺少参数:askcode");
-			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
-		}
-		if(this.discount_amount==null||this.discount_amount.trim().equals("")){
-			rv = new ResultVo(3,"缺少参数:discount_amount");
-			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
-		}
 		if(this.distance==null||this.distance.trim().equals("")){
 			rv = new ResultVo(3,"缺少参数:distance");
 			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
@@ -367,17 +382,19 @@ public class JsonDriverOrderAction extends JsonBaseAction {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("drivertelphone",this.drivertelphone);
 		map.put("customertelphone", this.customertelphone);
-		map.put("orderunm", this.orderunm);
+		map.put("ordernum", this.orderunm);
 		map.put("status", 0);
-		Driver_order d = (Driver_order) driver_orderDAO.selectdriverorder(map, "selectAll");
+		Driver_order d = (Driver_order) driver_orderDAO.selectdriverorder(map, "selectall2");
 		if (d ==null){
 			rv = new ResultVo(1,"订单确认失败，请联系管理员");
 			return FxJsonUtil.jsonHandle(rv,resutUrl,request);
 		}
 		boolean flag=false;
+		d.setStart_place(this.start_place);
+		d.setEnd_place(this.end_place);
 		d.setBegintime(this.begintime);
 		d.setEndtime(this.endtime);
-		d.setAskcode(this.askcode);
+		d.setAskcode(this.use_code);
 		d.setDiscount_amount(this.discount_amount);
 		d.setDistance(Float.parseFloat(this.distance));
 		float count = Float.parseFloat(this.fee);
@@ -410,6 +427,11 @@ public class JsonDriverOrderAction extends JsonBaseAction {
         	t.setOrder_num("充值");
         	t.setTelphone(this.drivertelphone);
         	tranrecordDAO.insert(t);
+        	Map<String, Object> map2 = new HashMap<String, Object>();
+			map2.put("telphone",this.drivertelphone);
+			Driver dr= (Driver) driverDAO.loginByNameAndTel(map2, "loginByNameAndTel");
+			dr.setJob_status(0);//空闲
+			driverDAO.update(dr);
 			rv = new ResultVo(0,"订单确认成功");
 			return FxJsonUtil.jsonHandle(rv,resutUrl,request);
 		}else{
@@ -457,15 +479,7 @@ public class JsonDriverOrderAction extends JsonBaseAction {
 			rv = new ResultVo(3,"缺少参数:end_place");
 			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
 		}
-		if(this.askcode==null||this.askcode.trim().equals("")){
-			rv = new ResultVo(3,"缺少参数:askcode");
-			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
-		}
-		if(this.discount_amount==null||this.discount_amount.trim().equals("")){
-			rv = new ResultVo(3,"缺少参数:discount_amount");
-			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
-		}
-		if(this.distance==null||this.distance.trim().equals("")){
+				if(this.distance==null||this.distance.trim().equals("")){
 			rv = new ResultVo(3,"缺少参数:distance");
 			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
 		}
@@ -478,7 +492,7 @@ public class JsonDriverOrderAction extends JsonBaseAction {
 		map.put("customertelphone", this.customertelphone);
 		map.put("orderunm", this.orderunm);
 		map.put("status", 0);
-		Driver_order d = (Driver_order) driver_orderDAO.selectdriverorder(map, "selectAll");
+		Driver_order d = (Driver_order) driver_orderDAO.selectdriverorder(map, "selectall2");
 		if (d ==null){
 			rv = new ResultVo(1,"订单确认失败，请联系管理员");
 			return FxJsonUtil.jsonHandle(rv,resutUrl,request);
@@ -493,8 +507,12 @@ public class JsonDriverOrderAction extends JsonBaseAction {
 		d_order.setEnd_place(this.end_place);
 		d_order.setBegintime(this.begintime);
 		d_order.setEndtime(this.endtime);
-		d_order.setAskcode(this.askcode);
-		d_order.setDiscount_amount(this.discount_amount);
+		if(this.askcode!=null&&!this.askcode.trim().equals("")){
+			d_order.setAskcode(this.askcode);
+		}
+		if(this.discount_amount!=null&&!this.discount_amount.trim().equals("")){
+			d_order.setDiscount_amount(this.discount_amount);
+		}
 		d_order.setOrdernum(this.orderunm);
 		d_order.setCreatetime(new Date());
 		d_order.setFee(Float.parseFloat(this.fee));
@@ -527,6 +545,14 @@ public class JsonDriverOrderAction extends JsonBaseAction {
 			rv = new ResultVo(3,"缺少参数:telphone");
 			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
 		}
+		if(this.rows==null||this.rows.trim().equals("")){
+			rv = new ResultVo(3,"缺少参数:rows");
+			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
+		}
+		if(this.offset==null||this.offset.trim().equals("")){
+			rv = new ResultVo(3,"缺少参数:offset");
+			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
+		}
 		Map<String, Object> map = new HashMap<String, Object>();
 		if(this.type.equals("1")){
 			map.put("drivertelphone", this.telphone);
@@ -536,18 +562,23 @@ public class JsonDriverOrderAction extends JsonBaseAction {
 			rv = new ResultVo(3,"缺少参数:type");
 			return FxJsonUtil.jsonHandle(rv,resutUrl,request);
 		}
+		map.put("rows", Integer.parseInt(this.rows));
+		map.put("offset", Integer.parseInt(this.offset));
+		
 		Driver_order  driver_order  =new Driver_order();
         List<Driver_order> clist =driver_orderDAO.findObjects(map,driver_order);
         if (clist==null||clist.size()<=0) {
         	rv = new ResultVo(2,"暂无记录");
 			return FxJsonUtil.jsonHandle(rv,resutUrl,request);
         }else{
+        	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         	com.zdqk.laobing.action.vo.Driver_orderList clistvo=new com.zdqk.laobing.action.vo.Driver_orderList();
         	List<com.zdqk.laobing.action.vo.Driver_order> list= new ArrayList<com.zdqk.laobing.action.vo.Driver_order>();
         	com.zdqk.laobing.action.vo.Driver_order cvo=null;
         	for(Driver_order c_order:clist){
         		cvo=new com.zdqk.laobing.action.vo.Driver_order(); 
         		BeanUtils.copyProperties(c_order,cvo);
+        		cvo.setClientdatetime(sdf.format(cvo.getCreatetime()));
         		list.add(cvo);
         	}
         	clistvo.setDriverorderlistvo(list);

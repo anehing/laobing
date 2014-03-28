@@ -235,7 +235,7 @@ public class JsonDriverAction extends JsonBaseAction {
 			rv = new ResultVo(3,"缺少参数:id");
 			return FxJsonUtil.jsonHandle(rv,resutUrl,request);
 		}if(this.jobstatus==null||this.jobstatus.trim().equals("")){
-			rv = new ResultVo(3,"缺少参数:jobstatus，0：开始工作，1：结束工作");
+			rv = new ResultVo(3,"缺少参数:jobstatus，0：开始工作，1：结束工作，3：结伴返程");
 			return FxJsonUtil.jsonHandle(rv,resutUrl,request);
 		}
 		
@@ -251,7 +251,7 @@ public class JsonDriverAction extends JsonBaseAction {
 				Map<String, Object> mapprice = new HashMap<String, Object>();
 	        	mapprice.put("drivertelphone", ds.getTelphone());
 	        	Pre_price p =(Pre_price) pre_priceDAO.seletcbytel(mapprice, "selectAll");
-	        	if(p.getPre_price()<=15){
+	        	if(p.getPre_price()<p.getPre_account()){
 	        		rv = new ResultVo(1,"账户不足,请充值");
 					return FxJsonUtil.jsonHandle(rv,resutUrl,request);
 	        	}
@@ -382,12 +382,40 @@ public class JsonDriverAction extends JsonBaseAction {
 				rv = new ResultVo(2,"更新失败");
 				return FxJsonUtil.jsonHandle(rv,resutUrl,request);
 			}
-			driverDAO.insert(dr);
+			driverDAO.update(dr);
 			rv = new ResultVo(0,"更新成功");
 			return FxJsonUtil.jsonHandle(rv,resutUrl,request);
 		}
 		
 	}
 	
+	/**
+	 * 结伴返程接口
+	 * */
+	@Action("togetherback")
+	public String togetherbackAction(){
+		Map<String, Object> map = new HashMap<String, Object>();
+		ResultVo rv = null;
+		if(this.telphone==null||this.telphone.trim().equals("")){
+			rv = new ResultVo(3,"缺少参数:telphone");
+			return FxJsonUtil.jsonHandle(rv,resutUrl,request);
+		}
+		if(this.jobstatus==null||this.jobstatus.trim().equals("")){
+			rv = new ResultVo(3,"缺少参数:jobstatus");
+			return FxJsonUtil.jsonHandle(rv,resutUrl,request);
+		}
+		map.put("telphone",this.jobstatus);
+		Driver dr= (Driver) driverDAO.loginByNameAndTel(map, "loginByNameAndTel");
+		if(dr==null){
+			rv = new ResultVo(2,"目前查询不到该司机信息");
+			return FxJsonUtil.jsonHandle(rv,resutUrl,request);
+		}else{
+			dr.setJob_status(Integer.parseInt(this.jobstatus));
+			driverDAO.update(dr);
+			rv = new ResultVo(0,"提交成功");
+			return FxJsonUtil.jsonHandle(rv,resutUrl,request);
+		}
+		
+	}
 	
 }

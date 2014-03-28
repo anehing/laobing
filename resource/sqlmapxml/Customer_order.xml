@@ -55,7 +55,7 @@
 	      ]]> 
       </isNotNull>   
       <isNotNull prepend=" and " property="status">STATUS = #status#</isNotNull>
-    </dynamic>
+    </dynamic>LIMIT #offset#,#rows#;
   </select>
   <select id="selectPage" parameterClass="java.util.Map" resultMap="customer_orderResult">select * from CUSTOMER_ORDER
     <dynamic prepend="where">

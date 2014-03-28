@@ -19,12 +19,12 @@ import com.zdqk.laobing.po.PublicNote;
 public class PublicNoteDAOImpl extends BasicDaoImpl<PublicNote> implements PublicNoteDAO<PublicNote>{
 
 	@Override
-	public List<PublicNote> selectAllByDesc() {
+	public List<PublicNote> selectAllByDesc(Map<String, Object> map) {
 		// TODO Auto-generated method stub
 		PublicNote PublicNote = new PublicNote();
 		List<PublicNote> list=null;
 		try {
-			list=getSqlMapClientTemplate().queryForList(PublicNote.getClass().getName()+".selectAllByDesc");
+			list=getSqlMapClientTemplate().queryForList(PublicNote.getClass().getName()+".selectAllByDesc",map);
 			
 		} catch (Exception e) {
 			System.out.println("数据连接失败，请检查数据服务是否开启");

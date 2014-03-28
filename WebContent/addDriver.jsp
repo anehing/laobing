@@ -159,6 +159,12 @@ function checkSubmit(){
 	 if(!checkNull(year)){
 	      showErrorMsg("驾龄不能为空");
 	      return false;
+	 }else{
+	 var strP=/^\d+(\.\d+)?$/; 
+	 if(!strP.test(year)){
+		 showErrorMsg("驾龄只能为数字");
+	      return false;
+	 } 
 	 }
 	 var times = document.getElementById("times").value;
 	 if(checkNull(times)){

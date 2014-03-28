@@ -226,7 +226,16 @@ public class JsonCustomerOrderAction extends JsonBaseAction {
 		}
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("customer_telphone", this.telphone);
-	
+		if(this.rows==null||this.rows.trim().equals("")){
+			rv = new ResultVo(3,"缺少参数:rows");
+			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
+		}
+		if(this.offset==null||this.offset.trim().equals("")){
+			rv = new ResultVo(3,"缺少参数:offset");
+			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
+		}
+		map.put("rows", Integer.parseInt(this.rows));
+		map.put("offset", Integer.parseInt(this.offset));
 		Customer_order c_order =new Customer_order(); 
         List<Customer_order> clist =customer_orderDAO.findObjects(map,c_order);
         if (clist==null||clist.size()<=0) {

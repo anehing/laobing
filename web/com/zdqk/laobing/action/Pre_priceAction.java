@@ -33,6 +33,7 @@ import com.zdqk.laobing.po.Tranrecord;
 		@InterceptorRef("simpleStack") })
 @Results({ @Result(name = "pre_priceList", location = "/pre_priceList.jsp"),
 	       @Result(name = "updatepre_price", location = "/updatePre_price.jsp"),
+	       @Result(name = "updatepre_account", location = "/updatePre_account.jsp"),
 	       @Result(name = "queryPre_price", type = "chain", location = "queryPre_price"),
 	      
 		})
@@ -102,6 +103,7 @@ public class Pre_priceAction extends BasePaginationAction {
 		this.pre_price = (Pre_price) pre_priceDAO.findObjectById(id, a);
 		
 		if (totype == 1) return "updatepre_price";
+		if (totype == 2) return "updatepre_account";
 		return null;
 
 	} 
@@ -126,7 +128,20 @@ public class Pre_priceAction extends BasePaginationAction {
 			else{ this.addActionError("充值失败");}
 		}
 		
-		return "queryPre_price";
+		return "updatepre_price";
+	}
+	/**
+	 * @author ane
+	 *  充值预付款
+	 */
+	@Action("updatePre_account")
+	public String updatePre_account() {
+		if(this.pre_price!=null){
+			boolean  flag=pre_priceDAO.update(this.pre_price);
+		    if(flag)  this.addActionMessage("更新成功");
+			else this.addActionError("更新失败");
+		}
+		return "updatepre_account";
 	}
 
 }
