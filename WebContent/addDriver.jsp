@@ -189,6 +189,11 @@ function checkSubmit(){
 			 return false
 		 }
 	 }
+	 var cityid=document.getElementById("cityid").value;
+	 if(cityid==0){
+	      showErrorMsg("请选择所在城市");
+	      return false;
+	 }
 	 return true;	
 }
 function checkFileType(filename){

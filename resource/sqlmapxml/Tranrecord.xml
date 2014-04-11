@@ -14,7 +14,7 @@
     <result property="telphone" column="TELPHONE"/>
     <result property="order_num" column="ORDER_NUM"/>
   </resultMap>
-  <insert id="insert" parameterClass="tranrecord">insert into TRANRECORD( ID,DRIVERID,ORDERID,TYPE,TRANS_DATETIME,ACCOUNT,NOTE,ORDER_NUM,TELPHONE ) values ( #id#,#driverid#,#orderid#,#type#,#trans_datetime#,#account#,#note#,#order_num#,#telphone# )</insert>
+  <insert id="insert" parameterClass="tranrecord">insert into TRANRECORD( ID,DRIVERID,ORDERID,TYPE,TRANS_DATETIME,ACCOUNT,NOTE,TELPHONE,ORDER_NUM ) values ( #id#,#driverid#,#orderid#,#type#,#trans_datetime#,#account#,#note#,#telphone#,#order_num# )</insert>
   <delete id="delete" parameterClass="tranrecord">delete from TRANRECORD where id = #id#</delete>
   <update id="update" parameterClass="tranrecord">update TRANRECORD 
     <dynamic prepend="set">
@@ -30,24 +30,30 @@
   </update>
   <select id="findById" parameterClass="java.lang.Integer" resultMap="tranrecordResult">select * from TRANRECORD where id = #id#</select>
   <select id="findNameById" parameterClass="java.lang.Integer" resultMap="tranrecordResult">select * from TRANRECORD where id = #id#</select>
-  <select id="selectAll" parameterClass="java.util.Map" resultMap="tranrecordResult">select * from TRANRECORD
+  <select id="selectAll" parameterClass="java.util.Map" resultMap="tranrecordResult">select ID,DRIVERID,ORDERID,TYPE,TRANS_DATETIME,ACCOUNT,NOTE,TELPHONE,ORDER_NUM from TRANRECORD
     <dynamic prepend="where">
       <isNotNull prepend=" and " property="driverid">DRIVERID = #driverid#</isNotNull>
       <isNotNull prepend=" and " property="orderid">ORDERID = #orderid#</isNotNull>
       <isNotNull prepend=" and " property="type">TYPE = #type#</isNotNull>
-      <isNotNull prepend=" and " property="trans_datetime">TRANS_DATETIME  between #createtime# and #tocreatetime#</isNotNull>
+      <isNotNull prepend=" and " property="trans_datetime">
+      <![CDATA[ 
+	         TRANS_DATETIME between #trans_datetime# and #totrans_datetime#
+	      ]]> </isNotNull>
       <isNotNull prepend=" and " property="account">ACCOUNT = #account#</isNotNull>
       <isNotNull prepend=" and " property="note">NOTE = #note#</isNotNull>
       <isNotNull prepend=" and " property="telphone">TELPHONE = #telphone#</isNotNull>
       <isNotNull prepend=" and " property="order_num">ORDER_NUM = #order_num#</isNotNull>
     </dynamic>
   </select>
-  <select id="selectPage" parameterClass="java.util.Map" resultMap="tranrecordResult">select * from TRANRECORD
+  <select id="selectPage" parameterClass="java.util.Map" resultMap="tranrecordResult">select ID,DRIVERID,ORDERID,TYPE,TRANS_DATETIME,ACCOUNT,NOTE,TELPHONE,ORDER_NUM from TRANRECORD
     <dynamic prepend="where">
       <isNotNull prepend=" and " property="driverid">DRIVERID = #driverid#</isNotNull>
       <isNotNull prepend=" and " property="orderid">ORDERID = #orderid#</isNotNull>
       <isNotNull prepend=" and " property="type">TYPE = #type#</isNotNull>
-      <isNotNull prepend=" and " property="trans_datetime">TRANS_DATETIME  between #createtime# and #tocreatetime#</isNotNull>
+      <isNotNull prepend=" and " property="trans_datetime">
+       <![CDATA[ 
+	         TRANS_DATETIME between #trans_datetime# and #totrans_datetime#
+	      ]]> </isNotNull>
       <isNotNull prepend=" and " property="account">ACCOUNT = #account#</isNotNull>
       <isNotNull prepend=" and " property="note">NOTE = #note#</isNotNull>
       <isNotNull prepend=" and " property="telphone">TELPHONE = #telphone#</isNotNull>
@@ -59,11 +65,23 @@
       <isNotNull prepend=" and " property="driverid">DRIVERID = #driverid#</isNotNull>
       <isNotNull prepend=" and " property="orderid">ORDERID = #orderid#</isNotNull>
       <isNotNull prepend=" and " property="type">TYPE = #type#</isNotNull>
-      <isNotNull prepend=" and " property="trans_datetime">TRANS_DATETIME  between #createtime# and #tocreatetime#</isNotNull>
+      <isNotNull prepend=" and " property="trans_datetime">
+      <![CDATA[ 
+	         TRANS_DATETIME between #trans_datetime# and #totrans_datetime#
+	      ]]> </isNotNull>
       <isNotNull prepend=" and " property="account">ACCOUNT = #account#</isNotNull>
       <isNotNull prepend=" and " property="note">NOTE = #note#</isNotNull>
       <isNotNull prepend=" and " property="telphone">TELPHONE = #telphone#</isNotNull>
       <isNotNull prepend=" and " property="order_num">ORDER_NUM = #order_num#</isNotNull>
+    </dynamic>
+  </select>
+  <select id="selectmoney" parameterClass="java.util.Map" resultClass="java.lang.Float">select sum(account) from TRANRECORD 
+    <dynamic prepend="where">
+      <isNotNull prepend=" and " property="type">TYPE = #type#</isNotNull>
+      <isNotNull prepend=" and " property="trans_datetime">
+      <![CDATA[ 
+	         TRANS_DATETIME between #trans_datetime# and #totrans_datetime#
+	      ]]> </isNotNull>
     </dynamic>
   </select>
 </sqlMap>

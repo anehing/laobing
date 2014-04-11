@@ -52,7 +52,8 @@ public class Driver implements Serializable{
 	private double latitude;
 	@TODO("distance")	
 	private String distance;
-	
+	@TODO("address")	
+	private String address;
 	public int getId() {
 		return id;
 	}
@@ -169,6 +170,12 @@ public class Driver implements Serializable{
 	}
 	public void setDistance(String distance) {
 		this.distance = distance;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
 	}
 	
 	

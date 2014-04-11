@@ -26,7 +26,7 @@ public interface ILoginService {
 	 * @param 级别
 	 * @return
 	 */
-	public String loadPopedomTree(Admin admin);
+	public Map loadPopedomTree(Admin admin);
 	/**
 	 * 检查用户名是否已存在
 	 * @param 级别

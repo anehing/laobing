@@ -77,9 +77,11 @@ public class JsonCouponAction extends JsonBaseAction {
 			rv = new ResultVo(7,"无此优惠券");
 			return FxJsonUtil.jsonHandle(rv,resutUrl,request);
 		}else{
+			if(coupon.getIs_invitation_code()==0){
 			if(coupon.getTelphone()!=null){
 				rv = new ResultVo(1,"此优惠券已被其他手机号绑定");
 				return FxJsonUtil.jsonHandle(rv,resutUrl,request);
+			}
 			}
 			coupon.setTelphone(this.telphone);
 			coupon.setUse_time(new Date());

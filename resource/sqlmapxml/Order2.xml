@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="com.zdqk.laobing.po.Order2">
+  <typeAlias alias="order2" type="com.zdqk.laobing.po.Order2"/>
+  <resultMap id="order2Result" class="order2">
+    <result property="id" column="ID"/>
+    <result property="customer_telphone" column="CUSTOMER_TELPHONE"/>
+    <result property="create_time" column="CREATE_TIME"/>
+    <result property="driver_telphone" column="DRIVER_TELPHONE"/>
+  </resultMap>
+  <insert id="insert" parameterClass="order2">insert into ORDER2( ID,CUSTOMER_TELPHONE,CREATE_TIME,DRIVER_TELPHONE ) values ( #id#,#customer_telphone#,#create_time#,#driver_telphone# )</insert>
+  <delete id="delete" parameterClass="order2">delete from ORDER2 where id = #id#</delete>
+  <update id="update" parameterClass="order2">update ORDER2 
+    <dynamic prepend="set">
+      <isNotNull prepend="," property="customer_telphone">CUSTOMER_TELPHONE = #customer_telphone#</isNotNull>
+      <isNotNull prepend="," property="create_time">CREATE_TIME = #create_time#</isNotNull>
+      <isNotNull prepend="," property="driver_telphone">DRIVER_TELPHONE = #driver_telphone#</isNotNull>
+    </dynamic>where id = #id#
+  </update>
+  <select id="findById" parameterClass="java.lang.Integer" resultMap="order2Result">select * from ORDER2 where id = #id#</select>
+  <select id="findNameById" parameterClass="java.lang.Integer" resultMap="order2Result">select * from ORDER2 where id = #id#</select>
+  <select id="selectAll" parameterClass="java.util.Map" resultMap="order2Result">select ID,CUSTOMER_TELPHONE,CREATE_TIME,DRIVER_TELPHONE from ORDER2
+    <dynamic prepend="where">
+      <isNotNull prepend=" and " property="customer_telphone">CUSTOMER_TELPHONE = #customer_telphone#</isNotNull>
+      <isNotNull prepend=" and " property="create_time">CREATE_TIME = #create_time#</isNotNull>
+      <isNotNull prepend=" and " property="driver_telphone">DRIVER_TELPHONE = #driver_telphone#</isNotNull>
+    </dynamic>
+  </select>
+  <select id="selectPage" parameterClass="java.util.Map" resultMap="order2Result">select ID,CUSTOMER_TELPHONE,CREATE_TIME,DRIVER_TELPHONE from ORDER2
+    <dynamic prepend="where">
+      <isNotNull prepend=" and " property="customer_telphone">CUSTOMER_TELPHONE = #customer_telphone#</isNotNull>
+      <isNotNull prepend=" and " property="create_time">CREATE_TIME = #create_time#</isNotNull>
+      <isNotNull prepend=" and " property="driver_telphone">DRIVER_TELPHONE = #driver_telphone#</isNotNull>
+    </dynamic>order by id desc limit #startIndex#,#endIndex#
+  </select>
+  <select id="selectCount" parameterClass="java.util.Map" resultClass="java.lang.Long">select count(id) from ORDER2 
+    <dynamic prepend="where">
+      <isNotNull prepend=" and " property="customer_telphone">CUSTOMER_TELPHONE = #customer_telphone#</isNotNull>
+      <isNotNull prepend=" and " property="create_time">CREATE_TIME = #create_time#</isNotNull>
+      <isNotNull prepend=" and " property="driver_telphone">DRIVER_TELPHONE = #driver_telphone#</isNotNull>
+    </dynamic>
+  </select>
+</sqlMap>

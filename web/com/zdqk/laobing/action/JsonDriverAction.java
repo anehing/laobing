@@ -71,8 +71,15 @@ public class JsonDriverAction extends JsonBaseAction {
 	private String jobstatus;
 	private String name;
 	private String telphone;
+	private String address;
 	
 	
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
 	public String getId() {
 		return id;
 	}
@@ -134,10 +141,7 @@ public class JsonDriverAction extends JsonBaseAction {
 	public String selectByjobstatusAciton() {
 		Map<String, Object> map = new HashMap<String, Object>();
 		ResultVo rv = null;
-		if(this.mc==null||this.mc.trim().equals("")){
-			rv = new ResultVo(3,"缺少参数:mc");
-			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
-		}
+		
 		if(this.latitude==null||this.latitude.trim().equals("")){
 			rv = new ResultVo(3,"缺少参数:latitude");
 			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
@@ -146,7 +150,6 @@ public class JsonDriverAction extends JsonBaseAction {
 			rv = new ResultVo(3,"缺少参数:longitude");
 			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
 		}
-     	map.put("mc",this.mc);
 		map.put("job_status",0);//空闲
 		List <Driver> list= driverDAO.selectByjobstatus(map, "selectByjobstatus");
 		if(list==null||list.size()<=0){
@@ -289,6 +292,8 @@ public class JsonDriverAction extends JsonBaseAction {
 			rv = new ResultVo(2,"用户名或者密码错误");
 			return FxJsonUtil.jsonHandle(rv,resutUrl,request);
 		}else{
+			dr.setPicture(host + "photo/" +dr.getPicture());
+			dr.setJob_status(1);
 			com.zdqk.laobing.action.vo.Driver drivervo =  new com.zdqk.laobing.action.vo.Driver();;	
 			BeanUtils.copyProperties(dr,drivervo);
 			drivervo.setReusltNumber(0);
@@ -367,6 +372,9 @@ public class JsonDriverAction extends JsonBaseAction {
 		if(this.longitude==null||this.longitude.trim().equals("")){
 			rv = new ResultVo(3,"缺少参数:longitude");
 			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
+		}if(this.address==null||this.address.trim().equals("")){
+			rv = new ResultVo(3,"缺少参数:address");
+			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
 		}
 		map.put("telphone",this.telphone);
 		Driver dr= (Driver) driverDAO.loginByNameAndTel(map, "loginByNameAndTel");
@@ -377,6 +385,7 @@ public class JsonDriverAction extends JsonBaseAction {
 			try {
 				dr.setLatitude(Double.parseDouble(this.latitude));
 				dr.setLongitude(Double.parseDouble(this.longitude));
+				dr.setAddress(this.address);
 			} catch (NumberFormatException e) {
 				// TODO Auto-generated catch block
 				rv = new ResultVo(2,"更新失败");

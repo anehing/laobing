@@ -31,6 +31,16 @@ public class Twitter implements Serializable{
     private int cityid;
 	@TODO("mc")
 	private String mc;//城市名称
+	@TODO("source")
+	private int source;
+	
+	
+	public int getSource() {
+		return source;
+	}
+	public void setSource(int source) {
+		this.source = source;
+	}
 	public int getId() {
 		return id;
 	}

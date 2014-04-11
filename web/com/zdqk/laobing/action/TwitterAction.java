@@ -63,6 +63,8 @@ public class TwitterAction extends BasePaginationAction {
     
 	private String masterSecret = "0777d1b54666a10bd10d7b2f";
 	private String appKey= "69ea07bcd736023af6ed3b3c";
+	private String masterSecret2 = "16179aea482826a58dd889db";
+	private String appKey2= "4ab161c79f28a9f58834e8eb";
 	private  JPushClient jpush = null;
 
     public static final int MAX = Integer.MAX_VALUE;
@@ -108,8 +110,6 @@ public class TwitterAction extends BasePaginationAction {
 			if(!twitter.getMc().equals("mc")){
 				map.put("mc", twitter.getMc());
 				map.put("sendtype", 1);
-				}else{
-					map.put("sendtype", 0);
 				}
 			}
 		
@@ -120,6 +120,7 @@ public class TwitterAction extends BasePaginationAction {
 		List<Twitter> list = publicQuery(map, a, twitterDAO); 
 		return "twitterList";
 	}
+
 	/**
 	 * @author ane
 	 *  根据账户ID修改推送信息totype==1表示修改，页面跳转到修改页面。
@@ -188,7 +189,7 @@ public class TwitterAction extends BasePaginationAction {
 			return "addTwitter";
 		
 	}
-	
+
 	private List<Dmb_city> getcity(){
 		Dmb_city a = new Dmb_city();
 		Map<String, Object> map = this.getPmapNew();
@@ -198,7 +199,12 @@ public class TwitterAction extends BasePaginationAction {
 	private void Jpush(Twitter twitter){
 
 		// 对android和ios设备发送
-		 jpush = new JPushClient(masterSecret, appKey);
+		if(twitter.getSource()==0){
+			 jpush = new JPushClient(masterSecret, appKey);
+		}else{
+			jpush = new JPushClient(masterSecret2, appKey2);
+		}
+		
 		 int sendNo = getRandomSendNo();// 在实际业务中，建议 sendNo 是一个你自己的业务可以处理的一个自增数字。
 		 String tag = twitter.getMc();
 		 String msgTitle = "";

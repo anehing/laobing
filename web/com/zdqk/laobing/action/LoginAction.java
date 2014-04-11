@@ -148,8 +148,17 @@ public class LoginAction extends ActionSupport{
 				request.setAttribute("message", "登录成功");
 	
 				
-				String tree=iLoginService.loadPopedomTree(adminInfo);
-				session.setAttribute("tree", tree);//设置右边树的列表
+				Map tree=iLoginService.loadPopedomTree(adminInfo);
+				session.setAttribute("tree0", tree.get("tree0"));//设置右边树的列表
+				session.setAttribute("tree1", tree.get("tree1"));//设置右边树的列表
+				session.setAttribute("tree2", tree.get("tree2"));//设置右边树的列表
+				session.setAttribute("tree3", tree.get("tree3"));//设置右边树的列表
+				session.setAttribute("tree4", tree.get("tree4"));//设置右边树的列表
+				session.setAttribute("tree5", tree.get("tree5"));//设置右边树的列表
+				session.setAttribute("tree6", tree.get("tree6"));//设置右边树的列表
+				session.setAttribute("tree7", tree.get("tree7"));//设置右边树的列表
+				session.setAttribute("tree8", tree.get("tree8"));//设置右边树的列表
+				session.setAttribute("tree9", tree.get("tree9"));//设置右边树的列表
 				
 			//	session.setAttribute("tree2", "<a href=\"base/queryAdmin.action\" target=\"main\">后台用户2管理</a>");//设置右边树的列表
 				logger.info("登陆成功，正在转发 : ");

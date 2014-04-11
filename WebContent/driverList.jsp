@@ -64,11 +64,11 @@
 						<tr>
 							<td class="topTd" align="center" width="4%">序号</td>
 							<td class="topTd" align="center" width="4%">状态</td>
-							<td class="topTd" align="center" width="6%">头像</td>
+							<td class="topTd" align="center" width="4%">头像</td>
 							<td class="topTd" align="center" width="3%">姓名</td>
 							<td class="topTd" align="center" width="3%">年龄</td>
 							<td class="topTd" align="center" width="4%">手机号</td>
-							<td class="topTd" align="center" width="3%">所在城市</td>
+							<td class="topTd" align="center" width="6%">位置</td>
 							<td class="topTd" align="center" width="4%">操作</td>
 						</tr>
 						<s:if test="page.data.size > 0">
@@ -88,7 +88,7 @@
 									
 									<td class="dataTd" align="center">${t.age}</td>
 									<td class="dataTd" align="center">${t.telphone}</td>
-									<td class="dataTd" align="center">${t.mc}</td>
+									<td class="dataTd" align="center">${t.address}</td>
 									<td class="dataTd" align="center">
 									  <a href="queryDriverbyId.action?totype=1&id=${t.id}">修改</a> 
 									  <a href="queryDriverbyId.action?totype=2&id=${t.id}">删除</a>

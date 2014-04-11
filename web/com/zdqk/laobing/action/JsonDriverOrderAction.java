@@ -20,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.apache.struts2.convention.annotation.ParentPackage;
 
 import com.zdqk.laobing.action.vo.ResultVo;
+import com.zdqk.laobing.dao.Customer_orderDAO;
 import com.zdqk.laobing.dao.DriverDAO;
 import com.zdqk.laobing.dao.Driver_orderDAO;
 import com.zdqk.laobing.dao.Pre_priceDAO;
@@ -56,7 +57,8 @@ public class JsonDriverOrderAction extends JsonBaseAction {
 	private Pre_priceDAO pre_priceDAO;
 	@Autowired
 	private DriverDAO driverDAO;
-	
+	@Autowired
+	private Customer_orderDAO customer_orderDAO;
 	private Pre_price pre_price;
 	@Autowired
 	private TranrecordDAO tranrecordDAO;
@@ -280,6 +282,17 @@ public class JsonDriverOrderAction extends JsonBaseAction {
 			rv = new ResultVo(3,"缺少参数:customertelphone");
 			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
 		}
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("telphone",this.drivertelphone);
+		Driver dr= (Driver) driverDAO.loginByNameAndTel(map, "loginByNameAndTel");
+		if (dr==null){
+			rv = new ResultVo(1,"司机不存在");
+			return FxJsonUtil.jsonHandle(rv,resutUrl,request);
+		}
+//		if(dr.getJob_status()!=0&&dr.getJob_status()!=3){
+//			rv = new ResultVo(1,"司机当前无法接单");
+//			return FxJsonUtil.jsonHandle(rv,resutUrl,request);
+//		}
 		Map<String, Object> userMap = new HashMap<String, Object>();
 		userMap.put("telphone",this.customertelphone);
 		userMap.put("isbind",1);
@@ -308,13 +321,6 @@ public class JsonDriverOrderAction extends JsonBaseAction {
 			BeanUtils.copyProperties(d_order,driver_order);
 			driver_order.setReusltNumber(0);
 			driver_order.setReusltMessage("下单成功");
-			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("telphone",this.drivertelphone);
-			Driver dr= (Driver) driverDAO.loginByNameAndTel(map, "loginByNameAndTel");
-			if (dr==null){
-				rv = new ResultVo(1,"司机不存在");
-				return FxJsonUtil.jsonHandle(rv,resutUrl,request);
-			}
 			dr.setJob_status(2);//忙碌
 			driverDAO.update(dr);
 			return FxJsonUtil.jsonHandle(driver_order,resutUrl,request);
@@ -385,6 +391,11 @@ public class JsonDriverOrderAction extends JsonBaseAction {
 		map.put("ordernum", this.orderunm);
 		map.put("status", 0);
 		Driver_order d = (Driver_order) driver_orderDAO.selectdriverorder(map, "selectall2");
+		Customer_order c=(Customer_order) customer_orderDAO.selectByTel(map, "selectAll2");
+		if(c!=null){
+			c.setStatus(2);
+			customer_orderDAO.update(c);
+		}
 		if (d ==null){
 			rv = new ResultVo(1,"订单确认失败，请联系管理员");
 			return FxJsonUtil.jsonHandle(rv,resutUrl,request);
@@ -405,32 +416,38 @@ public class JsonDriverOrderAction extends JsonBaseAction {
         	Map<String, Object> mapprice = new HashMap<String, Object>();
         	mapprice.put("drivertelphone", this.drivertelphone);
         	Pre_price p =(Pre_price) pre_priceDAO.seletcbytel(mapprice, "selectAll");
-        	if(p==null || p.getPre_price()<=15){
+        	if(p==null || p.getPre_price()<=p.getPre_account()){
         		rv = new ResultVo(1,"司机不存在,或者账户额度太低");
     			return FxJsonUtil.jsonHandle(rv,resutUrl,request);
         	}
+        	Tranrecord t =new Tranrecord();
         	float price =p.getPre_price();
         	if(count<=58){
+        		t.setAccount(2);
         		p.setPre_price(price-2);
         	}else if (58<count&&count<=79){
+        		t.setAccount(5);
         		p.setPre_price(price-5);
         	}else if (79<count&&count<=98){
+        		t.setAccount(10);
         		p.setPre_price(price-10);
         	}else{
+        		t.setAccount(15);
         		p.setPre_price(price-15);
         	}
         	pre_priceDAO.update(p);//修改预付款
-        	Tranrecord t =new Tranrecord();
+        	
         	t.setOrder_num(this.orderunm);
         	t.setTrans_datetime(new Date());
         	t.setType(0);//0:扣款，1：充值
-        	t.setOrder_num("充值");
         	t.setTelphone(this.drivertelphone);
+        	
         	tranrecordDAO.insert(t);
         	Map<String, Object> map2 = new HashMap<String, Object>();
 			map2.put("telphone",this.drivertelphone);
 			Driver dr= (Driver) driverDAO.loginByNameAndTel(map2, "loginByNameAndTel");
 			dr.setJob_status(0);//空闲
+			dr.setTimes(dr.getTimes()+1);
 			driverDAO.update(dr);
 			rv = new ResultVo(0,"订单确认成功");
 			return FxJsonUtil.jsonHandle(rv,resutUrl,request);
@@ -455,50 +472,51 @@ public class JsonDriverOrderAction extends JsonBaseAction {
 			rv = new ResultVo(3,"缺少参数:customertelphone");
 			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
 		}
-		if(this.orderunm==null||this.orderunm.trim().equals("")){
-			rv = new ResultVo(3,"缺少参数:orderunm");
-			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
-		}
-		if(this.waittime==null||this.waittime.trim().equals("")){
-			rv = new ResultVo(3,"缺少参数:waittime");
-			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
-		}
-		if(this.begintime==null||this.begintime.trim().equals("")){
-			rv = new ResultVo(3,"缺少参数:begintime");
-			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
-		}
-		if(this.endtime==null||this.endtime.trim().equals("")){
-			rv = new ResultVo(3,"缺少参数:endtime");
-			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
-		}
-		if(this.start_place==null||this.start_place.trim().equals("")){
-			rv = new ResultVo(3,"缺少参数:start_place");
-			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
-		}
-		if(this.end_place==null||this.end_place.trim().equals("")){
-			rv = new ResultVo(3,"缺少参数:end_place");
-			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
-		}
-				if(this.distance==null||this.distance.trim().equals("")){
-			rv = new ResultVo(3,"缺少参数:distance");
-			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
-		}
+//		if(this.waittime==null||this.waittime.trim().equals("")){
+//			rv = new ResultVo(3,"缺少参数:waittime");
+//			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
+//		}
+//		if(this.begintime==null||this.begintime.trim().equals("")){
+//			rv = new ResultVo(3,"缺少参数:begintime");
+//			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
+//		}
+//		if(this.endtime==null||this.endtime.trim().equals("")){
+//			rv = new ResultVo(3,"缺少参数:endtime");
+//			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
+//		}
+//		if(this.start_place==null||this.start_place.trim().equals("")){
+//			rv = new ResultVo(3,"缺少参数:start_place");
+//			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
+//		}
+//		if(this.end_place==null||this.end_place.trim().equals("")){
+//			rv = new ResultVo(3,"缺少参数:end_place");
+//			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
+//		}
+//				if(this.distance==null||this.distance.trim().equals("")){
+//			rv = new ResultVo(3,"缺少参数:distance");
+//			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
+//		}
+		float count=0;
 		if(this.fee==null||this.fee.trim().equals("")){
-			rv = new ResultVo(3,"缺少参数:fee");
-			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
+			count=0;
+		}else{
+			count= Float.parseFloat(this.fee);
 		}
+		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("drivertelphone",this.drivertelphone);
 		map.put("customertelphone", this.customertelphone);
-		map.put("orderunm", this.orderunm);
 		map.put("status", 0);
 		Driver_order d = (Driver_order) driver_orderDAO.selectdriverorder(map, "selectall2");
-		if (d ==null){
-			rv = new ResultVo(1,"订单确认失败，请联系管理员");
+		Customer_order c=(Customer_order) customer_orderDAO.selectByTel(map, "selectAll2");
+		if(c!=null){
+			c.setStatus(2);
+			customer_orderDAO.update(c);
+		}
+		if (d!=null){
+			rv = new ResultVo(1,"该订单尚未取消");
 			return FxJsonUtil.jsonHandle(rv,resutUrl,request);
 		}
-		d.setStatus(2);//订单作废
-	    driver_orderDAO.update(d);
 		Driver_order d_order =new Driver_order();
 		boolean flag=false;
 		d_order.setDrivertelphone(this.drivertelphone);
@@ -513,19 +531,48 @@ public class JsonDriverOrderAction extends JsonBaseAction {
 		if(this.discount_amount!=null&&!this.discount_amount.trim().equals("")){
 			d_order.setDiscount_amount(this.discount_amount);
 		}
-		d_order.setOrdernum(this.orderunm);
+		long num=Math.round(Math.random() * 1000) +Math.round(Math.random() * 1000);
+        d_order.setOrdernum(num+this.customertelphone.substring(customertelphone.length()-4));
 		d_order.setCreatetime(new Date());
 		d_order.setFee(Float.parseFloat(this.fee));
 		d_order.setDistance(Float.parseFloat(this.distance));
 		d_order.setStatus(1);
 	    flag=driver_orderDAO.insert(d_order);
         if(flag){
+        	Map<String, Object> mapprice = new HashMap<String, Object>();
+        	mapprice.put("drivertelphone", this.drivertelphone);
+        	Pre_price p =(Pre_price) pre_priceDAO.seletcbytel(mapprice, "selectAll");
+        	if(p==null || p.getPre_price()<=p.getPre_account()){
+        		rv = new ResultVo(1,"司机不存在,或者账户额度太低");
+    			return FxJsonUtil.jsonHandle(rv,resutUrl,request);
+        	}
         	Tranrecord t =new Tranrecord();
+        	float price =p.getPre_price();
+        	if(count<=58){
+        		t.setAccount(2);
+        		p.setPre_price(price-2);
+        	}else if (58<count&&count<=79){
+        		t.setAccount(5);
+        		p.setPre_price(price-5);
+        	}else if (79<count&&count<=98){
+        		t.setAccount(10);
+        		p.setPre_price(price-10);
+        	}else{
+        		t.setAccount(15);
+        		p.setPre_price(price-15);
+        	}
+        	pre_priceDAO.update(p);//修改预付款
+        	
         	t.setOrder_num(this.orderunm);
         	t.setTrans_datetime(new Date());
         	t.setType(0);//0:扣款，1：充值
         	t.setTelphone(this.drivertelphone);
         	tranrecordDAO.insert(t);
+        	Map<String, Object> map2 = new HashMap<String, Object>();
+    		map2.put("telphone",this.drivertelphone);
+    		Driver dr= (Driver) driverDAO.loginByNameAndTel(map2, "loginByNameAndTel");
+    		dr.setTimes(dr.getTimes()+1);
+			driverDAO.update(dr);
 			rv = new ResultVo(0,"补单成功");
 			return FxJsonUtil.jsonHandle(rv,resutUrl,request);
 		}else{
@@ -556,6 +603,7 @@ public class JsonDriverOrderAction extends JsonBaseAction {
 		Map<String, Object> map = new HashMap<String, Object>();
 		if(this.type.equals("1")){
 			map.put("drivertelphone", this.telphone);
+			map.put("status",1);
 		}else if(this.type.equals("2")){
 			map.put("customertelphone", this.telphone);
 		}else{
@@ -623,5 +671,51 @@ public class JsonDriverOrderAction extends JsonBaseAction {
         }
        
    }
+	/**未处理
+	 * 取消订单
+	 * @throws ParseException 
+	 * */
+	@Action("offdriverorder")
+	public String offdriverorder() {
+		ResultVo rv = null;
+		if(this.drivertelphone==null||this.drivertelphone.trim().equals("")){
+			rv = new ResultVo(3,"缺少参数:drivertelphone");
+			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
+		}
+		if(this.customertelphone==null||this.customertelphone.trim().equals("")){
+			rv = new ResultVo(3,"缺少参数:customertelphone");
+			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
+		}
+		if(this.orderunm==null||this.orderunm.trim().equals("")){
+			rv = new ResultVo(3,"缺少参数:orderunm");
+			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
+		}
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("drivertelphone",this.drivertelphone);
+		map.put("orderunm", this.orderunm);
+		map.put("customertelphone", this.customertelphone);
+		map.put("status", 0);
+		Driver_order d = (Driver_order) driver_orderDAO.selectdriverorder(map, "selectall2");
+		Customer_order c=(Customer_order) customer_orderDAO.selectByTel(map, "selectAll2");
+		if(c!=null){
+			c.setStatus(2);
+			customer_orderDAO.update(c);
+		}
+		if (d ==null){
+			rv = new ResultVo(1,"订单确认失败，请联系管理员");
+			return FxJsonUtil.jsonHandle(rv,resutUrl,request);
+		}
+		d.setStatus(2);//订单作废
+	  Boolean flag=  driver_orderDAO.update(d);
+        if(flag){
+			rv = new ResultVo(0,"取消成功");
+			return FxJsonUtil.jsonHandle(rv,resutUrl,request);
+		}else{
+			rv = new ResultVo(1,"取消失败");
+			return FxJsonUtil.jsonHandle(rv,resutUrl,request);
+		}
+	}
+      
+      
 
 }

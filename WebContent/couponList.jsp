@@ -89,8 +89,8 @@
 								    <td class="dataTd" align="center">${t.telphone}</td>
 								    <td class="dataTd" align="center"><fmt:formatDate value="${t.create_time}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 								    <td class="dataTd" align="center">
-									   <c:if test="${t.is_invitation_code eq 0}">是邀请码 </c:if>
-								       <c:if test="${t.is_invitation_code eq 1}">不是邀请码 </c:if>							 
+									   <c:if test="${t.is_invitation_code eq 1}">邀请码 </c:if>
+								       <c:if test="${t.is_invitation_code eq 0}">优惠券 </c:if>							 
 								    </td>
 								</tr>
 							</s:iterator>

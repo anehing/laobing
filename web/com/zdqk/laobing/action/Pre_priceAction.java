@@ -121,6 +121,7 @@ public class Pre_priceAction extends BasePaginationAction {
 		    	Tranrecord t =new Tranrecord();
 	        	t.setTrans_datetime(new Date());
 	        	t.setType(1);//0:扣款，1：充值
+	        	t.setAccount(this.price);
 	        	t.setTelphone(this.pre_price.getDrivertelphone());
 	        	tranrecordDAO.insert(t);
 		    	this.addActionMessage("充值成功");

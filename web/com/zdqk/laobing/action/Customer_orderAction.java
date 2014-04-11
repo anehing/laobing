@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.lfx.tools.DateConverter;
 import com.zdqk.laobing.dao.Customer_orderDAO;
 import com.zdqk.laobing.dao.Driver_orderDAO;
+import com.zdqk.laobing.dao.OrderDAO;
 import com.zdqk.laobing.po.Admin;
 import com.zdqk.laobing.po.Customer_order;
 import com.zdqk.laobing.po.Driver_order;
@@ -47,15 +48,30 @@ public class Customer_orderAction extends BasePaginationAction {
 	
 	@Autowired
 	private Customer_orderDAO customer_orderDAO;
-	
+	@Autowired
+	private OrderDAO orderDAO;
 	private Customer_order customer_order;
 	
 	
 	private String create_time;
 	private String tocreate_time;
-    
+	private String customer_telphone;
+	private String driver_telphone;
+	
     
 
+	public String getCustomer_telphone() {
+		return customer_telphone;
+	}
+	public void setCustomer_telphone(String customer_telphone) {
+		this.customer_telphone = customer_telphone;
+	}
+	public String getDriver_telphone() {
+		return driver_telphone;
+	}
+	public void setDriver_telphone(String driver_telphone) {
+		this.driver_telphone = driver_telphone;
+	}
 	public String getCreate_time() {
 		return create_time;
 	}
@@ -123,6 +139,16 @@ public class Customer_orderAction extends BasePaginationAction {
 	
 	@Action("updateCustomer_order")
 	public String updateCustomer_order() {
+		if(this.customer_order!=null){
+			boolean  flag=customer_orderDAO.update(this.customer_order);
+		    if(flag)  this.addActionMessage("更新成功");
+			else this.addActionError("更新失败");
+		}
+		
+		return "updateCustomer_order";
+	}
+	@Action("callrecord")
+	public String callrecord() {
 		if(this.customer_order!=null){
 			boolean  flag=customer_orderDAO.update(this.customer_order);
 		    if(flag)  this.addActionMessage("更新成功");

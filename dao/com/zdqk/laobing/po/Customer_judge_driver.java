@@ -23,6 +23,8 @@ public class Customer_judge_driver implements Serializable{
 	private String drivertelphone;	
 	@TODO("judge_time")
     private String judge_time;
+	@TODO("content")
+    private String content;
 	public int getId() {
 		return id;
 	}
@@ -53,6 +55,13 @@ public class Customer_judge_driver implements Serializable{
 	public void setJudge_time(String judge_time) {
 		this.judge_time = judge_time;
 	}
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
+	}
+
 	
 	
 	

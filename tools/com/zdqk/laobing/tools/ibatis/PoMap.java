@@ -3,12 +3,14 @@ package com.zdqk.laobing.tools.ibatis;
 import java.util.HashMap;
 import java.util.Map;
 
+
 import com.zdqk.laobing.po.Customer_judge_driver;
 import com.zdqk.laobing.po.Customer_order;
 import com.zdqk.laobing.po.Dmb_city;
 import com.zdqk.laobing.po.Driver;
 import com.zdqk.laobing.po.Driver_judge_Customer;
 import com.zdqk.laobing.po.Driver_order;
+import com.zdqk.laobing.po.Order2;
 import com.zdqk.laobing.po.PublicNote;
 import com.zdqk.laobing.po.Tranrecord;
 import com.zdqk.laobing.po.Twitter;
@@ -42,16 +44,16 @@ public class PoMap {
 //        hashmap.put("Pre_price", Pre_price);
 //        Price Price =new Price();
 //        hashmap.put("Price", Price);
-      // Tranrecord Tranrecord =new Tranrecord();
-     //  hashmap.put("Tranrecord", Tranrecord);
    //    Twitter Twitter =new Twitter();
      //  hashmap.put("Twitter", Twitter);
-       Url Url=new Url();
-        hashmap.put("Url", Url);
+       //Url Url=new Url();
+     //   hashmap.put("Url", Url);
    //   User User =new User();
    //     hashmap.put("User", User);
 //        Version Version =new Version();
 //        hashmap.put("Version", Version);
+   	Order2 Order2 = new Order2();
+    hashmap.put("Order2", Order2);
 		return hashmap; 
 	}
 }

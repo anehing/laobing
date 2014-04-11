@@ -23,8 +23,9 @@
     <result property="longitude" column="LONGITUDE"/>
     <result property="latitude" column="LATITUDE"/>
     <result property="distance" column="DISTANCE"/>
+      <result property="address" column="ADDRESS"/>
   </resultMap>
-  <insert id="insert" parameterClass="driver">insert into DRIVER( ID,JOB_STATUS,STARS,SEX,AGE,CITYID,MC,YEAR,TIMES,NAME,TELPHONE,IDENT_NUM,PICTURE,CITY,DRIVE_CARD,SERVICEFEE,LONGITUDE,LATITUDE,DISTANCE ) values ( #id#,#job_status#,#stars#,#sex#,#age#,#cityid#,#mc#,#year#,#times#,#name#,#telphone#,#ident_num#,#picture#,#city#,#drive_card#,#servicefee#,#longitude#,#latitude#,#distance# )</insert>
+  <insert id="insert" parameterClass="driver">insert into DRIVER( ID,JOB_STATUS,STARS,SEX,AGE,CITYID,MC,YEAR,TIMES,NAME,TELPHONE,IDENT_NUM,PICTURE,CITY,DRIVE_CARD,SERVICEFEE,LONGITUDE,LATITUDE,DISTANCE,ADDRESS ) values ( #id#,#job_status#,#stars#,#sex#,#age#,#cityid#,#mc#,#year#,#times#,#name#,#telphone#,#ident_num#,#picture#,#city#,#drive_card#,#servicefee#,#longitude#,#latitude#,#distance#,#address# )</insert>
   <delete id="delete" parameterClass="driver">delete from DRIVER where id = #id#</delete>
   <update id="update" parameterClass="driver">update DRIVER 
     <dynamic prepend="set">
@@ -46,11 +47,12 @@
       <isNotNull prepend="," property="longitude">LONGITUDE = #longitude#</isNotNull>
       <isNotNull prepend="," property="latitude">LATITUDE = #latitude#</isNotNull>
       <isNotNull prepend="," property="distance">DISTANCE = #distance#</isNotNull>
+        <isNotNull prepend="," property="address">ADDRESS = #address#</isNotNull>
     </dynamic>where id = #id#
   </update>
   <select id="findById" parameterClass="java.lang.Integer" resultMap="driverResult">select * from DRIVER where id = #id#</select>
   <select id="findNameById" parameterClass="java.lang.Integer" resultMap="driverResult">select * from DRIVER where id = #id#</select>
-  <select id="selectAll" parameterClass="java.util.Map" resultMap="driverResult">select ID,JOB_STATUS,STARS,SEX,AGE,CITYID,MC,YEAR,TIMES,NAME,TELPHONE,IDENT_NUM,PICTURE,CITY,DRIVE_CARD,SERVICEFEE,LONGITUDE,LATITUDE,DISTANCE from DRIVER
+  <select id="selectAll" parameterClass="java.util.Map" resultMap="driverResult">select * from DRIVER
     <dynamic prepend="where">
       <isNotNull prepend=" and " property="job_status">JOB_STATUS = #job_status#</isNotNull>
       <isNotNull prepend=" and " property="stars">STARS = #stars#</isNotNull>
@@ -70,9 +72,10 @@
        <isNotNull prepend=" and " property="longitude">LONGITUDE = #longitude#</isNotNull>
       <isNotNull prepend=" and " property="latitude">LATITUDE = #latitude#</isNotNull>
       <isNotNull prepend=" and " property="distance">DISTANCE = #distance#</isNotNull>
+       <isNotNull prepend=" and " property="address">ADDRESS = #address#</isNotNull>
     </dynamic>
   </select>
-  <select id="selectPage" parameterClass="java.util.Map" resultMap="driverResult">select ID,JOB_STATUS,STARS,SEX,AGE,CITYID,MC,YEAR,TIMES,NAME,TELPHONE,IDENT_NUM,PICTURE,CITY,DRIVE_CARD,SERVICEFEE,LONGITUDE,LATITUDE,DISTANCE from DRIVER
+  <select id="selectPage" parameterClass="java.util.Map" resultMap="driverResult">select * from DRIVER
     <dynamic prepend="where">
       <isNotNull prepend=" and " property="job_status">JOB_STATUS = #job_status#</isNotNull>
       <isNotNull prepend=" and " property="stars">STARS = #stars#</isNotNull>
@@ -92,6 +95,7 @@
        <isNotNull prepend=" and " property="longitude">LONGITUDE = #longitude#</isNotNull>
       <isNotNull prepend=" and " property="latitude">LATITUDE = #latitude#</isNotNull>
       <isNotNull prepend=" and " property="distance">DISTANCE = #distance#</isNotNull>
+      <isNotNull prepend=" and " property="address">ADDRESS = #address#</isNotNull>
     </dynamic>order by id desc limit #startIndex#,#endIndex#
   </select>
   <select id="selectCount" parameterClass="java.util.Map" resultClass="java.lang.Long">select count(id) from DRIVER 
@@ -114,6 +118,7 @@
       <isNotNull prepend=" and " property="longitude">LONGITUDE = #longitude#</isNotNull>
       <isNotNull prepend=" and " property="latitude">LATITUDE = #latitude#</isNotNull>
       <isNotNull prepend=" and " property="distance">DISTANCE = #distance#</isNotNull>
+      <isNotNull prepend=" and " property="address">ADDRESS = #address#</isNotNull>
     </dynamic>
   </select>
     <select id="selectByjobstatus" parameterClass="java.util.Map" resultMap="driverResult">select * from DRIVER

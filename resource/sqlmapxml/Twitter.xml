@@ -12,8 +12,9 @@
     <result property="type" column="TYPE"/>
     <result property="cityid" column="CITYID"/>
     <result property="mc" column="MC"/>
+     <result property="source" column="SOURCE"/>
   </resultMap>
-  <insert id="insert" parameterClass="twitter">insert into TWITTER( ID,TITLE,CONTENT,CREATETIME,SENDTYPE,TYPE,CITYID,MC ) values ( #id#,#title#,#content#,#createtime#,#sendtype#,#type#,#cityid#,#mc# )</insert>
+  <insert id="insert" parameterClass="twitter">insert into TWITTER( ID,TITLE,CONTENT,CREATETIME,SENDTYPE,TYPE,CITYID,MC,SOURCE ) values ( #id#,#title#,#content#,#createtime#,#sendtype#,#type#,#cityid#,#mc#,#source# )</insert>
   <delete id="delete" parameterClass="twitter">delete from TWITTER where id = #id#</delete>
   <update id="update" parameterClass="twitter">update TWITTER 
     <dynamic prepend="set">
@@ -24,11 +25,12 @@
       <isNotNull prepend="," property="type">TYPE = #type#</isNotNull>
       <isNotNull prepend="," property="cityid">CITYID = #cityid#</isNotNull>
       <isNotNull prepend="," property="mc">MC = #mc#</isNotNull>
+       <isNotNull prepend="," property="source">SOURCE = #source#</isNotNull>
     </dynamic>where id = #id#
   </update>
   <select id="findById" parameterClass="java.lang.Integer" resultMap="twitterResult">select * from TWITTER where id = #id#</select>
   <select id="findNameById" parameterClass="java.lang.Integer" resultMap="twitterResult">select * from TWITTER where id = #id#</select>
-  <select id="selectAll" parameterClass="java.util.Map" resultMap="twitterResult">select ID,TITLE,CONTENT,CREATETIME,SENDTYPE,TYPE,CITYID,MC from TWITTER
+  <select id="selectAll" parameterClass="java.util.Map" resultMap="twitterResult">select * from TWITTER
     <dynamic prepend="where">
       <isNotNull prepend=" and " property="title">TITLE = #title#</isNotNull>
       <isNotNull prepend=" and " property="content">CONTENT = #content#</isNotNull>
@@ -37,9 +39,10 @@
       <isNotNull prepend=" and " property="type">TYPE = #type#</isNotNull>
       <isNotNull prepend=" and " property="cityid">CITYID = #cityid#</isNotNull>
       <isNotNull prepend=" and " property="mc">MC = #mc#</isNotNull>
+      <isNotNull prepend=" and " property="source">SOURCE = #source#</isNotNull>
     </dynamic>
   </select>
-  <select id="selectPage" parameterClass="java.util.Map" resultMap="twitterResult">select ID,TITLE,CONTENT,CREATETIME,SENDTYPE,TYPE,CITYID,MC from TWITTER
+  <select id="selectPage" parameterClass="java.util.Map" resultMap="twitterResult">select * from TWITTER
     <dynamic prepend="where">
       <isNotNull prepend=" and " property="title">TITLE = #title#</isNotNull>
       <isNotNull prepend=" and " property="content">CONTENT = #content#</isNotNull>
@@ -48,6 +51,7 @@
       <isNotNull prepend=" and " property="type">TYPE = #type#</isNotNull>
       <isNotNull prepend=" and " property="cityid">CITYID = #cityid#</isNotNull>
       <isNotNull prepend=" and " property="mc">MC = #mc#</isNotNull>
+      <isNotNull prepend=" and " property="source">SOURCE = #source#</isNotNull>
     </dynamic>order by id desc limit #startIndex#,#endIndex#
   </select>
   <select id="selectCount" parameterClass="java.util.Map" resultClass="java.lang.Long">select count(id) from TWITTER 
@@ -59,6 +63,7 @@
       <isNotNull prepend=" and " property="type">TYPE = #type#</isNotNull>
       <isNotNull prepend=" and " property="cityid">CITYID = #cityid#</isNotNull>
       <isNotNull prepend=" and " property="mc">MC = #mc#</isNotNull>
+      <isNotNull prepend=" and " property="source">SOURCE = #source#</isNotNull>
     </dynamic>
   </select>
   

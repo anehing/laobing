@@ -25,6 +25,8 @@ public class Driver_judge_Customer implements Serializable{
     private int judge;
 	@TODO("create_time")
     private Date create_time;
+	@TODO("ordernum")		
+    private String ordernum;
 	public int getId() {
 		return id;
 	}
@@ -60,6 +62,12 @@ public class Driver_judge_Customer implements Serializable{
 	}
 	public void setCreate_time(Date create_time) {
 		this.create_time = create_time;
+	}
+	public String getOrdernum() {
+		return ordernum;
+	}
+	public void setOrdernum(String ordernum) {
+		this.ordernum = ordernum;
 	}
 	
 	

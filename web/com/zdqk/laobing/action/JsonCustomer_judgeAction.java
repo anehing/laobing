@@ -48,7 +48,7 @@ public class JsonCustomer_judgeAction extends JsonBaseAction {
     private Driver_order driver_order;
     private String telphone;
     private String score;
-  
+    private String content;
     private String orderid;
 
     private String judge;
@@ -102,6 +102,13 @@ public class JsonCustomer_judgeAction extends JsonBaseAction {
 	}
 	public void setJudge(String judge) {
 		this.judge = judge;
+	}
+	
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
 	}
 	/**
 	 * 获取司机评价
@@ -163,10 +170,15 @@ public class JsonCustomer_judgeAction extends JsonBaseAction {
 			rv = new ResultVo(3,"缺少参数:score");
 			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
 		}
+		if(this.content==null||this.content.trim().equals("")){
+			rv = new ResultVo(3,"缺少参数:content");
+			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
+		}
 		Customer_judge_driver c=new Customer_judge_driver();
 		c.setDrivertelphone(this.drivertelphone);
 		c.setTelphone(this.telphone);
 		c.setScore(Integer.parseInt(this.score));
+		c.setContent(this.content);
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm"); 
 		c.setJudge_time(df.format(new Date()));
 		flag=customer_judge_driverDAO.insert(c);
@@ -201,7 +213,7 @@ public class JsonCustomer_judgeAction extends JsonBaseAction {
 		d.setDrivertelphone(this.drivertelphone);
 		d.setCustomertelphone(this.telphone);
 		d.setJudge(Integer.parseInt(this.judge));
-		d.setOrderid(Integer.parseInt(this.orderid));
+		d.setOrdernum(this.orderid);
 		d.setCreate_time(new Date());
 		flag=driver_judge_customerDAO.insert(d);
 		if(flag){

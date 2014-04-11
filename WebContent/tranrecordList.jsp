@@ -29,15 +29,15 @@
 	            <tr>
 		            <td width="10%" align="center" bgcolor="#F3F8FE" class="dataTdText">交易类型</td>
 		            <td width="30%" align="left" class="dataTdText" bgcolor="#FFFFFF" >
-		            <s:select list="#{0:'充值',1:'扣款'}" listKey="key" listValue="value" name ="tranrecord.status" id="status"  headerValue="请选择" headerKey="3" ></s:select>
+		            <s:select list="#{0:'充值',1:'扣款'}" listKey="key" listValue="value" name ="tranrecord.type" id="type"  headerValue="请选择" headerKey="3" ></s:select>
 	                <!-- <td width="10%" align="center" bgcolor="#F3F8FE" class="dataTdText"></td>
 		            <td width="33%" align="left" class="dataTdText" bgcolor="#FFFFFF" > -->
 	             </tr>
 	              <tr>
 		            <td width="10%" align="center" bgcolor="#F3F8FE" class="dataTdText">时间</td>
 		            <td width="60%" align="left" class="dataTdText" bgcolor="#FFFFFF" >
-		                    <input type="text" name="createtime" id="create_time" class="tcal" value="${createtime}" />
-		            &nbsp;-<input type="text" name="tocreatetime" id="tocreate_time" class="tcal" value="${tocreatetime}" />
+		                    <input type="text" name="createtime" id="createtime" class="tcal" value="${createtime}" />
+		            &nbsp;-<input type="text" name="tocreatetime" id="tocreatetime" class="tcal" value="${tocreatetime}" />
 		            </td>
                  
 	            </tr>
@@ -53,6 +53,7 @@
 							<td class="topTd" align="center" width="8%">司机手机号</td>
 							<td class="topTd" align="center" width="8%">交易类型</td>
 							<td class="topTd" align="center" width="8%">交易时间</td>
+							<td class="topTd" align="center" width="8%">交易金额</td>
 							<td class="topTd" align="center" width="8%">订单号</td>
 						</tr>
 						<s:if test="page.data.size > 0">
@@ -69,6 +70,7 @@
 								        <c:if test="${t.type eq 0}">平台扣费</c:if>				 
 								    </td>
 									<td class="dataTd" align="center"><fmt:formatDate value="${t.trans_datetime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+									<td class="dataTd" align="center">${t.account}
 									<td class="dataTd" align="center">${t.order_num}
 									</td>
 								</tr>

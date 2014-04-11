@@ -10,8 +10,9 @@
     <result property="drivertelphone" column="DRIVERTELPHONE"/>
     <result property="judge" column="JUDGE"/>
     <result property="create_time" column="CREATE_TIME"/>
+     <result property="ordernum" column="ORDERNUM"/>
   </resultMap>
-  <insert id="insert" parameterClass="driver_judge_Customer">insert into DRIVER_JUDGE_CUSTOMER( ID,ORDERID,CUSTOMERTELPHONE,DRIVERTELPHONE,JUDGE,CREATE_TIME ) values ( #id#,#orderid#,#customertelphone#,#drivertelphone#,#judge#,#create_time# )</insert>
+  <insert id="insert" parameterClass="driver_judge_Customer">insert into DRIVER_JUDGE_CUSTOMER( ID,ORDERID,CUSTOMERTELPHONE,DRIVERTELPHONE,JUDGE,CREATE_TIME,ORDERNUM ) values ( #id#,#orderid#,#customertelphone#,#drivertelphone#,#judge#,#create_time#,#ordernum# )</insert>
   <delete id="delete" parameterClass="driver_judge_Customer">delete from DRIVER_JUDGE_CUSTOMER where id = #id#</delete>
   <update id="update" parameterClass="driver_judge_Customer">update DRIVER_JUDGE_CUSTOMER 
     <dynamic prepend="set">
@@ -20,26 +21,29 @@
       <isNotNull prepend="," property="drivertelphone">DRIVERTELPHONE = #drivertelphone#</isNotNull>
       <isNotNull prepend="," property="judge">JUDGE = #judge#</isNotNull>
       <isNotNull prepend="," property="create_time">CREATE_TIME = #create_time#</isNotNull>
+       <isNotNull prepend="," property="ordernum">ORDERNUM = #ordernum#</isNotNull>
     </dynamic>where id = #id#
   </update>
   <select id="findById" parameterClass="java.lang.Integer" resultMap="driver_judge_CustomerResult">select * from DRIVER_JUDGE_CUSTOMER where id = #id#</select>
   <select id="findNameById" parameterClass="java.lang.Integer" resultMap="driver_judge_CustomerResult">select * from DRIVER_JUDGE_CUSTOMER where id = #id#</select>
-  <select id="selectAll" parameterClass="java.util.Map" resultMap="driver_judge_CustomerResult">select ID,ORDERID,CUSTOMERTELPHONE,DRIVERTELPHONE,JUDGE,CREATE_TIME from DRIVER_JUDGE_CUSTOMER
+  <select id="selectAll" parameterClass="java.util.Map" resultMap="driver_judge_CustomerResult">select * from DRIVER_JUDGE_CUSTOMER
     <dynamic prepend="where">
       <isNotNull prepend=" and " property="orderid">ORDERID = #orderid#</isNotNull>
       <isNotNull prepend=" and " property="customertelphone">CUSTOMERTELPHONE = #customertelphone#</isNotNull>
       <isNotNull prepend=" and " property="drivertelphone">DRIVERTELPHONE = #drivertelphone#</isNotNull>
       <isNotNull prepend=" and " property="judge">JUDGE = #judge#</isNotNull>
       <isNotNull prepend=" and " property="create_time">CREATE_TIME = #create_time#</isNotNull>
+      <isNotNull prepend=" and " property="ordernum">ORDERNUM = #ordernum#</isNotNull>
     </dynamic>
   </select>
-  <select id="selectPage" parameterClass="java.util.Map" resultMap="driver_judge_CustomerResult">select ID,ORDERID,CUSTOMERTELPHONE,DRIVERTELPHONE,JUDGE,CREATE_TIME from DRIVER_JUDGE_CUSTOMER
+  <select id="selectPage" parameterClass="java.util.Map" resultMap="driver_judge_CustomerResult">select * from DRIVER_JUDGE_CUSTOMER
     <dynamic prepend="where">
       <isNotNull prepend=" and " property="orderid">ORDERID = #orderid#</isNotNull>
       <isNotNull prepend=" and " property="customertelphone">CUSTOMERTELPHONE = #customertelphone#</isNotNull>
       <isNotNull prepend=" and " property="drivertelphone">DRIVERTELPHONE = #drivertelphone#</isNotNull>
       <isNotNull prepend=" and " property="judge">JUDGE = #judge#</isNotNull>
       <isNotNull prepend=" and " property="create_time">CREATE_TIME = #create_time#</isNotNull>
+       <isNotNull prepend=" and " property="ordernum">ORDERNUM = #ordernum#</isNotNull>
     </dynamic>order by id desc limit #startIndex#,#endIndex#
   </select>
   <select id="selectCount" parameterClass="java.util.Map" resultClass="java.lang.Long">select count(id) from DRIVER_JUDGE_CUSTOMER 
@@ -49,6 +53,7 @@
       <isNotNull prepend=" and " property="drivertelphone">DRIVERTELPHONE = #drivertelphone#</isNotNull>
       <isNotNull prepend=" and " property="judge">JUDGE = #judge#</isNotNull>
       <isNotNull prepend=" and " property="create_time">CREATE_TIME = #create_time#</isNotNull>
+      <isNotNull prepend=" and " property="ordernum">ORDERNUM = #ordernum#</isNotNull>
     </dynamic>
   </select>
 </sqlMap>

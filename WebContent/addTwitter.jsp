@@ -48,6 +48,14 @@ html {
 					             listKey="key" listValue="value" value="0"/>
 					   </td>
 					   </tr>
+					   <tr>
+				        <td width="15%" align="center" class="dataTd" >推送来源</td>
+				     	<td width="35%" align="left" class="dataTd" >
+					        <s:radio label="推送类型" name ="twitter.source" id="source"
+					             list= "#{0:'&nbsp;用户端',1:'&nbsp;司机端'}"  
+					             listKey="key" listValue="value" value="0"/>
+					   </td>
+					   </tr>
 				  
 				   <tr>
 				        <td width="15%"  align="center" class="dataTd" >正文</td>

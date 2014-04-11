@@ -45,6 +45,7 @@
 							<td class="topTd" align="center" width="8%">标题</td>
 							<td class="topTd" align="center" width="8%">发送时间</td>
 							<td class="topTd" align="center" width="8%">推送类型</td>
+							<td class="topTd" align="center" width="8%">推送来源</td>
 							<td class="topTd" align="center" width="8%">城市</td>
 							<td class="topTd" align="center" width="8%">操作</td>
 						</tr>
@@ -59,6 +60,10 @@
 									<td class="dataTd" align="center">
 									   <c:if test="${t.sendtype eq 1}">按城市用户推送</c:if>
 								       <c:if test="${t.sendtype eq 0}">所有用户都收到</c:if>	
+								    </td>
+								    	<td class="dataTd" align="center">
+									   <c:if test="${t.source eq 1}">司机端</c:if>
+								       <c:if test="${t.source eq 0}">用户端</c:if>	
 								    </td>
 								    <td class="dataTd" align="center">${t.mc}</td>
 									<td class="dataTd" align="center">

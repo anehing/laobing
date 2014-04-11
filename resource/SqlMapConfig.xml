@@ -27,4 +27,5 @@
 	<sqlMap resource="sqlmapxml/Version.xml" />
 	<sqlMap resource="sqlmapxml/Driver_order.xml" />
 	<sqlMap resource="sqlmapxml/PublicNote.xml" /> 
+	<sqlMap resource="sqlmapxml/Order2.xml" /> 
 </sqlMapConfig>

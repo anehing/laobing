@@ -17,6 +17,7 @@ public class Customer_judge_driver extends ResultVo implements Serializable{
 		private String telphone;	
 		private String drivertelphone;	
 	    private String judge_time;
+	    private String content;
 		public int getId() {
 			return id;
 		}
@@ -46,6 +47,12 @@ public class Customer_judge_driver extends ResultVo implements Serializable{
 		}
 		public void setJudge_time(String judge_time) {
 			this.judge_time = judge_time;
+		}
+		public String getContent() {
+			return content;
+		}
+		public void setContent(String content) {
+			this.content = content;
 		}
 
 	

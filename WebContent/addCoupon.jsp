@@ -65,7 +65,12 @@ function checkSubmit(){
 	 if(!checkNull(coupon_num)){
 	      showErrorMsg("优惠卷码不能为空");
 	      return false;
-	 } 
+	 } else{
+		 if(couponList.jsp.length>7){
+			  showErrorMsg("优惠卷码长度不能超过7位");
+		      return false;
+		 }
+	 }
 	 if(!checkNull(discount_amount)){
 	      showErrorMsg("面值不能为空");
 	      return false;

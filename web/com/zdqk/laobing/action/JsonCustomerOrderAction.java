@@ -28,6 +28,7 @@ import com.zdqk.laobing.po.App_comment;
 import com.zdqk.laobing.po.Coupon;
 import com.zdqk.laobing.po.Customer_order;
 import com.zdqk.laobing.po.Driver_order;
+import com.zdqk.laobing.po.Order2;
 import com.zdqk.laobing.po.Price;
 import com.zdqk.laobing.po.User;
 import com.zdqk.laobing.service.ILoginService;
@@ -289,4 +290,37 @@ public class JsonCustomerOrderAction extends JsonBaseAction {
 //        }
 //       
 //   }
+	/**
+	 * 用户下单
+	 * */
+	@Action("callrecord")
+	public String callrecord(){
+		ResultVo rv = null;
+		
+		Boolean   flag = false;
+		Date dt=new Date();
+		if(this.customer_telphone==null||this.customer_telphone.trim().equals("")){
+			rv = new ResultVo(3,"缺少参数:customer_telphone");
+			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
+		}
+		if(this.drivertelphone==null||this.drivertelphone.trim().equals("")){
+			rv = new ResultVo(3,"缺少参数:drivertelphone");
+			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
+		}
+		Map<String, Object> map = new HashMap<String, Object>();
+		Order2 o =new Order2();
+		o.setCustomer_telphone(this.customer_telphone);
+		o.setDriver_telphone(this.drivertelphone);
+		o.setCreate_time(dt);
+		o.setCreate_time(dt);
+		flag=customer_orderDAO.insert(o);
+	    if(flag){
+			rv = new ResultVo(0,"记录成功");
+			return FxJsonUtil.jsonHandle(rv,resutUrl,request);
+		}else{
+			rv = new ResultVo(1,"记录失败");
+			return FxJsonUtil.jsonHandle(rv,resutUrl,request);
+		}
+      
+   }
 }
