@@ -1,14 +1,14 @@
 10
 
 dir
-339
+695
 http://www.svnchina.com/svn/designated_driver/server/laobing
 http://www.svnchina.com/svn/designated_driver
 
 
 
-2014-03-24T04:05:37.207488Z
-339
+2014-04-22T10:32:07.802269Z
+695
 lhq2013
 
 
@@ -25,40 +25,36 @@ svn:special svn:externals svn:needs-lock
 
 
 ac60b7ec-9232-43cb-983f-404c32153242
+
+
+
+
+
+
+
+
+((conflict tools dir update deleted edited (version http://www.svnchina.com/svn/designated_driver 3 339 server/laobing/tools dir) (version http://www.svnchina.com/svn/designated_driver 3 695 server/laobing/tools none)) (conflict resource dir update deleted edited (version http://www.svnchina.com/svn/designated_driver 3 339 server/laobing/resource dir) (version http://www.svnchina.com/svn/designated_driver 3 695 server/laobing/resource none)) (conflict service dir update deleted edited (version http://www.svnchina.com/svn/designated_driver 3 339 server/laobing/service dir) (version http://www.svnchina.com/svn/designated_driver 3 695 server/laobing/service none)) (conflict web dir update deleted edited (version http://www.svnchina.com/svn/designated_driver 3 339 server/laobing/web dir) (version http://www.svnchina.com/svn/designated_driver 3 695 server/laobing/web none)) (conflict dao dir update deleted edited (version http://www.svnchina.com/svn/designated_driver 3 339 server/laobing/dao dir) (version http://www.svnchina.com/svn/designated_driver 3 695 server/laobing/dao none)) (conflict WebContent dir update deleted edited (version http://www.svnchina.com/svn/designated_driver 3 339 server/laobing/WebContent dir) (version http://www.svnchina.com/svn/designated_driver 3 695 server/laobing/WebContent none)))
 
 .classpath
 file
+0
+
+
+add
 
 
 
 
-2014-03-05T06:34:05.000000Z
-24027841726233f2b23caac811dfc513
-2014-01-13T12:17:57.205622Z
-9
-lhq2013
+
 has-props
+has-prop-mods
+
+.gitignore
+file
+0
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-652
+add
 
 .hg
 dir
@@ -68,37 +64,17 @@ dir
 
 .project
 file
+0
+
+
+add
 
 
 
 
-2014-01-12T08:51:07.000000Z
-29041a9e8c379e839104ac23d5812e4b
-2014-01-12T10:13:04.744173Z
-8
-lhq2013
+
 has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-1160
+has-prop-mods
 
 .settings
 dir
@@ -139,22 +115,139 @@ lhq2013
 
 WebContent
 dir
+
+
+
+add
+
+
+
+
+
+
+
+
+
+
+
+
+
+copied
+http://www.svnchina.com/svn/designated_driver/server/laobing/WebContent
+339
 
 dao
 dir
+
+
+
+add
+
+
+
+
+
+
+
+
+
+
+
+
+
+copied
+http://www.svnchina.com/svn/designated_driver/server/laobing/dao
+339
 
 resource
 dir
+
+
+
+add
+
+
+
+
+
+
+
+
+
+
+
+
+
+copied
+http://www.svnchina.com/svn/designated_driver/server/laobing/resource
+339
 
 service
 dir
+
+
+
+add
+
+
+
+
+
+
+
+
+
+
+
+
+
+copied
+http://www.svnchina.com/svn/designated_driver/server/laobing/service
+339
 
 tools
 dir
+
+
+
+add
+
+
+
+
+
+
+
+
+
+
+
+
+
+copied
+http://www.svnchina.com/svn/designated_driver/server/laobing/tools
+339
 
 web
 dir
-
-webservice
-dir
+
+
+
+add
+
+
+
+
+
+
+
+
+
+
+
+
+
+copied
+http://www.svnchina.com/svn/designated_driver/server/laobing/web
+339
 

@@ -1,23 +1,11 @@
 K 25
 svn:wc:ra_dav:version-url
 V 50
-/svn/designated_driver/!svn/ver/339/server/laobing
-END
-.project
-K 25
-svn:wc:ra_dav:version-url
-V 57
-/svn/designated_driver/!svn/ver/8/server/laobing/.project
+/svn/designated_driver/!svn/ver/695/server/laobing
 END
 README
 K 25
 svn:wc:ra_dav:version-url
 V 55
 /svn/designated_driver/!svn/ver/3/server/laobing/README
-END
-.classpath
-K 25
-svn:wc:ra_dav:version-url
-V 59
-/svn/designated_driver/!svn/ver/9/server/laobing/.classpath
 END

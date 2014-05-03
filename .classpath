@@ -6,7 +6,6 @@
 	<classpathentry kind="src" path="web"/>
 	<classpathentry kind="src" path="service"/>
 	<classpathentry kind="src" path="tools"/>
-	<classpathentry kind="src" path="webservice"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
 	<classpathentry kind="output" path="build/classes"/>

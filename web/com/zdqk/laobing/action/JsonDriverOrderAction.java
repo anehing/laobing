@@ -497,11 +497,18 @@ public class JsonDriverOrderAction extends JsonBaseAction {
 //			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
 //		}
 		float count=0;
+		float distance2=0;
 		if(this.fee==null||this.fee.trim().equals("")){
 			count=0;
 		}else{
 			count= Float.parseFloat(this.fee);
 		}
+		if(this.distance==null||this.distance.trim().equals("")){
+			distance2=0;
+		}else{
+			distance2= Float.parseFloat(this.distance);
+		}
+		
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("drivertelphone",this.drivertelphone);
@@ -534,8 +541,8 @@ public class JsonDriverOrderAction extends JsonBaseAction {
 		long num=Math.round(Math.random() * 1000) +Math.round(Math.random() * 1000);
         d_order.setOrdernum(num+this.customertelphone.substring(customertelphone.length()-4));
 		d_order.setCreatetime(new Date());
-		d_order.setFee(Float.parseFloat(this.fee));
-		d_order.setDistance(Float.parseFloat(this.distance));
+		d_order.setFee(count);
+		d_order.setDistance(distance2);
 		d_order.setStatus(1);
 	    flag=driver_orderDAO.insert(d_order);
         if(flag){

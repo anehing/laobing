@@ -55,7 +55,7 @@
 				        <td width="15%" align="center" class="dataTd" >手机号码</td>
 				    	<td width="35%" align="left" class="dataTd" >
 				        	<s:textfield name="driver.telphone"  id="telphone" /></td>
-				        <td width="15%" align="center" class="dataTd" >身份证号</td>
+				        <td width="15%" align="center" class="dataTd" >工号</td>
 					    <td width="35%" align="left" class="dataTd" >
 			        	    <s:textfield name="driver.ident_num"  id="ident_num" />
 				        </td>
@@ -120,11 +120,7 @@ function checkSubmit(){
 	      return false;
 	 }
 	
-	 var ident_num=document.getElementById("ident_num").value;
-	 if(!checkNull(ident_num)){
-	      showErrorMsg("身份证号不能为空");
-	      return false;
-	 }
+	
 	 var drive_card=document.getElementById("drive_card").value;
 	 if(!checkNull(drive_card)){
 	      showErrorMsg("驾照号不能为空");

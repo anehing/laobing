@@ -14,6 +14,7 @@ public class DriverIncome extends ResultVo implements Serializable{
     private float yesfee;
     private float monthfee;
     private float allfee;
+    private float account;
 	public float getYesfee() {
 		return yesfee;
 	}
@@ -31,6 +32,12 @@ public class DriverIncome extends ResultVo implements Serializable{
 	}
 	public void setAllfee(float allfee) {
 		this.allfee = allfee;
+	}
+	public float getAccount() {
+		return account;
+	}
+	public void setAccount(float account) {
+		this.account = account;
 	}
 	
 	

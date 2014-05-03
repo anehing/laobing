@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import net.sf.json.JSON;
+import net.sf.json.JSONSerializer;
+
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.InterceptorRef;
@@ -46,6 +49,7 @@ import com.zdqk.laobing.tools.DateConverter;
 	       @Result(name = "queryDriver", type = "chain", location = "queryDriver"),
 	       @Result(name = "addDriver", location = "/addDriver.jsp"),
 	       @Result(name = "Driverdetil", location = "/driverDetil.jsp"),
+	       @Result(name = "driverMap", location = "/driverMap.jsp"),
 		})
 
 public class DriverAction extends BasePaginationAction {
@@ -73,9 +77,17 @@ public class DriverAction extends BasePaginationAction {
 	private float monthfee;
 	private float allfee;
     private int score=0;
+    private JSON driverlist;
+    
     
 	
 	
+	public JSON getDriverlist() {
+		return driverlist;
+	}
+	public void setDriverlist(JSON driverlist) {
+		this.driverlist = driverlist;
+	}
 	public int getScore() {
 		return score;
 	}
@@ -270,6 +282,8 @@ public class DriverAction extends BasePaginationAction {
 		if(this.driver!=null){
 			if(!this.batchFileName.equals("000000.png")){
 				this.driver.setPicture(this.getURL());
+			}else{
+				this.driver.setPicture("000000.png");
 			}
 			if(this.price>0){
 				Pre_price p =new Pre_price();
@@ -311,5 +325,16 @@ public class DriverAction extends BasePaginationAction {
 		File file = new File(dstPath + url);
 		Base64Utils.copy(this.myFile, file);
 		return url;
+	}
+	/**
+	 * @author ane
+	 *  查询司机信息
+	 */
+	@Action("querydrivermap")
+	public String querydrivermap() {
+		Map<String, Object> map = new HashMap<String, Object>();
+		List <Driver> list= driverDAO.selectByjobstatus(map, "selectByjobstatus");
+		driverlist = JSONSerializer.toJSON(list);  
+		return "driverMap";
 	}
 }

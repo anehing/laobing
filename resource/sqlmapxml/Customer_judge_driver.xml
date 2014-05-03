@@ -51,7 +51,7 @@
        <isNotNull prepend=" and " property="content">CONTENT = #content#</isNotNull>
     </dynamic>
   </select>
-   <select id="selectByDrivertelphone" parameterClass="java.util.Map" resultMap="customer_judge_driverResult">select ID,SCORE,TELPHONE,DRIVERTELPHONE,JUDGE_TIME from CUSTOMER_JUDGE_DRIVER
+   <select id="selectByDrivertelphone" parameterClass="java.util.Map" resultMap="customer_judge_driverResult">select * from CUSTOMER_JUDGE_DRIVER
     <dynamic prepend="where">
        <isNotNull prepend=" and " property="drivertelphone">DRIVERTELPHONE = #drivertelphone#</isNotNull>
     </dynamic>

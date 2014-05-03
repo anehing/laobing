@@ -122,13 +122,13 @@ public class JsonPriceAction extends JsonBaseAction {
 		map.put("note",this.city);
 		Date date =new Date();
 		int hour = date.getHours();
-        if (1<=hour&&hour<=6){
+        if (0<=hour&&hour<=6){
         	map.put("sort", 4);
         }else if (7<=hour&&hour<=21){
         	map.put("sort", 1);
-        }else if (22<=hour&&hour<=23){
+        }else if (22==hour){
         	map.put("sort", 2);
-        }else {
+        }else if(23==hour){
         	map.put("sort", 3);
         }
 

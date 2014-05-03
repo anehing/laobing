@@ -320,11 +320,16 @@ public class JsonDriverAction extends JsonBaseAction {
 		float yesfee = driver_orderDAO.selectyesincome(conditionMap, "selectyesincome");
 		float monthfee = driver_orderDAO.selectmonthincome(conditionMap, "selectmonthincome");
 		float allfee = driver_orderDAO.selectallincome(conditionMap,"selectallincome");
+		Map<String, Object> mapprice = new HashMap<String, Object>();
+    	mapprice.put("drivertelphone", telphone);
+    	Pre_price p =(Pre_price) pre_priceDAO.seletcbytel(mapprice, "selectAll");
+		float account = p.getPre_price();
 		DriverIncome income=new DriverIncome();
 		income.setAllfee(allfee);
 		income.setMonthfee(monthfee);
 		income.setYesfee(yesfee);
 		income.setReusltNumber(0);
+		income.setAccount(account);
 		income.setReusltMessage("操作成功");
 		return FxJsonUtil.jsonHandle(income,resutUrl,request);
 	}
@@ -371,9 +376,6 @@ public class JsonDriverAction extends JsonBaseAction {
 		}
 		if(this.longitude==null||this.longitude.trim().equals("")){
 			rv = new ResultVo(3,"缺少参数:longitude");
-			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
-		}if(this.address==null||this.address.trim().equals("")){
-			rv = new ResultVo(3,"缺少参数:address");
 			return FxJsonUtil.jsonHandle(rv,resutUrl,request);	
 		}
 		map.put("telphone",this.telphone);

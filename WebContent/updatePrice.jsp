@@ -31,12 +31,12 @@
 					</td>
 				</tr>
 				<tr> 
-				    <td width="15%" align="center" class="dataTd" >时间段</td>
-					<td width="35%" align="left" class="dataTd" >
-					    <s:radio label="时间段" name ="price.time" id="time"
-					             list= "#{'07:00-21:59':'&nbsp;07:00-21:59','22:00-22:59':'&nbsp;22:00-22:59','23:00-23:59':'&nbsp;23:00-23:59','00:00-06:59':'&nbsp;00:00-06:59'}"  
-					             listKey="key" listValue="value" value="price.time" />
-					</td> 
+				      <td width="15%" align="center" class="dataTd" >时间段</td>
+					    <td width="35%" align="left" class="dataTd" >
+					        <s:radio label="时间段" name ="price.sort" id="sort"
+					             list= "#{1:'07:00-21:59',2:'22:00-22:59',3:'23:00-23:59',4:'00:00-06:59'}"  
+					             listKey="key" value="1" />
+				    	</td> 
 				</tr>
 				<tr>
 					<td bgcolor="#edf2f8" colspan="8" align="center">
