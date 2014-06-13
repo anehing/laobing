@@ -79,15 +79,17 @@
       <isNotNull prepend=" and " property="status">STATUS = #status#</isNotNull>
     </dynamic>
   </select>
-    <select id="selectAll2" parameterClass="java.util.Map" resultMap="customer_orderResult">select * from CUSTOMER_ORDER
+    <select id="selectAll22" parameterClass="java.util.Map" resultMap="customer_orderResult">select * from CUSTOMER_ORDER
     <dynamic prepend="where">
-		<isNotNull prepend=" and " property="customer_telphone">customer_telphone = #customertelphone#</isNotNull>
+		<isNotNull prepend=" and " property="customer_telphone">customer_telphone = #customer_telphone#</isNotNull>
+		
       <isNotNull prepend=" and " >
 	      <![CDATA[ 
 	          #drivertelphone# in (drivernum1,drivernum2,drivernum3,drivernum4)
 	      ]]> 
       </isNotNull>   
       <isNotNull prepend=" and " property="status">STATUS = #status#</isNotNull>
+      
     </dynamic>
   </select>
 </sqlMap>

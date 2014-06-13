@@ -127,6 +127,14 @@
 		       <isNotNull prepend=" and " property="job_status">JOB_STATUS in (0,2,3)</isNotNull>
 	   </dynamic>
   </select>
+     <select id="selectByjobstatus2" parameterClass="java.util.Map" resultMap="driverResult">select * from DRIVER
+	    <dynamic prepend="where">
+		      <isNotNull prepend=" and " property="mc">MC = #mc#</isNotNull>
+		       <![CDATA[ 
+        1=1   and  JOB_STATUS in (0,2,3)
+      ]]>
+	   </dynamic>
+  </select>
   <select id="loginByNameAndTel" parameterClass="java.util.Map" resultMap="driverResult">select * from DRIVER
 	    <dynamic prepend="where">
 		      <isNotNull prepend=" and " property="name">NAME = #name#</isNotNull>

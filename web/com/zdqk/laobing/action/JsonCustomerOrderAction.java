@@ -22,6 +22,7 @@ import org.apache.struts2.convention.annotation.ParentPackage;
 import com.zdqk.laobing.action.vo.ResultVo;
 import com.zdqk.laobing.dao.CouponDAO;
 import com.zdqk.laobing.dao.Customer_orderDAO;
+import com.zdqk.laobing.dao.OrderDAO;
 import com.zdqk.laobing.dao.PriceDAO;
 import com.zdqk.laobing.dao.UserDAO;
 import com.zdqk.laobing.po.App_comment;
@@ -51,6 +52,8 @@ public class JsonCustomerOrderAction extends JsonBaseAction {
 	
 	@Autowired
 	private Customer_orderDAO customer_orderDAO;
+	@Autowired
+	private OrderDAO orderDAO;
 	private String telphone;
 	private String telphone1;
 	private String telphone2;
@@ -293,8 +296,8 @@ public class JsonCustomerOrderAction extends JsonBaseAction {
 	/**
 	 * 用户下单
 	 * */
-	@Action("callrecord")
-	public String callrecord(){
+	@Action("callrecordjson")
+	public String callrecord2(){
 		ResultVo rv = null;
 		
 		Boolean   flag = false;
@@ -313,7 +316,7 @@ public class JsonCustomerOrderAction extends JsonBaseAction {
 		o.setDriver_telphone(this.drivertelphone);
 		o.setCreate_time(dt);
 		o.setCreate_time(dt);
-		flag=customer_orderDAO.insert(o);
+		flag=orderDAO.insert(o);
 	    if(flag){
 			rv = new ResultVo(0,"记录成功");
 			return FxJsonUtil.jsonHandle(rv,resutUrl,request);

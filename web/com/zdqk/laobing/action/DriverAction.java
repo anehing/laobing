@@ -225,6 +225,11 @@ public class DriverAction extends BasePaginationAction {
 		if (totype == 2) {
 			boolean flag;
 		    flag=driverDAO.delete(this.driver);
+		    Map map = new HashMap();
+		    map.put("drivername", driver.getName());
+		    map.put("drivertelphone", driver.getTelphone());
+		    Pre_price p = (Pre_price) pre_priceDAO.seletcbytel(map, "selectAll");
+		    pre_priceDAO.delete(p);
 		    if(flag)  this.addActionMessage("删除成功");
 		    else this.addActionError("删除失败");
 		    return "queryDriver";
@@ -292,6 +297,7 @@ public class DriverAction extends BasePaginationAction {
 				p.setPre_price(this.price);
 				pre_priceDAO.insert(p);//给司机添加预付款
 			}
+			this.driver.setStars(5);
 			this.driver.setJob_status(1);
 			boolean  flag=driverDAO.insert(this.driver);
 		    if(flag)  this.addActionMessage("新增成功");
@@ -333,7 +339,7 @@ public class DriverAction extends BasePaginationAction {
 	@Action("querydrivermap")
 	public String querydrivermap() {
 		Map<String, Object> map = new HashMap<String, Object>();
-		List <Driver> list= driverDAO.selectByjobstatus(map, "selectByjobstatus");
+		List <Driver> list= driverDAO.selectByjobstatus(map, "selectByjobstatus2");
 		driverlist = JSONSerializer.toJSON(list);  
 		return "driverMap";
 	}

@@ -22,7 +22,7 @@
 		            <td width="10%" align="center" bgcolor="#F3F8FE" class="dataTdText">司机手机号</td>
 		            <td width="25%" align="left" bgcolor="#FFFFFF"> <s:textfield name="order.driver_telphone" id="driver_telphone"></s:textfield></td>
 		              <td width="10%" align="center" bgcolor="#F3F8FE" class="dataTdText">用户手机号</td>
-		            <td width="25%" align="left" bgcolor="#FFFFFF"> <s:textfield name="order.driver_telphone" id="driver_telphone"></s:textfield></td>
+		            <td width="25%" align="left" bgcolor="#FFFFFF"> <s:textfield name="order.customer_telphone" id="customer_telphone"></s:textfield></td>
 		            <td rowspan="3" align="center" valign="middle" bgcolor="#FFFFFF">
 			            <input	type="submit" class="inputBtn"   value="查询" style="cursor: pointer"  />
 		                <input	type="button" class="inputBtn"   value="清空" onClick="clearForm('form1')" style="cursor: pointer" />

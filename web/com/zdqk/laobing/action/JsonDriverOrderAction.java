@@ -390,8 +390,12 @@ public class JsonDriverOrderAction extends JsonBaseAction {
 		map.put("customertelphone", this.customertelphone);
 		map.put("ordernum", this.orderunm);
 		map.put("status", 0);
+		Map<String, Object> map3 = new HashMap<String, Object>();
+		map3.put("drivertelphone",this.drivertelphone);
+		map3.put("customer_telphone", this.customertelphone);
+		map3.put("status", 0);
 		Driver_order d = (Driver_order) driver_orderDAO.selectdriverorder(map, "selectall2");
-		Customer_order c=(Customer_order) customer_orderDAO.selectByTel(map, "selectAll2");
+		Customer_order c=(Customer_order) customer_orderDAO.selectByTel(map3, "selectAll22");
 		if(c!=null){
 			c.setStatus(2);
 			customer_orderDAO.update(c);
@@ -422,23 +426,25 @@ public class JsonDriverOrderAction extends JsonBaseAction {
         	}
         	Tranrecord t =new Tranrecord();
         	float price =p.getPre_price();
-        	if(count<=58){
-        		t.setAccount(2);
-        		p.setPre_price(price-2);
-        	}else if (58<count&&count<=79){
-        		t.setAccount(5);
-        		p.setPre_price(price-5);
-        	}else if (79<count&&count<=98){
-        		t.setAccount(10);
-        		p.setPre_price(price-10);
-        	}else{
-        		t.setAccount(15);
+        	Date date =new Date();
+    		int hour = date.getHours();
+            if (0<=hour&&hour<=6){
+            	t.setAccount(15);
         		p.setPre_price(price-15);
-        	}
+            }else if (7<=hour&&hour<=21){
+            	t.setAccount(2);
+        		p.setPre_price(price-2);
+            }else if (22==hour){
+            	t.setAccount(5);
+        		p.setPre_price(price-5);
+            }else if(23==hour){
+            	t.setAccount(10);
+        		p.setPre_price(price-10);
+            }
         	pre_priceDAO.update(p);//修改预付款
         	
         	t.setOrder_num(this.orderunm);
-        	t.setTrans_datetime(new Date());
+        	t.setTrans_datetime(date);
         	t.setType(0);//0:扣款，1：充值
         	t.setTelphone(this.drivertelphone);
         	
@@ -555,23 +561,25 @@ public class JsonDriverOrderAction extends JsonBaseAction {
         	}
         	Tranrecord t =new Tranrecord();
         	float price =p.getPre_price();
-        	if(count<=58){
-        		t.setAccount(2);
-        		p.setPre_price(price-2);
-        	}else if (58<count&&count<=79){
-        		t.setAccount(5);
-        		p.setPre_price(price-5);
-        	}else if (79<count&&count<=98){
-        		t.setAccount(10);
-        		p.setPre_price(price-10);
-        	}else{
-        		t.setAccount(15);
+        	Date date =new Date();
+    		int hour = date.getHours();
+            if (0<=hour&&hour<=6){
+            	t.setAccount(15);
         		p.setPre_price(price-15);
-        	}
+            }else if (7<=hour&&hour<=21){
+            	t.setAccount(2);
+        		p.setPre_price(price-2);
+            }else if (22==hour){
+            	t.setAccount(5);
+        		p.setPre_price(price-5);
+            }else if(23==hour){
+            	t.setAccount(10);
+        		p.setPre_price(price-10);
+            }
         	pre_priceDAO.update(p);//修改预付款
         	
         	t.setOrder_num(this.orderunm);
-        	t.setTrans_datetime(new Date());
+        	t.setTrans_datetime(date);
         	t.setType(0);//0:扣款，1：充值
         	t.setTelphone(this.drivertelphone);
         	tranrecordDAO.insert(t);

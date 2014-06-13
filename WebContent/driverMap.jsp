@@ -123,7 +123,11 @@ function doOptions() {
             var p0 = json.longitude;
             var p1 = json.latitude;
             var point = new BMap.Point(p0,p1);
-			var iconImg = createIcon({w:23,h:25,l:0,t:21,x:9,lb:12});
+            if (json.job_status == 2){//空闲
+            	var iconImg = createIcon({w:23,h:25,l:46,t:21,x:9,lb:12});
+            }else {
+            	var iconImg = createIcon({w:23,h:25,l:0,t:21,x:9,lb:12});
+            }
             var marker = new BMap.Marker(point,{icon:iconImg});
 			var iw = createInfoWindow(i);
 			var label = new BMap.Label(json.name,{"offset":new BMap.Size(13,-20)});
@@ -163,7 +167,7 @@ function doOptions() {
     }
     //创建一个Icon
     function createIcon(json){
-        var icon = new BMap.Icon("http://app.baidu.com/map/images/us_mk_icon.png", new BMap.Size(json.w,json.h),{imageOffset: new BMap.Size(-json.l,-json.t),infoWindowOffset:new BMap.Size(json.lb+5,1),offset:new BMap.Size(json.x,json.h)})
+        var icon = new BMap.Icon("http://app.baidu.com/map/images/us_mk_icon.png", new BMap.Size(json.w,json.h),{imageOffset: new BMap.Size(-json.l,-json.t),infoWindowOffset:new BMap.Size(json.lb,1),offset:new BMap.Size(json.x,json.h)})
         return icon;
     }
     
