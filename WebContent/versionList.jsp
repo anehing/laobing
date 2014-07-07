@@ -63,7 +63,7 @@
 									<td class="dataTd" align="center">
 									   <c:if test="${t.type eq 1}">android（用户端）</c:if>
 								       <c:if test="${t.type eq 0}">iphone（用户端）</c:if>	
-								       <c:if test="${t.type eq 3}">android（司机端）</c:if>							 
+								       <c:if test="${t.type eq 2}">android（司机端）</c:if>							 
 								    </td>
 									<td class="dataTd" align="center">${t.version}</td>
 									<td class="dataTd" align="center"><fmt:formatDate value="${t.createtime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>

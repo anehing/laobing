@@ -521,7 +521,12 @@ public class JsonDriverOrderAction extends JsonBaseAction {
 		map.put("customertelphone", this.customertelphone);
 		map.put("status", 0);
 		Driver_order d = (Driver_order) driver_orderDAO.selectdriverorder(map, "selectall2");
-		Customer_order c=(Customer_order) customer_orderDAO.selectByTel(map, "selectAll2");
+		List clist = customer_orderDAO.selectByTel(map, "selectAll22");
+		Customer_order c=null;
+		if(clist!=null&&clist.size()>=0){
+			c=(Customer_order)clist .get(0);
+		}
+		
 		if(c!=null){
 			c.setStatus(2);
 			customer_orderDAO.update(c);
@@ -711,7 +716,7 @@ public class JsonDriverOrderAction extends JsonBaseAction {
 		map.put("customertelphone", this.customertelphone);
 		map.put("status", 0);
 		Driver_order d = (Driver_order) driver_orderDAO.selectdriverorder(map, "selectall2");
-		Customer_order c=(Customer_order) customer_orderDAO.selectByTel(map, "selectAll2");
+		Customer_order c=(Customer_order) customer_orderDAO.selectByTel(map, "selectAll22");
 		if(c!=null){
 			c.setStatus(2);
 			customer_orderDAO.update(c);
